@@ -1,6 +1,6 @@
 {
   "name": "eedited_react_web",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SW Maestro 12th Team.eedited's React Web",
   "private": true,
   "dependencies": {
@@ -11,14 +11,21 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.18",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "node-sass": "^4.14.1",
+    "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-youtube": "^7.13.1",
+    "redux": "^4.1.0",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "youtube-api-search": "0.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -45,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.8",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
