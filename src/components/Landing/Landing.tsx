@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseTemplate from '../BaseTemplate/BaseTemplate';
+import BaseTemplate from '../common/BaseTemplate';
 import Description from './Description/Description';
 import VideoGrid from './VideoGrid/VideoGrid';
 

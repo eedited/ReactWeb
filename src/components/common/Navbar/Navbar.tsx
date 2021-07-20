@@ -16,8 +16,8 @@ const Navbar: React.FC = () => (
             <Link to="/">Chat</Link>
         </div>
         <div className="navbar__utility">
-            <Link to="/">Login</Link>
-            <Link to="/">Logout</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">SignUp</Link>
         </div>
     </div>
 );
