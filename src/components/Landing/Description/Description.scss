@@ -1,0 +1,13 @@
+.landing__description{
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+    .landing__description__text{
+        padding-right: 6em;
+        width : 40%;
+    }
+    .landing__description__img{
+        object-fit: contain;
+    }
+}

@@ -1,0 +1,23 @@
+.navbar{
+   height: 48px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-color: cornflowerblue;
+   padding : 8px 12px;
+   .navbar__logo{
+       font-size: 18px;
+   }
+   .navbar__menu{
+       display: flex;
+       list-style: none;
+       a{
+           padding : 8px 12px
+       }
+   }
+   .navbar__utility{
+       a{
+           padding : 8px 12px;
+       }
+   }
+}

@@ -2,7 +2,9 @@ import React from 'react';
 
 import './App.scss';
 import { Route } from 'react-router-dom';
-import Landing from './pages/Landing';
+import Landing from './components/Landing/Landing';
+
+// import Landing from './pages/Landing';
 import logo from './logo.svg';
 
 type AppType = ()=> JSX.Element;
