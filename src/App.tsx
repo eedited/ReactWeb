@@ -3,10 +3,10 @@ import React from 'react';
 import './App.scss';
 import { Route } from 'react-router-dom';
 import Landing from './components/Landing/Landing';
-import LoginPage from './components/LoginPage/LoginPage';
 // import Landing from './pages/Landing';
 import logo from './logo.svg';
-import SignupPage from './components/SignupPage/SignupPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SingupPage';
 
 type AppType = ()=> JSX.Element;
 

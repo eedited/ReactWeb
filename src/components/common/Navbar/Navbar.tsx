@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
+import NavbarOnlyLogo from './NavbarOnlyLogo';
 
 const Navbar: React.FC = () => (
-    <div className="navbar">
-        <div className="navbar__logo">
-            <Link to="/">eedited</Link>
-        </div>
+    <NavbarOnlyLogo>
         <div className="navbar__menu">
             <Link to="/">Video</Link>
             <Link to="/">Finding Wokrs</Link>
@@ -19,7 +17,7 @@ const Navbar: React.FC = () => (
             <Link to="/login">Login</Link>
             <Link to="/signup">SignUp</Link>
         </div>
-    </div>
+    </NavbarOnlyLogo>
 );
 
 export default Navbar;
