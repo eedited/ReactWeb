@@ -1,9 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../../lib/api/auth';
+import { userType } from '../../../modules/user/userType';
 import './Navbar.scss';
 import NavbarOnlyLogo from './NavbarOnlyLogo';
 
-const Navbar: React.FC = () => (
+interface props{
+    user: userType|null
+    onLogout: ()=> void
+}
+const Navbar: React.FC<props> = ({ user, onLogout }: props) => (
     <NavbarOnlyLogo>
         <div className="navbar__menu">
             <Link to="/">Video</Link>
@@ -14,8 +20,19 @@ const Navbar: React.FC = () => (
             <Link to="/">Chat</Link>
         </div>
         <div className="navbar__utility">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">SignUp</Link>
+            {user === null
+                ? (
+                    <>
+                        <Link to="/login">Login</Link>
+                        <Link to="/signup">SignUp</Link>
+                    </>
+                )
+                : (
+                    <>
+                        {user.userId}
+                        <button type="button" onClick={onLogout}>로그아웃</button>
+                    </>
+                )}
         </div>
     </NavbarOnlyLogo>
 );

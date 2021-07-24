@@ -10,13 +10,25 @@ import { logger } from 'redux-logger';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer, { rootStateType, rootActionType, rootSaga } from './modules';
+import { setUser } from './modules/user/user';
 // eslint-disable-next-line @typescript-eslint/typedef
 const sagaMiddleware = createSagaMiddleware();
 const store: Store<rootStateType, rootActionType> = createStore(
     rootReducer,
     composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
 );
+function loadUser() {
+    try {
+        const user: string|null = sessionStorage.getItem('user');
+        if (!user) return;
+        store.dispatch(setUser(JSON.parse(user)));
+    }
+    catch (err) {
+        console.log('local session doesn\'t work');
+    }
+}
 sagaMiddleware.run(rootSaga);
+loadUser();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

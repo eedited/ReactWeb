@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import { rootStateType } from '../../modules';
+import { rootActionType, rootStateType } from '../../modules';
 import { changeField, initializeForm, register } from '../../modules/auth/auth';
-import { check } from '../../modules/user/user';
 import { authActionType, responseType } from '../../modules/auth/authType';
 import { userType } from '../../modules/user/userType';
+import { setUser } from '../../modules/user/user';
 
 interface signupFormType{
     form: {
@@ -24,7 +24,7 @@ interface props{
     history: RouteComponentProps['history']
 }
 const SignupForm: React.FC<props> = ({ history }: props) => {
-    const dispatch: Dispatch<authActionType> = useDispatch();
+    const dispatch: Dispatch<rootActionType> = useDispatch();
     const {
         form, Auth, AuthError, User,
     }: signupFormType = useSelector(({ auth, user }: rootStateType) => ({
@@ -73,14 +73,20 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
         if (Auth) {
             console.log('회원가입 성공');
             console.log(Auth);
-            // dispatch(check())
+            dispatch(setUser({ userId: form.userId }));
         }
-    }, [Auth, AuthError, dispatch]);
+    }, [Auth, AuthError, dispatch, form.userId]);
     useEffect(() => {
         if (User) {
             console.log('check Api 성공');
             console.log(User);
             history.push('/');
+            try {
+                sessionStorage.setItem('user', JSON.stringify(User));
+            }
+            catch (err) {
+                console.log('local session not working');
+            }
         }
     }, [User, history]);
     return (

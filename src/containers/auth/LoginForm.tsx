@@ -4,11 +4,11 @@ import { Dispatch } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import AuthForm from '../../components/auth/AuthForm';
-import { rootStateType } from '../../modules';
+import { rootActionType, rootStateType } from '../../modules';
 import { changeField, initializeForm, login } from '../../modules/auth/auth';
 import { changeFieldActionType, authActionType, responseType } from '../../modules/auth/authType';
 import { userType } from '../../modules/user/userType';
-import { check } from '../../modules/user/user';
+import { setUser } from '../../modules/user/user';
 
 interface loginFormType{
     form: {
@@ -23,18 +23,8 @@ interface props{
     history: RouteComponentProps['history'],
 }
 
-interface CookieSetOptions{
-    path?: string;
-    expires?: Date;
-    maxAge?: number;
-    domain?: string;
-    secure?: boolean;
-    httpOnly?: boolean;
-    sameSite?: boolean | 'none' | 'lax' | 'strict';
-    encode?: (value: string)=> string;
-}
 const LoginForm: React.FC<props> = ({ history }: props) => {
-    const dispatch: Dispatch<authActionType> = useDispatch();
+    const dispatch: Dispatch<rootActionType> = useDispatch();
     const {
         form, Auth, AuthError, User,
     }: loginFormType = useSelector(({ auth, user }: rootStateType) => ({
@@ -73,15 +63,21 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
         }
         if (Auth) {
             console.log('로그인 성공');
-            // dispatch(check());
+
+            dispatch(setUser({ userId: form.userId }));
         }
-    }, [Auth, AuthError, dispatch]);
-    /*
+    }, [Auth, AuthError, User, dispatch, form.userId]);
     useEffect(() => {
         if (User) {
             history.push('/');
+            try {
+                sessionStorage.setItem('user', JSON.stringify(User));
+            }
+            catch (err) {
+                console.log('local session not working');
+            }
         }
-    }, [history, User]); */
+    }, [history, User]);
 
     return (
         <AuthForm

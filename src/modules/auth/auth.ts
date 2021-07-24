@@ -120,6 +120,7 @@ function auth(state: authStateType = initialState, action: authActionType): auth
             case INITIALIZE_FORM:
                 draft[(action as initializeFormActionType).payload.form] = initialState[(action as initializeFormActionType).payload.form]; // 이번 form 녀석을 바꿔버린다.
                 draft.authError = null;
+                draft.auth = null;
                 return draft;
             case REGISTER_SUCCESS:
                 draft.authError = null;

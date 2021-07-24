@@ -20,5 +20,8 @@ export const register: registerFunctionType = ({ userId, password, email }: auth
     password,
     email,
 });
+export type logoutFunctionType = ()=> Promise<AxiosResponse<void>>;
+export const logout: logoutFunctionType = () => client.get('/auth/logout');
+
 export type authFunctionType = loginFunctionType|registerFunctionType;
-export const check: ()=> Promise<AxiosResponse<authReturnProp>> = () => client.get('/auth/login/check');
+// export const check: ()=> Promise<AxiosResponse<authReturnProp>> = () => client.get('/auth/login/check');
