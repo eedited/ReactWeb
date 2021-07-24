@@ -1,10 +1,10 @@
 import produce from 'immer';
-import { current, WritableDraft } from 'immer/dist/internal';
-import { takeLatest } from 'redux-saga/effects';
+import { WritableDraft } from 'immer/dist/internal';
+import { takeLatest, ForkEffect } from 'redux-saga/effects';
 import createRequestSaga, { createRequestActionTypes, createRequestSagaReturnType } from '../../lib/createRequestSaga';
 import {
     changeFieldActionType, initializeFormActionType, authStateType, authActionType, registerActionType,
-    registerSuccessActionType, registerFailureActionType, loginFailureActionType, loginSuccessActionType, loginActionType,
+    loginActionType, responseFailureActionType, responseSuccessActionType,
 } from './authType';
 import * as authAPI from '../../lib/api/auth';
 // 액션 정의
@@ -40,7 +40,6 @@ export const register: registerFunctionType = ({ userId, password, email }: {use
         email,
     },
 });
-
 type loginFunctionType = ({ userId, password }: {userId: string, password: string})=> loginActionType
 export const login: loginFunctionType = ({ userId, password }: {userId: string, password: string}) => ({
     type: LOGIN,
@@ -49,29 +48,27 @@ export const login: loginFunctionType = ({ userId, password }: {userId: string, 
         password,
     },
 });
-export const registerSuccess: ()=> registerSuccessActionType = () => ({
+export const registerSuccess: ()=> responseSuccessActionType = () => ({
     type: REGISTER_SUCCESS,
 });
-
-export const registerFailure: ()=> registerFailureActionType = () => ({
+export const registerFailure: ()=> responseFailureActionType = () => ({
     type: REGISTER_FAILURE,
 });
 
-export const loginSuccess: ()=> loginFailureActionType = () => ({
+export const loginSuccess: ()=> responseSuccessActionType = () => ({
     type: LOGIN_SUCCESS,
 });
 
-export const loginFailure: ()=> loginSuccessActionType = () => ({
+export const loginFailure: ()=> responseFailureActionType = () => ({
     type: LOGIN_FAILURE,
 });
-// 초기 상태 정의
 const registerSaga: createRequestSagaReturnType = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga: createRequestSagaReturnType = createRequestSaga(LOGIN, authAPI.login);
-export function* authSaga() {
+export function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(REGISTER, registerSaga);
     yield takeLatest(LOGIN, loginSaga);
 }
-
+// 초기 상태 정의
 const initialState: authStateType = {
     register: {
         userId: '',
@@ -124,24 +121,24 @@ function auth(state: authStateType = initialState, action: authActionType): auth
                 return draft;
             case REGISTER_SUCCESS:
                 draft.authError = null;
-                if (typeof ((action as registerSuccessActionType).payload) !== undefined) {
-                    draft.auth = (action as registerSuccessActionType).payload?.auth;
+                if (typeof ((action as responseSuccessActionType).payload) !== undefined) {
+                    draft.auth = (action as responseSuccessActionType).payload;
                 }
                 return draft;
             case REGISTER_FAILURE:
-                if ((action as registerFailureActionType).payload !== undefined) {
-                    draft.authError = (action as registerFailureActionType).payload?.error;
+                if ((action as responseFailureActionType).payload !== undefined) {
+                    draft.authError = (action as responseFailureActionType).payload;
                 }
                 return draft;
             case LOGIN_SUCCESS:
                 draft.authError = null;
-                if ((action as registerSuccessActionType).payload !== undefined) {
-                    draft.auth = (action as registerSuccessActionType).payload?.auth;
+                if ((action as responseSuccessActionType).payload !== undefined) {
+                    draft.auth = (action as responseSuccessActionType).payload;
                 }
                 return draft;
             case LOGIN_FAILURE:
-                if ((action as registerFailureActionType).payload !== undefined) {
-                    draft.authError = (action as registerFailureActionType).payload?.error;
+                if ((action as responseFailureActionType).payload !== undefined) {
+                    draft.authError = (action as responseFailureActionType).payload;
                 }
                 return draft;
             default:

@@ -9,6 +9,7 @@ interface props{
         passwordConfirm?: string
         email?: string
     }
+    error: string|null
     onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
     onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void
 }
@@ -20,7 +21,7 @@ const textMap: textMapType = {
     register: '회원가입',
 };
 const AuthForm: React.FC<props> = ({
-    type, form, onChange, onSubmit,
+    type, form, onChange, onSubmit, error,
 }: props) => (
     <div>
         <form onSubmit={onSubmit}>
@@ -67,6 +68,7 @@ const AuthForm: React.FC<props> = ({
                     </div>
                 </div>
             )}
+            {error && <div style={{ color: 'red' }}>{error}</div>}
             <button type="submit">{textMap[type]}</button>
         </form>
         {type === 'login' ? (<Link to="/signup">회원가입</Link>) : (<Link to="/login">로그인</Link>)}

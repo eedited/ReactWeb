@@ -1,10 +1,16 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { setUserActionType, userStateType, userActionType } from './userType';
+import {
+    call, put, takeLatest, ForkEffect,
+} from 'redux-saga/effects';
+import {
+    setUserActionType, userStateType, userActionType, logoutActionType,
+} from './userType';
 import * as authApi from '../../lib/api/auth';
 import { initializeForm } from '../auth/auth';
-
+// 액션 정의
 export const SET_USER: string = 'SET_USER';
 export const LOGOUT: string = 'LOGOUT';
+
+// 액션 생성함수 정의
 type setUserFunctionType = ({ userId }: {userId: string})=> setUserActionType
 export const setUser: setUserFunctionType = ({ userId }: {userId: string}) => ({
     type: SET_USER,
@@ -12,15 +18,12 @@ export const setUser: setUserFunctionType = ({ userId }: {userId: string}) => ({
         userId,
     },
 });
-interface logoutActionType{
-    type: string
-}
-export const logout: ()=> logoutActionType = () => ({
+
+type logoutFunctionType = ()=> logoutActionType
+export const logout: logoutFunctionType = () => ({
     type: LOGOUT,
 });
-const initialState: userStateType = {
-    user: null,
-};
+
 function* logoutSaga() {
     try {
         yield call(authApi.logout);
@@ -32,9 +35,15 @@ function* logoutSaga() {
         console.log(e);
     }
 }
-export function* userSaga() {
+export function* userSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(LOGOUT, logoutSaga);
 }
+
+// 초기 상태 정의
+const initialState: userStateType = {
+    user: null,
+};
+// 리듀서 정의
 function user(state: userStateType = initialState, action: userActionType): userStateType {
     switch (action.type) {
         case 'SET_USER':
@@ -42,7 +51,7 @@ function user(state: userStateType = initialState, action: userActionType): user
                 ...state,
                 user: {
                     ...state.user,
-                    userId: action.payload.userId,
+                    userId: (action as setUserActionType).payload.userId,
                 },
             };
         case 'LOGOUT':

@@ -7,25 +7,25 @@ import ReactPlayer from 'react-player';
 import './Video.scss';
 
 const Video: React.FC = () => {
-    const isLoading: React.MutableRefObject<boolean> = useRef(true);
-    const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
+    const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
+    const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
 
     const play: ()=> void = () => {
-        if (isLoading.current === false) {
+        if (!isLoading) {
             setisPlay(true);
             youtubeRef.current?.getInternalPlayer().playVideo();
         }
     };
 
     const pause: ()=> void = () => {
-        if (isLoading.current === false) {
+        if (!isLoading) {
             youtubeRef.current?.getInternalPlayer().stopVideo();
             setisPlay(false);
         }
     };
     const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
-        isLoading.current = false;
+        setisLoading(false);
     };
 
     return (
@@ -47,7 +47,7 @@ const Video: React.FC = () => {
                     },
                 }}
                 style={{
-                    opacity: Number(!isLoading.current && isPlay),
+                    opacity: Number(!isLoading && isPlay),
                 }}
             />
             <img
@@ -58,7 +58,7 @@ const Video: React.FC = () => {
                 onFocus={play}
                 onMouseLeave={pause}
                 onBlur={pause}
-                style={{ opacity: Number(isLoading.current || !isPlay) }}
+                style={{ opacity: Number(isLoading || !isPlay) }}
             />
         </div>
     );

@@ -7,9 +7,13 @@ export interface setUserActionType{
         userId: string
     }
 }
+export interface logoutActionType{
+    type: string
+}
 export interface userStateType{
     user: userType|null
 }
 
 export type userActionType =
     |setUserActionType
+    |logoutActionType

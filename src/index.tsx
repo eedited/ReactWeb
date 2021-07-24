@@ -5,7 +5,7 @@ import './index.css';
 import { applyMiddleware, createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

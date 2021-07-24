@@ -8,18 +8,22 @@ export interface authProp {
 }
 export interface authReturnProp{
     success: boolean
+    info?: string
 }
+
 export type loginFunctionType = ({ userId, password }: authProp)=> Promise<AxiosResponse<authReturnProp>>
 export const login: loginFunctionType = ({ userId, password }: authProp) => client.post('/auth/login', {
     userId,
     password,
 });
+
 export type registerFunctionType = ({ userId, password, email }: authProp)=> Promise<AxiosResponse<authReturnProp>>
 export const register: registerFunctionType = ({ userId, password, email }: authProp) => client.post('/auth/signup', {
     userId,
     password,
     email,
 });
+
 export type logoutFunctionType = ()=> Promise<AxiosResponse<void>>;
 export const logout: logoutFunctionType = () => client.get('/auth/logout');
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseTemplate from '../containers/BaseTemplate';
+import BaseTemplate from './BaseTemplate';
 import Description from '../components/Landing/Description/Description';
 import VideoGrid from '../components/Landing/VideoGrid/VideoGrid';
 

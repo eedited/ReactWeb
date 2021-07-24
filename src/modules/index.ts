@@ -1,5 +1,5 @@
 import { combineReducers, CombinedState, Reducer } from 'redux';
-import { all } from 'redux-saga/effects';
+import { all, AllEffect, ForkEffect } from 'redux-saga/effects';
 import auth, { authSaga } from './auth/auth';
 import { authActionType, authStateType } from './auth/authType';
 import loading from './loading/loading';
@@ -24,7 +24,7 @@ const rootReducer: rootReducerType = combineReducers({
     loading,
     user,
 });
-export function* rootSaga() {
+export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect<never>, void, unknown>>, void, unknown> {
     yield all([authSaga(), userSaga()]);
 }
 

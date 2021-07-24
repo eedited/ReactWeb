@@ -14,6 +14,7 @@ export const finishLoading: finishLoadingFunctionType = (requestType: string) =>
     type: FINISH_LOADING,
     payload: requestType,
 });
+
 // 초기 상태 정의
 const initialState: loadingStateType = {};
 

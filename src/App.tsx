@@ -4,7 +4,7 @@ import './App.scss';
 import { Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 // import Landing from './pages/Landing';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SingupPage';
 

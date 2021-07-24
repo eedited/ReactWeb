@@ -1,33 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import AuthForm from '../../components/auth/AuthForm';
 import { rootActionType, rootStateType } from '../../modules';
 import { changeField, initializeForm, login } from '../../modules/auth/auth';
-import { changeFieldActionType, authActionType, responseType } from '../../modules/auth/authType';
+import {
+    responseSuccessType, responseFailureType, loginFormType,
+} from '../../modules/auth/authType';
 import { userType } from '../../modules/user/userType';
 import { setUser } from '../../modules/user/user';
 
-interface loginFormType{
-    form: {
-        userId: string,
-        password: string,
-    }
+interface fromReducerType{
+    form: loginFormType
     User: userType|null
-    Auth?: responseType|null
-    AuthError?: Error|null
+    Auth?: responseSuccessType|null
+    AuthError?: responseFailureType|null
 }
 interface props{
     history: RouteComponentProps['history'],
 }
 
 const LoginForm: React.FC<props> = ({ history }: props) => {
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: Dispatch<rootActionType> = useDispatch();
     const {
         form, Auth, AuthError, User,
-    }: loginFormType = useSelector(({ auth, user }: rootStateType) => ({
+    }: fromReducerType = useSelector(({ auth, user }: rootStateType) => ({
         form: auth.login,
         Auth: auth.auth,
         AuthError: auth.authError,
@@ -59,6 +58,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
         if (AuthError) {
             console.log('에러발생');
             console.log(AuthError);
+            setError('로그인 실패');
             return;
         }
         if (Auth) {
@@ -85,6 +85,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
+            error={error}
         />
     );
 };

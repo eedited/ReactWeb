@@ -1,11 +1,11 @@
 import { authProp } from '../../lib/api/auth';
 import { CHANGE_FIELD } from './auth';
 
-export interface responseType{
-    __id: string,
-    username: string,
-    __v: string
+export interface responseSuccessType{
+    success: boolean
 }
+export type responseFailureType = Error
+
 export interface changeFieldActionType{
     type: typeof CHANGE_FIELD,
     payload: {
@@ -14,7 +14,6 @@ export interface changeFieldActionType{
         value: string
     }
 }
-
 export interface initializeFormActionType{
     type: string,
     payload: {
@@ -32,55 +31,40 @@ export interface loginActionType{
         password: string
     }
 }
-export interface registerSuccessActionType{
+export interface responseSuccessActionType{
     type: string
-    payload?: {
-        auth: responseType|null
-    }
+    payload?: responseSuccessType|null
 }
-export interface registerFailureActionType{
+export interface responseFailureActionType{
     type: string
-    payload?: {
-        error: Error|null
-    }
+    payload?: responseFailureType|null
 }
-export interface loginSuccessActionType{
-    type: string
-    payload?: {
-        auth: responseType|null
-    }
-}
-export interface loginFailureActionType{
-    type: string
-    payload?: {
-        error: Error|null
-    }
-}
+
 export type authActionType =
     |initializeFormActionType
     |changeFieldActionType
     |registerActionType
-    |registerSuccessActionType
-    |registerFailureActionType
-    |loginSuccessActionType
-    |loginFailureActionType
+    |loginActionType
+    |responseSuccessActionType
+    |responseFailureActionType
 
+export interface signupFormType{
+    userId: string,
+    password: string,
+    passwordConfirm: string,
+    email: string
+}
+export interface loginFormType{
+    userId: string,
+    password: string
+}
 export interface authStateType{
     [key: string]: {
         [key2: string]: string
     }|unknown
 
-    register: {
-        userId: string,
-        password: string,
-        passwordConfirm: string,
-        email: string
-    },
-    login: {
-        userId: string,
-        password: string
-    }
-    auth?: responseType|null
-    authError?: Error|null
-
+    register: signupFormType,
+    login: loginFormType
+    auth?: responseSuccessType|null
+    authError?: responseFailureType|null
 }
