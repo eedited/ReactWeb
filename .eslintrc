@@ -102,6 +102,6 @@
         "react/jsx-filename-extension": "off",
         "react/jsx-indent": [2,4],
         "react/jsx-indent-props": [2,4],
-        "no-param-reassign":"warn"
+        "no-param-reassign":"off"
     }
 }

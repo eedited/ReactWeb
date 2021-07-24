@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 interface props{
     type: string
     form: {
-        username: string,
+        userId: string,
         password: string,
         passwordConfirm?: string
+        email?: string
     }
     onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
     onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void
@@ -26,10 +27,9 @@ const AuthForm: React.FC<props> = ({
             <div>
                 <h2>id:</h2>
                 <input
-                    type="email"
                     placeholder="아이디"
-                    name="username"
-                    value={form.username}
+                    name="userId"
+                    value={form.userId}
                     onChange={onChange}
                 />
             </div>
@@ -45,14 +45,26 @@ const AuthForm: React.FC<props> = ({
             </div>
             {type === 'register' && (
                 <div>
-                    <h2>passwd confirm:</h2>
-                    <input
-                        type="password"
-                        placeholder="비밀번호 확인"
-                        name="passwordConfirm"
-                        value={form.passwordConfirm}
-                        onChange={onChange}
-                    />
+                    <div>
+                        <h2>passwd confirm:</h2>
+                        <input
+                            type="password"
+                            placeholder="비밀번호 확인"
+                            name="passwordConfirm"
+                            value={form.passwordConfirm}
+                            onChange={onChange}
+                        />
+                    </div>
+                    <div>
+                        <h2>email:</h2>
+                        <input
+                            type="email"
+                            placeholder="이메일"
+                            name="email"
+                            value={form.email}
+                            onChange={onChange}
+                        />
+                    </div>
                 </div>
             )}
             <button type="submit">{textMap[type]}</button>
