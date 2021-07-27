@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { logout } from '../../../lib/api/auth';
 import { userType } from '../../../modules/user/userType';
 import './Navbar.scss';
 import NavbarOnlyLogo from './NavbarOnlyLogo';

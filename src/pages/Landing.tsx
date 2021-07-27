@@ -1,12 +1,12 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import Description from '../components/Landing/Description/Description';
-import VideoGrid from '../components/Landing/VideoGrid/VideoGrid';
+import VideoGridContainer from '../containers/landing/VideoGridContainer';
 
 const Landing: React.FC = () => (
     <BaseTemplate>
         <Description />
-        <VideoGrid />
+        <VideoGridContainer />
     </BaseTemplate>
 );
 

@@ -4,7 +4,7 @@ import {
 import { AxiosResponse } from 'axios';
 import { startLoading, finishLoading } from '../modules/loading/loading';
 import { authFunctionType, authReturnProp } from './api/auth';
-import { registerActionType } from '../modules/auth/authType';
+import { signupActionType } from '../modules/auth/authType';
 
 export const createRequestActionTypes: (type: string)=> string[] = (type: string) => {
     const SUCCESS: string = `${type}_SUCCESS`;
@@ -14,8 +14,8 @@ export const createRequestActionTypes: (type: string)=> string[] = (type: string
 interface responseType{
     data: unknown
 }
-
-export type createRequestSagaReturnType = (action: registerActionType)=> Generator<CallEffect<AxiosResponse<authReturnProp>> | PutEffect<{
+// 액션 타입을 어케 정의할지 매우 고민이 됩니다. 쓰는 놈들을 합쳐서 여기에 넣어줘야하나?
+export type createRequestSagaReturnType = (action: signupActionType)=> Generator<CallEffect<AxiosResponse<authReturnProp>> | PutEffect<{
     type: string;
     payload: unknown;
 }>, void, responseType>
@@ -24,12 +24,13 @@ export default function createRequestSaga(type: string, request: authFunctionTyp
     const SUCCESS: string = `${type}_SUCCESS`;
     const FAILURE: string = `${type}_FAILURE`;
 
-    function* ret(action: registerActionType): Generator<CallEffect<AxiosResponse<authReturnProp>> | PutEffect<{
+    function* ret(action: signupActionType): Generator<CallEffect<AxiosResponse<authReturnProp>> | PutEffect<{
         type: string;
         payload: unknown;
     }>, void, responseType> {
         yield put(startLoading(type));
         try {
+            console.log(action.payload);
             const response: responseType = yield call<typeof request>(request, action.payload);
             console.log(response);
             yield put({
@@ -40,7 +41,10 @@ export default function createRequestSaga(type: string, request: authFunctionTyp
         catch (err) {
             yield put({
                 type: FAILURE,
-                payload: err,
+                payload: {
+                    ...err.response.data,
+                    error: err,
+                },
             });
         }
         yield put(finishLoading(type));

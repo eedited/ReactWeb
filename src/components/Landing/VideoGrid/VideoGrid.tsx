@@ -1,14 +1,17 @@
 import React from 'react';
-import Video from './Video';
+import VideoContainer from '../../../containers/landing/VideoContainer';
 import './VideoGrid.scss';
 
-const VideoGrid: React.FC = () => (
+interface videoInfo{
+    videoUrl: string,
+    thumbnailUrl: string
+}
+interface props{
+    videoInfos: videoInfo[]
+}
+const VideoGrid: React.FC<props> = ({ videoInfos }: props) => (
     <div className="videoGrid">
-        <Video />
-        <Video />
-        <Video />
-        <Video />
-        <Video />
+        {videoInfos.map((video: videoInfo, idx: number) => <VideoContainer key={Math.random()} videoUrl={video.videoUrl} thumbnailUrl={video.thumbnailUrl} />)}
     </div>
 );
 

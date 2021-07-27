@@ -8,6 +8,7 @@ interface props{
         password: string,
         passwordConfirm?: string
         email?: string
+        nickname?: string
     }
     error: string|null
     onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
@@ -18,7 +19,7 @@ interface textMapType{
 }
 const textMap: textMapType = {
     login: '로그인',
-    register: '회원가입',
+    signup: '회원가입',
 };
 const AuthForm: React.FC<props> = ({
     type, form, onChange, onSubmit, error,
@@ -44,7 +45,7 @@ const AuthForm: React.FC<props> = ({
                     onChange={onChange}
                 />
             </div>
-            {type === 'register' && (
+            {type === 'signup' && (
                 <div>
                     <div>
                         <h2>passwd confirm:</h2>
@@ -66,12 +67,30 @@ const AuthForm: React.FC<props> = ({
                             onChange={onChange}
                         />
                     </div>
+                    <div>
+                        <h2>email:</h2>
+                        <input
+                            type="nickname"
+                            placeholder="nickname"
+                            name="nickname"
+                            value={form.nickname}
+                            onChange={onChange}
+                        />
+                    </div>
                 </div>
             )}
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <button type="submit">{textMap[type]}</button>
         </form>
         {type === 'login' ? (<Link to="/signup">회원가입</Link>) : (<Link to="/login">로그인</Link>)}
+        <br />
+        {type === 'login'
+        && (
+            <>
+                <Link to="findid"> 아이디 찾기</Link>
+                <Link to="findpw"> 비밀번호 찾기</Link>
+            </>
+        )}
     </div>
 );
 

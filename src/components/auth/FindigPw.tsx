@@ -1,0 +1,49 @@
+import React from 'react';
+
+interface props{
+    email: string
+    id: string
+    isSubmit: boolean
+    loading: 'start'|'success'|'failure'
+    validationString: string
+    findPwResponse: string|undefined
+    onEmailSubmit: ()=> void
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
+}
+
+const FindingPw: React.FC<props> = ({
+    onInputChange, id, email, onEmailSubmit, isSubmit, loading, validationString, findPwResponse,
+}: props) => (
+    <div>
+        <form>
+            <h2>
+                PW 찾기
+            </h2>
+            <h2>
+                가입할 때 입력했던 e-mail을 입력하세요
+            </h2>
+            <input name="email" onChange={onInputChange} value={email} />
+            <h2>
+                id를 입력하세요
+            </h2>
+            <input name="id" onChange={onInputChange} value={id} />
+            <button
+                type="button"
+                onClick={onEmailSubmit}
+            >
+                제출
+            </button>
+            {isSubmit && loading === 'success'
+                && (
+                    <div>
+                        새로운 비밀번호는
+                        {findPwResponse}
+                        입니다.
+                    </div>
+
+                )}
+        </form>
+    </div>
+);
+
+export default FindingPw;

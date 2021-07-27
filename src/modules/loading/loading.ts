@@ -6,13 +6,13 @@ export const FINISH_LOADING: string = 'loading/FINISH_LOADING' as const;
 type startLoadingFunctionType = (requestType: string)=> LoadingActionType;
 export const startLoading: startLoadingFunctionType = (requestType: string) => ({
     type: START_LOADING,
-    payload: requestType,
+    payload: { status: requestType },
 });
 
 type finishLoadingFunctionType = (requestType: string)=> LoadingActionType;
 export const finishLoading: finishLoadingFunctionType = (requestType: string) => ({
     type: FINISH_LOADING,
-    payload: requestType,
+    payload: { status: requestType },
 });
 
 // 초기 상태 정의
@@ -24,12 +24,12 @@ function loading(state: loadingStateType = initialState, action: LoadingActionTy
         case START_LOADING:
             return {
                 ...state,
-                [action.payload]: true,
+                [action.payload.status]: true,
             };
         case FINISH_LOADING:
             return {
                 ...state,
-                [action.payload]: false,
+                [action.payload.status]: false,
             };
         default:
             return state;

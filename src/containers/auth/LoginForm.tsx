@@ -56,14 +56,10 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
     }, [dispatch]);
     useEffect(() => {
         if (AuthError) {
-            console.log('에러발생');
-            console.log(AuthError);
-            setError('로그인 실패');
+            setError(AuthError.info);
             return;
         }
         if (Auth) {
-            console.log('로그인 성공');
-
             dispatch(setUser({ userId: form.userId }));
         }
     }, [Auth, AuthError, User, dispatch, form.userId]);

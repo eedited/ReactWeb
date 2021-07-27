@@ -22,7 +22,8 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "no-console": "off",
+        
+        "no-console":"off",
         "indent": "off",
         "@typescript-eslint/indent": [
             "error",

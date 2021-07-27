@@ -3,14 +3,14 @@ import { WritableDraft } from 'immer/dist/internal';
 import { takeLatest, ForkEffect } from 'redux-saga/effects';
 import createRequestSaga, { createRequestActionTypes, createRequestSagaReturnType } from '../../lib/createRequestSaga';
 import {
-    changeFieldActionType, initializeFormActionType, authStateType, authActionType, registerActionType,
-    loginActionType, responseFailureActionType, responseSuccessActionType,
+    changeFieldActionType, initializeFormActionType, authStateType, authActionType, signupActionType,
+    loginActionType, responseFailureActionType, responseSuccessActionType, responseSuccessType, responseFailureType,
 } from './authType';
 import * as authAPI from '../../lib/api/auth';
 // 액션 정의
 export const CHANGE_FIELD: string = 'auth/CHANG_FIELD' as const;
 export const INITIALIZE_FORM: string = 'auth/INITIALIZE_FORM' as const;
-export const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE]: string[] = createRequestActionTypes('auth/REGISTER');
+export const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE]: string[] = createRequestActionTypes('auth/SIGNUP');
 export const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE]: string[] = createRequestActionTypes('auth/LOGIN');
 
 // 액션 생성함수 정의
@@ -18,7 +18,7 @@ type changeFieldFunctionType = ({ form, key, value }: {form: string, key: string
 export const changeField: changeFieldFunctionType = ({ form, key, value }: {form: string, key: string, value: string}) => ({
     type: CHANGE_FIELD,
     payload: {
-        form, // TODO register or login
+        form, // TODO signup or login
         key, // state의 키값. username or password or passwordConfirm
         value, // 이번에 바뀌어야할 value
     },
@@ -28,16 +28,21 @@ export const initializeForm: initializeFormFunctionType = (form: string) => ({
     type: INITIALIZE_FORM,
     payload: {
         form,
-    }, // 이번에 초기화가 되어야할 form, register or login임
+    }, // 이번에 초기화가 되어야할 form, signup or login임
 });
 
-type registerFunctionType = ({ userId, password, email }: {userId: string, password: string, email: string})=> registerActionType;
-export const register: registerFunctionType = ({ userId, password, email }: {userId: string, password: string, email: string}) => ({
-    type: REGISTER,
+type signupFunctionType = ({
+    userId, password, email, nickname,
+}: {userId: string, password: string, email: string, nickname: string})=> signupActionType;
+export const signup: signupFunctionType = ({
+    userId, password, email, nickname,
+}: {userId: string, password: string, email: string, nickname: string}) => ({
+    type: SIGNUP,
     payload: {
         userId,
         password,
         email,
+        nickname,
     },
 });
 type loginFunctionType = ({ userId, password }: {userId: string, password: string})=> loginActionType
@@ -48,33 +53,41 @@ export const login: loginFunctionType = ({ userId, password }: {userId: string, 
         password,
     },
 });
-export const registerSuccess: ()=> responseSuccessActionType = () => ({
-    type: REGISTER_SUCCESS,
+type responseSuccessFunctionType = (payload: responseSuccessType|null)=> responseSuccessActionType
+type responseFailureFunctionType = (payload: responseFailureType|null)=> responseFailureActionType
+export const signupSuccess: responseSuccessFunctionType = (payload: responseSuccessType|null) => ({
+    type: SIGNUP_SUCCESS,
+    payload,
 });
-export const registerFailure: ()=> responseFailureActionType = () => ({
-    type: REGISTER_FAILURE,
+export const signupFailure: responseFailureFunctionType = (payload: responseFailureType|null) => ({
+    type: SIGNUP_FAILURE,
+    payload,
 });
 
-export const loginSuccess: ()=> responseSuccessActionType = () => ({
+export const loginSuccess: responseSuccessFunctionType = (payload: responseSuccessType|null) => ({
     type: LOGIN_SUCCESS,
+    payload,
 });
 
-export const loginFailure: ()=> responseFailureActionType = () => ({
+export const loginFailure: responseFailureFunctionType = (payload: responseFailureType|null) => ({
     type: LOGIN_FAILURE,
+    payload,
 });
-const registerSaga: createRequestSagaReturnType = createRequestSaga(REGISTER, authAPI.register);
+
+const signupSaga: createRequestSagaReturnType = createRequestSaga(SIGNUP, authAPI.signup);
 const loginSaga: createRequestSagaReturnType = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
-    yield takeLatest(REGISTER, registerSaga);
+    yield takeLatest(SIGNUP, signupSaga);
     yield takeLatest(LOGIN, loginSaga);
 }
 // 초기 상태 정의
 const initialState: authStateType = {
-    register: {
+    signup: {
         userId: '',
         password: '',
         passwordConfirm: '',
         email: '',
+        nickname: '',
     },
     login: {
         userId: '',
@@ -89,18 +102,21 @@ function auth(state: authStateType = initialState, action: authActionType): auth
     return produce(state, (draft: WritableDraft<authStateType>) => {
         switch (action.type) {
             case CHANGE_FIELD:
-                if ((action as changeFieldActionType).payload.form === 'register') {
+                if ((action as changeFieldActionType).payload.form === 'signup') {
                     if ((action as changeFieldActionType).payload.key === 'userId') {
-                        draft.register.userId = (action as changeFieldActionType).payload.value;
+                        draft.signup.userId = (action as changeFieldActionType).payload.value;
                     }
                     if ((action as changeFieldActionType).payload.key === 'password') {
-                        draft.register.password = (action as changeFieldActionType).payload.value;
+                        draft.signup.password = (action as changeFieldActionType).payload.value;
                     }
                     if ((action as changeFieldActionType).payload.key === 'passwordConfirm') {
-                        draft.register.passwordConfirm = (action as changeFieldActionType).payload.value;
+                        draft.signup.passwordConfirm = (action as changeFieldActionType).payload.value;
                     }
                     if ((action as changeFieldActionType).payload.key === 'email') {
-                        draft.register.email = (action as changeFieldActionType).payload.value;
+                        draft.signup.email = (action as changeFieldActionType).payload.value;
+                    }
+                    if ((action as changeFieldActionType).payload.key === 'nickname') {
+                        draft.signup.nickname = (action as changeFieldActionType).payload.value;
                     }
                 }
                 else if ((action as changeFieldActionType).payload.form === 'login') {
@@ -119,27 +135,19 @@ function auth(state: authStateType = initialState, action: authActionType): auth
                 draft.authError = null;
                 draft.auth = null;
                 return draft;
-            case REGISTER_SUCCESS:
+            case SIGNUP_SUCCESS:
                 draft.authError = null;
-                if (typeof ((action as responseSuccessActionType).payload) !== undefined) {
-                    draft.auth = (action as responseSuccessActionType).payload;
-                }
+                draft.auth = (action as responseSuccessActionType).payload;
                 return draft;
-            case REGISTER_FAILURE:
-                if ((action as responseFailureActionType).payload !== undefined) {
-                    draft.authError = (action as responseFailureActionType).payload;
-                }
+            case SIGNUP_FAILURE:
+                draft.authError = (action as responseFailureActionType).payload;
                 return draft;
             case LOGIN_SUCCESS:
                 draft.authError = null;
-                if ((action as responseSuccessActionType).payload !== undefined) {
-                    draft.auth = (action as responseSuccessActionType).payload;
-                }
+                draft.auth = (action as responseSuccessActionType).payload;
                 return draft;
             case LOGIN_FAILURE:
-                if ((action as responseFailureActionType).payload !== undefined) {
-                    draft.authError = (action as responseFailureActionType).payload;
-                }
+                draft.authError = (action as responseFailureActionType).payload;
                 return draft;
             default:
                 return draft;

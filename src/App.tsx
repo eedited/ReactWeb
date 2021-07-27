@@ -7,6 +7,8 @@ import Landing from './pages/Landing';
 // import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SingupPage';
+import FindingIdPage from './pages/FindingIdPage';
+import FindingPwPage from './pages/FindingPwPage';
 
 type AppType = ()=> JSX.Element;
 
@@ -15,6 +17,8 @@ const App: AppType = (): JSX.Element => (
         <Route path="/" component={Landing} exact />
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
+        <Route path="/findId" component={FindingIdPage} />
+        <Route path="/findPw" component={FindingPwPage} />
     </div>
 
 );
