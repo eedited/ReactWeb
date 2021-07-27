@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.scss';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 // import Landing from './pages/Landing';
 // import logo from './logo.svg';
@@ -14,11 +14,13 @@ type AppType = ()=> JSX.Element;
 
 const App: AppType = (): JSX.Element => (
     <div className="App">
-        <Route path="/" component={Landing} exact />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/signup" component={SignupPage} />
-        <Route path="/findId" component={FindingIdPage} />
-        <Route path="/findPw" component={FindingPwPage} />
+        <Switch>
+            <Route path="/" component={Landing} exact />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signup" component={SignupPage} />
+            <Route path="/findId" component={FindingIdPage} />
+            <Route path="/findPw" component={FindingPwPage} />
+        </Switch>
     </div>
 
 );
