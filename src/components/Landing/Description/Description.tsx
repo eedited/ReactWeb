@@ -7,7 +7,7 @@ const Description: React.FC = () => (
             <h1>title</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, magnam.</p>
         </div>
-        <img className="landing__description__img" src="logo192.png" alt="description img" />
+        <img className="landing__description__img" src="/logo192.png" alt="description img" />
     </div>
 
 );
