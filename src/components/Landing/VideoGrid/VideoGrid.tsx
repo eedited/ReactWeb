@@ -7,11 +7,15 @@ interface videoInfo{
     thumbnailUrl: string
 }
 interface props{
-    videoInfos: videoInfo[]
+    videoInfos: videoInfo[]|null
 }
 const VideoGrid: React.FC<props> = ({ videoInfos }: props) => (
+
     <div className="videoGrid">
-        {videoInfos.map((video: videoInfo, idx: number) => <VideoContainer key={Math.random()} videoUrl={video.videoUrl} thumbnailUrl={video.thumbnailUrl} />)}
+        {videoInfos === null
+            ? <div>loading</div>
+            : videoInfos.map((video: videoInfo, idx: number) => <VideoContainer key={Math.random()} videoUrl={video.videoUrl} thumbnailUrl={video.thumbnailUrl} />)}
+
     </div>
 );
 

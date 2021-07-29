@@ -5,15 +5,15 @@ export interface videoProp{
     videoId: string
 }
 export interface videoReturnProp{
-    videoURL: string,
-    thumnailURL: string,
+    videoUrl: string,
+    thumnailUrl: string,
     videoID: string
 }
-export type videoFunctionType = ({ videoId }: videoProp)=> Promise<AxiosResponse<videoReturnProp>>;
-export const video: videoFunctionType = ({ videoId }: videoProp) => client.get(`/video/${videoId}`);
+export type videoApiFunctionType = ({ videoId }: videoProp)=> Promise<AxiosResponse<videoReturnProp>>;
+export const video: videoApiFunctionType = ({ videoId }: videoProp) => client.get(`/video/${videoId}`);
 
-export type videoListReturnProp = videoReturnProp[]
-export type videoListFunctionType = ()=> Promise<AxiosResponse<videoListReturnProp>>
-export const videoList: videoListFunctionType = () => client.get('/video');
+export type videoListApiReturnProp = videoReturnProp[]
+export type videoListApiFunctionType = ()=> Promise<AxiosResponse<videoListApiReturnProp>>
+export const videoList: videoListApiFunctionType = () => client.get('/video');
 
-export type getVideoFunctionType = videoListFunctionType|videoFunctionType;
+export type getVideoFunctionType = videoListApiFunctionType|videoApiFunctionType;

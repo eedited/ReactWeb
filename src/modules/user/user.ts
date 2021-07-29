@@ -7,8 +7,8 @@ import {
 import * as authApi from '../../lib/api/auth';
 import { initializeForm } from '../auth/auth';
 // 액션 정의
-export const SET_USER: string = 'SET_USER';
-export const LOGOUT: string = 'LOGOUT';
+export const SET_USER: 'SET_USER' = 'SET_USER' as const;
+export const LOGOUT: 'LOGOUT' = 'LOGOUT' as const;
 
 // 액션 생성함수 정의
 type setUserFunctionType = ({ userId }: {userId: string})=> setUserActionType
@@ -28,7 +28,7 @@ function* logoutSaga() {
     try {
         yield call(authApi.logout);
         yield put(initializeForm('login'));
-        yield put(initializeForm('register'));
+        yield put(initializeForm('signup'));
         sessionStorage.removeItem('user');
     }
     catch (e) {

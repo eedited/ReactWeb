@@ -1,4 +1,7 @@
 import { authProp } from '../../lib/api/auth';
+import {
+    CHANGE_FIELD, INITIALIZE_FORM, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP, SIGNUP_FAILURE, SIGNUP_SUCCESS,
+} from './auth';
 
 export interface responseSuccessType{
     success: boolean
@@ -10,36 +13,36 @@ export interface responseFailureType {
 }
 
 export interface changeFieldActionType{
-    type: string,
+    type: typeof CHANGE_FIELD,
     payload: {
-        form: string,
+        form: 'signup' | 'login',
         key: string,
         value: string
     }
 }
 export interface initializeFormActionType{
-    type: string,
+    type: typeof INITIALIZE_FORM,
     payload: {
-        form: string
+        form: 'signup' | 'login',
     }
 }
 export interface signupActionType{
-    type: string,
+    type: typeof SIGNUP,
     payload: authProp;
 }
 export interface loginActionType{
-    type: string,
+    type: typeof LOGIN,
     payload: {
         userId: string,
         password: string
     }
 }
 export interface responseSuccessActionType{
-    type: string
+    type: typeof LOGIN_SUCCESS|typeof SIGNUP_SUCCESS
     payload: responseSuccessType|null
 }
 export interface responseFailureActionType{
-    type: string
+    type: typeof LOGIN_FAILURE|typeof SIGNUP_FAILURE
     payload: responseFailureType|null
 }
 
@@ -65,10 +68,6 @@ export interface loginFormType{
     password: string
 }
 export interface authStateType{
-    [key: string]: {
-        [key2: string]: string
-    }|undefined|responseFailureType|responseSuccessType|null
-
     signup: signupFormType,
     login: loginFormType
     auth?: responseSuccessType|null
