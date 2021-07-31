@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, RouteComponentProps } from 'react-router';
+import { Redirect } from 'react-router';
 import router from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
 import Description from '../components/Landing/Description/Description';
@@ -13,18 +13,22 @@ interface props{
 }
 const validMatch: string[] = ['popular'];
 const Landing: React.FC<props> = ({ match }: props) => {
+    let criteria: string;
     if (match.params.criteria !== undefined && !validMatch.includes(match.params.criteria)) {
         // 404로 보내버렷!
-        <Redirect to={{
-            pathname: '/404NotFound',
-        }}
-        />;
-        console.log(`${match.params.criteria}:  not valid index`);
+        return (
+            <Redirect to={{
+                pathname: '/404NotFound',
+            }}
+            />
+        );
     }
+    if (match.params.criteria === undefined) criteria = '';
+    else criteria = match.params.criteria;
     return (
         <BaseTemplate>
             <Description />
-            <VideoGridContainer criteria={match.params.criteria} />
+            <VideoGridContainer criteria={criteria} />
         </BaseTemplate>
     );
 };
