@@ -67,6 +67,7 @@
   },
   "proxy": "http://localhost:3000/",
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/react-router-dom": "^5.1.8",
     "@types/redux-actions": "^2.6.2",
     "eslint": "^7.30.0",
