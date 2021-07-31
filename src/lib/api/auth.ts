@@ -7,12 +7,14 @@ export interface authProp {
     email?: string
     nickname?: string
 }
-export interface authReturnProp{
+export interface authSuccessReturnProp{
     success: boolean
-    info?: string
-    err?: Error
 }
-
+export interface authFailureReturnProp{
+    error: Error
+    info: string
+}
+export type authReturnProp = authSuccessReturnProp | authFailureReturnProp
 export type loginFunctionType = ({ userId, password }: authProp)=> Promise<AxiosResponse<authReturnProp>>
 export const login: loginFunctionType = ({ userId, password }: authProp) => client.post('/auth/login', {
     userId,

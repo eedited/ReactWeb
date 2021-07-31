@@ -1,9 +1,9 @@
-import { videoApiListProp, videoApiProp, videoApiReturnSuccessProp } from '../../lib/api/video';
+import { videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp } from '../../lib/api/video';
 import {
     VIDEO, VIDEO_FAILURE, VIDEO_LIST, VIDEO_LIST_FAILURE, VIDEO_LIST_SUCCESS, VIDEO_SUCCESS,
 } from './video';
 
-export type videoSuccessType = videoApiReturnSuccessProp
+export type videoSuccessType = videoAPISuccessReturnProp
 export type viedoListSuccessType = videoSuccessType[]
 
 export interface videoFailureType{
@@ -15,7 +15,7 @@ export interface videoListFailureType{
 
 export interface videoActionType{
     type: typeof VIDEO
-    payload: videoApiProp
+    payload: videoAPIProp
 }
 export interface videoSuccessActionType{
     type: typeof VIDEO_SUCCESS
@@ -28,7 +28,7 @@ export interface videoFailureActionType{
 
 export interface videoListActionType{
     type: typeof VIDEO_LIST
-    payload: videoApiListProp
+    payload: videoAPIListProp
 }
 export interface videoListSuccessActionType{
     type: typeof VIDEO_LIST_SUCCESS

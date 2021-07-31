@@ -34,8 +34,8 @@ export const videoFailure: videoFailureFunctionType = (payload: videoFailureType
     payload,
 });
 
-type videListFunctionType = ({ criteria }: videoAPI.videoApiListProp)=> videoListActionType
-export const videoList: videListFunctionType = ({ criteria }: videoAPI.videoApiListProp) => ({
+type videListFunctionType = ({ criteria }: videoAPI.videoAPIListProp)=> videoListActionType
+export const videoList: videListFunctionType = ({ criteria }: videoAPI.videoAPIListProp) => ({
     type: VIDEO_LIST,
     payload: {
         criteria,
@@ -52,8 +52,8 @@ export const videoListFailure: videoListFailureFunctionType = (payload: videoLis
     type: VIDEO_LIST_FAILURE,
     payload,
 });
-const videoSaga: createRequestSagaReturnType<videoAPI.videoApiProp, videoAPI.videoApiReturnProp> = createRequestSaga<videoAPI.videoApiProp, videoAPI.videoApiReturnProp>(VIDEO, videoAPI.video);
-const videoListSaga: createRequestSagaReturnType<videoAPI.videoApiListProp, videoAPI.videoListApiReturnProp> = createRequestSaga<videoAPI.videoApiListProp, videoAPI.videoListApiReturnProp>(VIDEO, videoAPI.videoList);
+const videoSaga: createRequestSagaReturnType<videoAPI.videoAPIProp, videoAPI.videoAPIReturnProp> = createRequestSaga<videoAPI.videoAPIProp, videoAPI.videoAPIReturnProp>(VIDEO, videoAPI.video);
+const videoListSaga: createRequestSagaReturnType<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp> = createRequestSaga<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp>(VIDEO, videoAPI.videoList);
 export function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(VIDEO, videoSaga);
     yield takeLatest(VIDEO_LIST, videoListSaga);

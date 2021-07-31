@@ -1,13 +1,13 @@
 import { AxiosResponse } from 'axios';
 import client from './client';
 
-export interface videoApiProp{
+export interface videoAPIProp{
     videoId: string
 }
-export interface videoApiListProp{
+export interface videoAPIListProp{
     criteria: string
 }
-export interface videoApiReturnSuccessProp{
+export interface videoAPISuccessReturnProp{
     id: string
     uploader: string
     title: string
@@ -20,19 +20,19 @@ export interface videoApiReturnSuccessProp{
     updatedAt: Date
     deleted: Date | null
 }
-export interface videoApiReturnFailureProp{
+export interface videoAPIFailureReturnProp{
     error: Error
 }
-export type videoApiReturnProp = videoApiReturnSuccessProp|videoApiReturnFailureProp
-export type videoApiFunctionType = ({ videoId }: videoApiProp)=> Promise<AxiosResponse<videoApiReturnProp>>;
-export const video: videoApiFunctionType = ({ videoId }: videoApiProp) => client.get(`/video/${videoId}`);
+export type videoAPIReturnProp = videoAPISuccessReturnProp|videoAPIFailureReturnProp
+export type videoAPIFunctionType = ({ videoId }: videoAPIProp)=> Promise<AxiosResponse<videoAPIReturnProp>>;
+export const video: videoAPIFunctionType = ({ videoId }: videoAPIProp) => client.get(`/video/${videoId}`);
 
-export type videoListApiReturnSuccessProp = videoApiReturnProp[]
-export type videoListApiReturnFailureProp = videoApiReturnFailureProp
-export type videoListApiReturnProp = videoListApiReturnSuccessProp|videoListApiReturnFailureProp
-export type videoListApiFunctionType = ({ criteria }: videoApiListProp)=> Promise<AxiosResponse<videoListApiReturnProp>>
-export const videoList: videoListApiFunctionType = ({ criteria }: videoApiListProp) => client.get('/video/{criteria}');
-export const videoListLatest: videoListApiFunctionType = () => client.get('/video/sort/latest');
-export const videoListThumbUp: videoListApiFunctionType = () => client.get('/video/sort/thumbup');
+export type videoListAPISuccessReturnProp = videoAPIReturnProp[]
+export type videoListAPIFailureReturnProp = videoAPIFailureReturnProp
+export type videoListAPIReturnProp = videoListAPISuccessReturnProp|videoListAPIFailureReturnProp
+export type videoListAPIFunctionType = ({ criteria }: videoAPIListProp)=> Promise<AxiosResponse<videoListAPIReturnProp>>
+export const videoList: videoListAPIFunctionType = ({ criteria }: videoAPIListProp) => client.get('/video/{criteria}');
+export const videoListLatest: videoListAPIFunctionType = () => client.get('/video/sort/latest');
+export const videoListThumbUp: videoListAPIFunctionType = () => client.get('/video/sort/thumbup');
 
-export type getVideoFunctionType = videoListApiFunctionType|videoApiFunctionType;
+export type getVideoFunctionType = videoListAPIFunctionType|videoAPIFunctionType;
