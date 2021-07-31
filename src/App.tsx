@@ -9,6 +9,8 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SingupPage';
 import FindingIdPage from './pages/FindingIdPage';
 import FindingPwPage from './pages/FindingPwPage';
+import VideoPage from './pages/VideoPage';
+import Page404 from './pages/NotFound';
 
 type AppType = ()=> JSX.Element;
 
@@ -17,10 +19,13 @@ const App: AppType = (): JSX.Element => (
         <Switch>
             <Route path={['/', '/videos']} component={Landing} exact />
             <Route path="/videos/:sort" component={Landing} />
+            <Route path="/videoInfo" component={VideoPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signup" component={SignupPage} />
             <Route path="/findId" component={FindingIdPage} />
             <Route path="/findPw" component={FindingPwPage} />
+            <Route path="/404NotFound" component={Page404} />
+            <Route component={Page404} />
         </Switch>
     </div>
 
