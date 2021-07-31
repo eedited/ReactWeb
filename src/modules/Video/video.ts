@@ -1,12 +1,13 @@
 import { ForkEffect, takeLatest } from 'redux-saga/effects';
 import * as videoAPI from '../../lib/api/video';
-import createRequestVideoSaga, { createRequestVideoSagaReturnType } from './videoSaga';
+import createRequestVideoSaga, { createRequestVideoSagaReturnProp } from './videoSaga';
 import {
     videoFailureType, videoSuccessType, videoListFailureType, viedoListSuccessType,
     videoActionType, videoSuccessActionType, videoFailureActionType,
     videoListActionType, videoListSuccessActionType, videoListFailureActionType, videoStateType,
     videoReducerActionType,
 } from './videoType';
+import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 
 export const VIDEO_LIST: 'video/VIDEO_LIST' = 'video/VIDEO_LIST' as const;
 export const VIDEO_LIST_SUCCESS: 'video/VIDEO_LIST_SUCCESS' = 'video/VIDEO_LIST_SUCCESS' as const;
@@ -34,9 +35,12 @@ export const videoFailure: videoFailureFunctionType = (payload: videoFailureType
     payload,
 });
 
-type videListFunctionType = ()=> videoListActionType
-export const videoList: videListFunctionType = () => ({
+type videListFunctionType = ({ criteria }: videoAPI.videoApiListProp)=> videoListActionType
+export const videoList: videListFunctionType = ({ criteria }: videoAPI.videoApiListProp) => ({
     type: VIDEO_LIST,
+    payload: {
+        criteria,
+    },
 });
 type videoListSuccessFunctionType = (payload: viedoListSuccessType|null)=> videoListSuccessActionType
 export const videListSuccess: videoListSuccessFunctionType = (payload: viedoListSuccessType|null) => ({
@@ -49,8 +53,8 @@ export const videoListFailure: videoListFailureFunctionType = (payload: videoLis
     type: VIDEO_LIST_FAILURE,
     payload,
 });
-const videoSaga: createRequestVideoSagaReturnType = createRequestVideoSaga(VIDEO, videoAPI.video);
-const videoListSaga: createRequestVideoSagaReturnType = createRequestVideoSaga(VIDEO, videoAPI.videoList);
+const videoSaga: createRequestSagaReturnType<videoAPI.videoApiProp, videoAPI.videoApiReturnProp> = createRequestSaga<videoAPI.videoApiProp, videoAPI.videoApiReturnProp>(VIDEO, videoAPI.video);
+const videoListSaga: createRequestSagaReturnType<videoAPI.videoApiListProp, videoAPI.videoListApiReturnProp> = createRequestSaga<videoAPI.videoApiListProp, videoAPI.videoListApiReturnProp>(VIDEO, videoAPI.videoList);
 export function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(VIDEO, videoSaga);
     yield takeLatest(VIDEO_LIST, videoListSaga);
