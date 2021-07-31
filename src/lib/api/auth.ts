@@ -11,6 +11,7 @@ export interface authSuccessReturnProp{
     success: boolean
 }
 export interface authFailureReturnProp{
+    success: boolean
     error: Error
     info: string
 }

@@ -1,16 +1,10 @@
-import { authProp } from '../../lib/api/auth';
+import { authFailureReturnProp, authProp, authSuccessReturnProp } from '../../lib/api/auth';
 import {
     CHANGE_FIELD, INITIALIZE_FORM, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP, SIGNUP_FAILURE, SIGNUP_SUCCESS,
 } from './auth';
 
-export interface responseSuccessType{
-    success: boolean
-}
-export interface responseFailureType {
-    success: boolean,
-    info: string,
-    error: Error
-}
+export type responseSuccessType = authSuccessReturnProp
+export type responseFailureType = authFailureReturnProp
 
 export interface changeFieldActionType{
     type: typeof CHANGE_FIELD,

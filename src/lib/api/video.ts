@@ -21,13 +21,13 @@ export interface videoAPISuccessReturnProp{
     deleted: Date | null
 }
 export interface videoAPIFailureReturnProp{
-    error: Error
+    info: string
 }
 export type videoAPIReturnProp = videoAPISuccessReturnProp|videoAPIFailureReturnProp
 export type videoAPIFunctionType = ({ videoId }: videoAPIProp)=> Promise<AxiosResponse<videoAPIReturnProp>>;
 export const video: videoAPIFunctionType = ({ videoId }: videoAPIProp) => client.get(`/video/${videoId}`);
 
-export type videoListAPISuccessReturnProp = videoAPIReturnProp[]
+export type videoListAPISuccessReturnProp = videoAPISuccessReturnProp[]
 export type videoListAPIFailureReturnProp = videoAPIFailureReturnProp
 export type videoListAPIReturnProp = videoListAPISuccessReturnProp|videoListAPIFailureReturnProp
 export type videoListAPIFunctionType = ({ criteria }: videoAPIListProp)=> Promise<AxiosResponse<videoListAPIReturnProp>>
