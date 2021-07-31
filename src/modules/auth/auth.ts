@@ -6,7 +6,6 @@ import {
     loginActionType, responseFailureActionType, responseSuccessActionType, responseSuccessType, responseFailureType,
 } from './authType';
 import * as authAPI from '../../lib/api/auth';
-import createRequestAuthSaga, { createRequetAuthSagaReturnType } from './authSaga';
 import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 // 액션 정의
 export const CHANGE_FIELD: 'auth/CHANGE_FIELD' = 'auth/CHANGE_FIELD' as const;
@@ -82,8 +81,6 @@ export const loginFailure: responseFailureFunctionType = (payload: responseFailu
 });
 
 const signupSaga: createRequestSagaReturnType<authAPI.authProp, authAPI.authReturnProp> = createRequestSaga<authAPI.authProp, authAPI.authReturnProp>(SIGNUP, authAPI.signup);
-// const signupSaga: createRequetAuthSagaReturnType = createRequestAuthSaga(SIGNUP, authAPI.signup);
-// const loginSaga: createRequetAuthSagaReturnType = createRequestAuthSaga(LOGIN, authAPI.login);
 const loginSaga: createRequestSagaReturnType<authAPI.authProp, authAPI.authReturnProp> = createRequestSaga<authAPI.authProp, authAPI.authReturnProp>(LOGIN, authAPI.login);
 export function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(SIGNUP, signupSaga);

@@ -1,6 +1,5 @@
 import { ForkEffect, takeLatest } from 'redux-saga/effects';
 import * as videoAPI from '../../lib/api/video';
-import createRequestVideoSaga, { createRequestVideoSagaReturnProp } from './videoSaga';
 import {
     videoFailureType, videoSuccessType, videoListFailureType, viedoListSuccessType,
     videoActionType, videoSuccessActionType, videoFailureActionType,
