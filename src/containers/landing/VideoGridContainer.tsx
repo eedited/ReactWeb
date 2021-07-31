@@ -13,7 +13,10 @@ interface videoInfoType{
     thumbnailUrl: string,
     videoUrl: string
 }
-const VideoGridContainer: React.FC = () => {
+interface props{
+    criteria: string
+}
+const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
     const [videoInfo, setVideoInfo]: [videoInfoType[]|null, React.Dispatch<React.SetStateAction<videoInfoType[]|null>>] = useState<videoInfoType[]|null>(null);
     const dispatch: React.Dispatch<rootActionType> = useDispatch();
     const {
@@ -22,14 +25,14 @@ const VideoGridContainer: React.FC = () => {
         videos: videoReducer.videoList,
     }));
     useEffect(() => {
-        dispatch((videoList()));
+        dispatch((videoList({ criteria })));
         if (videos !== null) {
             setVideoInfo(videos.map((video: videoSuccessType) => ({
-                thumbnailUrl: video.thumnailURL,
-                videoUrl: video.videoURL,
+                thumbnailUrl: video.thumbnail,
+                videoUrl: video.url,
             })));
         }
-    }, [dispatch, videos]);
+    }, [criteria, dispatch, videos]);
     return (
         <VideoGrid videoInfos={videoInfo} />
     );
