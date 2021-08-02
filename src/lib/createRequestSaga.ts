@@ -33,7 +33,9 @@ export default function createRequestSaga<P, R>(type: string, request: genericRe
             const response: RetrunProp<R> = yield call(request, action.payload);
             yield put({
                 type: SUCCESS,
-                payload: response.data,
+                payload: {
+                    ...response.data,
+                },
             });
         }
         catch (err) {
@@ -41,7 +43,7 @@ export default function createRequestSaga<P, R>(type: string, request: genericRe
                 type: FAILURE,
                 payload: {
                     ...err.response.data,
-                    error: err,
+                    ...err,
                 },
             });
         }

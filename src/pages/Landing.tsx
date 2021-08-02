@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router';
 import router from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
@@ -11,9 +11,12 @@ interface matchParams{
 interface props{
     match: router.match<matchParams>
 }
-const validMatch: string[] = ['popular'];
+const validMatch: string[] = ['thumbup', 'latest'];
 const Landing: React.FC<props> = ({ match }: props) => {
-    let criteria: string;
+    let criteria: string = '';
+    useEffect(() => {
+        console.log(criteria);
+    }, [criteria]);
     if (match.params.criteria !== undefined && !validMatch.includes(match.params.criteria)) {
         // 404로 보내버렷!
         return (
@@ -23,8 +26,9 @@ const Landing: React.FC<props> = ({ match }: props) => {
             />
         );
     }
-    if (match.params.criteria === undefined) criteria = '';
+    if (match.params.criteria === undefined) criteria = 'latest';
     else criteria = match.params.criteria;
+
     return (
         <BaseTemplate>
             <Description />

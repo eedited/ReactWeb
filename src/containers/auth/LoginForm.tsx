@@ -57,8 +57,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
     useEffect(() => {
         if (AuthError) {
             if (AuthError.info) setError(AuthError.info);
-            else setError(AuthError.error.message);
-            return;
+            else setError(AuthError.message);
         }
         if (Auth) {
             dispatch(setUser({ userId: form.userId }));

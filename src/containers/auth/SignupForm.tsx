@@ -88,7 +88,6 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
     useEffect(() => {
         if (AuthError) {
             setError(`회원가입 실패 ${AuthError.info}`);
-            return;
         }
         if (Auth) {
             dispatch(setUser({ userId: form.userId }));

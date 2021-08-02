@@ -4,7 +4,7 @@ import {
 } from './auth';
 
 export type responseSuccessType = authSuccessReturnProp
-export type responseFailureType = authFailureReturnProp
+export type responseFailureType = authFailureReturnProp&Error
 
 export interface changeFieldActionType{
     type: typeof CHANGE_FIELD,
