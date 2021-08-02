@@ -114,6 +114,7 @@ function auth(state: authStateType = initialState, action: authActionType): auth
                 if (action.payload.form === 'login') draft.login = initialState.login; // 이번 form 녀석을 바꿔버린다.
                 else if (action.payload.form === 'signup') draft.signup = initialState.signup; // 이번 form 녀석을 바꿔버린다.
                 draft.authError = null;
+                draft.auth = null;
                 return draft;
             case SIGNUP_SUCCESS:
                 draft.authError = null;
