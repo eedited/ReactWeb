@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { rootActionType, rootStateType } from '../../modules';
-import { videoSuccessType, viedoListSuccessType } from '../../modules/Video/videoType';
 import { videoList } from '../../modules/Video/video';
+import { VIDEO, videoListAPISuccessReturnProp } from '../../lib/api/video';
 
 interface fromReducerType{
-    videos: viedoListSuccessType|null
-}
-interface videoInfoType{
-    thumbnailUrl: string,
-    videoUrl: string
+    videos: videoListAPISuccessReturnProp|null
 }
 interface props{
     criteria: string
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
-    const [videoInfo, setVideoInfo]: [videoInfoType[]|null, React.Dispatch<React.SetStateAction<videoInfoType[]|null>>] = useState<videoInfoType[]|null>(null);
+    const [videoInfo, setVideoInfo]: [VIDEO[]|null, React.Dispatch<React.SetStateAction<VIDEO[]|null>>] = useState<VIDEO[]|null>(null);
     const dispatch: React.Dispatch<rootActionType> = useDispatch();
     const {
         videos,
@@ -26,13 +23,13 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
     }));
     useEffect(() => {
         dispatch((videoList({ criteria })));
-        if (videos !== null) {
-            setVideoInfo(videos.map((video: videoSuccessType) => ({
-                thumbnailUrl: video.thumbnail,
-                videoUrl: video.url,
-            })));
+    }, [criteria, dispatch]);
+    useEffect(() => {
+        if (videos) {
+            setVideoInfo(videos.videos);
+            console.log(videos);
         }
-    }, [criteria, dispatch, videos]);
+    }, [videos]);
     return (
         <VideoGrid videoInfos={videoInfo} />
     );

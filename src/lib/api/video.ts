@@ -7,7 +7,7 @@ export interface videoAPIProp{
 export interface videoAPIListProp{
     criteria: string
 }
-export interface videoAPISuccessReturnProp{
+export interface VIDEO {
     id: string
     uploader: string
     title: string
@@ -20,11 +20,17 @@ export interface videoAPISuccessReturnProp{
     updatedAt: Date
     deleted: Date | null
 }
+export interface videoAPISuccessReturnProp{
+    video: VIDEO
+}
 export interface videoAPIFailureReturnProp{
     info: string
+    error: Error
 }
 
-export type videoListAPISuccessReturnProp = videoAPISuccessReturnProp[]
+export interface videoListAPISuccessReturnProp {
+    videos: VIDEO[]
+}
 export type videoListAPIFailureReturnProp = videoAPIFailureReturnProp
 export type videoListAPIReturnProp = videoListAPISuccessReturnProp|videoListAPIFailureReturnProp
 
@@ -43,12 +49,10 @@ export type videoAPIUploadReturnProp = videoAPIUploadSuccessReturnProp|videoAPIU
 
 export type videoAPIReturnProp = videoAPISuccessReturnProp|videoAPIFailureReturnProp
 export type videoAPIFunctionType = ({ videoId }: videoAPIProp)=> Promise<AxiosResponse<videoAPIReturnProp>>;
-export const video: videoAPIFunctionType = ({ videoId }: videoAPIProp) => client.get(`/video/${videoId}`);
+export const video: videoAPIFunctionType = ({ videoId }: videoAPIProp) => client.get(`/video/largeVideo/${videoId}`);
 
 export type videoListAPIFunctionType = ({ criteria }: videoAPIListProp)=> Promise<AxiosResponse<videoListAPIReturnProp>>
-export const videoList: videoListAPIFunctionType = ({ criteria }: videoAPIListProp) => client.get('/video/{criteria}');
-export const videoListLatest: videoListAPIFunctionType = () => client.get('/video/sort/latest');
-export const videoListThumbUp: videoListAPIFunctionType = () => client.get('/video/sort/thumbup');
+export const videoList: videoListAPIFunctionType = ({ criteria }: videoAPIListProp) => client.get(`/video/sort/${criteria}`);
 
 export type videoAPIUploadFunctionType = ({
     title, discription, url, thumbnail,

@@ -1,21 +1,18 @@
 import React from 'react';
 import VideoContainer from '../../../containers/landing/VideoContainer';
+import { VIDEO } from '../../../lib/api/video';
 import './VideoGrid.scss';
 
-interface videoInfo{
-    videoUrl: string,
-    thumbnailUrl: string
-}
+type videoInfo = VIDEO
 interface props{
-    videoInfos: videoInfo[]|null
+    videoInfos: VIDEO[]|null
 }
 const VideoGrid: React.FC<props> = ({ videoInfos }: props) => (
 
     <div className="videoGrid">
         {videoInfos === null
             ? <div>loading</div>
-            : videoInfos.map((video: videoInfo, idx: number) => <VideoContainer key={Math.random()} videoUrl={video.videoUrl} thumbnailUrl={video.thumbnailUrl} />)}
-
+            : videoInfos.map((video: videoInfo, idx: number) => <VideoContainer key={video.id} videoInfo={video} />)}
     </div>
 );
 

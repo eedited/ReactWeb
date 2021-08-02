@@ -3,6 +3,8 @@
 import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
+import { VIDEO } from '../../../lib/api/video';
 import './Video.scss';
 
 interface props{
@@ -10,44 +12,45 @@ interface props{
     play: ()=> void
     pause: ()=> void
     setOpacity: ()=> number
-    thumbnailUrl: string
-    videoUrl: string
+    videoInfo: VIDEO
 }
 const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    onLoad, play, pause, setOpacity, thumbnailUrl, videoUrl,
+    onLoad, play, pause, setOpacity, videoInfo,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
-    <div className="video">
-        <ReactPlayer
-            className="video__player"
-            url={videoUrl}
-            ref={youtubeRef}
-            muted
-            width="480px"
-            height="270px"
-            onReady={onLoad}
-            config={{
-                youtube: {
-                    playerVars: {
-                        rel: 0,
-                        origin: 'http://localhost:3000',
+    <Link to={`videoInfo?videoId=${videoInfo.id}`}>
+        <div className="video">
+            <ReactPlayer
+                className="video__player"
+                url={videoInfo.url}
+                ref={youtubeRef}
+                muted
+                width="480px"
+                height="270px"
+                onReady={onLoad}
+                config={{
+                    youtube: {
+                        playerVars: {
+                            rel: 0,
+                            origin: 'http://localhost:3000',
+                        },
                     },
-                },
-            }}
-            style={{
-                opacity: setOpacity(),
-            }}
-        />
-        <img
-            className="video__img"
-            src={thumbnailUrl}
-            alt="123"
-            onMouseOver={play}
-            onFocus={play}
-            onMouseLeave={pause}
-            onBlur={pause}
-            style={{ opacity: (setOpacity() + 1) % 2 }}
-        />
-    </div>
+                }}
+                style={{
+                    opacity: setOpacity(),
+                }}
+            />
+            <img
+                className="video__img"
+                src={videoInfo.thumbnail}
+                alt="123"
+                onMouseOver={play}
+                onFocus={play}
+                onMouseLeave={pause}
+                onBlur={pause}
+                style={{ opacity: (setOpacity() + 1) % 2 }}
+            />
+        </div>
+    </Link>
 ));
 
 export default React.memo(Video);

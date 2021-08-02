@@ -7,9 +7,11 @@ import {
 
 export type videoSuccessType = videoAPISuccessReturnProp
 export type viedoListSuccessType = videoListAPISuccessReturnProp
+export type videoUploadSuccessType = videoAPIUploadSuccessReturnProp
 
-export type videoFailureType = videoAPIFailureReturnProp
-export type videoListFailureType = videoListAPIFailureReturnProp
+export type videoFailureType = videoAPIFailureReturnProp & Error
+export type videoListFailureType = videoListAPIFailureReturnProp & Error
+export type videoUploadFailureType = videoAPIUploadFailureReturnProp&Error
 
 export interface videoActionType{
     type: typeof VIDEO
@@ -43,11 +45,11 @@ export interface videoUploadActionType{
 }
 export interface videoUploadSuccessActionType{
     type: typeof VIDEO_UPLOAD_SUCCESS
-    payload: videoAPIUploadSuccessReturnProp|null
+    payload: videoUploadSuccessType|null
 }
 export interface videoUploadFailureActionType{
     type: typeof VIDEO_UPLOAD_FAILURE
-    payload: videoAPIUploadFailureReturnProp|null
+    payload: videoUploadFailureType|null
 }
 
 export type videoReducerActionType =
@@ -57,9 +59,13 @@ export type videoReducerActionType =
     |videoListActionType
     |videoListSuccessActionType
     |videoListFailureActionType
+    |videoUploadActionType
+    |videoUploadSuccessActionType
+    |videoUploadFailureActionType
 
 export interface videoStateType{
     video: videoSuccessType|null
     videoList: viedoListSuccessType|null
     getVideoError: videoFailureType|null
+    videoUploadError: videoUploadFailureType|null
 }

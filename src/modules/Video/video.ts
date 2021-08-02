@@ -8,6 +8,8 @@ import {
     videoUploadActionType,
     videoUploadSuccessActionType,
     videoUploadFailureActionType,
+    videoUploadSuccessType,
+    videoUploadFailureType,
 } from './videoType';
 import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 
@@ -73,19 +75,19 @@ export const videoUpload: videoUploadFunctionType = ({
         thumbnail,
     },
 });
-type videoUploadSuccessFunctionType = (payload: videoAPI.videoAPIUploadSuccessReturnProp|null)=> videoUploadSuccessActionType
-export const videoUploadSuccess: videoUploadSuccessFunctionType = (payload: videoAPI.videoAPIUploadSuccessReturnProp|null) => ({
+type videoUploadSuccessFunctionType = (payload: videoUploadSuccessType|null)=> videoUploadSuccessActionType
+export const videoUploadSuccess: videoUploadSuccessFunctionType = (payload: videoUploadSuccessType|null) => ({
     type: VIDEO_UPLOAD_SUCCESS,
     payload,
 });
-type videoUploadFailureFunctionType = (payload: videoAPI.videoAPIUploadFailureReturnProp|null)=> videoUploadFailureActionType
-export const videoUploadFailure: videoUploadFailureFunctionType = (payload: videoAPI.videoAPIUploadFailureReturnProp|null) => ({
+type videoUploadFailureFunctionType = (payload: videoUploadFailureType|null)=> videoUploadFailureActionType
+export const videoUploadFailure: videoUploadFailureFunctionType = (payload: videoUploadFailureType|null) => ({
     type: VIDEO_UPLOAD_FAILURE,
     payload,
 });
 
 const videoSaga: createRequestSagaReturnType<videoAPI.videoAPIProp, videoAPI.videoAPIReturnProp> = createRequestSaga<videoAPI.videoAPIProp, videoAPI.videoAPIReturnProp>(VIDEO, videoAPI.video);
-const videoListSaga: createRequestSagaReturnType<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp> = createRequestSaga<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp>(VIDEO, videoAPI.videoList);
+const videoListSaga: createRequestSagaReturnType<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp> = createRequestSaga<videoAPI.videoAPIListProp, videoAPI.videoListAPIReturnProp>(VIDEO_LIST, videoAPI.videoList);
 const videoUploadSaga: createRequestSagaReturnType<videoAPI.videoAPIUploadProp, videoAPI.videoAPIUploadReturnProp> = createRequestSaga<videoAPI.videoAPIUploadProp, videoAPI.videoAPIUploadReturnProp>(VIDEO_UPLOAD, videoAPI.videoUpload);
 export function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(VIDEO, videoSaga);
@@ -97,6 +99,7 @@ const initialState: videoStateType = {
     video: null,
     videoList: null,
     getVideoError: null,
+    videoUploadError: null,
 };
 
 function videoReducer(state: videoStateType = initialState, action: videoReducerActionType): videoStateType {
@@ -120,6 +123,15 @@ function videoReducer(state: videoStateType = initialState, action: videoReducer
             return {
                 ...state,
                 getVideoError: action.payload,
+            };
+        case VIDEO_UPLOAD_SUCCESS:
+            return {
+                ...state,
+            };
+        case VIDEO_UPLOAD_FAILURE:
+            return {
+                ...state,
+                videoUploadError: action.payload,
             };
         default:
             return state;
