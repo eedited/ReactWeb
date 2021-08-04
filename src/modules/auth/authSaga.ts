@@ -7,8 +7,8 @@ import { authAction } from './auth';
 import * as authAPI from '../../lib/api/auth';
 import { loginPayloadType, signupPayloadType } from './authType';
 
-const signupSaga: createRequestSagaReturnType<authAPI.signupProp, authAPI.authReturnProp> = createRequestSaga('auth/signup', authAPI.signup);
-const loginSaga: createRequestSagaReturnType<authAPI.loginProp, authAPI.authReturnProp> = createRequestSaga('auth/login', authAPI.login);
+const signupSaga: createRequestSagaReturnType<authAPI.signupProp, authAPI.authReturnProp> = createRequestSaga('AUTH/signup', authAPI.signup);
+const loginSaga: createRequestSagaReturnType<authAPI.loginProp, authAPI.authReturnProp> = createRequestSaga('AUTH/login', authAPI.login);
 
 export default function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     const { signup, login }: {

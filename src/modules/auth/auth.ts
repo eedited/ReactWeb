@@ -44,7 +44,15 @@ const authSlice: sliceAction = createSlice({
             state[action.payload.form][action.payload.key] = action.payload.value;
         },
         intializeForm(state: WritableDraft<authStateType>) {
-            state = initialState;
+            state.signup.userId = '';
+            state.signup.password = '';
+            state.signup.passwordConfirm = '';
+            state.signup.email = '';
+            state.signup.nickname = '';
+            state.login.userId = '';
+            state.login.password = '';
+            state.auth = null;
+            state.authError = null;
         },
         signup(state: WritableDraft<authStateType>, action: PayloadAction<signupPayloadType>) {},
         signupSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>) {
@@ -60,11 +68,11 @@ const authSlice: sliceAction = createSlice({
             state.authError = null;
         },
         loginFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>) {
-            state.authError = null;
+            state.authError = action.payload;
         },
     },
 });
 export const AUTH: string = authSlice.name;
-const authReducer: Reducer<authStateType, AnyAction> = authSlice.reducer;
-export default authReducer;
+
+export default authSlice.reducer;
 export const authAction: authActionType = authSlice.actions;
