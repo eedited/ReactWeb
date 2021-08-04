@@ -1,38 +1,39 @@
-import { LoadingActionType, loadingStateType } from './loadingType';
-// 액션 정의
-export const START_LOADING: 'loading/START_LOADING' = 'loading/START_LOADING' as const;
-export const FINISH_LOADING: 'loading/FINISH_LOADING' = 'loading/FINISH_LOADING' as const;
-// 액션 생성함수 정의
-type startLoadingFunctionType = (requestType: string)=> LoadingActionType;
-export const startLoading: startLoadingFunctionType = (requestType: string) => ({
-    type: START_LOADING,
-    payload: { status: requestType },
-});
+import {
+    CaseReducerActions, createSlice, PayloadAction, Slice,
+} from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
+import { loadingStateType } from './loadingType';
 
-type finishLoadingFunctionType = (requestType: string)=> LoadingActionType;
-export const finishLoading: finishLoadingFunctionType = (requestType: string) => ({
-    type: FINISH_LOADING,
-    payload: { status: requestType },
-});
-
-// 초기 상태 정의
 const initialState: loadingStateType = {};
+type loadingSliceType = Slice<loadingStateType, {
+    startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+        status: string;
+    }>): void;
+    finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+        status: string;
+    }>): void;
+}, 'LOADING'>
 
-// 리듀서 정의
-function loading(state: loadingStateType = initialState, action: LoadingActionType): loadingStateType {
-    switch (action.type) {
-        case START_LOADING:
-            return {
-                ...state,
-                [action.payload.status]: true,
-            };
-        case FINISH_LOADING:
-            return {
-                ...state,
-                [action.payload.status]: false,
-            };
-        default:
-            return state;
-    }
-}
-export default loading;
+const loadingSlice: loadingSliceType = createSlice({
+    name: 'LOADING',
+    initialState,
+    reducers: {
+        startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{status: string}>) {
+            state[action.payload.status] = true;
+        },
+        finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{status: string}>) {
+            state[action.payload.status] = false;
+        },
+    },
+});
+
+export const LOADING: string = loadingSlice.name;
+export default loadingSlice.reducer;
+export const loadingAction: CaseReducerActions<{
+    startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+        status: string;
+    }>): void;
+    finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+        status: string;
+    }>): void;
+}> = loadingSlice.actions;
