@@ -1,15 +1,13 @@
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-export interface userStateType{
-    user: string|null
+export interface userType{
+    userId: string
 }
-
+export interface userStateType{
+    user: userType|null
+}
 export type userActionType = CaseReducerActions<{
-    setUser(state: WritableDraft<userStateType>, action: PayloadAction<{
-        userId: string;
-    }>): void;
-    logout(state: WritableDraft<userStateType>, action: PayloadAction<{
-        userId: string;
-    }>): void;
+    setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
+    logout(state: WritableDraft<userStateType>): void;
 }>

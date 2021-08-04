@@ -2,27 +2,23 @@ import {
     createSlice, PayloadAction, Slice,
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import { userActionType, userStateType } from './userType';
+import { userActionType, userStateType, userType } from './userType';
 
 const initialState: userStateType = {
     user: null,
 };
 type userSliceType = Slice<userStateType, {
-    setUser(state: WritableDraft<userStateType>, action: PayloadAction<{
-        userId: string;
-    }>): void;
-    logout(state: WritableDraft<userStateType>, action: PayloadAction<{
-        userId: string;
-    }>): void;
+    setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
+    logout(state: WritableDraft<userStateType>): void;
 }, 'USER'>
 const userSlice: userSliceType = createSlice({
     name: 'USER',
     initialState,
     reducers: {
-        setUser(state: WritableDraft<userStateType>, action: PayloadAction<{userId: string}>) {
-            state.user = action.payload.userId;
+        setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
+            state.user = action.payload;
         },
-        logout(state: WritableDraft<userStateType>, action: PayloadAction<{userId: string}>) {
+        logout(state: WritableDraft<userStateType>) {
             state.user = null;
         },
     },
