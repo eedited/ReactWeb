@@ -2,13 +2,12 @@
 
 import {
     AnyAction,
-    CaseReducerActions,
     createSlice, PayloadAction, Slice,
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { Reducer } from 'react';
 import {
-    changeFieldType, signupPayloadType, loginPayloadType, responseSuccessType, responseFailureType, authStateType,
+    changeFieldType, signupPayloadType, loginPayloadType, responseSuccessType, responseFailureType, authStateType, authActionType,
 } from './authType';
 
 const initialState: authStateType = {
@@ -68,13 +67,4 @@ const authSlice: sliceAction = createSlice({
 export const AUTH: string = authSlice.name;
 const authReducer: Reducer<authStateType, AnyAction> = authSlice.reducer;
 export default authReducer;
-export const authAction: CaseReducerActions<{
-    changeField(state: WritableDraft<authStateType>, action: PayloadAction<changeFieldType>): void;
-    intializeForm(state: WritableDraft<authStateType>): void;
-    signup(state: WritableDraft<authStateType>, action: PayloadAction<signupPayloadType>): void;
-    signupSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>): void;
-    signupFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>): void;
-    login(state: WritableDraft<authStateType>, action: PayloadAction<loginPayloadType>): void;
-    loginSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>): void;
-    loginFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>): void;
-}> = authSlice.actions;
+export const authAction: authActionType = authSlice.actions;
