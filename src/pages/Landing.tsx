@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Redirect } from 'react-router';
-import router from 'react-router-dom';
+import router, { Link } from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
 import Description from '../components/Landing/Description/Description';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
@@ -18,7 +18,7 @@ const Landing: React.FC<props> = ({ match }: props) => {
         console.log(criteria);
     }, [criteria]);
     if (match.params.criteria !== undefined && !validMatch.includes(match.params.criteria)) {
-        // 404로 보내버렷!
+        // 404로 보내버렷!``
         return (
             <Redirect to={{
                 pathname: '/404NotFound',
@@ -32,6 +32,9 @@ const Landing: React.FC<props> = ({ match }: props) => {
     return (
         <BaseTemplate>
             <Description />
+            <Link to="/videos/thumbup">thumbup</Link>
+            <br />
+            <Link to="/videos/latest">latest</Link>
             <VideoGridContainer criteria={criteria} />
         </BaseTemplate>
     );

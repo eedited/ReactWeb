@@ -2,7 +2,7 @@ import {
     videoAPIFailureReturnProp, videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp, videoAPIUploadFailureReturnProp, videoAPIUploadProp, videoAPIUploadSuccessReturnProp, videoListAPIFailureReturnProp, videoListAPISuccessReturnProp,
 } from '../../lib/api/video';
 import {
-    VIDEO, VIDEO_FAILURE, VIDEO_LIST, VIDEO_LIST_FAILURE, VIDEO_LIST_SUCCESS, VIDEO_SUCCESS, VIDEO_UPLOAD, VIDEO_UPLOAD_FAILURE, VIDEO_UPLOAD_SUCCESS,
+    VIDEO, VIDEO_CLEAR, VIDEO_FAILURE, VIDEO_LIST, VIDEO_LIST_FAILURE, VIDEO_LIST_SUCCESS, VIDEO_SUCCESS, VIDEO_UPLOAD, VIDEO_UPLOAD_FAILURE, VIDEO_UPLOAD_SUCCESS,
 } from './video';
 
 export type videoSuccessType = videoAPISuccessReturnProp
@@ -51,6 +51,9 @@ export interface videoUploadFailureActionType{
     type: typeof VIDEO_UPLOAD_FAILURE
     payload: videoUploadFailureType|null
 }
+export interface videoClearActionType{
+    type: typeof VIDEO_CLEAR
+}
 
 export type videoReducerActionType =
     |videoActionType
@@ -62,6 +65,7 @@ export type videoReducerActionType =
     |videoUploadActionType
     |videoUploadSuccessActionType
     |videoUploadFailureActionType
+    |videoClearActionType
 
 export interface videoStateType{
     video: videoSuccessType|null

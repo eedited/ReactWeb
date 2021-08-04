@@ -7,17 +7,18 @@ import './Largevideo.scss';
 interface props{
     onLoad: (player: ReactPlayer)=> void
     videoInfo: VIDEO
+    setOpacity: ()=> number
 }
 const LargeVideo: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    onLoad, videoInfo,
+    onLoad, videoInfo, setOpacity,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => {
     if (videoInfo === null) {
         return <div>error</div>;
     }
     return (
-        <div className="LargeVideo">
+        <div className="largeVideo">
             <ReactPlayer
-                className="video__player"
+                className="largeVideo__player"
                 url={videoInfo.url}
                 ref={youtubeRef}
                 width="1280px"
@@ -33,6 +34,17 @@ const LargeVideo: React.ForwardRefExoticComponent<props & React.RefAttributes<Re
                     },
                 }}
                 style={{
+                    opacity: (setOpacity()),
+                    zIndex: setOpacity(),
+                }}
+            />
+            <img
+                className="largeVideo__img"
+                src={videoInfo.thumbnail}
+                alt="123"
+                style={{
+                    opacity: (setOpacity() + 1) % 2,
+                    zIndex: (setOpacity() + 1) % 2,
                 }}
             />
         </div>

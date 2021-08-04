@@ -3,6 +3,7 @@
     width: 480px;
     height: 270px;
     margin: 12px 18px;
+    transition: 5s all cubic-bezier(0.075, 0.82, 0.165, 1);
     .video__player{
         position:absolute;
         margin:0

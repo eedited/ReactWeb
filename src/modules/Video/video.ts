@@ -10,6 +10,7 @@ import {
     videoUploadFailureActionType,
     videoUploadSuccessType,
     videoUploadFailureType,
+    videoClearActionType,
 } from './videoType';
 import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 
@@ -24,6 +25,21 @@ export const VIDEO_FAILURE: 'video/VIDEO_FAILURE' = 'video/VIDEO_FAILURE' as con
 export const VIDEO_UPLOAD: 'video/VIDEO_UPLOAD' = 'video/VIDEO_UPLOAD' as const;
 export const VIDEO_UPLOAD_SUCCESS: 'video/VIDEO_UPLOAD_SUCCESS' = 'video/VIDEO_UPLOAD_SUCCESS' as const;
 export const VIDEO_UPLOAD_FAILURE: 'video/VIDEO_UPLOAD_FAILURE' = 'video/VIDEO_UPLOAD_FAILURE' as const;
+
+export const VIDEO_USER: 'video/VIDEO_USER' = 'video/VIDEO_USER' as const;
+export const VIDEO_USER_SUCCESS: 'video/VIDEO_USER_SUCCESS' = 'video/VIDEO_USER_SUCCESS' as const;
+export const VIDEO_USER_FAILURE: 'video/VIDEO_USER_FAILURE' = 'video/VIDEO_USER_FAILURE' as const;
+
+export const VIDEO_USER_LIKE: 'video/VIDEO_USER_LIKE' = 'video/VIDEO_USER_LIKE' as const;
+export const VIDEO_USER_LIKE_SUCCESS: 'video/VIDEO_USER_LIKE_SUCCESS' = 'video/VIDEO_USER_LIKE_SUCCESS' as const;
+export const VIDEO_USER_LIKE_FAILURE: 'video/VIDEO_USER_LIKE_FAILURE' = 'video/VIDEO_USER_LIKE_FAILURE' as const;
+
+export const VIDEO_CLEAR: 'video/VIDEO_CLEAR' = 'video/VIDEO_CLEAR' as const;
+
+export type videoClearFunctionType = ()=> videoClearActionType
+export const videoClear: videoClearFunctionType = () => ({
+    type: VIDEO_CLEAR,
+});
 
 export type videoFunctionType = (videoId: string)=> videoActionType
 export const video: videoFunctionType = (videoId: string) => ({
@@ -44,10 +60,11 @@ export const videoFailure: videoFailureFunctionType = (payload: videoFailureType
 });
 
 type videListFunctionType = ({ criteria }: videoAPI.videoAPIListProp)=> videoListActionType
-export const videoList: videListFunctionType = ({ criteria }: videoAPI.videoAPIListProp) => ({
+export const videoList: videListFunctionType = ({ criteria, page }: videoAPI.videoAPIListProp) => ({
     type: VIDEO_LIST,
     payload: {
         criteria,
+        page,
     },
 });
 type videoListSuccessFunctionType = (payload: viedoListSuccessType|null)=> videoListSuccessActionType
@@ -104,6 +121,8 @@ const initialState: videoStateType = {
 
 function videoReducer(state: videoStateType = initialState, action: videoReducerActionType): videoStateType {
     switch (action.type) {
+        case VIDEO_CLEAR:
+            return initialState;
         case VIDEO_SUCCESS:
             return {
                 ...state,
@@ -114,11 +133,22 @@ function videoReducer(state: videoStateType = initialState, action: videoReducer
                 ...state,
                 getVideoError: action.payload,
             };
-        case VIDEO_LIST_SUCCESS:
-            return {
-                ...state,
-                videoList: action.payload,
-            };
+        case VIDEO_LIST_SUCCESS: // 비디오를 성공적으로 얻어왔을 때이므로, action.payload는 null일수가 없다.
+            if (state.videoList) {
+                if (action.payload) {
+                    return {
+                        ...state,
+                        videoList: { videos: state.videoList.videos.concat(action.payload.videos) },
+                    };
+                }
+            }
+            else if (action.payload) {
+                return {
+                    ...state,
+                    videoList: action.payload,
+                };
+            }
+            return state;
         case VIDEO_LIST_FAILURE:
             return {
                 ...state,

@@ -3,6 +3,7 @@
 import React, {
     useRef, useState,
     useEffect,
+    useCallback,
 } from 'react';
 
 import ReactPlayer from 'react-player';
@@ -12,7 +13,7 @@ import Largevideo from '../../components/Video/Largevideo';
 import { VIDEO, videoAPISuccessReturnProp } from '../../lib/api/video';
 
 import { rootActionType, rootStateType } from '../../modules';
-import { video } from '../../modules/Video/video';
+import { video, videoClear } from '../../modules/Video/video';
 
 interface fromReducerType{
     Video: videoAPISuccessReturnProp|null
@@ -32,6 +33,9 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
         Video: videoReducer.video,
     }));
     useEffect(() => {
+        dispatch(videoClear());
+    }, [dispatch]);
+    useEffect(() => {
         dispatch(video(videoId)); // 쿼리 스트링으로 넘어와야함.
     }, [dispatch, videoId]);
     useEffect(() => {
@@ -42,6 +46,7 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
         setisLoading(false);
     };
+    const setOpacity: ()=> number = useCallback(() => Number(!isLoading), [isLoading]);
     return (
         <div>
             { videoInfo === null
@@ -51,6 +56,7 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
                         onLoad={onLoad}
                         videoInfo={videoInfo}
                         ref={youtubeRef}
+                        setOpacity={setOpacity}
                     />
                 )}
         </div>
