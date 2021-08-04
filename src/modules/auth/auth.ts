@@ -1,21 +1,27 @@
 import produce from 'immer';
 import { WritableDraft } from 'immer/dist/internal';
 import { takeLatest, ForkEffect } from 'redux-saga/effects';
-import createRequestSaga, { createRequestActionTypes, createRequestSagaReturnType } from '../../lib/createRequestSaga';
 import {
     changeFieldActionType, initializeFormActionType, authStateType, authActionType, signupActionType,
     loginActionType, responseFailureActionType, responseSuccessActionType, responseSuccessType, responseFailureType,
 } from './authType';
 import * as authAPI from '../../lib/api/auth';
+import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 // 액션 정의
-export const CHANGE_FIELD: string = 'auth/CHANG_FIELD' as const;
-export const INITIALIZE_FORM: string = 'auth/INITIALIZE_FORM' as const;
-export const [SIGNUP, SIGNUP_SUCCESS, SIGNUP_FAILURE]: string[] = createRequestActionTypes('auth/SIGNUP');
-export const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE]: string[] = createRequestActionTypes('auth/LOGIN');
+export const CHANGE_FIELD: 'auth/CHANGE_FIELD' = 'auth/CHANGE_FIELD' as const;
+export const INITIALIZE_FORM: 'auth/INITIALIZE_FORM' = 'auth/INITIALIZE_FORM' as const;
+
+export const SIGNUP: 'auth/SIGNUP' = 'auth/SIGNUP' as const;
+export const SIGNUP_SUCCESS: 'auth/SIGNUP_SUCCESS' = 'auth/SIGNUP_SUCCESS' as const;
+export const SIGNUP_FAILURE: 'auth/SIGNUP_FAILURE' = 'auth/SIGNUP_FAILURE' as const;
+
+export const LOGIN: 'auth/SIGNUP' = 'auth/SIGNUP' as const;
+export const LOGIN_SUCCESS: 'auth/LOGIN_SUCCESS' = 'auth/LOGIN_SUCCESS' as const;
+export const LOGIN_FAILURE: 'auth/LOGIN_FAILURE' = 'auth/LOGIN_FAILURE' as const;
 
 // 액션 생성함수 정의
-type changeFieldFunctionType = ({ form, key, value }: {form: string, key: string, value: string})=> changeFieldActionType
-export const changeField: changeFieldFunctionType = ({ form, key, value }: {form: string, key: string, value: string}) => ({
+type changeFieldFunctionType = ({ form, key, value }: {form: 'signup'|'login', key: string, value: string})=> changeFieldActionType
+export const changeField: changeFieldFunctionType = ({ form, key, value }: {form: 'signup'|'login', key: string, value: string}) => ({
     type: CHANGE_FIELD,
     payload: {
         form, // TODO signup or login
@@ -23,8 +29,8 @@ export const changeField: changeFieldFunctionType = ({ form, key, value }: {form
         value, // 이번에 바뀌어야할 value
     },
 });
-type initializeFormFunctionType= (form: string)=> initializeFormActionType
-export const initializeForm: initializeFormFunctionType = (form: string) => ({
+type initializeFormFunctionType= (form: 'signup'|'login')=> initializeFormActionType
+export const initializeForm: initializeFormFunctionType = (form: 'signup'|'login') => ({
     type: INITIALIZE_FORM,
     payload: {
         form,
@@ -74,8 +80,8 @@ export const loginFailure: responseFailureFunctionType = (payload: responseFailu
     payload,
 });
 
-const signupSaga: createRequestSagaReturnType = createRequestSaga(SIGNUP, authAPI.signup);
-const loginSaga: createRequestSagaReturnType = createRequestSaga(LOGIN, authAPI.login);
+const signupSaga: createRequestSagaReturnType<authAPI.signupProp, authAPI.authReturnProp> = createRequestSaga<authAPI.signupProp, authAPI.authReturnProp>(SIGNUP, authAPI.signup);
+const loginSaga: createRequestSagaReturnType<authAPI.loginProp, authAPI.authReturnProp> = createRequestSaga<authAPI.loginProp, authAPI.authReturnProp>(LOGIN, authAPI.login);
 export function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(SIGNUP, signupSaga);
     yield takeLatest(LOGIN, loginSaga);
@@ -102,52 +108,27 @@ function auth(state: authStateType = initialState, action: authActionType): auth
     return produce(state, (draft: WritableDraft<authStateType>) => {
         switch (action.type) {
             case CHANGE_FIELD:
-                if ((action as changeFieldActionType).payload.form === 'signup') {
-                    if ((action as changeFieldActionType).payload.key === 'userId') {
-                        draft.signup.userId = (action as changeFieldActionType).payload.value;
-                    }
-                    if ((action as changeFieldActionType).payload.key === 'password') {
-                        draft.signup.password = (action as changeFieldActionType).payload.value;
-                    }
-                    if ((action as changeFieldActionType).payload.key === 'passwordConfirm') {
-                        draft.signup.passwordConfirm = (action as changeFieldActionType).payload.value;
-                    }
-                    if ((action as changeFieldActionType).payload.key === 'email') {
-                        draft.signup.email = (action as changeFieldActionType).payload.value;
-                    }
-                    if ((action as changeFieldActionType).payload.key === 'nickname') {
-                        draft.signup.nickname = (action as changeFieldActionType).payload.value;
-                    }
-                }
-                else if ((action as changeFieldActionType).payload.form === 'login') {
-                    if ((action as changeFieldActionType).payload.key === 'userId') {
-                        draft.login.userId = (action as changeFieldActionType).payload.value;
-                    }
-                    if ((action as changeFieldActionType).payload.key === 'password') {
-                        draft.login.password = (action as changeFieldActionType).payload.value;
-                    }
-                }
-                // 나는 쓰레기다 나는 쓰레기다 나는 쓰레기다
-                // state의 state[form][key]를 action.value로 바꾼다.
+                draft[action.payload.form][action.payload.key] = action.payload.value;
                 return draft;
             case INITIALIZE_FORM:
-                draft[(action as initializeFormActionType).payload.form] = initialState[(action as initializeFormActionType).payload.form]; // 이번 form 녀석을 바꿔버린다.
+                if (action.payload.form === 'login') draft.login = initialState.login; // 이번 form 녀석을 바꿔버린다.
+                else if (action.payload.form === 'signup') draft.signup = initialState.signup; // 이번 form 녀석을 바꿔버린다.
                 draft.authError = null;
                 draft.auth = null;
                 return draft;
             case SIGNUP_SUCCESS:
                 draft.authError = null;
-                draft.auth = (action as responseSuccessActionType).payload;
+                draft.auth = action.payload;
                 return draft;
             case SIGNUP_FAILURE:
-                draft.authError = (action as responseFailureActionType).payload;
+                draft.authError = action.payload;
                 return draft;
             case LOGIN_SUCCESS:
                 draft.authError = null;
-                draft.auth = (action as responseSuccessActionType).payload;
+                draft.auth = action.payload;
                 return draft;
             case LOGIN_FAILURE:
-                draft.authError = (action as responseFailureActionType).payload;
+                draft.authError = action.payload;
                 return draft;
             default:
                 return draft;

@@ -4,14 +4,15 @@ import React, {
     useRef, useState, useCallback,
 } from 'react';
 import ReactPlayer from 'react-player';
+import { Link } from 'react-router-dom';
 import Video from '../../components/Landing/VideoGrid/Video';
+import { VIDEO } from '../../lib/api/video';
 
 interface props{
-    thumbnailUrl: string,
-    videoUrl: string
+    videoInfo: VIDEO
 }
 
-const VideoContainer: React.FC<props> = ({ thumbnailUrl, videoUrl }: props) => {
+const VideoContainer: React.FC<props> = ({ videoInfo }: props) => {
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
@@ -39,8 +40,7 @@ const VideoContainer: React.FC<props> = ({ thumbnailUrl, videoUrl }: props) => {
             play={play}
             pause={pause}
             setOpacity={setOpacity}
-            thumbnailUrl={thumbnailUrl}
-            videoUrl={videoUrl}
+            videoInfo={videoInfo}
             ref={youtubeRef}
         />
     );

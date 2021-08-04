@@ -8,6 +8,7 @@
   },
   "engineStrict": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -42,7 +43,7 @@
     "youtube-api-search": "0.0.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -65,8 +66,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:3000/",
+  "proxy": "http://localhost:3000",
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@types/react-router-dom": "^5.1.8",
     "@types/redux-actions": "^2.6.2",
     "eslint": "^7.30.0",
