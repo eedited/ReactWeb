@@ -9,11 +9,12 @@ import React, {
 import ReactPlayer from 'react-player';
 import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { AnyAction } from 'redux';
 import Largevideo from '../../components/Video/Largevideo';
+import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { VIDEO, videoAPISuccessReturnProp } from '../../lib/api/video';
-
-import { rootActionType, rootStateType } from '../../modules';
-import { video, videoClear } from '../../modules/Video/video';
+import { videoAction } from '../../modules/Video/video';
+import { videoActionType } from '../../modules/Video/videoType';
 
 interface fromReducerType{
     Video: videoAPISuccessReturnProp|null
@@ -23,21 +24,22 @@ interface props extends RouteComponentProps{
 }
 
 const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
+    const { video, videoClear }: videoActionType = videoAction;
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
-    const dispatch: React.Dispatch<rootActionType> = useDispatch();
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const [videoInfo, setVideoInfo]: [VIDEO|null, React.Dispatch<React.SetStateAction<VIDEO|null>>] = useState<VIDEO|null>(null);
     const {
         Video,
-    }: fromReducerType = useSelector(({ videoReducer }: rootStateType) => ({
-        Video: videoReducer.video,
+    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+        Video: state.videoReducer.video,
     }));
     useEffect(() => {
         dispatch(videoClear());
-    }, [dispatch]);
+    }, [dispatch, videoClear]);
     useEffect(() => {
-        dispatch(video(videoId)); // 쿼리 스트링으로 넘어와야함.
-    }, [dispatch, videoId]);
+        dispatch(video({ videoId })); // 쿼리 스트링으로 넘어와야함.
+    }, [dispatch, video, videoId]);
     useEffect(() => {
         if (Video) {
             setVideoInfo(Video.video);

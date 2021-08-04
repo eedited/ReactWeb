@@ -4,13 +4,12 @@
 import React, {
     useEffect, useRef, useState, useCallback,
 } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
-import { rootActionType, rootStateType } from '../../modules';
-import { videoClear, videoList } from '../../modules/Video/video';
+import { videoAction } from '../../modules/Video/video';
 import { VIDEO, videoListAPISuccessReturnProp } from '../../lib/api/video';
+import { videoActionType } from '../../modules/Video/videoType';
+import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface fromReducerType{
     videos: videoListAPISuccessReturnProp|null
@@ -19,24 +18,25 @@ interface props{
     criteria: string
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
+    const { videoClear, videoList }: videoActionType = videoAction;
     const [videoInfo, setVideoInfo]: [VIDEO[], React.Dispatch<React.SetStateAction<VIDEO[]>>] = useState<VIDEO[]>([]);
     const page: React.MutableRefObject<number> = useRef(0);
-    const dispatch: React.Dispatch<rootActionType> = useDispatch();
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         videos,
-    }: fromReducerType = useSelector(({ videoReducer }: rootStateType) => ({
-        videos: videoReducer.videoList,
+    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+        videos: state.videoReducer.videoList,
     }));
     useEffect(() => {
         dispatch(videoClear());
-    }, [dispatch]);
+    }, [dispatch, videoClear]);
     useEffect(() => {
         dispatch((videoList({
             criteria,
             page: page.current,
         })));
         page.current += 1;
-    }, [criteria, dispatch]);
+    }, [criteria, dispatch, videoList]);
 
     const f: ()=> void = useCallback(() => {
         dispatch((videoList({
@@ -44,7 +44,7 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
             page: page.current,
         })));
         page.current += 1;
-    }, [dispatch, criteria]);
+    }, [dispatch, videoList, criteria]);
 
     if (videos !== null) {
         return (

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { AnyAction, CombinedState } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import { rootActionType, rootStateType } from '../../modules';
-import { changeField, initializeForm, login } from '../../modules/auth/auth';
 import {
-    responseSuccessType, responseFailureType, loginFormType,
+    responseSuccessType, responseFailureType, authStateType, authActionType,
 } from '../../modules/auth/authType';
-import { userType } from '../../modules/user/userType';
-import { setUser } from '../../modules/user/user';
+import { userStateType, userType } from '../../modules/user/userType';
+import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { loadingStateType } from '../../modules/loading/loadingType';
+import { videoStateType } from '../../modules/Video/videoType';
+import { loginProp } from '../../lib/api/auth';
+import { authAction } from '../../modules/auth/auth';
+import { userAction } from '../../modules/user/user';
 
 interface fromReducerType{
-    form: loginFormType
+    form: loginProp
     User: userType|null
     Auth?: responseSuccessType|null
     AuthError?: responseFailureType|null
@@ -22,15 +24,16 @@ interface props{
 }
 
 const LoginForm: React.FC<props> = ({ history }: props) => {
+    const { changeField, intializeForm, login }: authActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
-    const dispatch: Dispatch<rootActionType> = useDispatch();
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User,
-    }: fromReducerType = useSelector(({ auth, user }: rootStateType) => ({
-        form: auth.login,
-        Auth: auth.auth,
-        AuthError: auth.authError,
-        User: user.user,
+    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+        form: state.authReducer.login,
+        User: state.userReducer.user,
+        Auth: state.authReducer.auth,
+        AuthError: state.authReducer.authError,
     }));
 
     const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,17 +55,17 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
         }));
     };
     useEffect(() => {
-        dispatch(initializeForm('login'));
-    }, [dispatch]);
+        dispatch(intializeForm());
+    }, [dispatch, intializeForm]);
     useEffect(() => {
         if (AuthError) {
             if (AuthError.info) setError(AuthError.info);
-            else setError(AuthError.message);
+            else setError(AuthError.error.message);
         }
         if (Auth) {
-            dispatch(setUser({ userId: form.userId }));
+            dispatch(userAction.setUser({ userId: form.userId }));
         }
-    }, [Auth, AuthError, User, dispatch, form.userId]);
+    }, [Auth, AuthError, dispatch, form.userId]);
     useEffect(() => {
         if (User) {
             history.push('/');

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { AnyAction, Dispatch } from 'redux';
 import Navbar from '../../components/common/Navbar/Navbar';
+import { userAction } from '../../modules/user/user';
+import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { userType } from '../../modules/user/userType';
-import { rootActionType, rootStateType } from '../../modules';
-import { logout } from '../../modules/user/user';
 
 interface props{
     children?: React.ReactNode
@@ -14,10 +14,10 @@ interface userContainerType{
 }
 
 const NavbarContainer: React.FC<props> = ({ children }: props) => {
-    const { User }: userContainerType = useSelector(({ user }: rootStateType) => ({ User: user.user }));
-    const dispatch: Dispatch<rootActionType> = useDispatch();
+    const { User }: userContainerType = useAppSelector((state: selectorStateType) => ({ User: state.userReducer.user }));
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const onLogout: ()=> void = () => {
-        dispatch(logout());
+        dispatch(userAction.logout());
     };
     return <Navbar user={User} onLogout={onLogout} />;
 };

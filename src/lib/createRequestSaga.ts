@@ -4,7 +4,7 @@ import {
 } from 'redux-saga/effects';
 
 import { AxiosResponse } from 'axios';
-import { startLoading, finishLoading } from '../modules/loading/loading';
+import { loadingAction } from '../modules/loading/loading';
 
 interface genericAction<T, P> {
     type: T,
@@ -21,14 +21,14 @@ export type createRequestSagaReturnType<P, R> = (action: genericAction<string, P
 }>, void, RetrunProp<R>>
 
 export default function createRequestSaga<P, R>(type: string, request: genericRequest<P, R>): createRequestSagaReturnType<P, R> {
-    const SUCCESS: string = `${type}_SUCCESS`;
-    const FAILURE: string = `${type}_FAILURE`;
+    const SUCCESS: string = `${type}Success`;
+    const FAILURE: string = `${type}Failure`;
 
     function* ret(action: genericAction<string, P>): Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
         type: string;
         payload: unknown;
     }>, void, RetrunProp<R>> {
-        yield put(startLoading(type));
+        yield put(loadingAction.startLoading({ status: type }));
         try {
             const response: RetrunProp<R> = yield call(request, action.payload);
             yield put({
@@ -47,7 +47,7 @@ export default function createRequestSaga<P, R>(type: string, request: genericRe
                 },
             });
         }
-        yield put(finishLoading(type));
+        yield put(loadingAction.finishLoading({ status: type }));
     }
     return ret;
 }

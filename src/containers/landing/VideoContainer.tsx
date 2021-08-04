@@ -4,7 +4,6 @@ import React, {
     useRef, useState, useCallback,
 } from 'react';
 import ReactPlayer from 'react-player';
-import { Link } from 'react-router-dom';
 import Video from '../../components/Landing/VideoGrid/Video';
 import { VIDEO } from '../../lib/api/video';
 
