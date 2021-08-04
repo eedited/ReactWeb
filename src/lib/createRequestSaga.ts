@@ -43,7 +43,7 @@ export default function createRequestSaga<P, R>(type: string, request: genericRe
                 type: FAILURE,
                 payload: {
                     ...err.response.data,
-                    ...err,
+                    error: err,
                 },
             });
         }

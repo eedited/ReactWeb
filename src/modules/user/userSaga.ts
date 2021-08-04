@@ -1,7 +1,7 @@
 import {
     call, ForkEffect, put, takeLatest,
 } from 'redux-saga/effects';
-import { userAction } from './user_action';
+import { userAction } from './user';
 import { authAction } from '../auth/auth';
 import { authActionType } from '../auth/authType';
 import * as authApi from '../../lib/api/auth';
