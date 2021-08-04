@@ -80,8 +80,8 @@ export const loginFailure: responseFailureFunctionType = (payload: responseFailu
     payload,
 });
 
-const signupSaga: createRequestSagaReturnType<authAPI.authProp, authAPI.authReturnProp> = createRequestSaga<authAPI.authProp, authAPI.authReturnProp>(SIGNUP, authAPI.signup);
-const loginSaga: createRequestSagaReturnType<authAPI.authProp, authAPI.authReturnProp> = createRequestSaga<authAPI.authProp, authAPI.authReturnProp>(LOGIN, authAPI.login);
+const signupSaga: createRequestSagaReturnType<authAPI.signupProp, authAPI.authReturnProp> = createRequestSaga<authAPI.signupProp, authAPI.authReturnProp>(SIGNUP, authAPI.signup);
+const loginSaga: createRequestSagaReturnType<authAPI.loginProp, authAPI.authReturnProp> = createRequestSaga<authAPI.loginProp, authAPI.authReturnProp>(LOGIN, authAPI.login);
 export function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(SIGNUP, signupSaga);
     yield takeLatest(LOGIN, loginSaga);

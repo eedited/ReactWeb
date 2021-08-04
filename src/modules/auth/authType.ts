@@ -1,4 +1,6 @@
-import { authFailureReturnProp, authProp, authSuccessReturnProp } from '../../lib/api/auth';
+import {
+    authFailureReturnProp, signupProp, loginProp, authSuccessReturnProp,
+} from '../../lib/api/auth';
 import {
     CHANGE_FIELD, INITIALIZE_FORM, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP, SIGNUP_FAILURE, SIGNUP_SUCCESS,
 } from './auth';
@@ -22,14 +24,11 @@ export interface initializeFormActionType{
 }
 export interface signupActionType{
     type: typeof SIGNUP,
-    payload: authProp;
+    payload: signupProp;
 }
 export interface loginActionType{
     type: typeof LOGIN,
-    payload: {
-        userId: string,
-        password: string
-    }
+    payload: loginProp;
 }
 export interface responseSuccessActionType{
     type: typeof LOGIN_SUCCESS|typeof SIGNUP_SUCCESS

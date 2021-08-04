@@ -1,12 +1,19 @@
 import { AxiosResponse } from 'axios';
 import client from './client';
 
-export interface authProp {
+export interface signupProp {
+    [key: string]: string
     userId: string,
     password: string,
-    email?: string
-    nickname?: string
+    email: string
+    nickname: string
 }
+export interface loginProp{
+    [key: string]: string
+    userId: string,
+    password: string
+}
+
 export interface authSuccessReturnProp{
     success: boolean
 }
@@ -15,18 +22,18 @@ export interface authFailureReturnProp{
     info: string
 }
 export type authReturnProp = authSuccessReturnProp | authFailureReturnProp
-export type loginFunctionType = ({ userId, password }: authProp)=> Promise<AxiosResponse<authReturnProp>>
-export const login: loginFunctionType = ({ userId, password }: authProp) => client.post('/auth/login', {
+export type loginFunctionType = ({ userId, password }: loginProp)=> Promise<AxiosResponse<authReturnProp>>
+export const login: loginFunctionType = ({ userId, password }: loginProp) => client.post('/auth/login', {
     userId,
     password,
 });
 
 export type signupFunctionType = ({
     userId, password, email, nickname,
-}: authProp)=> Promise<AxiosResponse<authReturnProp>>
+}: signupProp)=> Promise<AxiosResponse<authReturnProp>>
 export const signup: signupFunctionType = ({
     userId, password, email, nickname,
-}: authProp) => client.post('/auth/signup', {
+}: signupProp) => client.post('/auth/signup', {
     userId,
     password,
     email,
