@@ -2,31 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { applyMiddleware, createStore, Store } from 'redux';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import createSagaMiddleware from 'redux-saga';
-import { logger } from 'redux-logger';
+import createStore from './store';
 import App from './App';
-import rootReducer, { rootStateType, rootActionType, rootSaga } from './modules';
-import { setUser } from './modules/user/user';
+import { userAction } from './modules/user/user';
 // eslint-disable-next-line @typescript-eslint/typedef
-const sagaMiddleware = createSagaMiddleware();
-const store: Store<rootStateType, rootActionType> = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
-);
+const store = createStore();
+export type AppDispatch = typeof store.dispatch;
+export type rootState = ReturnType<typeof store.getState>;
+
 function loadUser() {
     try {
         const user: string|null = sessionStorage.getItem('user');
         if (!user) return;
-        store.dispatch(setUser(JSON.parse(user)));
+        store.dispatch(userAction.setUser(JSON.parse(user)));
     }
     catch (err) {
         console.log('local session doesn\'t work');
     }
 }
-sagaMiddleware.run(rootSaga);
+
 loadUser();
 ReactDOM.render(
     <Provider store={store}>
