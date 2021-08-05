@@ -6,6 +6,10 @@ export interface userType{
 }
 export interface userStateType{
     user: userType|null
+    userError: Error|null
+}
+export interface logoutFailureType{
+    error: Error
 }
 export type userActionType = CaseReducerActions<{
     setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
