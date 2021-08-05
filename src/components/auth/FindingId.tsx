@@ -3,7 +3,7 @@ import React from 'react';
 interface props{
     email: string
     isSubmit: boolean
-    loading: 'start'|'success'|'failure'
+    loading: string
     validationString: string
     onEmailSubmit: ()=> void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
@@ -27,11 +27,15 @@ const FindingId: React.FC<props> = ({
             >
                 제출
             </button>
-            {isSubmit && loading === 'success'
-                && (
+            {(isSubmit && loading === 'success')
+                ? (
                     <div>
-                        <input name="validationString" onChange={onInputChange} value={validationString} />
-                        <button type="button">인증</button>
+                        id가 email로 전달되었습니다.
+                    </div>
+                )
+                : (
+                    <div>
+                        {loading}
                     </div>
                 )}
         </form>
