@@ -61,17 +61,17 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             else setError(AuthError.error.message);
         }
         if (Auth) {
-            dispatch(userAction.setUser({ userId: form.userId }));
+            dispatch(userAction.check());
         }
-    }, [Auth, AuthError, dispatch, form.userId]);
+    }, [Auth, AuthError, dispatch]);
     useEffect(() => {
         if (User) {
             history.push('/');
             try {
-                sessionStorage.setItem('user', JSON.stringify(User));
+                localStorage.setItem('user', JSON.stringify(User));
             }
             catch (err) {
-                console.log('local session not working');
+                console.log('local storage not working');
             }
         }
     }, [history, User]);

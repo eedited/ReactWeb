@@ -10,23 +10,23 @@ interface props{
 }
 interface userContainerType{
     User: userType|null
-    UserError: Error|null
+    logoutError: Error|null
 }
 
 const NavbarContainer: React.FC<props> = ({ children }: props) => {
-    const { User, UserError }: userContainerType = useAppSelector((state: selectorStateType) => ({
+    const { User, logoutError }: userContainerType = useAppSelector((state: selectorStateType) => ({
         User: state.userReducer.user,
-        UserError: state.userReducer.userError,
+        logoutError: state.userReducer.logoutError,
     }));
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const onLogout: ()=> void = () => {
         dispatch(userAction.logout());
     };
     useEffect(() => {
-        if (UserError) {
-            alert(UserError);
+        if (logoutError) {
+            alert(logoutError);
         }
-    }, [UserError]);
+    }, [logoutError]);
     return <Navbar user={User} onLogout={onLogout} />;
 };
 

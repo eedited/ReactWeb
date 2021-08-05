@@ -13,7 +13,13 @@ export interface loginProp{
     userId: string,
     password: string
 }
-
+export interface checkSuccessReturnProp{
+    userId: string
+}
+export interface checkFailureReturnProp{
+    info: string
+}
+export type checkReturnProp = checkSuccessReturnProp | checkFailureReturnProp
 export interface authSuccessReturnProp{
     success: boolean
 }
@@ -43,5 +49,4 @@ export const signup: signupFunctionType = ({
 export type logoutFunctionType = ()=> Promise<AxiosResponse<void>>;
 export const logout: logoutFunctionType = () => client.get('/auth/logout');
 
-export type authFunctionType = loginFunctionType|signupFunctionType;
-// export const check: ()=> Promise<AxiosResponse<authReturnProp>> = () => client.get('/auth/login/check');
+export const check: ()=> Promise<AxiosResponse<checkReturnProp>> = () => client.get('/auth/check');

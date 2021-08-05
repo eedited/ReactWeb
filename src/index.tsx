@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './App';
 import { userAction } from './modules/user/user';
+import { userActionType } from './modules/user/userType';
 // eslint-disable-next-line @typescript-eslint/typedef
 const store = createStore();
 export type AppDispatch = typeof store.dispatch;
@@ -13,12 +14,15 @@ export type rootState = ReturnType<typeof store.getState>;
 
 function loadUser() {
     try {
-        const user: string|null = sessionStorage.getItem('user');
+        const { setUser, check }: userActionType = userAction;
+        const user: string|null = localStorage.getItem('user');
         if (!user) return;
-        store.dispatch(userAction.setUser(JSON.parse(user)));
+        store.dispatch(setUser(JSON.parse(user)));
+        console.log(user);
+        store.dispatch(check());
     }
     catch (err) {
-        console.log('local session doesn\'t work');
+        console.log('local storage doesn\'t work');
     }
 }
 

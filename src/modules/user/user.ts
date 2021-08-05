@@ -4,30 +4,44 @@ import {
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import {
+    checkFailureType,
     logoutFailureType, userActionType, userStateType, userType,
 } from './userType';
 
 const initialState: userStateType = {
     user: null,
-    userError: null,
+    checkError: null,
+    logoutError: null,
 };
-type userSliceType = Slice<userStateType, {
-    setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
+type userSliceType=Slice<userStateType, {
     logout(state: WritableDraft<userStateType>): void;
-}, 'USER'>
+    logoutSuccess(state: WritableDraft<userStateType>): void;
+    logoutFailure(state: WritableDraft<userStateType>, action: PayloadAction<logoutFailureType>): void;
+    check(state: WritableDraft<userStateType>): void;
+    checkSuccess(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
+    checkFailure(state: WritableDraft<userStateType>, action: PayloadAction<checkFailureType>): void;
+    setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void
+}, 'USER'>;
 const userSlice: userSliceType = createSlice({
     name: 'USER',
     initialState,
     reducers: {
-        setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
-            state.user = action.payload;
-        },
         logout(state: WritableDraft<userStateType>) {
             state.user = null;
         },
         logoutSuccess(state: WritableDraft<userStateType>) {},
         logoutFailure(state: WritableDraft<userStateType>, action: PayloadAction<logoutFailureType>) {
-            state.userError = action.payload.error;
+            state.logoutError = action.payload.error;
+        },
+        check(state: WritableDraft<userStateType>) {},
+        checkSuccess(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
+            state.user = action.payload;
+        },
+        checkFailure(state: WritableDraft<userStateType>, action: PayloadAction<checkFailureType>) {
+            state.checkError = action.payload;
+        },
+        setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
+            state.user = action.payload;
         },
     },
 });
