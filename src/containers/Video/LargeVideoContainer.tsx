@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 
 import ReactPlayer from 'react-player';
-import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import Largevideo from '../../components/Video/Largevideo';

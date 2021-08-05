@@ -1,6 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AnyAction, Dispatch } from 'redux';
+import { AnyAction } from 'redux';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../modules/user/user';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
