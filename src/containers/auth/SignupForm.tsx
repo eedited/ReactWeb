@@ -14,7 +14,6 @@ import { userAction } from '../../modules/user/user';
 
 interface formReduceType{
     form: signupProp&{passwordConfirm: string}
-    User: userType|null
     Auth?: responseSuccessType|null
     AuthError?: responseFailureType|null
 }
@@ -26,12 +25,11 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
-        form, Auth, AuthError, User,
+        form, Auth, AuthError,
     }: formReduceType = useAppSelector(((state: selectorStateType) => ({
         form: state.authReducer.signup,
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
-        User: state.userReducer.user,
     })));
     const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
@@ -92,20 +90,9 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             setError(`회원가입 실패 ${AuthError.info}`);
         }
         if (Auth) {
-            dispatch(userAction.setUser({ userId: form.userId }));
+            history.push('/login');
         }
-    }, [Auth, AuthError, dispatch, form.userId]);
-    useEffect(() => {
-        if (User) {
-            history.push('/');
-            try {
-                sessionStorage.setItem('user', JSON.stringify(User));
-            }
-            catch (err) {
-                console.log('local session not working');
-            }
-        }
-    }, [User, history]);
+    }, [Auth, AuthError, history]);
     return (
         <AuthForm
             type="signup"
