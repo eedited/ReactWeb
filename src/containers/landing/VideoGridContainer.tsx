@@ -2,12 +2,12 @@
 // page의 값을 setPage로 1 증가시키면 될 것을 보임.
 
 import React, {
-    useEffect, useRef, useState, useCallback,
+    useEffect, useRef, useCallback,
 } from 'react';
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { videoAction } from '../../modules/Video/video';
-import { VIDEO, videoListAPISuccessReturnProp } from '../../lib/api/video';
+import { videoListAPISuccessReturnProp } from '../../lib/api/video';
 import { videoActionType } from '../../modules/Video/videoType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -19,7 +19,6 @@ interface props{
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
     const { videoClear, videoList }: videoActionType = videoAction;
-    const [videoInfo, setVideoInfo]: [VIDEO[], React.Dispatch<React.SetStateAction<VIDEO[]>>] = useState<VIDEO[]>([]);
     const page: React.MutableRefObject<number> = useRef(0);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {

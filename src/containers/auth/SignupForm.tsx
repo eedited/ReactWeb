@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { AnyAction } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
@@ -8,7 +7,7 @@ import {
     responseSuccessType, responseFailureType, authActionType,
 } from '../../modules/auth/authType';
 import { signupProp } from '../../lib/api/auth';
-import { userStateType, userType } from '../../modules/user/userType';
+import { userType } from '../../modules/user/userType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../modules/auth/auth';
 import { userAction } from '../../modules/user/user';
