@@ -1,8 +1,7 @@
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import {
-    VIDEO,
-    videoAPIFailureReturnProp, videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp, videoAPIUploadFailureReturnProp, videoAPIUploadProp, videoAPIUploadSuccessReturnProp, videoListAPIFailureReturnProp, videoListAPISuccessReturnProp,
+    videoAPIFailureReturnProp, videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp, videoAPIUploadFailureReturnProp, videoAPIUploadProp, videoAPIUploadSuccessReturnProp, videoAPIUserProp, videoListAPIFailureReturnProp, videoListAPISuccessReturnProp,
 } from '../../lib/api/video';
 
 export type videoSuccessType = videoAPISuccessReturnProp
@@ -30,10 +29,13 @@ export type videoActionType=CaseReducerActions<{
     videoUpload(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUploadProp>): void;
     videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>): void;
     videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>): void;
+    videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>): void;
 }>
 export interface videoStateType{
     video: videoSuccessType|null
     videoList: viedoListSuccessType|null
     getVideoError: videoFailureType|null
     videoUploadError: videoUploadFailureType|null
+    videoUserUpload: viedoListSuccessType|null
+    videoUserUploadError: videoListFailureType|null
 }

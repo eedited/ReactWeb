@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
 import {
-    AnyAction,
     createSlice, PayloadAction, Slice,
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import { Reducer } from 'react';
 import {
     changeFieldType, signupPayloadType, loginPayloadType, responseSuccessType, responseFailureType, authStateType, authActionType,
 } from './authType';
@@ -73,6 +71,5 @@ const authSlice: sliceAction = createSlice({
     },
 });
 export const AUTH: string = authSlice.name;
-
 export default authSlice.reducer;
 export const authAction: authActionType = authSlice.actions;
