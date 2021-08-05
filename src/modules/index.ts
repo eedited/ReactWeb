@@ -1,36 +1,33 @@
-import { combineReducers, CombinedState, Reducer } from 'redux';
+import {
+    AnyAction, CombinedState, combineReducers, Reducer,
+} from '@reduxjs/toolkit';
 import { all, AllEffect, ForkEffect } from 'redux-saga/effects';
-import auth, { authSaga } from './auth/auth';
-import { authActionType, authStateType } from './auth/authType';
-import loading from './loading/loading';
-import { LoadingActionType, loadingStateType } from './loading/loadingType';
-import { userActionType, userStateType } from './user/userType';
-import user, { userSaga } from './user/user';
-import { videoReducerActionType, videoStateType } from './Video/videoType';
-import videoReducer, { getVideoSaga } from './Video/video';
+import authSaga from './auth/authSaga';
+import userSaga from './user/userSaga';
+import getVideoSaga from './Video/videoSaga';
+import authReducer from './auth/auth';
+import loadingReducer from './loading/loading';
+import userReducer from './user/user';
+import videoReducer from './Video/video';
+import { authStateType } from './auth/authType';
+import { loadingStateType } from './loading/loadingType';
+import { userStateType } from './user/userType';
+import { videoStateType } from './Video/videoType';
 
-export interface rootStateType{
-    auth: authStateType
-    loading: loadingStateType
-    user: userStateType
-    videoReducer: videoStateType
-}
-export type rootActionType =
-    |authActionType
-    |LoadingActionType
-    |userActionType
-    |videoReducerActionType
-
-export type rootReducerType = Reducer<CombinedState<rootStateType>, rootActionType>;
-
-const rootReducer: rootReducerType = combineReducers({
-    auth,
-    loading,
-    user,
-    videoReducer,
-});
 export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect<never>, void, unknown>>, void, unknown> {
     yield all([authSaga(), userSaga(), getVideoSaga()]);
 }
 
+const rootReducer: Reducer<CombinedState<{
+    authReducer: authStateType;
+    loadingReducer: loadingStateType;
+    userReducer: userStateType;
+    videoReducer: videoStateType;
+}>, AnyAction> = combineReducers({
+    authReducer,
+    loadingReducer,
+    userReducer,
+    videoReducer,
+});
 export default rootReducer;
+export type rootState = ReturnType<typeof rootReducer>

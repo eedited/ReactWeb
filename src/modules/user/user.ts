@@ -1,67 +1,29 @@
 import {
-    call, put, takeLatest, ForkEffect,
-} from 'redux-saga/effects';
-import {
-    setUserActionType, userStateType, userActionType, logoutActionType,
-} from './userType';
-import * as authApi from '../../lib/api/auth';
-import { initializeForm } from '../auth/auth';
-// 액션 정의
-export const SET_USER: 'SET_USER' = 'SET_USER' as const;
-export const LOGOUT: 'LOGOUT' = 'LOGOUT' as const;
+    createSlice, PayloadAction, Slice,
+} from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
+import { userActionType, userStateType, userType } from './userType';
 
-// 액션 생성함수 정의
-type setUserFunctionType = ({ userId }: {userId: string})=> setUserActionType
-export const setUser: setUserFunctionType = ({ userId }: {userId: string}) => ({
-    type: SET_USER,
-    payload: {
-        userId,
-    },
-});
-
-type logoutFunctionType = ()=> logoutActionType
-export const logout: logoutFunctionType = () => ({
-    type: LOGOUT,
-});
-
-function* logoutSaga() {
-    try {
-        yield call(authApi.logout);
-        yield put(initializeForm('login'));
-        yield put(initializeForm('signup'));
-        sessionStorage.removeItem('user');
-    }
-    catch (e) {
-        console.log(e);
-    }
-}
-export function* userSaga(): Generator<ForkEffect<never>, void, unknown> {
-    yield takeLatest(LOGOUT, logoutSaga);
-}
-
-// 초기 상태 정의
 const initialState: userStateType = {
     user: null,
 };
-// 리듀서 정의
-function user(state: userStateType = initialState, action: userActionType): userStateType {
-    switch (action.type) {
-        case 'SET_USER':
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    userId: (action as setUserActionType).payload.userId,
-                },
-            };
-        case 'LOGOUT':
-            return {
-                ...state,
-                user: null,
-            };
-        default: {
-            return state;
-        }
-    }
-}
-export default user;
+type userSliceType = Slice<userStateType, {
+    setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>): void;
+    logout(state: WritableDraft<userStateType>): void;
+}, 'USER'>
+const userSlice: userSliceType = createSlice({
+    name: 'USER',
+    initialState,
+    reducers: {
+        setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
+            state.user = action.payload;
+        },
+        logout(state: WritableDraft<userStateType>) {
+            state.user = null;
+        },
+    },
+});
+
+export const USER: string = userSlice.name;
+export default userSlice.reducer;
+export const userAction: userActionType = userSlice.actions;

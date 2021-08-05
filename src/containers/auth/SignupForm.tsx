@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useSelector } from 'react-redux';
+import { AnyAction } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import { rootActionType, rootStateType } from '../../modules';
-import { changeField, initializeForm, signup } from '../../modules/auth/auth';
+
 import {
-    responseSuccessType, responseFailureType, signupFormType,
+    responseSuccessType, responseFailureType, authActionType,
 } from '../../modules/auth/authType';
-import { userType } from '../../modules/user/userType';
-import { setUser } from '../../modules/user/user';
+import { signupProp } from '../../lib/api/auth';
+import { userStateType, userType } from '../../modules/user/userType';
+import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { authAction } from '../../modules/auth/auth';
+import { userAction } from '../../modules/user/user';
 
 interface formReduceType{
-    form: signupFormType
+    form: signupProp&{passwordConfirm: string}
     User: userType|null
     Auth?: responseSuccessType|null
     AuthError?: responseFailureType|null
@@ -21,16 +23,17 @@ interface props{
     history: RouteComponentProps['history']
 }
 const SignupForm: React.FC<props> = ({ history }: props) => {
+    const { changeField, signup, intializeForm }: authActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
-    const dispatch: Dispatch<rootActionType> = useDispatch();
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User,
-    }: formReduceType = useSelector(({ auth, user }: rootStateType) => ({
-        form: auth.signup,
-        Auth: auth.auth,
-        AuthError: auth.authError,
-        User: user.user,
-    }));
+    }: formReduceType = useAppSelector(((state: selectorStateType) => ({
+        form: state.authReducer.signup,
+        Auth: state.authReducer.auth,
+        AuthError: state.authReducer.authError,
+        User: state.userReducer.user,
+    })));
     const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
@@ -83,14 +86,14 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
         }));
     };
     useEffect(() => {
-        dispatch(initializeForm('signup'));
-    }, [dispatch]);
+        dispatch(intializeForm());
+    }, [dispatch, intializeForm]);
     useEffect(() => {
         if (AuthError) {
             setError(`회원가입 실패 ${AuthError.info}`);
         }
         if (Auth) {
-            dispatch(setUser({ userId: form.userId }));
+            dispatch(userAction.setUser({ userId: form.userId }));
         }
     }, [Auth, AuthError, dispatch, form.userId]);
     useEffect(() => {

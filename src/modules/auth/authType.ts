@@ -1,68 +1,33 @@
+import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
 import {
-    authFailureReturnProp, signupProp, loginProp, authSuccessReturnProp,
+    authFailureReturnProp, authSuccessReturnProp, loginProp, signupProp,
 } from '../../lib/api/auth';
-import {
-    CHANGE_FIELD, INITIALIZE_FORM, LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, SIGNUP, SIGNUP_FAILURE, SIGNUP_SUCCESS,
-} from './auth';
 
-export type responseSuccessType = authSuccessReturnProp
-export type responseFailureType = authFailureReturnProp&Error
-
-export interface changeFieldActionType{
-    type: typeof CHANGE_FIELD,
-    payload: {
-        form: 'signup' | 'login',
-        key: string,
-        value: string
-    }
+export interface changeFieldType {
+    form: 'signup' | 'login',
+    key: string,
+    value: string
 }
-export interface initializeFormActionType{
-    type: typeof INITIALIZE_FORM,
-    payload: {
-        form: 'signup' | 'login',
-    }
+export type signupPayloadType = signupProp;
+export type loginPayloadType = loginProp;
+export type responseSuccessType = authSuccessReturnProp;
+export interface responseFailureType extends authFailureReturnProp{
+    error: Error
 }
-export interface signupActionType{
-    type: typeof SIGNUP,
-    payload: signupProp;
-}
-export interface loginActionType{
-    type: typeof LOGIN,
-    payload: loginProp;
-}
-export interface responseSuccessActionType{
-    type: typeof LOGIN_SUCCESS|typeof SIGNUP_SUCCESS
-    payload: responseSuccessType|null
-}
-export interface responseFailureActionType{
-    type: typeof LOGIN_FAILURE|typeof SIGNUP_FAILURE
-    payload: responseFailureType|null
-}
-
-export type authActionType =
-    |initializeFormActionType
-    |changeFieldActionType
-    |signupActionType
-    |loginActionType
-    |responseSuccessActionType
-    |responseFailureActionType
-
-export interface signupFormType{
-    [key: string]: string
-    userId: string,
-    password: string,
-    passwordConfirm: string,
-    email: string
-    nickname: string
-}
-export interface loginFormType{
-    [key: string]: string
-    userId: string,
-    password: string
-}
+export type authActionType = CaseReducerActions<{
+    changeField(state: WritableDraft<authStateType>, action: PayloadAction<changeFieldType>): void;
+    intializeForm(state: WritableDraft<authStateType>): void;
+    signup(state: WritableDraft<authStateType>, action: PayloadAction<signupPayloadType>): void;
+    signupSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>): void;
+    signupFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>): void;
+    login(state: WritableDraft<authStateType>, action: PayloadAction<loginPayloadType>): void;
+    loginSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>): void;
+    loginFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>): void;
+}>
 export interface authStateType{
-    signup: signupFormType,
-    login: loginFormType
+    signup: signupProp&{passwordConfirm: string},
+    login: loginProp
     auth?: responseSuccessType|null
     authError?: responseFailureType|null
 }

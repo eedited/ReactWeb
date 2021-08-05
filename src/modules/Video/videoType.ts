@@ -1,72 +1,36 @@
+import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
 import {
+    VIDEO,
     videoAPIFailureReturnProp, videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp, videoAPIUploadFailureReturnProp, videoAPIUploadProp, videoAPIUploadSuccessReturnProp, videoListAPIFailureReturnProp, videoListAPISuccessReturnProp,
 } from '../../lib/api/video';
-import {
-    VIDEO, VIDEO_CLEAR, VIDEO_FAILURE, VIDEO_LIST, VIDEO_LIST_FAILURE, VIDEO_LIST_SUCCESS, VIDEO_SUCCESS, VIDEO_UPLOAD, VIDEO_UPLOAD_FAILURE, VIDEO_UPLOAD_SUCCESS,
-} from './video';
 
 export type videoSuccessType = videoAPISuccessReturnProp
 export type viedoListSuccessType = videoListAPISuccessReturnProp
 export type videoUploadSuccessType = videoAPIUploadSuccessReturnProp
 
-export type videoFailureType = videoAPIFailureReturnProp & Error
-export type videoListFailureType = videoListAPIFailureReturnProp & Error
-export type videoUploadFailureType = videoAPIUploadFailureReturnProp&Error
-
-export interface videoActionType{
-    type: typeof VIDEO
-    payload: videoAPIProp
+export interface videoFailureType extends videoAPIFailureReturnProp{
+    error: Error
 }
-export interface videoSuccessActionType{
-    type: typeof VIDEO_SUCCESS
-    payload: videoSuccessType|null
+export interface videoListFailureType extends videoListAPIFailureReturnProp{
+    error: Error
 }
-export interface videoFailureActionType{
-    type: typeof VIDEO_FAILURE
-    payload: videoFailureType|null
+export interface videoUploadFailureType extends videoAPIUploadFailureReturnProp{
+    error: Error
 }
 
-export interface videoListActionType{
-    type: typeof VIDEO_LIST
-    payload: videoAPIListProp
-}
-export interface videoListSuccessActionType{
-    type: typeof VIDEO_LIST_SUCCESS
-    payload: viedoListSuccessType|null
-}
-export interface videoListFailureActionType{
-    type: typeof VIDEO_LIST_FAILURE
-    payload: videoListFailureType|null
-}
-
-export interface videoUploadActionType{
-    type: typeof VIDEO_UPLOAD
-    payload: videoAPIUploadProp
-}
-export interface videoUploadSuccessActionType{
-    type: typeof VIDEO_UPLOAD_SUCCESS
-    payload: videoUploadSuccessType|null
-}
-export interface videoUploadFailureActionType{
-    type: typeof VIDEO_UPLOAD_FAILURE
-    payload: videoUploadFailureType|null
-}
-export interface videoClearActionType{
-    type: typeof VIDEO_CLEAR
-}
-
-export type videoReducerActionType =
-    |videoActionType
-    |videoSuccessActionType
-    |videoFailureActionType
-    |videoListActionType
-    |videoListSuccessActionType
-    |videoListFailureActionType
-    |videoUploadActionType
-    |videoUploadSuccessActionType
-    |videoUploadFailureActionType
-    |videoClearActionType
-
+export type videoActionType=CaseReducerActions<{
+    videoClear(state: WritableDraft<videoStateType>): void;
+    video(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIProp>): void;
+    videoSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoSuccessType>): void;
+    videoFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoFailureType>): void;
+    videoList(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIListProp>): void;
+    videoListSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>): void;
+    videoListFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>): void;
+    videoUpload(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUploadProp>): void;
+    videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>): void;
+    videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>): void;
+}>
 export interface videoStateType{
     video: videoSuccessType|null
     videoList: viedoListSuccessType|null
