@@ -46,7 +46,7 @@
             border-radius: 1.25rem;
             text-align: center;
             .navbar__utility__findIcon{
-                transform: translate(0,0.625rem);
+                transform: translate(0,0.4rem);
             }
         }
         .navbar__utility__buttons{
@@ -58,6 +58,7 @@
 }
 .navbar__bottom__line{
     background-color: rgb(32, 32, 32);
-    opacity: 0.102;
+    opacity: 0.4;
+    margin: 0rem;
 }
 

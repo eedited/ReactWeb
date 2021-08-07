@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router';
 import router from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
-import Description from '../components/Landing/Description/Description';
+import Description from '../components/Landing/Hero/Hero';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 
 interface matchParams{
