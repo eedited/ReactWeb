@@ -34,8 +34,8 @@ const Navbar: React.FC<props> = ({
                     <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
                 </div>
                 <div className="navbar__utility__buttons">
-                    <WhiteButton className="navbar__utility__button" onClick={onLogin}>로그인</WhiteButton>
-                    <BlueButton className="navbar__utility__button" onClick={onSignup}>회원가입</BlueButton>
+                    <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign In</WhiteButton>
+                    <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign Up</BlueButton>
                 </div>
             </div>
         </div>
