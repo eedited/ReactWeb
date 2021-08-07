@@ -1,25 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { userType } from '../../../modules/user/userType';
+import BlueButton from '../Button/BlueButton';
+import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
 
 interface props{
     user: userType|null
     onLogout: ()=> void
+    onLogin: ()=> void
+    onSignup: ()=> void
 }
-const Navbar: React.FC<props> = ({ user, onLogout }: props) => (
-    <div className="navbar">
-        <div className="navbar__menu">
-            <img className="navbar__menu__logo" />
-            <div className="navbar__menu__links">
-                <div className="navbar__menu__link">포트폴리오</div>
-                <div className="navbar__menu__link">인재찾기</div>
-                <div className="navbar__menu__link">채용하기</div>
-                <div className="navbar__menu__link">배워보기</div>
-                <div className="navbar__menu__link">커뮤니티</div>
+
+const Navbar: React.FC<props> = ({
+    user, onLogout, onLogin, onSignup,
+}: props) => (
+    <>
+        <div className="navbar">
+            <div className="navbar__menu">
+                <img className="navbar__menu__logo" src="/logo.png" alt="eedited_logo" />
+                <div className="navbar__menu__links">
+                    <Link className="navbar__menu__link" to="/">포트폴리오</Link>
+                    <Link className="navbar__menu__link" to="/">인재찾기</Link>
+                    <Link className="navbar__menu__link" to="/">채용하기</Link>
+                    <Link className="navbar__menu__link preparing" to="/">배워보기</Link>
+                    <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
+                </div>
+            </div>
+            <div className="navbar__utility">
+                <div className="navbar__utility__find">
+                    <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
+                </div>
+                <div className="navbar__utility__buttons">
+                    <WhiteButton className="navbar__utility__button" onClick={onLogin}>로그인</WhiteButton>
+                    <BlueButton className="navbar__utility__button" onClick={onSignup}>회원가입</BlueButton>
+                </div>
             </div>
         </div>
-    </div>
+        <hr className="navbar__bottom__line" />
+    </>
 );
 
 export default Navbar;

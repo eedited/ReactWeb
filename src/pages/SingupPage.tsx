@@ -1,10 +1,8 @@
 import React from 'react';
-import NavbarOnlyLogo from '../components/common/Navbar/NavbarOnlyLogo';
 import SignupForm from '../containers/auth/SignupForm';
-
+// navbar 지움.
 const SignupPage: React.FC = () => (
     <div>
-        <NavbarOnlyLogo />
         <SignupForm />
     </div>
 );
