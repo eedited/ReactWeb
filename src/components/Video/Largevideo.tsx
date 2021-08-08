@@ -21,8 +21,8 @@ const LargeVideo: React.ForwardRefExoticComponent<props & React.RefAttributes<Re
                 className="largeVideo__player"
                 url={videoInfo.url}
                 ref={youtubeRef}
-                width="1280px"
-                height="720px"
+                width="100%"
+                height="34.3125vw"
                 controls
                 onReady={onLoad}
                 config={{
