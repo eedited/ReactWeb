@@ -4,6 +4,7 @@ import router from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
 import Description from '../components/Landing/Hero/Hero';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
+import FilterContainer from '../containers/filter/FilterContainer';
 
 interface matchParams{
     criteria: string
@@ -32,9 +33,7 @@ const Landing: React.FC<props> = ({ match }: props) => {
     return (
         <BaseTemplate>
             <Description />
-            <a href="/videos/thumbup">thumbup</a>
-            <br />
-            <a href="/videos/latest">latest</a>
+            <FilterContainer />
             <VideoGridContainer criteria={criteria} />
         </BaseTemplate>
     );
