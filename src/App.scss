@@ -1,18 +1,18 @@
 @font-face {
-  font-family: interMedium;
-  src: url('./fonts/Inter-Medium.ttf');
-}
-@font-face {
-  font-family: interBold;
-  src: url('./fonts/Inter-Bold.ttf');
-}
-@font-face {
   font-family: NotoSansKRMedium;
   src: url('./fonts/NotoSansKR-Medium.otf');
 }
 @font-face {
   font-family: NotoSansKRBold;
   src: url('./fonts/NotoSansKR-Bold.otf');
+}
+@font-face {
+  font-family: Pretendard-Bold;
+  src: url('./fonts/Pretendard-Bold.woff2');
+}
+@font-face {
+  font-family: Pretendard-Medium;
+  src: url('./fonts/Pretendard-Medium.woff2');
 }
 body{
   font-family: NotoSansKRMedium;
