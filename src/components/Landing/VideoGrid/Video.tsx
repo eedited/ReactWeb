@@ -17,40 +17,58 @@ interface props{
 const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
     onLoad, play, pause, setOpacity, videoInfo,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
-    <Link to={`/videoInfo?videoId=${videoInfo.id}`}>
-        <div className="video">
-            <ReactPlayer
-                className="video__player"
-                url={videoInfo.url}
-                ref={youtubeRef}
-                muted
-                width="480px"
-                height="270px"
-                onReady={onLoad}
-                config={{
-                    youtube: {
-                        playerVars: {
-                            rel: 0,
-                            origin: 'http://localhost:3000',
+    <div className="videoElement">
+        <Link to={`/videoInfo?videoId=${videoInfo.id}`}>
+            <div className="video">
+                <ReactPlayer
+                    className="video__player"
+                    url={videoInfo.url}
+                    ref={youtubeRef}
+                    muted
+                    width="100%"
+                    height="100%"
+                    onReady={onLoad}
+                    config={{
+                        youtube: {
+                            playerVars: {
+                                rel: 0,
+                                origin: 'http://localhost:3000',
+                            },
                         },
-                    },
-                }}
-                style={{
-                    opacity: setOpacity(),
-                }}
-            />
-            <img
-                className="video__img"
-                src={videoInfo.thumbnail}
-                alt="123"
-                onMouseOver={play}
-                onFocus={play}
-                onMouseLeave={pause}
-                onBlur={pause}
-                style={{ opacity: (setOpacity() + 1) % 2 }}
-            />
+                    }}
+                    style={{
+                        opacity: setOpacity(),
+                    }}
+                />
+                <img
+                    className="video__img"
+                    src={videoInfo.thumbnail}
+                    alt="123"
+                    onMouseOver={play}
+                    onFocus={play}
+                    onMouseLeave={pause}
+                    onBlur={pause}
+                    style={{ opacity: (setOpacity() + 1) % 2 }}
+                />
+            </div>
+        </Link>
+        <div className="video__title">{videoInfo.title}</div>
+        <div className="video__detail">
+            <div className="video__uploader">
+                <div className="video__uploader__name">{videoInfo.uploader}</div>
+                <div className="vidoe__uploader__follow">
+                    {/* onClick함수 필요함. */}
+                    <img className="video__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
+                    팔로우
+                </div>
+            </div>
+            <div className="video__detail__like">
+                <img className="video__detail__like__icon" src="/icons/heart-icon--filled.png" alt="like-icon" />
+                {' '}
+                {videoInfo.likeCnt}
+            </div>
         </div>
-    </Link>
+    </div>
 ));
 
 export default React.memo(Video);

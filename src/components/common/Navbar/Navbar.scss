@@ -1,23 +1,64 @@
-.navbar{
-   height: 48px;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   background-color: cornflowerblue;
-   padding : 8px 12px;
-   .navbar__logo{
-       font-size: 18px;
-   }
-   .navbar__menu{
-       display: flex;
-       list-style: none;
-       a{
-           padding : 8px 12px
-       }
-   }
-   .navbar__utility{
-       a{
-           padding : 8px 12px;
-       }
-   }
+.preparing{
+    color:rgb(210, 210, 210);
 }
+
+.navbar{
+    height: 5rem;
+    left: 0rem;
+    top: 0rem;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    justify-content: space-between;
+    align-items: center;
+    padding : 0.5rem 0.75rem;
+    .navbar__menu{
+        width : 37.5rem;
+        margin-left:72px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .navbar__menu__logo{
+            text-align: center;
+            width: 7.5rem;
+            height: 3rem;
+        }
+        .navbar__menu__links{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-family: 'NotoSansKRBold';
+            a{
+                padding : 0.5rem 0.75rem;
+            }
+        }   
+    }
+    .navbar__utility{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width : 18rem;
+        margin-right: 1.25rem;
+        .navbar__utility__find{
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: rgb(247, 247, 247);
+            border-radius: 1.25rem;
+            text-align: center;
+            .navbar__utility__findIcon{
+                transform: translate(0,0.4rem);
+            }
+        }
+        .navbar__utility__buttons{
+            display: flex;
+            width : 14rem;
+            justify-content: space-between;
+        }
+    }
+}
+.navbar__bottom__line{
+    background-color: rgb(32, 32, 32);
+    opacity: 0.4;
+    margin: 0rem;
+}
+

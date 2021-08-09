@@ -1,12 +1,11 @@
 import React from 'react';
-import NavbarOnlyLogo from '../components/common/Navbar/NavbarOnlyLogo';
 import LoginForm from '../containers/auth/LoginForm';
+import BaseTemplate from './BaseTemplate';
 
 const LoginPage: React.FC = () => (
-    <div>
-        <NavbarOnlyLogo />
+    <BaseTemplate>
         <LoginForm />
-    </div>
+    </BaseTemplate>
 );
 
 export default LoginPage;

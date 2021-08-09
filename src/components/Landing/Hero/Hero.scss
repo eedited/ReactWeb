@@ -1,0 +1,27 @@
+.hero{
+    display: flex;
+    height: 46.875rem;
+    background-color: rgb(247, 247, 247);
+    align-items: center;
+    .hero__description{
+        z-index: 2;
+        padding-right: 6em;
+        transform: translate(15.625rem, -3.125rem);
+        .hero__description__title{
+            font-family: 'NotoSansKRBold';
+            font-size: 3.125rem;
+            line-height: 4.375rem;
+        }
+        .hero__description__body{
+            font-family: 'NotoSansKRMedium';
+            font-size: 0.625rem;
+            line-height: 1rem;
+        }
+    }
+    .hero__img{
+        position: absolute;
+        height: 46.875rem;
+        z-index: 1;
+    }
+}
+

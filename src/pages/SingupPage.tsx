@@ -1,12 +1,11 @@
 import React from 'react';
-import NavbarOnlyLogo from '../components/common/Navbar/NavbarOnlyLogo';
 import SignupForm from '../containers/auth/SignupForm';
-
+import BaseTemplate from './BaseTemplate';
+// navbar 지움.
 const SignupPage: React.FC = () => (
-    <div>
-        <NavbarOnlyLogo />
+    <BaseTemplate>
         <SignupForm />
-    </div>
+    </BaseTemplate>
 );
 
 export default SignupPage;
