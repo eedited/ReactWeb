@@ -3,53 +3,54 @@ import './Footer.scss';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => (
-    <div className="footer">
-        <div className="footer__description">
-            <Link to="/">eedited</Link>
-            <p>
-                eedited is the worlds leading community
-                for creatives to share, grow and get hired
-            </p>
+    <>
+        <div className="footer">
+            <div className="footer__description">
+                <Link to="/"><img className="footer__description__logo" src="/logo.png" alt="eedited_logo" /></Link>
+                <p>
+                    실력있는 영상 에디터들의 포트폴리오를
+                    <br />
+                    한 눈에 보고 바로 소통하는 비즈니스 커뮤니티
+                </p>
+            </div>
+            <div className="footer__sitemap">
+                <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column__heading">포트폴리오</div>
+                    <Link to="/" className="footer__sitemap__column__link">브이로그</Link>
+                    <Link to="/" className="footer__sitemap__column__link">게임</Link>
+                    <Link to="/" className="footer__sitemap__column__link">뷰티</Link>
+                    <Link to="/" className="footer__sitemap__column__link">IT/리뷰</Link>
+                    <Link to="/" className="footer__sitemap__column__link">스터디</Link>
+                    <Link to="/" className="footer__sitemap__column__link">기타</Link>
+                </div>
+                <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column__heading">인재찾기</div>
+                    <Link to="/" className="footer__sitemap__column__link">파트타임</Link>
+                    <Link to="/" className="footer__sitemap__column__link">풀타임</Link>
+                    <br />
+                    <div className="footer__sitemap__column__heading">채용하기</div>
+                    <Link to="/" className="footer__sitemap__column__link">파트타임</Link>
+                    <Link to="/" className="footer__sitemap__column__link">풀타임</Link>
+                </div>
+                <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column__heading">배워보기</div>
+                    <Link to="/" className="footer__sitemap__column__link">Premier Pro</Link>
+                    <Link to="/" className="footer__sitemap__column__link">Final Cut Pro</Link>
+                    <Link to="/" className="footer__sitemap__column__link">디자인</Link>
+                    <Link to="/" className="footer__sitemap__column__link">사운드 에디팅</Link>
+                </div>
+                <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column__heading">커뮤니티</div>
+                    <Link to="/" className="footer__sitemap__column__link">자유게시판</Link>
+                    <Link to="/" className="footer__sitemap__column__link">익명게시판</Link>
+                    <Link to="/" className="footer__sitemap__column__link">정보공유</Link>
+                    <Link to="/" className="footer__sitemap__column__link">인재찾기 후기</Link>
+                    <Link to="/" className="footer__sitemap__column__link">채용하기 후기</Link>
+                </div>
+            </div>
+            <div className="right_reserved">© eedited. All rights reserved.</div>
         </div>
-        <div className="footer__sitemap">
-            <div className="footer__sitemap__column">
-                <div className="footer__sitemap__column__heading">Videos</div>
-                <Link to="/" className="footer__sitemap__column__link">V-log</Link>
-                <Link to="/" className="footer__sitemap__column__link">Game</Link>
-                <Link to="/" className="footer__sitemap__column__link">Beauty</Link>
-                <Link to="/" className="footer__sitemap__column__link">IT</Link>
-                <Link to="/" className="footer__sitemap__column__link">News</Link>
-                <Link to="/" className="footer__sitemap__column__link">Info</Link>
-                <Link to="/" className="footer__sitemap__column__link">Stocks</Link>
-                <Link to="/" className="footer__sitemap__column__link">Music</Link>
-            </div>
-            <div className="footer__sitemap__column">
-                <div className="footer__sitemap__column__heading">Finding Works</div>
-                <Link to="/" className="footer__sitemap__column__link">Part-Time</Link>
-                <Link to="/" className="footer__sitemap__column__link">Full-Time</Link>
-                <br />
-                <div className="footer__sitemap__column__heading">Hiring Jobs</div>
-                <Link to="/" className="footer__sitemap__column__link">Part-Time</Link>
-                <Link to="/" className="footer__sitemap__column__link">Full-Time</Link>
-            </div>
-            <div className="footer__sitemap__column">
-                <div className="footer__sitemap__column__heading">Learn</div>
-                <Link to="/" className="footer__sitemap__column__link">프리미어</Link>
-                <Link to="/" className="footer__sitemap__column__link">파이널 컷 프로</Link>
-                <Link to="/" className="footer__sitemap__column__link">디자인</Link>
-            </div>
-            <div className="footer__sitemap__column">
-                <div className="footer__sitemap__column__heading">Board</div>
-                <Link to="/" className="footer__sitemap__column__link">자유게시판</Link>
-                <Link to="/" className="footer__sitemap__column__link">질의게시판</Link>
-                <Link to="/" className="footer__sitemap__column__link">정보게시판</Link>
-                <Link to="/" className="footer__sitemap__column__link">익명게시판</Link>
-                <Link to="/" className="footer__sitemap__column__link">Finding Wokrs 후기</Link>
-                <Link to="/" className="footer__sitemap__column__link">Hiring Jobs 후기</Link>
-            </div>
-
-        </div>
-    </div>
+    </>
 );
 
 export default Footer;
