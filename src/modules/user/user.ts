@@ -39,6 +39,10 @@ const userSlice: userSliceType = createSlice({
         },
         checkFailure(state: WritableDraft<userStateType>, action: PayloadAction<checkFailureType>) {
             state.checkError = action.payload;
+            if (state.user) {
+                state.user = null;
+                localStorage.removeItem('user');
+            }
         },
         setUser(state: WritableDraft<userStateType>, action: PayloadAction<userType>) {
             state.user = action.payload;
