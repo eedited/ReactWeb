@@ -19,7 +19,7 @@ interface props{
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
     const { videoClear, videoList }: videoActionType = videoAction;
-    const page: React.MutableRefObject<number> = useRef(1);
+    const page: React.MutableRefObject<number> = useRef(0);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         videos,

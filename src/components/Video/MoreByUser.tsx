@@ -8,14 +8,19 @@ interface props{
 }
 const MoreByUser: React.FC<props> = ({ videos }: props) => (
     <>
-        <div>이 편집자의 다른 동영상</div>
+        <div className="more-by-user__title">이 편집자의 다른 동영상</div>
         <div className="more-by-user">
             {
-                videos.map((video: VIDEO) => (
-                    <VideoContainer
-                        videoInfo={video}
-                    />
-                ))
+                videos.map((video: VIDEO, idx: number) => {
+                    if (idx < 3) {
+                        return (
+                            <VideoContainer
+                                videoInfo={video}
+                            />
+                        );
+                    }
+                    return <></>;
+                })
             }
         </div>
     </>
