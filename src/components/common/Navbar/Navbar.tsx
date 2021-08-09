@@ -20,7 +20,9 @@ const Navbar: React.FC<props> = ({
     <>
         <div className="navbar">
             <div className="navbar__menu">
-                <img className="navbar__menu__logo" src="/logo.png" alt="eedited_logo" />
+                <Link to="/">
+                    <img className="navbar__menu__logo" src="/logo.png" alt="eedited_logo" />
+                </Link>
                 <div className="navbar__menu__links">
                     <Link className="navbar__menu__link" to="/">포트폴리오</Link>
                     <Link className="navbar__menu__link" to="/">인재찾기</Link>
@@ -33,10 +35,19 @@ const Navbar: React.FC<props> = ({
                 <div className="navbar__utility__find">
                     <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
                 </div>
-                <div className="navbar__utility__buttons">
-                    <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign In</WhiteButton>
-                    <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign Up</BlueButton>
-                </div>
+                {user === null
+                    ? (
+                        <div className="navbar__utility__buttons">
+                            <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign In</WhiteButton>
+                            <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign Up</BlueButton>
+                        </div>
+                    )
+                    : (
+                        <div className="navbar__utility__buttons">
+                            <WhiteButton className="navbar__utility__button" onClick={onLogout}>Sign Out</WhiteButton>
+                            <BlueButton className="navbar__utility__button" onClick={() => { /* uploadfuc */ }}>Upload</BlueButton>
+                        </div>
+                    )}
             </div>
         </div>
         <hr className="navbar__bottom__line" />
