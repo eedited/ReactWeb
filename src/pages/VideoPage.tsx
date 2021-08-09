@@ -7,6 +7,7 @@ import LargeVideoDescription from '../containers/Video/LargeVideoDescriptionCont
 import MoreByUser from '../containers/Video/MoreByUserContainer';
 import UserMabyLike from '../containers/Video/UserMaybeLike';
 import VideoHeader from '../containers/Video/VideoHeader';
+import HorizonLine from '../components/common/HorizonLine/HorizonLine';
 
 type props = RouteComponentProps
 
@@ -31,14 +32,9 @@ const VideoPage: React.FC<props> = ({ location }: props) => {
                 }
             </>
             <LargeVideoDescription />
-            {/* <section>
-                discription
-
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque blanditiis, animi molestias fuga corrupti sint laborum eum tempora incidunt autem quasi sit dolorum amet nam minus veniam modi fugiat deleniti quos quam sapiente, quaerat inventore necessitatibus? Eveniet nihil doloremque minima maxime ducimus esse, illo in sit ullam placeat! Est, quisquam!
-            </section> */}
-            <hr />
+            <HorizonLine />
             <MoreByUser />
-            <hr />
+            <HorizonLine />
             <UserMabyLike />
         </BaseTemplate>
     );
