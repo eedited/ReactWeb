@@ -12,7 +12,7 @@ const MoreByUser: React.FC<props> = ({ videos }: props) => (
         <div className="more-by-user">
             {
                 videos.map((video: VIDEO, idx: number) => {
-                    if (idx < 3) {
+                    if (idx < 6) {
                         return (
                             <VideoContainer
                                 videoInfo={video}

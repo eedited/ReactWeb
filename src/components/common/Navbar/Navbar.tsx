@@ -21,7 +21,7 @@ const Navbar: React.FC<props> = ({
         <div className="navbar">
             <div className="navbar__menu">
                 <Link to="/">
-                    <img className="navbar__menu__logo" src="/logo.png" alt="eedited_logo" />
+                    <img className="navbar__menu__logo" src="/icons/orange-logo.png" alt="eedited_logo" />
                 </Link>
                 <div className="navbar__menu__links">
                     <Link className="navbar__menu__link" to="/">포트폴리오</Link>
