@@ -13,14 +13,12 @@
 <img alt="Redux-Saga" src ="https://img.shields.io/badge/Redux_Saga-999999.svg?&style=for-the-badge&logo=Redux-Saga&logoColor=black"/>
 
 ## About The Project
----
 ![landing](./public/docs/landing-page.png)
 
 Front-End Source Code for Eedited Service.<br>
 This code is Written in TypeScript.
 
 ## Built With
----
 ### React
 - React is a JavaScript library for building user interfaces.
 - The reason why we use react is that react can be scaled up easily from web app to react-native app.
@@ -37,7 +35,6 @@ This code is Written in TypeScript.
 - We use Redux for predictable state management.
 - We use Redux Saga middleware for asynchronous ajax handling. 
 ## Getting Started
----
 ### Prerequisite
 - To Service Eedited Service with this FE server, You need Rest-API-Server.
 - Have to Use node v14.16.1
@@ -51,7 +48,6 @@ This code is Written in TypeScript.
 > npm install
 3. run Project
 > npm start
----
 ## Contact
 ### Team eedited
 
