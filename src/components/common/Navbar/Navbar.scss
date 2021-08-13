@@ -37,22 +37,38 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width : 18rem;
+        width : 23rem;
         margin-right: 1.25rem;
         .navbar__utility__find{
+            display:flex;
+            justify-content: space-around;
+            align-items: center;
             width: 2.5rem;
             height: 2.5rem;
             background-color: rgb(247, 247, 247);
             border-radius: 1.25rem;
             text-align: center;
-            .navbar__utility__findIcon{
-                transform: translate(0,0.4rem);
+            .navbar__utility__find__input{
+                border:none;
+                background-color: transparent;
+                outline:none;
+                width : 5rem
             }
+        }
+        .find__activated{
+            width : 9rem;
         }
         .navbar__utility__buttons{
             display: flex;
             width : 14rem;
             justify-content: space-between;
+            .navbar__utility__nickname{
+                margin-top:0.5rem;
+            }
+            .navbar__utility__profile{
+                width : 40px;
+                height: 40px;
+            }
         }
     }
 }
