@@ -82,7 +82,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             nickname,
         }));
     };
-    useEffect(() => {
+    useEffect(() => () => {
         dispatch(intializeForm());
     }, [dispatch, intializeForm]);
     useEffect(() => {

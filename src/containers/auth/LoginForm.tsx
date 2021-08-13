@@ -52,7 +52,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             password,
         }));
     };
-    useEffect(() => {
+    useEffect(() => () => {
         dispatch(intializeForm());
     }, [dispatch, intializeForm]);
     useEffect(() => {
