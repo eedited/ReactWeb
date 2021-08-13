@@ -52,7 +52,9 @@
     "start": "set PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://bambam-react-app-deploy-test --profile=soma1214",
+    "invalidate": "aws cloudfront create-invalidation --profile=soma1214 --distribution-id ECMKDIFKHHL9V --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "eslintConfig": {
     "extends": [
