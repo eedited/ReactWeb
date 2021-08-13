@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar from '../../components/common/Navbar/Navbar';
@@ -19,6 +19,7 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
         User: state.userReducer.user,
         logoutError: state.userReducer.logoutError,
     }));
+    const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const onLogout: ()=> void = () => {
         dispatch(userAction.logout());
@@ -34,7 +35,18 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
             alert(logoutError);
         }
     }, [logoutError]);
-    return <Navbar user={User} onLogout={onLogout} onLogin={onLogin} onSignup={onSignup} />;
+    return (
+        <Navbar
+            user={User}
+            onLogout={onLogout}
+            onLogin={onLogin}
+            onSignup={onSignup}
+            isSearchClick={isSearchClick}
+            onSearchClick={() => {
+                setIsSeacrhClick(!isSearchClick);
+            }}
+        />
+    );
 };
 
 export default withRouter(NavbarContainer);
