@@ -14,7 +14,11 @@ export interface loginProp{
     password: string
 }
 export interface checkSuccessReturnProp{
-    userId: string
+    userId: string,
+    nickname: string,
+    email: string,
+    profilePicture: string,
+    proTag: boolean
 }
 export interface checkFailureReturnProp{
     info: string
