@@ -21,8 +21,11 @@ export interface VIDEO {
     updatedAt: Date
     deleted: Date | null
 }
+export interface VIDEO_WITH_NICKNAME extends VIDEO{
+    nickname: string
+}
 export interface videoAPISuccessReturnProp{
-    video: VIDEO
+    video: VIDEO_WITH_NICKNAME
 }
 export interface videoAPIFailureReturnProp{
     info: string
