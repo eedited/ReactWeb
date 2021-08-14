@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
-import { VIDEO_WITH_NICKNAME } from '../../lib/api/video';
+import { VIDEO } from '../../lib/api/video';
 import './Largevideo.scss';
 
 interface props{
     onLoad: (player: ReactPlayer)=> void
-    videoInfo: VIDEO_WITH_NICKNAME
+    videoInfo: VIDEO
     setOpacity: ()=> number
 }
 const LargeVideo: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({

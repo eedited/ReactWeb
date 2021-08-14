@@ -1,9 +1,9 @@
 import React from 'react';
 import './LargeVideoHeader.scss';
-import { VIDEO_WITH_NICKNAME } from '../../lib/api/video';
+import { VIDEO } from '../../lib/api/video';
 
 interface props {
-    video: VIDEO_WITH_NICKNAME
+    video: VIDEO
 }
 
 const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
