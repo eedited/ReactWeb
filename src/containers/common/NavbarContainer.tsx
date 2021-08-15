@@ -30,6 +30,9 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
     const onSignup: ()=> void = () => {
         history.push('/signup');
     };
+    const onUpload: ()=> void = () => {
+        history.push('/upload');
+    };
     useEffect(() => {
         if (logoutError) {
             alert(logoutError);
@@ -41,6 +44,7 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
             onLogout={onLogout}
             onLogin={onLogin}
             onSignup={onSignup}
+            onUpload={onUpload}
             isSearchClick={isSearchClick}
             onSearchClick={() => {
                 setIsSeacrhClick(!isSearchClick);

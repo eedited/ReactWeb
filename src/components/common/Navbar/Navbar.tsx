@@ -15,10 +15,11 @@ interface props{
     onLogin: ()=> void
     onSignup: ()=> void
     onSearchClick: ()=> void
+    onUpload: ()=> void
 }
 
 const Navbar: React.FC<props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick,
+    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload,
 }: props) => (
     <>
         <div className="navbar">
@@ -93,7 +94,7 @@ const Navbar: React.FC<props> = ({
                                     </li>
 
                                     <li className="navbar__utility__dropdown__item">
-                                        <button onClick={onLogout} type="button">
+                                        <button onClick={onUpload} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
                                                     src="/icons/upload-icon.png"
@@ -125,7 +126,7 @@ const Navbar: React.FC<props> = ({
                                 </ul>
                             </div>
 
-                            <BlueButton className="navbar__utility__button" onClick={() => { /* uploadfuc */ }}>Upload</BlueButton>
+                            <BlueButton className="navbar__utility__button" onClick={onUpload}>Upload</BlueButton>
                         </div>
                     )}
             </div>

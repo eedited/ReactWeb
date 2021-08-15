@@ -12,6 +12,7 @@ import FindingPwPage from './pages/FindingPwPage';
 import VideoPage from './pages/VideoPage';
 import Page404 from './pages/NotFound';
 import ScrollTop from './components/common/ScrollTop';
+import UploadPage from './pages/UploadPage';
 
 type AppType = ()=> JSX.Element;
 
@@ -26,6 +27,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/findId" component={FindingIdPage} />
                 <Route path="/findPw" component={FindingPwPage} />
+                <Route path="/upload" component={UploadPage} />
                 <Route path="/404NotFound" component={Page404} />
                 <Route component={Page404} />
             </Switch>

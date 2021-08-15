@@ -71,7 +71,12 @@ export type videoAPIUploadFunctionType = ({
 }: videoAPIUploadProp)=> Promise<AxiosResponse<videoAPIUploadReturnProp>>
 export const videoUpload: videoAPIUploadFunctionType = ({
     title, discription, url, thumbnail,
-}: videoAPIUploadProp) => client.get('/video/upload');
+}: videoAPIUploadProp) => client.post('/video/upload', {
+    title,
+    discription,
+    url,
+    thumbnail,
+});
 
 export type videoAPIUserFunctionType = ({ uploader }: videoAPIUserProp)=> Promise<AxiosResponse<videoAPIUserReturnProp>>
 export const videoUser: videoAPIUserFunctionType = ({ uploader }: videoAPIUserProp) => client.get(`/video/${uploader}/list/?page=1`);
