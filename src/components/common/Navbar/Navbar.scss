@@ -36,27 +36,35 @@
     .navbar__utility{
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        width : 23rem;
+        justify-content: flex-end;
+        width : 50rem;
         margin-right: 1.25rem;
         .navbar__utility__find{
             display:flex;
-            justify-content: space-around;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            justify-content: space-between;
             align-items: center;
             width: 2.5rem;
             height: 2.5rem;
+            margin-right: 1.5rem;
             background-color: rgb(247, 247, 247);
             border-radius: 1.25rem;
             text-align: center;
+            .navbar__utility__findIcon{
+                margin-left:0.75rem;
+            }
             .navbar__utility__find__input{
                 border:none;
                 background-color: transparent;
                 outline:none;
-                width : 5rem
+                width : 12rem
             }
         }
         .find__activated{
-            width : 9rem;
+            width : 15rem;
+            background-color: transparent;
+            border: 1px solid rgb(32,32,32);
+            border-radius: 10px;            
         }
         .navbar__utility__buttons{
             display: flex;
@@ -65,9 +73,67 @@
             .navbar__utility__nickname{
                 margin-top:0.5rem;
             }
+            .navbar__utility__dropdown{
+                display : flex;
+                gap : 10px;
+                justify-content: space-between;
+                position: relative;
+            }
+            .navbar__utility__dropdown:hover{
+                .navbar__utility__dropdown__list{
+                    display : block;
+                }
+            }
             .navbar__utility__profile{
                 width : 40px;
                 height: 40px;
+            }
+            .navbar__utility__dropdown__list{
+                display:none;
+                position: absolute;
+                text-decoration: none;    
+                left: -50px;
+                padding-top : 60px;
+                width : 100%; 
+                z-index: 2;
+                list-style: none;
+                .navbar__utility__dropdown__item{
+                    width : 250%;
+                    height: 44px;
+                    line-height: 44px;
+                    text-align : center;
+                    box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
+                    background-color: rgb(255,255,255);
+                    &__top{
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                    }
+                    &__bottom{
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                    }
+                    &__flex{
+                        display : flex;
+                        justify-content: start;
+                        margin-left: 1rem;
+                        gap : 1rem;
+                        &__img{
+                            width : 20px;
+                            height: 20px;
+                        }
+                    }
+                    button{
+                        width : 100%;
+                        border: 0rem; 
+                        font-size:1rem;
+                        font-family: Pretendard-Medium;
+                        background-color: transparent;
+                    }
+                }
+                .navbar__utility__dropdown__item:hover{
+                    background-color: rgb(247, 247, 247);
+                }
+                
             }
         }
     }
@@ -78,3 +144,15 @@
     margin: 0rem;
 }
 
+
+.dropdown_background {
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 3013px;
+  top: 182px;
+  width: 500px;
+  height: 481px;
+  z-index: 243;
+}

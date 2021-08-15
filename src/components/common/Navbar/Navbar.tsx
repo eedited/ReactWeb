@@ -34,7 +34,7 @@ const Navbar: React.FC<props> = ({
                     <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
                 </div>
             </div>
-            <div className={isSearchClick ? 'navbar__utility navbar__find__activated' : 'navbar__utility'}>
+            <div className="navbar__utility">
                 {!isSearchClick ? (
                     <div className="navbar__utility__find">
                         <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
@@ -56,8 +56,75 @@ const Navbar: React.FC<props> = ({
                     )
                     : (
                         <div className="navbar__utility__buttons">
-                            <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
-                            <div className="navbar__utility__nickname">{user.nickname}</div>
+                            <div className="navbar__utility__dropdown">
+                                <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
+                                <div className="navbar__utility__nickname">{user.nickname}</div>
+
+                                <ul className="navbar__utility__dropdown__list">
+                                    <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__top">
+                                        <button onClick={onLogout} type="button">
+                                            <div className="navbar__utility__dropdown__item__flex">
+                                                <img
+                                                    src="/icons/mypage-icon.png"
+                                                    alt="mypage-icon"
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                    }}
+                                                />
+                                                <div>마이페이지</div>
+                                            </div>
+                                        </button>
+                                    </li>
+                                    <li className="navbar__utility__dropdown__item">
+                                        <button onClick={onLogout} type="button">
+                                            <div className="navbar__utility__dropdown__item__flex">
+                                                <img
+                                                    src="/icons/chat-icon.png"
+                                                    alt="chat-icon"
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                    }}
+                                                />
+                                                <div>대화</div>
+                                            </div>
+                                        </button>
+                                    </li>
+
+                                    <li className="navbar__utility__dropdown__item">
+                                        <button onClick={onLogout} type="button">
+                                            <div className="navbar__utility__dropdown__item__flex">
+                                                <img
+                                                    src="/icons/upload-icon.png"
+                                                    alt="upload-icon"
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                    }}
+                                                />
+                                                <div>업로드</div>
+                                            </div>
+                                        </button>
+                                    </li>
+                                    <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__bottom">
+                                        <button onClick={onLogout} type="button">
+                                            <div className="navbar__utility__dropdown__item__flex">
+                                                <img
+                                                    src="/icons/logout-icon.png"
+                                                    alt="logout-icon"
+                                                    style={{
+                                                        width: '20px',
+                                                        height: '20px',
+                                                    }}
+                                                />
+                                                <div>로그아웃</div>
+                                            </div>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
                             <BlueButton className="navbar__utility__button" onClick={() => { /* uploadfuc */ }}>Upload</BlueButton>
                         </div>
                     )}
