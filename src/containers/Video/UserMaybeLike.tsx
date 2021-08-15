@@ -17,6 +17,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
             {
                 id: '2',
@@ -30,6 +31,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
             {
                 id: '3',
@@ -43,6 +45,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
             {
                 id: '4',
@@ -56,6 +59,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
             {
                 id: '5',
@@ -69,6 +73,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
             {
                 id: '6',
@@ -82,6 +87,7 @@ const UserMaybeLikeContainer: React.FC = () => {
                 createdAt: (new Date()),
                 updatedAt: (new Date()),
                 deleted: null,
+                nickname: '아이유 편집자',
             },
         ],
     };

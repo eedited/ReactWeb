@@ -12,7 +12,7 @@ const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
             <img className="LargeVideoHeader__main__profileIcon" src="../../../../public/sungPA.jpg" alt="profile" />
             <div className="LargeVideoHeader__main__rest">
                 <div className="LargeVideoHeader__main__rest__title">{ video.title }</div>
-                <div className="LargeVideoHeader__main__rest__nickname">{ video.uploader }</div>
+                <div className="LargeVideoHeader__main__rest__nickname">{ video.nickname }</div>
             </div>
         </div>
         <div className="LargeVideoHeader__iconlist">

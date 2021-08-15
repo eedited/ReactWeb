@@ -25,6 +25,9 @@
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
+    "aws-amplify": "^4.2.3",
+    "aws-amplify-react": "^5.0.9",
+    "aws-sdk": "^2.967.0",
     "axios": "^0.21.1",
     "history": "^5.0.0",
     "immer": "^9.0.5",
@@ -52,7 +55,9 @@
     "start": "set PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync ./build s3://bambam-react-app-deploy-test --profile=soma1214",
+    "invalidate": "aws cloudfront create-invalidation --profile=soma1214 --distribution-id ECMKDIFKHHL9V --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "eslintConfig": {
     "extends": [

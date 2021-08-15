@@ -27,7 +27,6 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-    const [videoInfo, setVideoInfo]: [VIDEO|null, React.Dispatch<React.SetStateAction<VIDEO|null>>] = useState<VIDEO|null>(null);
     const {
         Video,
     }: fromReducerType = useAppSelector((state: selectorStateType) => ({
@@ -39,23 +38,18 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     useEffect(() => {
         dispatch(video({ videoId })); // 쿼리 스트링으로 넘어와야함.
     }, [dispatch, video, videoId]);
-    useEffect(() => {
-        if (Video) {
-            setVideoInfo(Video.video);
-        }
-    }, [Video]);
     const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
         setisLoading(false);
     };
     const setOpacity: ()=> number = useCallback(() => Number(!isLoading), [isLoading]);
     return (
         <div>
-            { videoInfo === null
+            { Video === null
                 ? <div>error</div>
                 : (
                     <Largevideo
                         onLoad={onLoad}
-                        videoInfo={videoInfo}
+                        videoInfo={Video.video}
                         ref={youtubeRef}
                         setOpacity={setOpacity}
                     />

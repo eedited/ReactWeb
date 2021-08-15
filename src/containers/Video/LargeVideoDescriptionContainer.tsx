@@ -13,12 +13,7 @@ const LargeVideoDescriptionContainer: React.FC = () => {
     }: fromReducerType = useAppSelector((state: selectorStateType) => ({
         Video: state.videoReducer.video,
     }));
-    if (Video === null) {
-        return <div />;
-    }
-    return (
-        <LargeVideoDescription description={Video.video.discription} />
-    );
+    return Video !== null ? (<LargeVideoDescription description={Video.video.discription} />) : (<div />);
 };
 
 export default LargeVideoDescriptionContainer;

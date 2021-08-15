@@ -20,6 +20,7 @@ export interface VIDEO {
     createdAt: Date
     updatedAt: Date
     deleted: Date | null
+    nickname: string
 }
 export interface videoAPISuccessReturnProp{
     video: VIDEO
