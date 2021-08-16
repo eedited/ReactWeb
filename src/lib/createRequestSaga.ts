@@ -30,7 +30,6 @@ export default function createRequestSaga<P, R>(type: string, request: genericRe
     }>, void, RetrunProp<R>> {
         yield put(loadingAction.startLoading({ status: type }));
         try {
-            console.log(action.payload);
             const response: RetrunProp<R> = yield call(request, action.payload);
             yield put({
                 type: SUCCESS,

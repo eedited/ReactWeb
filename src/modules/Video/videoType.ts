@@ -35,6 +35,7 @@ export interface videoStateType{
     video: videoSuccessType|null
     videoList: viedoListSuccessType|null
     getVideoError: videoFailureType|null
+    videoUploadSuccess: videoUploadSuccessType|null
     videoUploadError: videoUploadFailureType|null
     videoUserUpload: viedoListSuccessType|null
     videoUserUploadError: videoListFailureType|null

@@ -1,118 +1,79 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
-import BlueButton from '../../components/common/Button/BlueButton';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../modules/Video/video';
 import useInputs, { inputType } from '../../lib/hooks/useInputs';
-import './Upload.scss';
-import { videoUploadFailureType } from '../../modules/Video/videoType';
+import { videoUploadFailureType, videoUploadSuccessType } from '../../modules/Video/videoType';
+import Upload from '../../components/upload/Upload';
 
 interface fromReducerType{
     uploadError: videoUploadFailureType|null
+    uploadSuccess: videoUploadSuccessType|null
 }
-
-const UploadContainer: React.FC = () => {
+interface props{
+    history: RouteComponentProps['history']
+}
+const UploadContainer: React.FC<props> = ({ history }: props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         uploadError,
+        uploadSuccess,
     }: fromReducerType = useAppSelector((state: selectorStateType) => ({
         uploadError: state.videoReducer.videoUploadError,
+        uploadSuccess: state.videoReducer.videoUploadSuccess,
     }));
     const [inputState, onInputChange]: [inputType, (e: React.ChangeEvent<HTMLInputElement>)=> void] = useInputs({
         title: '',
         videoLink: '',
         thumbnailLink: '',
         currentTag: '',
-        description: '',
     });
-    const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
+    const [description, onDescriptionChange]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
+    // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
+    const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if ([inputState.title, inputState.videoLink, inputState.thumbnailLink, description].includes('')) {
+            setError('빈 칸을 모두 입력하세요');
+            return;
+        }
+        if (!ReactPlayer.canPlay(inputState.videoLink)) {
+            setError('올바르지 못한 video Url 입니다');
+            return;
+        }
         dispatch(
             videoAction.videoUpload(
                 {
                     title: inputState.title,
-                    discription: inputState.description,
+                    discription: description,
                     url: inputState.videoLink,
                     thumbnail: inputState.thumbnailLink,
                 },
             ),
         );
     };
-
+    useEffect(() => {
+        if (uploadError) {
+            setError(`회원가입 실패 ${uploadError.info}`);
+        }
+        if (uploadSuccess) {
+            history.push('/');
+        }
+    }, [history, uploadError, uploadSuccess]);
     return (
-        <div className="upload">
-            <div className="upload__haeder">
-                <div className="upload__header__title">업로드</div>
-                <img alt="upload__haeder__img" src="/upload_temp.png" className="upload__haeder__img" />
-            </div>
-            <div className="upload__body">
-                <form onSubmit={uploadSubmit} className="upload__form">
-                    <div className="upload__info">
-                        <div className="upload__info__item">
-                            <div className="upload__info__title">제목</div>
-                            <input
-                                className="upload__info__title__input"
-                                onChange={onInputChange}
-                                name="title"
-                                value={inputState.title}
-                            />
-                        </div>
-                        <div className="upload__info__item">
-                            <div className="upload__info__title">비디오 링크</div>
-                            <input className="upload__info__title__input" onChange={onInputChange} name="videoLink" value={inputState.value} />
-                        </div>
-                        <div className="upload__info__item">
-                            <div className="upload__info__title">썸네일 링크</div>
-                            <input className="upload__info__title__input" onChange={onInputChange} name="thumbnailLink" value={inputState.value} />
-                        </div>
-                        {/*
-                    <div className="upload__info__item">
-                        <div className="upload__info__title">태그</div>
-                        <input className="upload__info__title__input" onChange={onInputChange} name="currentTag" value={inputState.currentTag} />
-                    </div>
-                    */
-                        }
-                        <div className="upload__info__item">
-                            <div className="upload__info__title">설명</div>
-                            <input className="upload__info__description__input" name="description" onChange={onInputChange} value={inputState.description} />
-                        </div>
-                        <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">업로드하기</BlueButton>
-                        {uploadError && <div>{uploadError.info}</div>}
-                    </div>
-                </form>
-                <div className="upload__preview">
-                    {ReactPlayer.canPlay(inputState.videoLink)
-                        ? (
-                            <>
-                                <div className="upload__preview__wrapper">
-                                    <ReactPlayer
-                                        ref={youtubeRef}
-                                        className="upload__preview__video"
-                                        width="100%"
-                                        height="100%"
-                                        url={inputState.videoLink}
-                                    />
-                                </div>
-                                <div className="upload__preview__title">
-                                    {inputState.title}
-                                </div>
-                            </>
-                        )
-                        : (
-                            <>
-                                <div className="upload__preview__img__wrapper">
-                                    <img className="upload__preview__img" src="/play-button.png" alt="play-button" />
-                                </div>
-                                <div className="upload__preview__img__title">이곳에 미리보기가 표시됩니다.</div>
-                            </>
-                        )}
-                </div>
-            </div>
-        </div>
+        <Upload
+            uploadSubmit={uploadSubmit}
+            onInputChange={onInputChange}
+            onDescriptionChange={onDescriptionChange}
+            inputState={inputState}
+            error={error}
+            description={description}
+            ref={youtubeRef}
+        />
     );
 };
 
-export default UploadContainer;
+export default withRouter(UploadContainer);

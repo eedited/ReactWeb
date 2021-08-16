@@ -13,6 +13,7 @@ const initialState: videoStateType = {
     video: null,
     videoList: null,
     getVideoError: null,
+    videoUploadSuccess: null,
     videoUploadError: null,
     videoUserUpload: null,
     videoUserUploadError: null,
@@ -41,6 +42,7 @@ const videoSlice: videoSliceType = createSlice({
             state.videoList = null;
             state.video = null;
             state.getVideoError = null;
+            state.videoUploadSuccess = null;
             state.videoUploadError = null;
             state.videoUserUpload = null;
             state.videoUserUploadError = null;
@@ -68,12 +70,16 @@ const videoSlice: videoSliceType = createSlice({
         },
 
         videoUpload(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUploadProp>) {},
-        videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>) {},
+        videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>) {
+            state.videoUploadSuccess = action.payload;
+        },
         videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>) {
             state.videoUploadError = action.payload;
         },
 
-        videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>) {},
+        videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>) {
+            state.videoUploadSuccess = action.payload;
+        },
         videoUserUploadedSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>) {
             state.videoUserUpload = action.payload;
         },
