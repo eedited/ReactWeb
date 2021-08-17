@@ -3,7 +3,7 @@ import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import {
     videoAPIListProp, videoAPIProp, videoAPIUploadProp, videoAPIUserProp,
-} from '../../lib/api/video';
+} from '../../library/api/video';
 import {
     videoActionType,
     videoFailureType, videoListFailureType, videoStateType, videoSuccessType, videoUploadFailureType, videoUploadSuccessType, viedoListSuccessType,

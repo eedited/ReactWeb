@@ -3,9 +3,9 @@ import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../modules/Video/video';
-import useInputs, { inputType } from '../../lib/hooks/useInputs';
-import { videoUploadFailureType, videoUploadSuccessType } from '../../modules/Video/videoType';
+import { videoAction } from '../../redux/Video/video';
+import useInputs, { inputType } from '../../library/hooks/useInputs';
+import { videoUploadFailureType, videoUploadSuccessType } from '../../redux/Video/videoType';
 import Upload from '../../components/upload/Upload';
 
 interface fromReducerType{

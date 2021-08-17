@@ -2,7 +2,7 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import {
     authFailureReturnProp, authSuccessReturnProp, loginProp, signupProp,
-} from '../../lib/api/auth';
+} from '../../library/api/auth';
 
 export interface changeFieldType {
     form: 'signup' | 'login',

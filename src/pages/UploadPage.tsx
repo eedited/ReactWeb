@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import BaseTemplate from './BaseTemplate';
 import UploadContainer from '../containers/upload/UploadContainer';
-import { userType } from '../modules/user/userType';
+import { userType } from '../redux/user/userType';
 import { selectorStateType, useAppSelector } from '../hooks';
 
 interface fromReducerType{

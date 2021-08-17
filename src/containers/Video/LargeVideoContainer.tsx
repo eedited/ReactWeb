@@ -11,9 +11,9 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import Largevideo from '../../components/Video/Largevideo';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { VIDEO, videoAPISuccessReturnProp } from '../../lib/api/video';
-import { videoAction } from '../../modules/Video/video';
-import { videoActionType } from '../../modules/Video/videoType';
+import { VIDEO, videoAPISuccessReturnProp } from '../../library/api/video';
+import { videoAction } from '../../redux/Video/video';
+import { videoActionType } from '../../redux/Video/videoType';
 
 interface fromReducerType{
     Video: videoAPISuccessReturnProp|null

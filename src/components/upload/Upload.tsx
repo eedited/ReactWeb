@@ -1,7 +1,8 @@
 import React, { forwardRef, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import BlueButton from '../../components/common/Button/BlueButton';
-import { inputType } from '../../lib/hooks/useInputs';
+import VideoContainer from '../../containers/landing/VideoContainer';
+import { inputType } from '../../library/hooks/useInputs';
 import './Upload.scss';
 
 interface props{

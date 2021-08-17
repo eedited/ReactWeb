@@ -1,5 +1,5 @@
 import React from 'react';
-import { videoListAPISuccessReturnProp } from '../../lib/api/video';
+import { videoListAPISuccessReturnProp } from '../../library/api/video';
 import UserMaybeLike from '../../components/Video/UserMaybeLike';
 
 const UserMaybeLikeContainer: React.FC = () => {

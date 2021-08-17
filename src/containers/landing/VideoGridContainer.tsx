@@ -6,9 +6,9 @@ import React, {
 } from 'react';
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
-import { videoAction } from '../../modules/Video/video';
-import { videoListAPISuccessReturnProp } from '../../lib/api/video';
-import { videoActionType } from '../../modules/Video/videoType';
+import { videoAction } from '../../redux/Video/video';
+import { videoListAPISuccessReturnProp } from '../../library/api/video';
+import { videoActionType } from '../../redux/Video/videoType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface fromReducerType{

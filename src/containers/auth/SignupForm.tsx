@@ -5,10 +5,10 @@ import AuthForm from '../../components/auth/AuthForm';
 
 import {
     responseSuccessType, responseFailureType, authActionType,
-} from '../../modules/auth/authType';
-import { signupProp } from '../../lib/api/auth';
+} from '../../redux/auth/authType';
+import { signupProp } from '../../library/api/auth';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { authAction } from '../../modules/auth/auth';
+import { authAction } from '../../redux/auth/auth';
 
 interface formReduceType{
     form: signupProp&{passwordConfirm: string}

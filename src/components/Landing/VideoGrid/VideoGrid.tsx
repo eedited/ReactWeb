@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoContainer from '../../../containers/landing/VideoContainer';
-import { VIDEO } from '../../../lib/api/video';
+import { VIDEO } from '../../../library/api/video';
 import './VideoGrid.scss';
 
 type videoInfo = VIDEO

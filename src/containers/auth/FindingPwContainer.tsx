@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { AxiosResponse } from 'axios';
-import client from '../../lib/api/client';
-import useInputs, { inputType } from '../../lib/hooks/useInputs';
+import client from '../../library/api/client';
+import useInputs, { inputType } from '../../library/hooks/useInputs';
 import FindingPw from '../../components/auth/FindigPw';
 
 interface findPwSuccessType{
