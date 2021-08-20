@@ -4,10 +4,10 @@ import {
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
 import { authActionType } from '../auth/authType';
-import * as authAPI from '../../lib/api/auth';
+import * as authAPI from '../../library/api/auth';
 import { userActionType } from './userType';
 import { loadingAction } from '../loading/loading';
-import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
+import createRequestSaga, { createRequestSagaReturnType } from '../../library/createRequestSaga';
 
 function* logoutSaga() {
     const { intializeForm }: authActionType = authAction;

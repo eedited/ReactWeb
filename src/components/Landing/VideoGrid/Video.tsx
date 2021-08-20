@@ -4,7 +4,7 @@ import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import { VIDEO } from '../../../lib/api/video';
+import { VIDEO } from '../../../library/api/video';
 import './Video.scss';
 
 interface props{
@@ -38,6 +38,7 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                     }}
                     style={{
                         opacity: setOpacity(),
+                        borderRadius: '20px',
                     }}
                 />
                 <img

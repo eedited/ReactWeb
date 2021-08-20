@@ -2,11 +2,11 @@
 
 import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
-import { VIDEO, videoAPISuccessReturnProp, videoListAPISuccessReturnProp } from '../../lib/api/video';
+import { VIDEO, videoAPISuccessReturnProp, videoListAPISuccessReturnProp } from '../../library/api/video';
 import MoreByUser from '../../components/Video/MoreByUser';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../modules/Video/video';
-import { videoActionType } from '../../modules/Video/videoType';
+import { videoAction } from '../../redux/Video/video';
+import { videoActionType } from '../../redux/Video/videoType';
 
 interface fromReducerType{
     video: videoAPISuccessReturnProp|null

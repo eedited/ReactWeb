@@ -1,0 +1,108 @@
+.upload{
+    position:relative;
+    width : 61%;
+    left : 19.5%;
+    .upload__haeder{
+        display: flex;
+        height: 250px;
+        flex-direction: row;
+        justify-content: space-between;
+        line-height: 250px;
+        font-size: 40px;
+        font-family : NotoSansKRBold;
+        border-bottom: 1px solid rgba(32, 32, 32,0.102);
+    }
+    .upload__body{
+        display : flex;
+        margin-bottom: 60px;
+        border-bottom: 1px solid rgba(32, 32, 32,0.102);
+        .upload__form{
+            width : 65%;
+            padding-right: 30px;
+            border-right: 1px solid rgba(32, 32, 32,0.102);
+        }
+        .upload__info{
+            .upload__info__item{
+                margin-top : 30px;
+                .upload__info__title{
+                    font-size : 13px;
+                    font-family : NotoSansKRBold;
+                }
+                .upload__info__title__input{
+                    width : 100%;
+                    height: 45px;
+                    margin-top : 16px;
+                    border-radius: 10px;
+                    background-color: rgb(247, 247, 247);
+                    border:none;
+                    font-size:13px;
+                }
+                .upload__info__title__input:focus{
+                    background-color: rgb(255,255,255);
+                }
+                .upload__info__description__input{
+                    width : 100%;
+                    height: 200px;
+                    margin-top : 16px;
+                    border-radius: 10px;
+                    background-color: rgb(247, 247, 247);
+                    border:none;
+                    font-size:13px;
+                }
+                .upload__info__description__input:focus{
+                    background-color: rgb(255,255,255);
+                }
+            }
+            .upload__submit{
+                margin-top : 30px;
+                margin-bottom: 30px;
+            }
+        }
+        .upload__preview{
+            width : 35%;
+            margin-top : 60px;
+            padding-left : 30px;
+            .upload__preview__wrapper{
+                position: relative;
+                padding-top: 56.25%;
+                .upload__preview__video{
+                    position: absolute;
+                    margin:0;
+                    top:0;
+                    left:0;
+                }
+                
+            }
+            .upload__preview__img__wrapper{
+                position: relative;
+                padding-top: 56.25%;
+                border-radius: 10px;
+                background-color: rgb(247, 247, 247);
+                .upload__preview__img{
+                    border-radius: 10px;
+                        position: absolute;
+                        width : 20%;
+                        height: 40%;
+                        margin:0;
+                        top:30%;
+                        left:40%;
+                        background-color: rgb(247, 247, 247);
+                }    
+            }
+            .upload__preview__title{
+                margin-top : 30px;
+                font-size: 13px;
+                font-family: NotoSansKRBold;
+            }
+            .upload__preview__img__title{
+                margin-top : 30px;
+                font-size: 13px;
+                font-family: NotoSansKRBold;
+                color : rgb(188, 188, 188);
+            }
+            
+        }
+    }
+}
+
+

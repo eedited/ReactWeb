@@ -1,6 +1,6 @@
 import React from 'react';
 import { selectorStateType, useAppSelector } from '../../hooks';
-import { videoAPISuccessReturnProp } from '../../lib/api/video';
+import { videoAPISuccessReturnProp } from '../../library/api/video';
 import LargeVideoHeader from '../../components/Video/LargeVideoHeader';
 
 interface fromReducerType{

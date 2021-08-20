@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import ReactPlayer from 'react-player';
 import Video from '../../components/Landing/VideoGrid/Video';
-import { VIDEO } from '../../lib/api/video';
+import { VIDEO } from '../../library/api/video';
 
 interface props{
     videoInfo: VIDEO

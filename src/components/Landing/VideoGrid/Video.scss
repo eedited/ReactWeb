@@ -1,15 +1,17 @@
 .video{
     position: relative;
     padding-top: 56.25%;
+    border-radius: 20px;
     .video__player{
         border-radius: 20px;
         position:absolute;
+        border-radius: 20px;
         margin:0;
         top:0;
         left:0;
     }
     .video__img{
-        border-radius: 20px;
+        border-radius: 10px;
         position: absolute;
         top:0;
         left:0;
@@ -24,7 +26,7 @@
     font-size: 16px;
 }
 .video__detail{
-    font-family: NotoSansMedium;
+    font-family: NotoSansKRMedium;
     display: flex;
     justify-content: space-between;
     flex-direction: row;

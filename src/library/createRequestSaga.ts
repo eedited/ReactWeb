@@ -4,7 +4,7 @@ import {
 } from 'redux-saga/effects';
 
 import { AxiosResponse } from 'axios';
-import { loadingAction } from '../modules/loading/loading';
+import { loadingAction } from '../redux/loading/loading';
 
 interface genericAction<T, P> {
     type: T,

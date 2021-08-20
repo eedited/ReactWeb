@@ -3,10 +3,11 @@
     height: 46.875rem;
     background-color: rgb(247, 247, 247);
     align-items: center;
+    justify-content: center;
     .hero__description{
         z-index: 2;
         padding-right: 6em;
-        transform: translate(15.625rem, -3.125rem);
+        transform: translate(-7rem, 0);
         .hero__description__title{
             font-family: 'NotoSansKRBold';
             font-size: 3.125rem;
@@ -19,8 +20,7 @@
         }
     }
     .hero__img{
-        position: absolute;
-        height: 46.875rem;
+        height: 40rem;
         z-index: 1;
     }
 }

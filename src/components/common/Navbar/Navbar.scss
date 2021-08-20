@@ -3,7 +3,7 @@
 }
 
 .navbar{
-    height: 5rem;
+    height: 4rem;
     left: 0rem;
     top: 0rem;
     display: flex;
@@ -68,26 +68,22 @@
         }
         .navbar__utility__buttons{
             display: flex;
-            width : 14rem;
+            width : 13rem;
             justify-content: space-between;
+        }
+        .navbar__utility__dropdown{
+            right : 10px;
             .navbar__utility__nickname{
                 margin-top:0.5rem;
-            }
-            .navbar__utility__dropdown{
-                display : flex;
-                gap : 10px;
-                justify-content: space-between;
-                position: relative;
-            }
-            .navbar__utility__dropdown:hover{
-                .navbar__utility__dropdown__list{
-                    display : block;
-                }
             }
             .navbar__utility__profile{
                 width : 40px;
                 height: 40px;
             }
+            display : flex;
+            gap : 10px;
+            justify-content: space-between;
+            position: relative;
             .navbar__utility__dropdown__list{
                 display:none;
                 position: absolute;
@@ -136,6 +132,11 @@
                 
             }
         }
+        .navbar__utility__dropdown:hover{
+            .navbar__utility__dropdown__list{
+                display : block;
+            }
+        }
     }
 }
 .navbar__bottom__line{
@@ -145,14 +146,3 @@
 }
 
 
-.dropdown_background {
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  left: 3013px;
-  top: 182px;
-  width: 500px;
-  height: 481px;
-  z-index: 243;
-}

@@ -8,7 +8,12 @@ interface props {
 const LargeVideoDescription: React.FC<props> = ({ description }: props) => (
     <div className="LargeVideoDescription">
         <div className="LargeVideoDescription__txt">
-            { description }
+            { description.split('\n').map((line: string) => (
+                <>
+                    {line}
+                    <br />
+                </>
+            )) }
         </div>
     </div>
 );

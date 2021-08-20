@@ -2,7 +2,7 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import {
     videoAPIFailureReturnProp, videoAPIListProp, videoAPIProp, videoAPISuccessReturnProp, videoAPIUploadFailureReturnProp, videoAPIUploadProp, videoAPIUploadSuccessReturnProp, videoAPIUserProp, videoListAPIFailureReturnProp, videoListAPISuccessReturnProp,
-} from '../../lib/api/video';
+} from '../../library/api/video';
 
 export type videoSuccessType = videoAPISuccessReturnProp
 export type viedoListSuccessType = videoListAPISuccessReturnProp
@@ -35,6 +35,7 @@ export interface videoStateType{
     video: videoSuccessType|null
     videoList: viedoListSuccessType|null
     getVideoError: videoFailureType|null
+    videoUploadSuccess: videoUploadSuccessType|null
     videoUploadError: videoUploadFailureType|null
     videoUserUpload: viedoListSuccessType|null
     videoUserUploadError: videoListFailureType|null
