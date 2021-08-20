@@ -22,8 +22,15 @@ export interface VIDEO {
     deleted: Date | null
     nickname: string
 }
+export interface TAG{
+    name: string,
+    id: string
+}
+export interface VideoTag{
+    videoTag: TAG[]
+}
 export interface videoAPISuccessReturnProp{
-    video: VIDEO
+    video: VIDEO&VideoTag
 }
 export interface videoAPIFailureReturnProp{
     info: string
