@@ -29,8 +29,8 @@ const Navbar: React.FC<props> = ({
                 </Link>
                 <div className="navbar__menu__links">
                     <Link className="navbar__menu__link" to="/">포트폴리오</Link>
-                    <Link className="navbar__menu__link" to="/">인재찾기</Link>
-                    <Link className="navbar__menu__link" to="/">채용하기</Link>
+                    <Link className="navbar__menu__link" to="/finding">인재찾기</Link>
+                    <Link className="navbar__menu__link" to="/hiring">채용하기</Link>
                     <Link className="navbar__menu__link preparing" to="/">배워보기</Link>
                     <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
                 </div>
@@ -56,14 +56,14 @@ const Navbar: React.FC<props> = ({
                         </div>
                     )
                     : (
-                        <div className="navbar__utility__buttons">
+                        <>
                             <div className="navbar__utility__dropdown">
                                 <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
                                 <div className="navbar__utility__nickname">{user.nickname}</div>
 
                                 <ul className="navbar__utility__dropdown__list">
                                     <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__top">
-                                        <button onClick={onLogout} type="button">
+                                        <button onClick={() => { /**/ }} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
                                                     src="/icons/mypage-icon.png"
@@ -73,12 +73,12 @@ const Navbar: React.FC<props> = ({
                                                         height: '20px',
                                                     }}
                                                 />
-                                                <div>마이페이지</div>
+                                                <Link to="/profile">마이페이지</Link>
                                             </div>
                                         </button>
                                     </li>
                                     <li className="navbar__utility__dropdown__item">
-                                        <button onClick={onLogout} type="button">
+                                        <button onClick={() => { /**/ }} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
                                                     src="/icons/chat-icon.png"
@@ -88,7 +88,7 @@ const Navbar: React.FC<props> = ({
                                                         height: '20px',
                                                     }}
                                                 />
-                                                <div>대화</div>
+                                                <Link to="/chat">대화</Link>
                                             </div>
                                         </button>
                                     </li>
@@ -125,9 +125,11 @@ const Navbar: React.FC<props> = ({
                                     </li>
                                 </ul>
                             </div>
-
-                            <BlueButton className="navbar__utility__button" onClick={onUpload}>Upload</BlueButton>
-                        </div>
+                            <div className="navbar__utility__buttons">
+                                <WhiteButton className="navbar__utility__button" onClick={onUpload}>Apply</WhiteButton>
+                                <BlueButton className="navbar__utility__button" onClick={onUpload}>Upload</BlueButton>
+                            </div>
+                        </>
                     )}
             </div>
         </div>
