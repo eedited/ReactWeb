@@ -47,6 +47,7 @@ export interface videoAPIUploadProp{
     discription: string,
     url: string,
     thumbnail: string
+    tags: string[]
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface videoAPIUploadSuccessReturnProp {}
@@ -74,15 +75,16 @@ export type videoListAPIFunctionType = ({ criteria, page }: videoAPIListProp)=> 
 export const videoList: videoListAPIFunctionType = ({ criteria, page }: videoAPIListProp) => client.get(`/video/sort/${criteria}/?page=${page}`);
 
 export type videoAPIUploadFunctionType = ({
-    title, discription, url, thumbnail,
+    title, discription, url, thumbnail, tags,
 }: videoAPIUploadProp)=> Promise<AxiosResponse<videoAPIUploadReturnProp>>
 export const videoUpload: videoAPIUploadFunctionType = ({
-    title, discription, url, thumbnail,
+    title, discription, url, thumbnail, tags,
 }: videoAPIUploadProp) => client.post('/video/upload', {
     title,
     discription,
     url,
     thumbnail,
+    tags,
 });
 
 export type videoAPIUserFunctionType = ({ uploader }: videoAPIUserProp)=> Promise<AxiosResponse<videoAPIUserReturnProp>>

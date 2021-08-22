@@ -17,7 +17,7 @@ const FindingPwContainer: React.FC = () => {
     const [isSubmit, setIsSubmit]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [loading, setLoading]: [loadingState, React.Dispatch<React.SetStateAction<loadingState>>] = useState<loadingState>('start');
     const [findPwResponse, setFindPwResponse]: [findPwResponseType, React.Dispatch<React.SetStateAction<findPwResponseType>>] = useState<findPwResponseType>({ password: '' });
-    const [inputState, onInputChange]: [inputType, (e: React.ChangeEvent<HTMLInputElement>)=> void] = useInputs({
+    const [inputState, onInputChange, onInputClear]: [inputType, (e: React.ChangeEvent<HTMLInputElement>)=> void, (name: string)=> void] = useInputs({
         email: '',
         validationString: '',
         id: '',

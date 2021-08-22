@@ -30,6 +30,8 @@ export type videoActionType=CaseReducerActions<{
     videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>): void;
     videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>): void;
     videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>): void;
+    videoUserUploadedSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>): void
+    videoUserUploadedFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>): void
 }>
 export interface videoStateType{
     video: videoSuccessType|null

@@ -1,7 +1,8 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { cloneElement, forwardRef, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import BlueButton from '../../components/common/Button/BlueButton';
 import VideoContainer from '../../containers/landing/VideoContainer';
+import { tagType } from '../../containers/upload/UploadContainer';
 import { inputType } from '../../library/hooks/useInputs';
 import './Upload.scss';
 
@@ -12,9 +13,12 @@ interface props{
     inputState: inputType
     error: string|null
     description: string
+    onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>)=> void
+    onTagRemove: (id: number)=> void
+    tags: tagType[]
 }
 const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange,
+    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
@@ -55,20 +59,42 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             placeholder="https://img.youtube.com/vi/{videoId}/0.jpg"
                         />
                     </div>
-                    {/*
                     <div className="upload__info__item">
                         <div className="upload__info__title">태그</div>
-                        <input className="upload__info__title__input" onChange={onInputChange} name="currentTag" value={inputState.currentTag} />
+                        <div className="upload__info__tag">
+                            {tags.map((tag: tagType) => (
+                                <div className="upload__info__tag__element" key={tag.id}>
+                                    {tag.tag}
+                                    <button
+                                        type="button"
+                                        key={tag.id}
+                                        onClick={() => {
+                                            onTagRemove(tag.id);
+                                        }}
+                                    >
+                                        <img
+                                            className="upload__info__tag__element__delete"
+                                            src="/icons/remove-icon.png"
+                                            alt={tag.tag}
+                                        />
+                                    </button>
+                                </div>
+                            ))}
+                            <input
+                                className="upload__info__tag__input"
+                                onChange={onInputChange}
+                                name="currentTag"
+                                value={inputState.currentTag}
+                                onKeyPress={onKeyPressTag}
+                            />
+                        </div>
                     </div>
-                    */
-                    }
                     <div className="upload__info__item">
                         <div className="upload__info__title">설명</div>
                         <textarea
                             className="upload__info__description__input"
                             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                                 onDescriptionChange(e.target.value);
-                                console.log(e.target.value);
                             }}
                             value={description}
                         />
@@ -108,4 +134,4 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
     </div>
 ));
 
-export default (Upload);
+export default React.memo(Upload);

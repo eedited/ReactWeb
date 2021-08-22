@@ -23,7 +23,6 @@ const MoreByUserContainer: React.FC = () => {
     }));
     useEffect(() => {
         if (video) {
-            console.log(video.video.uploader);
             dispatch(videoUserUploaded({ uploader: video.video.uploader }));
         }
     }, [dispatch, video, videoUserUploaded]);
