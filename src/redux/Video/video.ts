@@ -77,9 +77,7 @@ const videoSlice: videoSliceType = createSlice({
             state.videoUploadError = action.payload;
         },
 
-        videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>) {
-            state.videoUploadSuccess = action.payload;
-        },
+        videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>) {},
         videoUserUploadedSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>) {
             state.videoUserUpload = action.payload;
         },

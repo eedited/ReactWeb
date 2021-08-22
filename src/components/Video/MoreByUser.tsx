@@ -15,11 +15,12 @@ const MoreByUser: React.FC<props> = ({ videos }: props) => (
                     if (idx < 6) {
                         return (
                             <VideoContainer
+                                key={video.id}
                                 videoInfo={video}
                             />
                         );
                     }
-                    return <></>;
+                    return <div key={`uniquekey${idx * 2}`} />;
                 })
             }
         </div>

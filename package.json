@@ -29,7 +29,7 @@
     "aws-amplify-react": "^5.0.9",
     "aws-sdk": "^2.967.0",
     "axios": "^0.21.1",
-    "history": "^5.0.0",
+    "history": "^4.9.0",
     "immer": "^9.0.5",
     "node-sass": "^4.14.1",
     "qs": "^6.10.1",
