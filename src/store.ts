@@ -7,11 +7,22 @@ import rootReducer, { rootSaga } from './modules';
 
 const sagaMiddleware = createSagaMiddleware();
 const createStore = () => {
-    const store = configureStore({
-        reducer: rootReducer,
-        middleware: [sagaMiddleware, logger],
-        devTools: true,
-    });
+    const env = process.env.NODE_ENV;
+    let store;
+    if (env === 'development') {
+        store = configureStore({
+            reducer: rootReducer,
+            middleware: [sagaMiddleware, logger],
+            devTools: true,
+        });
+    }
+    else {
+        store = configureStore({
+            reducer: rootReducer,
+            middleware: [sagaMiddleware],
+            devTools: false,
+        });
+    }
     sagaMiddleware.run(rootSaga);
     return store;
 };
