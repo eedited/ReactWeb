@@ -14,8 +14,7 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "import"
+        "@typescript-eslint"
     ],
     "extends": [
         "airbnb",
@@ -117,7 +116,7 @@
         "@typescript-eslint/no-empty-function": "off",
         "import/no-unresolved": "off",
         "react/jsx-filename-extension": "off",
-        "react/jsx-indent": [2,4],
-        "react/jsx-indent-props": [2,4]
+        "react/jsx-indent": [2, 4],
+        "react/jsx-indent-props": [2, 4]
     }
 }
