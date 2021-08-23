@@ -2,16 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { AxiosResponse } from 'axios';
 import client from '../../lib/api/client';
 import useInputs, { inputType } from '../../lib/hooks/useInputs';
-import FindingPw from '../../components/auth/FindigPw';
+import FindingPw, { findPwResponseType } from '../../components/auth/FindigPw';
 
-interface findPwSuccessType{
-    password: string,
-}
-interface findPwFailureType{
-    info: string
-    error: Error
-}
-export type findPwResponseType = findPwFailureType | findPwSuccessType
 type loadingState = 'start'|'success'|'failure';
 const FindingPwContainer: React.FC = () => {
     const [isSubmit, setIsSubmit]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
