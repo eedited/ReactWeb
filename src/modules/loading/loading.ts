@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import {
     CaseReducerActions, createSlice, PayloadAction, Slice,
 } from '@reduxjs/toolkit';

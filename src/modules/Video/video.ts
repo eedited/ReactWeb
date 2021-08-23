@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';

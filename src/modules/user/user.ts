@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import {
     createSlice, PayloadAction, Slice,
