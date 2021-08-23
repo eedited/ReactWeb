@@ -7,18 +7,16 @@ import React, {
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { videoAction } from '../../modules/Video/video';
-import { videoListAPISuccessReturnProp } from '../../lib/api/video';
-import { videoActionType } from '../../modules/Video/videoType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface fromReducerType{
-    videos: videoListAPISuccessReturnProp|null
+    videos: videoRouter.videoListSuccessResponse|null
 }
 interface props{
     criteria: string
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
-    const { videoClear, videoList }: videoActionType = videoAction;
+    const { videoClear, videoList }: videoModule.ActionType = videoAction;
     const page: React.MutableRefObject<number> = useRef(1);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {

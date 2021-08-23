@@ -1,7 +1,6 @@
 import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
-import { VIDEO } from '../../lib/api/video';
 import './Largevideo.scss';
 
 interface props{

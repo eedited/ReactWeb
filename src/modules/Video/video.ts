@@ -2,15 +2,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import {
-    videoAPIListProp, videoAPIProp, videoAPIUploadProp, videoAPIUserProp,
-} from '../../lib/api/video';
-import {
-    videoActionType,
-    videoFailureType, videoListFailureType, videoStateType, videoSuccessType, videoUploadFailureType, videoUploadSuccessType, viedoListSuccessType,
-} from './videoType';
 
-const initialState: videoStateType = {
+const initialState: videoModule.StateType = {
     video: null,
     videoList: null,
     getVideoError: null,
@@ -18,27 +11,27 @@ const initialState: videoStateType = {
     videoUserUpload: null,
     videoUserUploadError: null,
 };
-type videoSliceType = Slice<videoStateType, {
-    videoClear(state: WritableDraft<videoStateType>): void;
-    video(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIProp>): void;
-    videoSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoSuccessType>): void;
-    videoFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoFailureType>): void;
-    videoList(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIListProp>): void,
-    videoListSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>): void,
-    videoListFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>): void,
-    videoUpload(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUploadProp>): void,
-    videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>): void,
-    videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>): void;
-    videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>): void
-    videoUserUploadedSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>): void
-    videoUserUploadedFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>): void
+type videoSliceType = Slice<videoModule.StateType, {
+    videoClear(state: WritableDraft<videoModule.StateType>): void;
+    video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>): void;
+    videoSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoSuccessResponse>): void;
+    videoFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>): void;
+    videoList(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListRequest>): void;
+    videoListSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListSuccessResponse>): void;
+    videoListFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoListFailureResponse>): void;
+    videoUpload(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadRequest>): void;
+    videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>): void;
+    videoUploadFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>): void;
+    videoUserUploaded(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoRequest>): void;
+    videoUserUploadedSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>): void
+    videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>): void
 }, 'VIDEO'>
 
 const videoSlice: videoSliceType = createSlice({
     name: 'VIDEO',
     initialState,
     reducers: {
-        videoClear(state: WritableDraft<videoStateType>) {
+        videoClear(state: WritableDraft<videoModule.StateType>) {
             state.videoList = null;
             state.video = null;
             state.getVideoError = null;
@@ -47,16 +40,16 @@ const videoSlice: videoSliceType = createSlice({
             state.videoUserUploadError = null;
         },
 
-        video(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIProp>) {},
-        videoSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoSuccessType>) {
+        video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>) {},
+        videoSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoSuccessResponse>) {
             state.video = action.payload;
         },
-        videoFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoFailureType>) {
+        videoFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>) {
             state.getVideoError = action.payload;
         },
 
-        videoList(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIListProp>) {},
-        videoListSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>) {
+        videoList(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListRequest>) {},
+        videoListSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListSuccessResponse>) {
             if (state.videoList == null) {
                 state.videoList = { videos: action.payload.videos };
             }
@@ -64,27 +57,26 @@ const videoSlice: videoSliceType = createSlice({
                 state.videoList.videos = state.videoList.videos.concat(action.payload.videos);
             }
         },
-        videoListFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>) {
+        videoListFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>) {
             state.getVideoError = action.payload;
         },
 
-        videoUpload(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUploadProp>) {},
-        videoUploadSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadSuccessType>) {},
-        videoUploadFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoUploadFailureType>) {
+        videoUpload(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadRequest>) {},
+        videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>) {},
+        videoUploadFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>) {
             state.videoUploadError = action.payload;
         },
 
-        videoUserUploaded(state: WritableDraft<videoStateType>, action: PayloadAction<videoAPIUserProp>) {},
-        videoUserUploadedSuccess(state: WritableDraft<videoStateType>, action: PayloadAction<viedoListSuccessType>) {
+        videoUserUploaded(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoRequest>) {},
+        videoUserUploadedSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>) {
             state.videoUserUpload = action.payload;
         },
-        videoUserUploadedFailure(state: WritableDraft<videoStateType>, action: PayloadAction<videoListFailureType>) {
+        videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>) {
             state.videoUserUploadError = action.payload;
         },
-
     },
 });
 
 export const VIDEO: string = videoSlice.name;
 export default videoSlice.reducer;
-export const videoAction: videoActionType = videoSlice.actions;
+export const videoAction: videoModule.ActionType = videoSlice.actions;

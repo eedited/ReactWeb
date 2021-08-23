@@ -11,19 +11,17 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import Largevideo from '../../components/Video/Largevideo';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { VIDEO, videoAPISuccessReturnProp } from '../../lib/api/video';
 import { videoAction } from '../../modules/Video/video';
-import { videoActionType } from '../../modules/Video/videoType';
 
 interface fromReducerType{
-    Video: videoAPISuccessReturnProp|null
+    Video: videoRouter.videoSuccessResponse|null
 }
 interface props extends RouteComponentProps{
     videoId: string
 }
 
 const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
-    const { video, videoClear }: videoActionType = videoAction;
+    const { video, videoClear }: videoModule.ActionType = videoAction;
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();

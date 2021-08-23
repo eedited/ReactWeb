@@ -4,7 +4,6 @@ import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import { VIDEO } from '../../../lib/api/video';
 import './Video.scss';
 
 interface props{

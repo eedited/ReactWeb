@@ -1,10 +1,9 @@
 import React from 'react';
 import { selectorStateType, useAppSelector } from '../../hooks';
-import { videoAPISuccessReturnProp } from '../../lib/api/video';
 import LargeVideoDescription from '../../components/Video/LargeVideoDescription';
 
 interface fromReducerType{
-    Video: videoAPISuccessReturnProp|null
+    Video: videoRouter.videoSuccessResponse|null
 }
 
 const LargeVideoDescriptionContainer: React.FC = () => {

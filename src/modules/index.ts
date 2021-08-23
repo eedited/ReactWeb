@@ -10,10 +10,9 @@ import loadingReducer from './loading/loading';
 import userReducer from './user/user';
 import videoReducer from './Video/video';
 import filterReducer from './filter/filter';
-import { authStateType } from './auth/authType';
 import { loadingStateType } from './loading/loadingType';
 import { userStateType } from './user/userType';
-import { videoStateType } from './Video/videoType';
+
 import { filterStateType } from './filter/filterType';
 
 export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect<never>, void, unknown>>, void, unknown> {
@@ -21,10 +20,10 @@ export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect<never>, vo
 }
 
 const rootReducer: Reducer<CombinedState<{
-    authReducer: authStateType;
+    authReducer: authModule.StateType;
     loadingReducer: loadingStateType;
     userReducer: userStateType;
-    videoReducer: videoStateType;
+    videoReducer: videoModule.StateType;
     filterReducer: filterStateType
 }>, AnyAction> = combineReducers({
     authReducer,

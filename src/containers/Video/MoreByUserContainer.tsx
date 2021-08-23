@@ -2,18 +2,16 @@
 
 import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
-import { VIDEO, videoAPISuccessReturnProp, videoListAPISuccessReturnProp } from '../../lib/api/video';
 import MoreByUser from '../../components/Video/MoreByUser';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../modules/Video/video';
-import { videoActionType } from '../../modules/Video/videoType';
 
 interface fromReducerType{
-    video: videoAPISuccessReturnProp|null
-    userUploadedVideo: videoListAPISuccessReturnProp|null
+    video: videoRouter.videoSuccessResponse|null
+    userUploadedVideo: videoRouter.userVideoSuccessResponse|null
 }
 const MoreByUserContainer: React.FC = () => {
-    const { videoUserUploaded }: videoActionType = videoAction;
+    const { videoUserUploaded }: videoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         video, userUploadedVideo,
