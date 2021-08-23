@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 
-import {
-    createSlice, PayloadAction, Slice,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import {
-    changeFieldType, signupPayloadType, loginPayloadType, responseSuccessType, responseFailureType, authStateType, authActionType,
-} from './authType';
+import { changeFieldType, signupPayloadType, loginPayloadType, responseSuccessType, responseFailureType, authStateType, authActionType } from './authType';
 
 const initialState: authStateType = {
     signup: {
@@ -24,7 +20,9 @@ const initialState: authStateType = {
     authError: null,
 };
 
-type sliceAction=Slice<authStateType, {
+type sliceAction = Slice<
+authStateType,
+{
     changeField(state: WritableDraft<authStateType>, action: PayloadAction<changeFieldType>): void;
     intializeForm(state: WritableDraft<authStateType>): void;
     signup(state: WritableDraft<authStateType>, action: PayloadAction<signupPayloadType>): void;
@@ -33,7 +31,9 @@ type sliceAction=Slice<authStateType, {
     login(state: WritableDraft<authStateType>, action: PayloadAction<loginPayloadType>): void;
     loginSuccess(state: WritableDraft<authStateType>, action: PayloadAction<responseSuccessType>): void;
     loginFailure(state: WritableDraft<authStateType>, action: PayloadAction<responseFailureType>): void;
-}, 'AUTH'> ;
+},
+'AUTH'
+>;
 const authSlice: sliceAction = createSlice({
     name: 'AUTH',
     initialState,

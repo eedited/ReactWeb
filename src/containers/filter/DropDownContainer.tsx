@@ -15,7 +15,7 @@ interface props{
 const DropDownContainer: React.FC<props> = ({ initialStateDD, imgSrc }: props) => {
     const [ddItem, setDD]: [dropDownProp[], React.Dispatch<React.SetStateAction<dropDownProp[]>>] = useState<dropDownProp[]>(initialStateDD);
     const [isListOpen, setIsListOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
-    const selectItem: (item: dropDownProp)=> void = (item: dropDownProp) => {
+    const selectItem: (item: dropDownProp) => void = (item: dropDownProp) => {
         setIsListOpen(false);
         const temp: dropDownProp[] = [...ddItem];
         temp.forEach((x: dropDownProp) => {

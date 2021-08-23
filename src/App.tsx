@@ -13,7 +13,7 @@ import VideoPage from './pages/VideoPage';
 import Page404 from './pages/NotFound';
 import ScrollTop from './components/common/ScrollTop';
 
-type AppType = ()=> JSX.Element;
+type AppType = () => JSX.Element;
 
 const App: AppType = (): JSX.Element => (
     <div className="App">

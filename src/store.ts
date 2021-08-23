@@ -1,4 +1,4 @@
-// 난 이거의 타입을 적을 자신이 없어
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/typedef */
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';

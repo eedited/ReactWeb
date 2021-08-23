@@ -1,6 +1,6 @@
 .videoGrid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     justify-content: space-around;
     column-gap: 20px;
     row-gap: 40px;

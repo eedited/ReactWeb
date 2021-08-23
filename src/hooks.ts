@@ -8,11 +8,11 @@ import { userStateType } from './modules/user/userType';
 import { videoStateType } from './modules/Video/videoType';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch: ()=> Dispatch<AnyAction> = () => useDispatch<AppDispatch>();
+export const useAppDispatch: () => Dispatch<AnyAction> = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<rootState> = useSelector;
 export type selectorStateType = CombinedState<{
     authReducer: authStateType;
     loadingReducer: loadingStateType;
     userReducer: userStateType;
     videoReducer: videoStateType;
-}>
+}>;

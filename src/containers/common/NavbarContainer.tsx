@@ -21,13 +21,13 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
     }));
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-    const onLogout: ()=> void = () => {
+    const onLogout: () => void = () => {
         dispatch(userAction.logout());
     };
-    const onLogin: ()=> void = () => {
+    const onLogin: () => void = () => {
         history.push('/login');
     };
-    const onSignup: ()=> void = () => {
+    const onSignup: () => void = () => {
         history.push('/signup');
     };
     useEffect(() => {

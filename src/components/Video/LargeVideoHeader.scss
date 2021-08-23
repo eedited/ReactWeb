@@ -1,4 +1,4 @@
-.LargeVideoHeader{
+.LargeVideoHeader {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -8,27 +8,27 @@
     font-size: 1em;
     padding-top: 2vh;
 
-    .LargeVideoHeader__main{
+    .LargeVideoHeader__main {
         display: flex;
         align-items: center;
 
-        .LargeVideoHeader__main__profileIcon{
+        .LargeVideoHeader__main__profileIcon {
             width: 50px;
             height: 50px;
         }
-        .LargeVideoHeader__main__rest__title{
+        .LargeVideoHeader__main__rest__title {
             font-weight: bold;
         }
     }
 
-    .LargeVideoHeader__iconlist{
+    .LargeVideoHeader__iconlist {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        .LargeVideoHeader_iconlist__icon{
+        .LargeVideoHeader_iconlist__icon {
             width: 3vw;
             height: 3vw;
-            
+
             margin: 0.5vw;
         }
     }

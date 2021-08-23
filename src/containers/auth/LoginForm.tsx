@@ -34,7 +34,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
         AuthError: state.authReducer.authError,
     }));
 
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
             changeField({
@@ -44,7 +44,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
-    const onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { userId, password }: {userId: string, password: string} = form;
         dispatch(login({

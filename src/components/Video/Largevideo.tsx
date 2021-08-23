@@ -5,9 +5,9 @@ import { VIDEO } from '../../lib/api/video';
 import './Largevideo.scss';
 
 interface props{
-    onLoad: (player: ReactPlayer)=> void
+    onLoad: (player: ReactPlayer) => void
     videoInfo: VIDEO
-    setOpacity: ()=> number
+    setOpacity: () => number
 }
 const LargeVideo: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
     onLoad, videoInfo, setOpacity,

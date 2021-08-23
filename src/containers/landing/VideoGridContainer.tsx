@@ -37,7 +37,7 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
         page.current += 1;
     }, [criteria, dispatch, videoList]);
 
-    const f: ()=> void = useCallback(() => {
+    const f: () => void = useCallback(() => {
         dispatch((videoList({
             criteria,
             page: page.current,

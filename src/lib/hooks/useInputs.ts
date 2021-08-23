@@ -11,9 +11,9 @@ function reducer(state: inputType, action: HTMLInputElement): inputType {
     };
 }
 
-export default function useInputs(initialForm: inputType): [inputType, (e: React.ChangeEvent<HTMLInputElement>)=> void] {
+export default function useInputs(initialForm: inputType): [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void] {
     const [state, dispatch]: [inputType, React.Dispatch<HTMLInputElement>] = useReducer(reducer, initialForm);
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(e.target);
     };
     return [state, onChange];

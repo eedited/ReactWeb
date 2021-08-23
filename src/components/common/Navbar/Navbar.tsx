@@ -11,10 +11,10 @@ import './Navbar.scss';
 interface props{
     user: userType|null
     isSearchClick: boolean
-    onLogout: ()=> void
-    onLogin: ()=> void
-    onSignup: ()=> void
-    onSearchClick: ()=> void
+    onLogout: () => void
+    onLogin: () => void
+    onSignup: () => void
+    onSearchClick: () => void
 }
 
 const Navbar: React.FC<props> = ({

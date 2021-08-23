@@ -13,9 +13,9 @@ interface genericAction<T, P> {
 interface RetrunProp<P>{
     data: P
 }
-type genericRequest<P, R> = (payload: P)=> Promise<AxiosResponse<R>>
+type genericRequest<P, R> = (payload: P) => Promise<AxiosResponse<R>>
 
-export type createRequestSagaReturnType<P, R> = (action: genericAction<string, P>)=> Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
+export type createRequestSagaReturnType<P, R> = (action: genericAction<string, P>) => Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
     type: string;
     payload: unknown;
 }>, void, RetrunProp<R>>

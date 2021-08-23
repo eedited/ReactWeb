@@ -8,8 +8,8 @@ interface props{
     loading: 'start'|'success'|'failure'
     validationString: string
     findPwResponse: findPwResponseType
-    onEmailSubmit: ()=> void
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
+    onEmailSubmit: () => void
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const FindingPw: React.FC<props> = ({

@@ -1,13 +1,13 @@
-.LargeVideoDescription{
+.LargeVideoDescription {
     position: relative;
     width: 50%;
     height: 10vh;
     left: 25%;
     font-size: 1em;
     padding-top: 2em;
-    .LargeVideoDescription__text{
+    .LargeVideoDescription__text {
         position: absolute;
-        font-family: "Noto Sans CJK KR";
+        font-family: 'Noto Sans CJK KR';
         color: rgb(32, 32, 32);
         line-height: 1.8;
     }

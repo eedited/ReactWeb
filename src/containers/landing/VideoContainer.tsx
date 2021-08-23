@@ -16,23 +16,23 @@ const VideoContainer: React.FC<props> = ({ videoInfo }: props) => {
     const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
 
-    const play: ()=> void = () => {
+    const play: () => void = () => {
         if (!isLoading) {
             setisPlay(true);
             youtubeRef.current?.getInternalPlayer().playVideo();
         }
     };
 
-    const pause: ()=> void = () => {
+    const pause: () => void = () => {
         if (!isLoading) {
             youtubeRef.current?.getInternalPlayer().stopVideo();
             setisPlay(false);
         }
     };
-    const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
+    const onLoad: (plyaer: ReactPlayer) => void = (player: ReactPlayer) => {
         setisLoading(false);
     };
-    const setOpacity: ()=> number = useCallback(() => Number(!isLoading && isPlay), [isLoading, isPlay]);
+    const setOpacity: () => number = useCallback(() => Number(!isLoading && isPlay), [isLoading, isPlay]);
     return (
         <Video
             onLoad={onLoad}

@@ -4,7 +4,8 @@
     "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
+        "extraFileExtensions": [".html"]
     },
     "env": {
         "node": true,
@@ -13,17 +14,20 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "import"
     ],
     "extends": [
         "airbnb",
         "airbnb/hooks",
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
     ],
     "rules": {
-        
-        "no-console":"off",
+        "no-console": "warn",
         "indent": "off",
         "@typescript-eslint/indent": [
             "error",
@@ -33,7 +37,6 @@
             "error",
             "single"
         ],
-        "max-len": "off",
         "no-multiple-empty-lines": [
             "error",
             {
@@ -54,7 +57,7 @@
         "object-property-newline": [
             "error",
             {
-                "allowAllPropertiesOnSameLine": false
+                "allowAllPropertiesOnSameLine": true
             }
         ],
         "@typescript-eslint/typedef": [
@@ -80,7 +83,13 @@
             "error",
             {
                 "before": false,
-                "after": true
+                "after": true,
+                "overrides": {
+                    "arrow": {
+                        "before": true,
+                        "after": true
+                    }
+                }
             }
         ],
         "@typescript-eslint/consistent-type-definitions": [
@@ -96,13 +105,19 @@
                 "ignoreTypeReferences": false
             }
         ],
-        
         "no-constant-condition": "off",
+        "max-len": "off",
+        "import/prefer-default-export": "off",
+        "import/extensions": [
+            "off"
+        ],
+        "import/first": "off",
+        "object-curly-newline": "off",
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": "off",
         "import/no-unresolved": "off",
-        "import/extensions": "off",
         "react/jsx-filename-extension": "off",
         "react/jsx-indent": [2,4],
-        "react/jsx-indent-props": [2,4],
-        "no-param-reassign":"off"
+        "react/jsx-indent-props": [2,4]
     }
 }

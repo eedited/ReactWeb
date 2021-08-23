@@ -2,7 +2,7 @@ import React from 'react';
 import './WhiteButton.scss';
 
 interface props{
-    onClick: ()=> void,
+    onClick: () => void,
     children?: React.ReactNode
     className?: string
 }

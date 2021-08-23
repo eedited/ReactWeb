@@ -7,7 +7,7 @@ interface props{
 }
 const ScrollTop: React.FC<props> = ({ history, children }: props) => {
     useEffect(() => {
-        const unlisten: ()=> void = history.listen(() => {
+        const unlisten: () => void = history.listen(() => {
             window.scrollTo(0, 0);
         });
         return () => {

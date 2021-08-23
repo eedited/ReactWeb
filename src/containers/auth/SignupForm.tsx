@@ -31,7 +31,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
     })));
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
             changeField({
@@ -41,14 +41,14 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
-    const ValidateEmail: (main: string)=> boolean = (mail: string) => {
+    const ValidateEmail: (main: string) => boolean = (mail: string) => {
         const re: RegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test(String(mail).toLowerCase())) {
             return true;
         }
         return false;
     };
-    const onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const {
             userId, password, passwordConfirm, email, nickname,

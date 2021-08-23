@@ -38,10 +38,10 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     useEffect(() => {
         dispatch(video({ videoId })); // 쿼리 스트링으로 넘어와야함.
     }, [dispatch, video, videoId]);
-    const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
+    const onLoad: (plyaer: ReactPlayer) => void = (player: ReactPlayer) => {
         setisLoading(false);
     };
-    const setOpacity: ()=> number = useCallback(() => Number(!isLoading), [isLoading]);
+    const setOpacity: () => number = useCallback(() => Number(!isLoading), [isLoading]);
     return (
         <div>
             { Video === null

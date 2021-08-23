@@ -3,13 +3,13 @@ import { WritableDraft } from 'immer/dist/internal';
 import { checkFailureReturnProp, checkSuccessReturnProp } from '../../lib/api/auth';
 
 export type userType = checkSuccessReturnProp
-export interface logoutFailureType{
+export interface logoutFailureType {
     error: Error
 }
-export interface checkFailureType extends checkFailureReturnProp{
+export interface checkFailureType extends checkFailureReturnProp {
     error: Error
 }
-export interface userStateType{
+export interface userStateType {
     user: userType|null
     logoutError: Error|null
     checkError: checkFailureType|null

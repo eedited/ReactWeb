@@ -1,6 +1,4 @@
-import {
-    ForkEffect, takeLatest,
-} from 'redux-saga/effects';
+import { ForkEffect, takeLatest } from 'redux-saga/effects';
 import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 import { authAction } from './auth';
 import * as authAPI from '../../lib/api/auth';

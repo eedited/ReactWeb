@@ -11,8 +11,8 @@ interface props{
         nickname?: string
     }
     error: string|null
-    onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
-    onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
 interface textMapType{
     [type: string]: string
