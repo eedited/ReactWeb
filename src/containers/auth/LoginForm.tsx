@@ -2,27 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import {
-    responseSuccessType, responseFailureType, authActionType,
-} from '../../modules/auth/authType';
 import { userType } from '../../modules/user/userType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { loginProp } from '../../lib/api/auth';
 import { authAction } from '../../modules/auth/auth';
 import { userAction } from '../../modules/user/user';
 
 interface fromReducerType{
-    form: loginProp
+    form: authRouter.loginRequest
     User: userType|null
-    Auth?: responseSuccessType|null
-    AuthError?: responseFailureType|null
+    Auth?: authRouter.authSuccessResponse|null
+    AuthError?: authModule.authFailureResponse|null
 }
 interface props{
     history: RouteComponentProps['history'],
 }
 
 const LoginForm: React.FC<props> = ({ history }: props) => {
-    const { changeField, intializeForm, login }: authActionType = authAction;
+    const { changeField, intializeForm, login }: authModule.ActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {

@@ -3,17 +3,15 @@ import {
 } from 'redux-saga/effects';
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
-import { authActionType } from '../auth/authType';
-import * as authAPI from '../../lib/api/auth';
+import * as api from '../../lib/api/auth';
 import { userActionType } from './userType';
 import { loadingAction } from '../loading/loading';
-import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
 
 function* logoutSaga() {
-    const { intializeForm }: authActionType = authAction;
+    const { intializeForm }: authModule.ActionType = authAction;
     yield put(loadingAction.startLoading({ status: 'USER/logout' }));
     try {
-        yield call(authAPI.logout);
+        yield call(api.logout);
         yield put(intializeForm());
         localStorage.removeItem('user');
     }
@@ -30,7 +28,7 @@ function* logoutSaga() {
 function* checkSaga() {
     yield put(loadingAction.startLoading({ status: 'USER/check' }));
     try {
-        const response: {data: authAPI.checkSuccessReturnProp} = yield call(authAPI.check);
+        const response: {data: authRouter.checkSuccessResponse} = yield call(api.check);
         yield put({
             type: 'USER/checkSuccess',
             payload: {

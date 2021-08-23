@@ -1,12 +1,11 @@
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import { checkFailureReturnProp, checkSuccessReturnProp } from '../../lib/api/auth';
 
-export type userType = checkSuccessReturnProp
+export type userType = authRouter.checkSuccessResponse
 export interface logoutFailureType {
     error: Error
 }
-export interface checkFailureType extends checkFailureReturnProp {
+export interface checkFailureType extends authRouter.authFailureResponse {
     error: Error
 }
 export interface userStateType {
