@@ -4,7 +4,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { authAction } from '../../modules/auth/auth';
+import { authAction } from '../../redux/auth/auth';
 
 interface formReduceType{
     form: authRouter.singupRequest&{passwordConfirm: string}

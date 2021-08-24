@@ -1,7 +1,7 @@
 import { ForkEffect, takeLatest } from 'redux-saga/effects';
-import createRequestSaga, { createRequestSagaReturnType } from '../../lib/createRequestSaga';
+import createRequestSaga, { createRequestSagaReturnType } from '../../library/createRequestSaga';
 import { authAction } from './auth';
-import * as authAPI from '../../lib/api/auth';
+import * as authAPI from '../../library/api/auth';
 
 const signupSaga: createRequestSagaReturnType<authRouter.singupRequest, authRouter.authResponse> = createRequestSaga('AUTH/signup', authAPI.signup);
 const loginSaga: createRequestSagaReturnType<authRouter.loginRequest, authRouter.authResponse> = createRequestSaga('AUTH/login', authAPI.login);

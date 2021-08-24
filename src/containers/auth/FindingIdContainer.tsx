@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import client from '../../lib/api/client';
-import useInputs, { inputType } from '../../lib/hooks/useInputs';
+import client from '../../library/api/client';
+import useInputs, { inputType } from '../../library/hooks/useInputs';
 import FindingId from '../../components/auth/FindingId';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

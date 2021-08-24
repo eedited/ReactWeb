@@ -3,7 +3,7 @@ import { S3Image } from 'aws-amplify-react';
 import { Link } from 'react-router-dom';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { userType } from '../../../modules/user/userType';
+import { userType } from '../../../redux/user/userType';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';

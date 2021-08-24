@@ -3,7 +3,7 @@ import {
 } from 'redux-saga/effects';
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
-import * as api from '../../lib/api/auth';
+import * as api from '../../library/api/auth';
 import { userActionType } from './userType';
 import { loadingAction } from '../loading/loading';
 
