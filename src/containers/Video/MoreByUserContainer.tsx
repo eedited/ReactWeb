@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
 import MoreByUser from '../../components/Video/MoreByUser';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../modules/Video/video';
+import { videoAction } from '../../redux/Video/video';
 
 interface fromReducerType{
     video: videoRouter.videoSuccessResponse|null

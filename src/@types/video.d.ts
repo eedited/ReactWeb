@@ -16,6 +16,12 @@ export declare global{
         deleted: Date | null
         nickname: string
     }
+    interface VIDEO_UPLOAD{
+        title: string,
+        discription: string,
+        url: string,
+        thumbnail: string
+    }
     namespace videoRouter{
         interface videoRequest{
             videoId: string
@@ -40,12 +46,7 @@ export declare global{
         }
         type videoListResponse = videoListSuccessResponse|videoListFailureResponse;
 
-        interface videoUploadRequest{
-            title: string,
-            discription: string,
-            url: string,
-            thumbnail: string
-        }
+        type videoUploadRequest = VIDEO_UPLOAD
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface videoUploadSuccessResponse {}
         interface videoUploadFailureResponse {

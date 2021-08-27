@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
-import { videoAction } from '../../modules/Video/video';
+import { videoAction } from '../../redux/Video/video';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface fromReducerType{
