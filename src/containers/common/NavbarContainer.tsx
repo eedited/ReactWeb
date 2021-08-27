@@ -4,14 +4,13 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { userType } from '../../redux/user/userType';
 
 interface props{
     history: RouteComponentProps['history']
 }
 interface userContainerType{
-    User: userType|null
-    logoutError: Error|null
+    User: USER|null
+    logoutError: userModule.logoutFailureResonse|null
 }
 
 const NavbarContainer: React.FC<props> = ({ history }: props) => {

@@ -2,26 +2,30 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 export declare global {
+    interface SIGNUP{
+        [key: string]: string;
+        userId: string;
+        password: string;
+        email: string;
+        nickname: string;
+    }
+    interface LOGIN{
+        [key: string]: string;
+        userId: string;
+        password: string;
+    }
+    interface USER{
+        userId: string;
+        nickname: string;
+        email: string;
+        profilePicture: string;
+        proTag: boolean;
+    }
+
     namespace authRouter{
-        interface singupRequest {
-            [key: string]: string;
-            userId: string;
-            password: string;
-            email: string;
-            nickname: string;
-        }
-        interface loginRequest {
-            [key: string]: string;
-            userId: string;
-            password: string;
-        }
-        interface checkSuccessResponse {
-            userId: string;
-            nickname: string;
-            email: string;
-            profilePicture: string;
-            proTag: boolean;
-        }
+        type singupRequest = SIGNUP
+        type loginRequest = LOGIN
+        type checkSuccessResponse = USER
         interface checkFailureResponse {
             info: string;
         }
@@ -41,6 +45,7 @@ export declare global {
             key: string;
             value: string;
         }
+        type SIGNUPFORM = SIGNUP&{passwordConfirm: string}
         interface authFailureResponse extends authRouter.authFailureResponse {
             error: Error;
         }
@@ -56,8 +61,8 @@ export declare global {
             loginFailure(state: WritableDraft<StateType>, action: PayloadAction<authFailureResponse>): void;
         }>;
         interface StateType {
-            signup: authRouter.singupRequest & { passwordConfirm: string };
-            login: authRouter.loginRequest;
+            signup: SIGNUP & { passwordConfirm: string };
+            login: LOGIN;
             auth?: authRouter.authSuccessResponse | null;
             authError?: authFailureResponse | null;
         }

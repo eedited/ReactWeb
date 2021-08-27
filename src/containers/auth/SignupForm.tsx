@@ -7,7 +7,7 @@ import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 
 interface formReduceType{
-    form: authRouter.singupRequest&{passwordConfirm: string}
+    form: authModule.SIGNUPFORM
     Auth?: authRouter.authSuccessResponse|null
     AuthError?: authModule.authFailureResponse|null
 }

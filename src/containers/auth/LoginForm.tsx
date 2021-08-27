@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import { userType } from '../../redux/user/userType';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
 
 interface fromReducerType{
-    form: authRouter.loginRequest
-    User: userType|null
+    form: LOGIN
+    User: USER|null
     Auth?: authRouter.authSuccessResponse|null
     AuthError?: authModule.authFailureResponse|null
 }

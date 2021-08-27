@@ -4,7 +4,6 @@ import {
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
 import * as api from '../../library/api/auth';
-import { userActionType } from './userType';
 import { loadingAction } from '../loading/loading';
 
 function* logoutSaga() {
@@ -48,7 +47,7 @@ function* checkSaga() {
     yield put(loadingAction.finishLoading({ status: 'USER/logout' }));
 }
 export default function* userSaga(): Generator<ForkEffect<never>, void, unknown> {
-    const { logout, check }: userActionType = userAction;
+    const { logout, check }: userModule.ActionType = userAction;
     yield takeLatest(logout, logoutSaga);
     yield takeLatest(check, checkSaga);
 }
