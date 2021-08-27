@@ -3,7 +3,10 @@ import {
     CaseReducerActions, createSlice, PayloadAction, Slice,
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import { loadingStateType } from './loadingType';
+
+export interface loadingStateType{
+    [key: string]: boolean
+}
 
 const initialState: loadingStateType = {};
 type loadingSliceType = Slice<loadingStateType, {
