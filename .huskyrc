@@ -1,0 +1,6 @@
+{
+    "hooks": {
+        "pre-commit": "echo 'PreCommit : Run lint-staged...'",
+        "pre-push": "echo 'PrePush : Run jest...'"
+    }
+}

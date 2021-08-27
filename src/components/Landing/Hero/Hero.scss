@@ -1,4 +1,4 @@
-.hero{
+.hero {
     display: flex;
     height: 46.875rem;
     background-color: rgb(247, 247, 247);
@@ -9,19 +9,20 @@
         padding-right: 6em;
         transform: translate(-7rem, 0);
         .hero__description__title{
+
             font-family: 'NotoSansKRBold';
             font-size: 3.125rem;
             line-height: 4.375rem;
         }
-        .hero__description__body{
+        .hero__description__body {
             font-family: 'NotoSansKRMedium';
             font-size: 0.625rem;
             line-height: 1rem;
         }
     }
+
     .hero__img{
         height: 40rem;
         z-index: 1;
     }
 }
-

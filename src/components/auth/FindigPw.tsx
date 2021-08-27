@@ -1,5 +1,13 @@
 import React from 'react';
-import { findPwResponseType } from '../../containers/auth/FindingPwContainer';
+
+interface findPwSuccessType{
+    password: string,
+}
+interface findPwFailureType{
+    info: string
+    error: Error
+}
+export type findPwResponseType = findPwFailureType | findPwSuccessType
 
 interface props{
     email: string
@@ -8,8 +16,8 @@ interface props{
     loading: 'start'|'success'|'failure'
     validationString: string
     findPwResponse: findPwResponseType
-    onEmailSubmit: ()=> void
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
+    onEmailSubmit: () => void
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const FindingPw: React.FC<props> = ({

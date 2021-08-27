@@ -2,27 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-import {
-    responseSuccessType, responseFailureType, authActionType,
-} from '../../redux/auth/authType';
-import { userType } from '../../redux/user/userType';
+
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { loginProp } from '../../library/api/auth';
+
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
 
 interface fromReducerType{
-    form: loginProp
-    User: userType|null
-    Auth?: responseSuccessType|null
-    AuthError?: responseFailureType|null
+    form: LOGIN
+    User: USER|null
+    Auth?: authRouter.authSuccessResponse|null
+    AuthError?: authModule.authFailureResponse|null
 }
 interface props{
     history: RouteComponentProps['history'],
 }
 
 const LoginForm: React.FC<props> = ({ history }: props) => {
-    const { changeField, intializeForm, login }: authActionType = authAction;
+    const { changeField, intializeForm, login }: authModule.ActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
@@ -34,7 +31,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
         AuthError: state.authReducer.authError,
     }));
 
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
             changeField({
@@ -44,7 +41,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
-    const onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { userId, password }: {userId: string, password: string} = form;
         dispatch(login({

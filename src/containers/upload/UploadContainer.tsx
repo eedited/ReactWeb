@@ -5,12 +5,11 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
 import useInputs, { inputType } from '../../library/hooks/useInputs';
-import { videoUploadFailureType, videoUploadSuccessType } from '../../redux/Video/videoType';
 import Upload from '../../components/upload/Upload';
 
 interface fromReducerType{
-    uploadError: videoUploadFailureType|null
-    uploadSuccess: videoUploadSuccessType|null
+    uploadError: videoModule.videoUploadFailureResponse|null
+    uploadSuccess: videoRouter.videoUploadSuccessResponse|null
 }
 interface props{
     history: RouteComponentProps['history']
@@ -24,7 +23,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         uploadError: state.videoReducer.videoUploadError,
         uploadSuccess: state.videoReducer.videoUploadSuccess,
     }));
-    const [inputState, onInputChange]: [inputType, (e: React.ChangeEvent<HTMLInputElement>)=> void] = useInputs({
+    const [inputState, onInputChange]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void] = useInputs({
         title: '',
         videoLink: '',
         thumbnailLink: '',
@@ -34,7 +33,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
-    const uploadSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
+    const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if ([inputState.title, inputState.videoLink, inputState.thumbnailLink, description].includes('')) {
             setError('빈 칸을 모두 입력하세요');

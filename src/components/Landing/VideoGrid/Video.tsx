@@ -4,14 +4,13 @@ import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import { VIDEO } from '../../../library/api/video';
 import './Video.scss';
 
 interface props{
-    onLoad: (player: ReactPlayer)=> void
-    play: ()=> void
-    pause: ()=> void
-    setOpacity: ()=> number
+    onLoad: (player: ReactPlayer) => void
+    play: () => void
+    pause: () => void
+    setOpacity: () => number
     videoInfo: VIDEO
 }
 const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({

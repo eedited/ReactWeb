@@ -3,23 +3,19 @@ import { AnyAction } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 
-import {
-    responseSuccessType, responseFailureType, authActionType,
-} from '../../redux/auth/authType';
-import { signupProp } from '../../library/api/auth';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 
 interface formReduceType{
-    form: signupProp&{passwordConfirm: string}
-    Auth?: responseSuccessType|null
-    AuthError?: responseFailureType|null
+    form: authModule.SIGNUPFORM
+    Auth?: authRouter.authSuccessResponse|null
+    AuthError?: authModule.authFailureResponse|null
 }
 interface props{
     history: RouteComponentProps['history']
 }
 const SignupForm: React.FC<props> = ({ history }: props) => {
-    const { changeField, signup, intializeForm }: authActionType = authAction;
+    const { changeField, signup, intializeForm }: authModule.ActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
@@ -29,7 +25,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
     })));
-    const onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
             changeField({
@@ -39,14 +35,14 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
-    const ValidateEmail: (main: string)=> boolean = (mail: string) => {
+    const ValidateEmail: (main: string) => boolean = (mail: string) => {
         const re: RegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test(String(mail).toLowerCase())) {
             return true;
         }
         return false;
     };
-    const onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const {
             userId, password, passwordConfirm, email, nickname,

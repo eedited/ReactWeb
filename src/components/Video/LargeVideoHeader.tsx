@@ -1,6 +1,5 @@
 import React from 'react';
 import './LargeVideoHeader.scss';
-import { VIDEO } from '../../library/api/video';
 
 interface props {
     video: VIDEO

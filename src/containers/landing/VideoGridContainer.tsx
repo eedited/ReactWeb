@@ -7,18 +7,17 @@ import React, {
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { videoAction } from '../../redux/Video/video';
-import { videoListAPISuccessReturnProp } from '../../library/api/video';
-import { videoActionType } from '../../redux/Video/videoType';
+
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface fromReducerType{
-    videos: videoListAPISuccessReturnProp|null
+    videos: videoRouter.videoListSuccessResponse|null
 }
 interface props{
     criteria: string
 }
 const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
-    const { videoClear, videoList }: videoActionType = videoAction;
+    const { videoClear, videoList }: videoModule.ActionType = videoAction;
     const page: React.MutableRefObject<number> = useRef(1);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
@@ -37,7 +36,7 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
         page.current += 1;
     }, [criteria, dispatch, videoList]);
 
-    const f: ()=> void = useCallback(() => {
+    const f: () => void = useCallback(() => {
         dispatch((videoList({
             criteria,
             page: page.current,

@@ -3,16 +3,10 @@ import { Link } from 'react-router-dom';
 
 interface props{
     type: string
-    form: {
-        userId: string,
-        password: string,
-        passwordConfirm?: string
-        email?: string
-        nickname?: string
-    }
+    form: authModule.SIGNUPFORM | LOGIN
     error: string|null
-    onChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
-    onSubmit: (e: React.FormEvent<HTMLFormElement>)=> void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
 interface textMapType{
     [type: string]: string

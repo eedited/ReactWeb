@@ -18,7 +18,7 @@ import HiringJobPage from './pages/HiringJobPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
 
-type AppType = ()=> JSX.Element;
+type AppType = () => JSX.Element;
 
 const App: AppType = (): JSX.Element => (
     <div className="App">

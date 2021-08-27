@@ -13,8 +13,8 @@ interface props{
     ddItem: dropDownProp[]
     isListOpen: boolean
     imgSrc: string
-    clickTitle: ()=> void
-    selectItem: (item: dropDownProp)=> void
+    clickTitle: () => void
+    selectItem: (item: dropDownProp) => void
 }
 const DropDown: React.FC<props> = ({
     className, ddItem, imgSrc, clickTitle, selectItem, isListOpen,

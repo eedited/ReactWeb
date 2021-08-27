@@ -4,14 +4,13 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { userType } from '../../redux/user/userType';
 
 interface props{
     history: RouteComponentProps['history']
 }
 interface userContainerType{
-    User: userType|null
-    logoutError: Error|null
+    User: USER|null
+    logoutError: userModule.logoutFailureResonse|null
 }
 
 const NavbarContainer: React.FC<props> = ({ history }: props) => {
@@ -21,16 +20,16 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
     }));
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-    const onLogout: ()=> void = () => {
+    const onLogout: () => void = () => {
         dispatch(userAction.logout());
     };
-    const onLogin: ()=> void = () => {
+    const onLogin: () => void = () => {
         history.push('/login');
     };
-    const onSignup: ()=> void = () => {
+    const onSignup: () => void = () => {
         history.push('/signup');
     };
-    const onUpload: ()=> void = () => {
+    const onUpload: () => void = () => {
         history.push('/upload');
     };
     useEffect(() => {

@@ -1,4 +1,4 @@
-// 난 이거의 타입을 적을 자신이 없어
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/typedef */
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
@@ -7,11 +7,22 @@ import rootReducer, { rootSaga } from './redux';
 
 const sagaMiddleware = createSagaMiddleware();
 const createStore = () => {
-    const store = configureStore({
-        reducer: rootReducer,
-        middleware: [sagaMiddleware, logger],
-        devTools: true,
-    });
+    const env = process.env.NODE_ENV;
+    let store;
+    if (env === 'development') {
+        store = configureStore({
+            reducer: rootReducer,
+            middleware: [sagaMiddleware, logger],
+            devTools: true,
+        });
+    }
+    else {
+        store = configureStore({
+            reducer: rootReducer,
+            middleware: [sagaMiddleware],
+            devTools: false,
+        });
+    }
     sagaMiddleware.run(rootSaga);
     return store;
 };

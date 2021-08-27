@@ -1,13 +1,13 @@
 import React, { forwardRef, useRef } from 'react';
 import ReactPlayer from 'react-player';
-import BlueButton from '../../components/common/Button/BlueButton';
+import BlueButton from '../common/Button/BlueButton';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import { inputType } from '../../library/hooks/useInputs';
 import './Upload.scss';
 
 interface props{
-    uploadSubmit: (e: React.FormEvent<HTMLFormElement>)=> void
-    onInputChange: (e: React.ChangeEvent<HTMLInputElement>)=> void
+    uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
     inputState: inputType
     error: string|null

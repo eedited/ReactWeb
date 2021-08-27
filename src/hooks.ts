@@ -2,17 +2,15 @@ import { Dispatch } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { AnyAction, CombinedState } from 'redux';
 import type { rootState, AppDispatch } from './index';
-import { authStateType } from './redux/auth/authType';
-import { loadingStateType } from './redux/loading/loadingType';
-import { userStateType } from './redux/user/userType';
-import { videoStateType } from './redux/Video/videoType';
+
+import { loadingStateType } from './redux/loading/loading';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch: ()=> Dispatch<AnyAction> = () => useDispatch<AppDispatch>();
+export const useAppDispatch: () => Dispatch<AnyAction> = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<rootState> = useSelector;
 export type selectorStateType = CombinedState<{
-    authReducer: authStateType;
+    authReducer: authModule.StateType;
     loadingReducer: loadingStateType;
-    userReducer: userStateType;
-    videoReducer: videoStateType;
-}>
+    userReducer: userModule.StateType;
+    videoReducer: videoModule.StateType;
+}>;

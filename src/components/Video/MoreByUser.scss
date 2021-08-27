@@ -1,13 +1,13 @@
 .more-by-user {
-    display:grid;
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-content: center;   
+    justify-content: center;
     row-gap: 40px;
     column-gap: 40px;
     padding-left: 19.5%;
     padding-right: 19.5%;
 }
-.more-by-user__title{
+.more-by-user__title {
     font-family: NotoSansKRBold;
     padding-left: 19.5%;
 }

@@ -3,19 +3,18 @@ import { S3Image } from 'aws-amplify-react';
 import { Link } from 'react-router-dom';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { userType } from '../../../redux/user/userType';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
 
 interface props{
-    user: userType|null
+    user: USER|null
     isSearchClick: boolean
-    onLogout: ()=> void
-    onLogin: ()=> void
-    onSignup: ()=> void
-    onSearchClick: ()=> void
-    onUpload: ()=> void
+    onLogout: () => void
+    onLogin: () => void
+    onSignup: () => void
+    onSearchClick: () => void
+    onUpload: () => void
 }
 
 const Navbar: React.FC<props> = ({

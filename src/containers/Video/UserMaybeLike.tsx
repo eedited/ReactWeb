@@ -1,9 +1,8 @@
 import React from 'react';
-import { videoListAPISuccessReturnProp } from '../../library/api/video';
 import UserMaybeLike from '../../components/Video/UserMaybeLike';
 
 const UserMaybeLikeContainer: React.FC = () => {
-    const videos: videoListAPISuccessReturnProp = {
+    const videos: videoRouter.videoListSuccessResponse = {
         videos: [
             {
                 id: '1',

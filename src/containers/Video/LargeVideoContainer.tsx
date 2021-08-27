@@ -11,19 +11,17 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import Largevideo from '../../components/Video/Largevideo';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { VIDEO, videoAPISuccessReturnProp } from '../../library/api/video';
 import { videoAction } from '../../redux/Video/video';
-import { videoActionType } from '../../redux/Video/videoType';
 
 interface fromReducerType{
-    Video: videoAPISuccessReturnProp|null
+    Video: videoRouter.videoSuccessResponse|null
 }
 interface props extends RouteComponentProps{
     videoId: string
 }
 
 const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
-    const { video, videoClear }: videoActionType = videoAction;
+    const { video, videoClear }: videoModule.ActionType = videoAction;
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -38,10 +36,10 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     useEffect(() => {
         dispatch(video({ videoId })); // 쿼리 스트링으로 넘어와야함.
     }, [dispatch, video, videoId]);
-    const onLoad: (plyaer: ReactPlayer)=> void = (player: ReactPlayer) => {
+    const onLoad: (plyaer: ReactPlayer) => void = (player: ReactPlayer) => {
         setisLoading(false);
     };
-    const setOpacity: ()=> number = useCallback(() => Number(!isLoading), [isLoading]);
+    const setOpacity: () => number = useCallback(() => Number(!isLoading), [isLoading]);
     return (
         <div>
             { Video === null
