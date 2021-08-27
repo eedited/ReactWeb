@@ -8,7 +8,7 @@ interface props {
 const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
-            <img className="LargeVideoHeader__main__profileIcon" src="../../../../public/sungPA.jpg" alt="profile" />
+            <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
             <div className="LargeVideoHeader__main__rest">
                 <div className="LargeVideoHeader__main__rest__title">{ video.title }</div>
                 <div className="LargeVideoHeader__main__rest__nickname">{ video.nickname }</div>

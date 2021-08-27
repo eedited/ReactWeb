@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.scss';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 // import Landing from './pages/Landing';
 // import logo from './logo.svg';
@@ -24,14 +24,15 @@ const App: AppType = (): JSX.Element => (
     <div className="App">
         <ScrollTop>
             <Switch>
-                <Route path={['/', '/videos']} component={Landing} exact />
+                <Route path="/" component={Landing} exact />
+                <Route path="/video" component={Landing} />
                 <Route path="/videos/:criteria" component={Landing} />
                 <Route path="/videoInfo" component={VideoPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/findId" component={FindingIdPage} />
                 <Route path="/findPw" component={FindingPwPage} />
-                <Route path="/upload" component={UploadPage} />
+                <Route path="/upload" component={UploadPage} exact />
                 <Route path="/404NotFound" component={Page404} />
                 <Route path="/finding" component={FindingJobPage} />
                 <Route path="/hiring" component={HiringJobPage} />

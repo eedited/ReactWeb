@@ -32,11 +32,11 @@ const NavbarContainer: React.FC<props> = ({ history }: props) => {
     const onUpload: () => void = () => {
         history.push('/upload');
     };
-    useEffect(() => {
+    /*    useEffect(() => {
         if (logoutError) {
             alert(logoutError);
         }
-    }, [logoutError]);
+    }, [logoutError]); */
     return (
         <Navbar
             user={User}

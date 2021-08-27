@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+    useCallback, useEffect, useRef, useState,
+} from 'react';
 import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
 import useInputs, { inputType } from '../../library/hooks/useInputs';
-import Upload from '../../components/upload/Upload';
+import Upload, { tagType } from '../../components/upload/Upload';
 
 interface fromReducerType{
     uploadError: videoModule.videoUploadFailureResponse|null
@@ -14,6 +16,7 @@ interface fromReducerType{
 interface props{
     history: RouteComponentProps['history']
 }
+
 const UploadContainer: React.FC<props> = ({ history }: props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
@@ -23,14 +26,15 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         uploadError: state.videoReducer.videoUploadError,
         uploadSuccess: state.videoReducer.videoUploadSuccess,
     }));
-    const [inputState, onInputChange]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void] = useInputs({
+    const [inputState, onInputChange, onInputClear]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string) => void] = useInputs({
         title: '',
         videoLink: '',
         thumbnailLink: '',
         currentTag: '',
     });
     const [description, onDescriptionChange]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
-    // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
+    const [tags, onTagsChange]: [tagType[], React.Dispatch<React.SetStateAction<tagType[]>>] = useState([] as tagType[]);
+    const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
@@ -50,6 +54,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
                     discription: description,
                     url: inputState.videoLink,
                     thumbnail: inputState.thumbnailLink,
+                    tags: tags.map((tag: tagType) => tag.tag),
                 },
             ),
         );
@@ -62,6 +67,25 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             history.push('/');
         }
     }, [history, uploadError, uploadSuccess]);
+
+    const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (inputState.currentTag !== '') {
+                const tag: string = inputState.currentTag;
+                const nextTag: tagType = {
+                    id: tagId.current,
+                    tag,
+                };
+                onTagsChange(() => tags.concat(nextTag));
+                tagId.current += 1;
+                onInputClear('currentTag');
+            }
+        }
+    }, [inputState.currentTag, onInputClear, tags]);
+    const onTagRemove: (id: number) => void = useCallback((id: number) => {
+        onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
+    }, [tags]);
     return (
         <Upload
             uploadSubmit={uploadSubmit}
@@ -71,6 +95,10 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             error={error}
             description={description}
             ref={youtubeRef}
+            onKeyPressTag={onKeyPressTag}
+            onTagRemove={onTagRemove}
+            tags={tags}
+
         />
     );
 };

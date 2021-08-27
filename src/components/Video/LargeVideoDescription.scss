@@ -9,4 +9,19 @@
         color: rgb(32, 32, 32);
         line-height: 1.8;
     }
+
+    .LargeVideoDescription__tags{
+        display: flex;
+        flex-direction: row;
+        gap : 8px;
+        margin-top : 30px;
+        .LargeVideoDescription__tag{
+            color: rgb(112, 112, 112);
+            background-color: rgb(247, 247, 247);
+            font-family: Pretendard-Medium;
+            font-size: 0.9em;
+            line-height: 1.2em;
+            padding : 4px
+        }
+    }
 }

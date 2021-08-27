@@ -2,6 +2,13 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 export declare global{
+    interface TAG{
+        name: string,
+        id: string
+    }
+    interface VIDEO_TAG{
+        videoTag: TAG[]
+    }
     interface VIDEO {
         id: string
         uploader: string
@@ -21,13 +28,14 @@ export declare global{
         discription: string,
         url: string,
         thumbnail: string
+        tags: string[]
     }
     namespace videoRouter{
         interface videoRequest{
             videoId: string
         }
         interface videoSuccessResponse{
-            video: VIDEO
+            video: VIDEO&VIDEO_TAG
         }
         interface videoFailureResponse{
             info: string

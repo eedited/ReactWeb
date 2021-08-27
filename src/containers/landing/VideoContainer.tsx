@@ -8,9 +8,10 @@ import Video from '../../components/Landing/VideoGrid/Video';
 
 interface props{
     videoInfo: VIDEO
+    key?: string
 }
 
-const VideoContainer: React.FC<props> = ({ videoInfo }: props) => {
+const VideoContainer: React.FC<props> = ({ videoInfo, key }: props) => {
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
@@ -40,8 +41,11 @@ const VideoContainer: React.FC<props> = ({ videoInfo }: props) => {
             setOpacity={setOpacity}
             videoInfo={videoInfo}
             ref={youtubeRef}
+            key={key}
         />
     );
 };
-
+VideoContainer.defaultProps = {
+    key: '',
+};
 export default React.memo(VideoContainer);

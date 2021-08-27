@@ -64,7 +64,9 @@ const videoSlice: videoSliceType = createSlice({
         },
 
         videoUpload(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadRequest>) {},
-        videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>) {},
+        videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>) {
+            state.videoUploadSuccess = action.payload;
+        },
         videoUploadFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>) {
             state.videoUploadError = action.payload;
         },

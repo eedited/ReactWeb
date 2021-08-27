@@ -40,6 +40,49 @@
                 .upload__info__title__input:focus{
                     background-color: rgb(255,255,255);
                 }
+                .upload__info__tag{
+                    width : 100%;
+                    height: 45px;
+                    margin-top: 16px;
+                    border-radius: 10px;
+                    background-color: rgb(247,247,247);
+                    display : flex;
+                    justify-content: flex-start;
+                    flex-direction: row;
+                    align-items: center;
+                    font-size: 13px;
+                    font-family: NotoSansKRMedium;
+                    .upload__info__tag__element{
+                        display: inline-block;
+                        background-color : rgb(255,255,255);
+                        padding : 4px 16px 4px 12px;
+                        
+                        margin-left : 8px;
+                        position: relative;
+                        .upload__info__tag__element__delete{
+                            position: absolute;
+                            margin-top: -11px;
+                            width : 14px;
+                            height: 14px;
+                            cursor : pointer
+                        }
+                        button{
+                            border : none;
+                            background-color: transparent;
+                        }
+                    }
+                    .upload__info__tag__input{
+                        position: relative;
+                        border:none;
+                        background-color: transparent;
+                        height: 45px;
+                        flex : 1;
+                        margin-left : 8px;
+                    }
+                    .upload__info__tag__input:focus{
+                        outline: none;
+                    }
+                }
                 .upload__info__description__input{
                     width : 100%;
                     height: 200px;
@@ -106,3 +149,13 @@
 }
 
 
+.tag_background {
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  left: 1083px;
+  top: 1207px;
+  width: 162px;
+  height: 60px;
+  z-index: 93;
+}

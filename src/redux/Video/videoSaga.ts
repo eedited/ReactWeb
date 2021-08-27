@@ -7,7 +7,7 @@ import * as videoAPI from '../../library/api/video';
 
 const videoSaga: createRequestSagaReturnType<videoRouter.videoRequest, videoRouter.videoResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
 const videoListSaga: createRequestSagaReturnType<videoRouter.videoListRequest, videoRouter.videoListResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
-const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoUpload);
+const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
 const videoMoreByUserSaga: createRequestSagaReturnType<videoRouter.userVideoRequest, videoRouter.userVideoResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
 
 export default function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
