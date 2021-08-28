@@ -4,7 +4,6 @@ import { WritableDraft } from 'immer/dist/internal';
 export declare global{
     interface TAG{
         name: string,
-        id: string
     }
     interface VIDEO_TAG{
         videoTag: TAG[]
@@ -21,7 +20,12 @@ export declare global{
         createdAt: Date
         updatedAt: Date
         deleted: Date | null
-        nickname: string
+        User: {
+            nickname: string
+        }
+        WhatVideoUpload?: {
+            liker: string
+        }[]
     }
     interface VIDEO_UPLOAD{
         title: string,
@@ -34,9 +38,7 @@ export declare global{
         interface videoRequest{
             videoId: string
         }
-        interface videoSuccessResponse{
-            video: VIDEO&VIDEO_TAG
-        }
+        type videoSuccessResponse = VIDEO&{ VideoTag: {tagName: string}[]}
         interface videoFailureResponse{
             info: string
         }
@@ -72,6 +74,17 @@ export declare global{
             info: string
         }
         type userVideoResponse = userVideoSuccessResponse | userVideoFailureResponse
+
+        interface videoLikeRequest{
+            videoId: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface videoLikeSuccessResponse{}
+        interface videoLikeFailureResponse{
+            info: string
+        }
+        type videoLikeResponse = videoLikeSuccessResponse | videoLikeFailureResponse
+
     }
     namespace videoModule{
 
