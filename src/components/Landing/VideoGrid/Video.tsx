@@ -4,6 +4,8 @@ import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
+
+import LikeButtonCnt from './LikeButtonCnt';
 import './Video.scss';
 
 interface props{
@@ -56,7 +58,7 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
         <div className="video__title">{videoInfo.title}</div>
         <div className="video__detail">
             <div className="video__uploader">
-                <div className="video__uploader__name">{videoInfo.nickname}</div>
+                <div className="video__uploader__name">{videoInfo.User.nickname}</div>
                 <div className="vidoe__uploader__follow">
                     {/* onClick함수 필요함. */}
                     <img className="video__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
@@ -64,9 +66,7 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                 </div>
             </div>
             <div className="video__detail__like">
-                <img className="video__detail__like__icon" src="/icons/heart-icon--filled.png" alt="like-icon" />
-                {' '}
-                {videoInfo.likeCnt}
+                <LikeButtonCnt Video={videoInfo} />
             </div>
         </div>
     </div>
