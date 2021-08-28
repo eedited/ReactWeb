@@ -3,7 +3,7 @@ import './LargeVideoDescription.scss';
 
 interface props {
     description: string
-    tags: TAG[]
+    tags: {tagName: string}[]
 }
 
 const LargeVideoDescription: React.FC<props> = ({ description, tags }: props) => (
@@ -17,7 +17,7 @@ const LargeVideoDescription: React.FC<props> = ({ description, tags }: props) =>
             )) }
         </div>
         <div className="LargeVideoDescription__tags">
-            {tags.map((tag: TAG) => (<div className="LargeVideoDescription__tag" key={`mykey${tag.id}`}>{tag.name}</div>))}
+            {tags.map((tag: {tagName: string}, idx: number) => (<div className="LargeVideoDescription__tag" key={`mykey${idx * 2}`}>{tag.tagName}</div>))}
         </div>
     </div>
 );
