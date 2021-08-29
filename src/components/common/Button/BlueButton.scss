@@ -1,9 +1,15 @@
+@import '/src/public/scss/public.scss';
+
 .blueButton {
-    border-radius: 0.625rem;
     background-color: rgb(233, 144, 65);
-    width: 6.25rem;
-    height: 2.5rem;
+    width: rem(107);
+    height: rem(44);
     border: 0rem;
+    border-radius: rem(10);
     color: rgb(255, 255, 255);
     font-family: Pretendard-Medium;
+    font-size: rem(16);
+}
+.blueButton:hover{
+    cursor: pointer;
 }

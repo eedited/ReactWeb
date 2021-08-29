@@ -50,8 +50,8 @@ const Navbar: React.FC<props> = ({
                 {user === null
                     ? (
                         <div className="navbar__utility__buttons">
-                            <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign In</WhiteButton>
-                            <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign Up</BlueButton>
+                            <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign in</WhiteButton>
+                            <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign up</BlueButton>
                         </div>
                     )
                     : (
@@ -65,12 +65,9 @@ const Navbar: React.FC<props> = ({
                                         <button onClick={() => { /**/ }} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
+                                                    className="navbar__utility__dropdown__item__flex__img"
                                                     src="/icons/mypage-icon.png"
                                                     alt="mypage-icon"
-                                                    style={{
-                                                        width: '20px',
-                                                        height: '20px',
-                                                    }}
                                                 />
                                                 <Link to="/profile">마이페이지</Link>
                                             </div>
@@ -80,12 +77,9 @@ const Navbar: React.FC<props> = ({
                                         <button onClick={() => { /**/ }} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
+                                                    className="navbar__utility__dropdown__item__flex__img"
                                                     src="/icons/chat-icon.png"
                                                     alt="chat-icon"
-                                                    style={{
-                                                        width: '20px',
-                                                        height: '20px',
-                                                    }}
                                                 />
                                                 <Link to="/chat">대화</Link>
                                             </div>
@@ -96,12 +90,9 @@ const Navbar: React.FC<props> = ({
                                         <button onClick={onUpload} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
+                                                    className="navbar__utility__dropdown__item__flex__img"
                                                     src="/icons/upload-icon.png"
                                                     alt="upload-icon"
-                                                    style={{
-                                                        width: '20px',
-                                                        height: '20px',
-                                                    }}
                                                 />
                                                 <div>업로드</div>
                                             </div>
@@ -111,12 +102,9 @@ const Navbar: React.FC<props> = ({
                                         <button onClick={onLogout} type="button">
                                             <div className="navbar__utility__dropdown__item__flex">
                                                 <img
+                                                    className="navbar__utility__dropdown__item__flex__img"
                                                     src="/icons/logout-icon.png"
                                                     alt="logout-icon"
-                                                    style={{
-                                                        width: '20px',
-                                                        height: '20px',
-                                                    }}
                                                 />
                                                 <div>로그아웃</div>
                                             </div>
