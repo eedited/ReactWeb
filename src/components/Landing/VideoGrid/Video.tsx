@@ -4,8 +4,7 @@ import React, { forwardRef } from 'react';
 
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-
-import LikeButtonCnt from './LikeButtonCnt';
+import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
 import './Video.scss';
 
 interface props{
@@ -66,7 +65,7 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                 </div>
             </div>
             <div className="video__detail__like">
-                <LikeButtonCnt Video={videoInfo} />
+                <LikeButtonCountContainer Video={videoInfo} />
             </div>
         </div>
     </div>

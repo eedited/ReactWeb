@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { videoLike } from '../../../library/api/video';
-import './LikebuttonCnt.scss';
+import { videoLike } from '../../library/api/video';
+import LikeButtonCount from '../../components/Landing/VideoGrid/LikeButtonCount';
+import './LikebuttonCount.scss';
 
 interface likeButtonStateType{
     toggle: boolean,
@@ -14,7 +15,7 @@ interface liekResponse{
     success: videoRouter.videoLikeSuccessResponse | null
     failure: videoRouter.videoLikeFailureResponse | null
 }
-const LikeButtonCnt: React.FC<props> = ({ Video }: props) => {
+const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
     const [likeButtonState, toggleClickLikeButton]: [likeButtonStateType, React.Dispatch<React.SetStateAction<likeButtonStateType>>] = useState<likeButtonStateType>({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
     const [likeResponse, setLikeResponse]: [liekResponse, React.Dispatch<React.SetStateAction<liekResponse>>] = useState<liekResponse>({ success: null, failure: null });
     useEffect(() => {
@@ -45,16 +46,8 @@ const LikeButtonCnt: React.FC<props> = ({ Video }: props) => {
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
     if (Video === null) return <div />;
     return (
-        <>
-            <button className="likebutton" onClick={() => onButtonClick(Video.id)} type="button">
-                {!likeButtonState.toggle
-                    ? <img className="likebutton__img" src="/icons/heart-icon.png" alt="like" />
-                    : <img className="likebutton__img" src="/icons/heart-icon--filled.png" alt="like" />}
-                {' '}
-                <div className="likebutton__txt">{likeButtonState.likeCnt}</div>
-            </button>
-        </>
+        <LikeButtonCount likeButtonState={likeButtonState} onButtonClick={() => onButtonClick(Video.id)} />
     );
 };
 
-export default LikeButtonCnt;
+export default LikeButtonCountContainer;
