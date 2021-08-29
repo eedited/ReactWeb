@@ -13,7 +13,7 @@ const Description: React.FC = () => (
                 {' '}
                 모두 여기에
             </p>
-            <p>
+            <p className="hero__description__body">
                 에디티드에서 능력자들의 포트폴리오를
                 <br />
                 {' '}

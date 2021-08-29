@@ -1,12 +1,12 @@
 @import '/src/public/scss/public.scss';
 
 .blueButton {
-    background-color: rgb(233, 144, 65);
+    background-color: $orange;
     width: rem(107);
     height: rem(44);
     border: 0rem;
     border-radius: rem(10);
-    color: rgb(255, 255, 255);
+    color: $white;
     font-family: Pretendard-Medium;
     font-size: rem(16);
 }

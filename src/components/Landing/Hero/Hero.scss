@@ -1,28 +1,28 @@
+@import '/src/public/scss/public.scss';
+
 .hero {
     display: flex;
-    height: 46.875rem;
+    height: rem(750);
     background-color: rgb(247, 247, 247);
     align-items: center;
     justify-content: center;
+    gap : rem(180);
     .hero__description{
-        z-index: 2;
-        padding-right: 6em;
-        transform: translate(-7rem, 0);
         .hero__description__title{
-
             font-family: 'NotoSansKRBold';
-            font-size: 3.125rem;
-            line-height: 4.375rem;
+            font-size: rem(60);
+            line-height: rem(80);
+            margin-bottom: rem(58);
         }
         .hero__description__body {
             font-family: 'NotoSansKRMedium';
-            font-size: 0.625rem;
-            line-height: 1rem;
+            font-size: rem(20);
+            line-height: rem(33);
         }
     }
 
     .hero__img{
-        height: 40rem;
-        z-index: 1;
+        height: rem(663);
+        width : rem(576);
     }
 }

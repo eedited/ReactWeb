@@ -1,7 +1,7 @@
 @import '/src/public/scss/public.scss';
 
 .whiteButton {
-    background-color: rgb(247, 247, 247);
+    background-color: $gray;
     width: rem(107);
     height: rem(44);
     border: 0rem;
