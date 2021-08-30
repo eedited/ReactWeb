@@ -47,7 +47,7 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
                 : (
                     <Largevideo
                         onLoad={onLoad}
-                        videoInfo={Video.video}
+                        videoInfo={Video}
                         ref={youtubeRef}
                         setOpacity={setOpacity}
                     />

@@ -61,7 +61,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     };
     useEffect(() => {
         if (uploadError) {
-            setError(`회원가입 실패 ${uploadError.info}`);
+            setError(`업로드 실패 ${uploadError.info}`);
         }
         if (uploadSuccess) {
             history.push('/');

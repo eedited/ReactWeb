@@ -22,14 +22,14 @@ const MoreByUserContainer: React.FC = () => {
     }));
     useEffect(() => {
         if (video) {
-            dispatch(videoUserUploaded({ uploader: video.video.uploader }));
+            dispatch(videoUserUploaded({ uploader: video.uploader }));
         }
     }, [dispatch, video, videoUserUploaded]);
 
     if (userUploadedVideo === null) {
         return <div />;
     }
-    return <MoreByUser videos={userUploadedVideo.videos.filter((Video: VIDEO) => Video.id !== video?.video.id)} />;
+    return <MoreByUser videos={userUploadedVideo.videos.filter((Video: VIDEO) => Video.id !== video?.id)} />;
 };
 
 export default MoreByUserContainer;

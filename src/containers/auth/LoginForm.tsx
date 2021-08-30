@@ -4,7 +4,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
 

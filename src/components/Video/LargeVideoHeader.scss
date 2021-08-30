@@ -25,11 +25,12 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        gap : 0.5vw;
         .LargeVideoHeader_iconlist__icon {
             width: 3vw;
             height: 3vw;
 
-            margin: 0.5vw;
+            
         }
     }
 }
