@@ -43,7 +43,7 @@ const LargeVideoContainer: React.FC<props> = ({ history, videoId }: props) => {
     return (
         <div>
             { Video === null
-                ? <div>error</div>
+                ? <div />
                 : (
                     <Largevideo
                         onLoad={onLoad}

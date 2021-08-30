@@ -61,7 +61,11 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                 <div className="vidoe__uploader__follow">
                     {/* onClick함수 필요함. */}
                     <img className="video__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
-                    팔로우
+                    <div>
+                        {' '}
+                        팔로우
+                    </div>
+
                 </div>
             </div>
             <div className="video__detail__like">

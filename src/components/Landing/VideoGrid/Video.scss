@@ -1,40 +1,36 @@
+@import '/src/public/scss/public.scss';
 .video {
     position: relative;
     padding-top: 56.25%;
-
-    border-radius: 20px;
+    margin-bottom: rem(20);
     .video__player{
-        border-radius: 20px;
         position:absolute;
-        border-radius: 20px;
         margin:0;
         top:0;
         left:0;
     }
     .video__img{
-        border-radius: 10px;
-
         position: absolute;
+        border-radius: 10px;
+        margin: 0;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        margin: 0;
     }
 }
 .video__title {
     font-family: Pretendard-Bold;
-    line-height: 32px;
-    font-size: 16px;
+    font-size: rem(15);
+    line-height: rem(23);
 }
 .video__detail{
     font-family: NotoSansKRMedium;
-
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    line-height: 16px;
-    font-size: 16px;
+    line-height: rem(23);
+    font-size: rem(13);
     .video__uploader {
         display: flex;
         flex-direction: row;
@@ -42,20 +38,24 @@
         align-items: center;
         .video__uploader__name {
             color: #707070;
-            margin-right: 10px;
         }
         .vidoe__uploader__follow {
+            display: flex;
+            align-items: center;
+            gap : rem(3);
             color: #6080f4;
             .video__uploader__follow__icon {
-                width: 13px;
-                height: 13px;
+                
+                width: rem(13);
+                height: rem(13);
             }
         }
     }
     .video__detail__like {
         .video__detail__like__icon {
-            width: 13px;
-            height: 13px;
+            vertical-align: middle;
+            width: rem(13);
+            height: rem(13);
         }
     }
 }

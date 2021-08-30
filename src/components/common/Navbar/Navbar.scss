@@ -1,134 +1,144 @@
+@import '/src/public/scss/public.scss';
+
 .preparing {
     color: rgb(210, 210, 210);
 }
 
 .navbar{
-    height: 4rem;
-    left: 0rem;
-    top: 0rem;
     display: flex;
-    background-color: rgb(255, 255, 255);
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0.75rem;
+
+    height: rem(80);
+    background-color: $white;
+    
     .navbar__menu {
-        width: 37.5rem;
-        margin-left: 72px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: rem(675);
+        margin-left : rem(50);
         .navbar__menu__logo {
             text-align: center;
-            width: 7.5rem;
-            height: 3rem;
+            width: rem(114);
+            height: rem(44);
         }
         .navbar__menu__links {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 1rem;
+            width : rem(474);
+            font-size: rem(16);
             font-family: NotoSansKRBold;
-            a {
-                padding: 0.5rem 0.75rem;
-            }
         }
     }
     .navbar__utility {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        width: 50rem;
-        margin-right: 1.25rem;
+        
+        margin-right: rem(50);
         .navbar__utility__find {
             display: flex;
-            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             justify-content: space-between;
             align-items: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            margin-right: 1.5rem;
-            background-color: rgb(247, 247, 247);
-            border-radius: 1.25rem;
             text-align: center;
+
+            font-size: rem(18);
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width : rem(44);
+            height: rem(44);
+            margin-right: 1.5rem;
+            background-color: $gray;
+            border-radius: rem(22);
+            
             .navbar__utility__findIcon {
-                margin-left: 0.75rem;
+                margin-left: rem(13);
             }
             .navbar__utility__find__input {
                 border: none;
                 background-color: transparent;
                 outline: none;
-                width: 12rem;
+                width : rem(200);
             }
         }
         .find__activated {
-            width: 15rem;
+            width: rem(250);
             background-color: transparent;
             border: 1px solid rgb(32, 32, 32);
             border-radius: 10px;
         }
         .navbar__utility__buttons {
             display: flex;
-            width : 13rem;
+            width : rem(227);
             justify-content: space-between;
         }
         .navbar__utility__dropdown{
-            right : 10px;
-            .navbar__utility__nickname{
-                margin-top:0.5rem;
-            }
-            .navbar__utility__profile{
-                width : 40px;
-                height: 40px;
-            }
             display : flex;
-            gap : 10px;
+            gap : rem(10);
             justify-content: space-between;
             position: relative;
+            .navbar__utility__nickname{
+                line-height: rem(44);
+                font-size: rem(16);
+                font-family: Pretendard-Medium;
+                padding-right: rem(26);
+            }
+            .navbar__utility__profile{
+                width : rem(44);
+                height: rem(44);
+            }
             .navbar__utility__dropdown__list{
                 display:none;
-
                 position: absolute;
                 text-decoration: none;
-                left: -50px;
-                padding-top: 60px;
-                width: 100%;
-                z-index: 2;
                 list-style: none;
+
+                padding-top : rem(74);
+                width: 200%;
+                z-index: 2;
+                
                 .navbar__utility__dropdown__item {
-                    width: 250%;
-                    height: 44px;
-                    line-height: 44px;
+                    width: 100%;
+                    height: rem(44);
+                    line-height: rem(44);
                     text-align: center;
-                    box-shadow: 0px 20px 50px 0px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0px rem(20) rem(50) 0px rgba(0, 0, 0, 0.1);
                     background-color: rgb(255, 255, 255);
                     &__top {
-                        border-top-left-radius: 10px;
-                        border-top-right-radius: 10px;
+                        border-top-left-radius: rem(10);
+                        border-top-right-radius: rem(10);
                     }
                     &__bottom {
-                        border-bottom-left-radius: 10px;
-                        border-bottom-right-radius: 10px;
+                        border-bottom-left-radius: rem(10);
+                        border-bottom-right-radius: rem(10);
                     }
                     &__flex {
                         display: flex;
                         justify-content: flex-start;
-                        margin-left: 1rem;
-                        gap: 1rem;
+                        align-items: center;
+                        margin-left: rem(17);
+                        gap: rem(19);
                         &__img {
-                            width: 20px;
-                            height: 20px;
+                            width: rem(20);
+                            height: rem(20);
                         }
                     }
                     button {
                         width: 100%;
+                        height: 100%;
                         border: 0rem;
-                        font-size: 1rem;
+                        font-size: rem(14);
                         font-family: Pretendard-Medium;
                         background-color: transparent;
                     }
+                    button:hover{
+                        cursor:pointer;
+                    }
                 }
                 .navbar__utility__dropdown__item:hover {
-                    background-color: rgb(247, 247, 247);
+                    background-color: $gray;
+                    
                 }
             }
         }

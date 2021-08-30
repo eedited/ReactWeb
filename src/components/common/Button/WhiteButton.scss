@@ -1,8 +1,15 @@
+@import '/src/public/scss/public.scss';
+
 .whiteButton {
-    border-radius: 0.625rem;
-    background-color: rgb(247, 247, 247);
-    width: 6.25rem;
-    height: 2.5rem;
+    background-color: $gray;
+    width: rem(107);
+    height: rem(44);
     border: 0rem;
+    border-radius: rem(10);
     font-family: Pretendard-Medium;
+    font-size: rem(16);
+}
+
+.whiteButton{
+    cursor: pointer;
 }

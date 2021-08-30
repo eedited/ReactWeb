@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar from '../../components/common/Navbar/Navbar';
