@@ -1,0 +1,18 @@
+.likebutton{
+    cursor : pointer;
+    background-color: transparent;
+    border : 0;
+    outline : 0;
+    font-family: NotoSansKRMedium;
+    display: flex;
+    flex-direction: row;
+    gap : 4px;
+    align-items: center;
+    .likebutton__img{
+        width : 16px;
+        height: 16px;
+    }
+    .likebutton__txt{
+        font-size: 16px;
+    }
+}

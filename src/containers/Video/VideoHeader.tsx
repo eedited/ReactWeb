@@ -16,7 +16,7 @@ const LargeVideoHeaderContainer: React.FC = () => {
         return <div />;
     }
     return (
-        <LargeVideoHeader video={Video.video} />
+        <LargeVideoHeader video={Video} />
     );
 };
 
