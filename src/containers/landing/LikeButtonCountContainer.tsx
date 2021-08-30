@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { videoLike } from '../../library/api/video';
 import LikeButtonCount from '../../components/Landing/VideoGrid/LikeButtonCount';
-import './LikebuttonCount.scss';
 
 interface likeButtonStateType{
     toggle: boolean,

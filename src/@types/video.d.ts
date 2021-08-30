@@ -38,7 +38,7 @@ export declare global{
         interface videoRequest{
             videoId: string
         }
-        type videoSuccessResponse = VIDEO&{ VideoTag: {tagName: string}[]}
+        type videoSuccessResponse = VIDEO&{ WhatVideoUploadTag: {tagName: string}[]}
         interface videoFailureResponse{
             info: string
         }
