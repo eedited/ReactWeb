@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MyPage from '../components/myPage/MyPage';
+import BaseTemplate from './BaseTemplate';
 
 const ProfilePage: React.FC = () => (
-    <Link to="/">
-        <img src="/ploaceholder_page/eedited-profile-1.jpg" alt="hiring placeholder" style={{ width: '100%' }} />
-    </Link>
+    <BaseTemplate>
+        <MyPage />
+    </BaseTemplate>
 );
 
 export default ProfilePage;
