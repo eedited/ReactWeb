@@ -28,7 +28,7 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
     const onButtonClick: (VIDEOID: string) => Promise<void> = useCallback(async (VIDEOID: string) => {
         setLikeResponse({ success: null, failure: null });
         try {
-            const response: AxiosResponse<videoRouter.videoLikeResponse> = await videoLike({ videoId: VIDEOID });
+            const response: AxiosResponse<videoRouter.videoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
             setLikeResponse({ ...likeResponse, success: response });
             setToggle((prevState: boolean) => !prevState);
         }

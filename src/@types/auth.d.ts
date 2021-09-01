@@ -36,7 +36,6 @@ export declare global {
         interface checkFailureResponse {
             info: string;
         }
-        type checkResponse = checkSuccessResponse | checkSuccessResponse;
         interface authSuccessResponse {
             success: boolean;
         }
@@ -44,7 +43,6 @@ export declare global {
             success: boolean;
             info: string;
         }
-        type authResponse = authSuccessResponse | authFailureResponse;
     }
     namespace authModule{
         interface changeFieldType {

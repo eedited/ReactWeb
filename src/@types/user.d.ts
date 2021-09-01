@@ -14,7 +14,6 @@ export declare global {
         interface myPageFailureResponse{
             info: string
         }
-        type myPageResponse = myPageSuccessResponse | myPageFailureResponse
     }
     namespace userModule{
         interface checkFailureResponse extends authRouter.authFailureResponse{

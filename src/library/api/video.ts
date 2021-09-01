@@ -1,23 +1,23 @@
 import { AxiosResponse } from 'axios';
 import client from './client';
 
-type videoAPIFunctionType = ({ videoId }: videoRouter.videoRequest) => Promise<AxiosResponse<videoRouter.videoResponse>>;
+type videoAPIFunctionType = ({ videoId }: videoRouter.videoRequest) => Promise<AxiosResponse<videoRouter.videoSuccessResponse>>;
 export const video: videoAPIFunctionType = ({ videoId }: videoRouter.videoRequest) => client.get(`/video/${videoId}`);
 
-type videoListAPIFunctionType = ({ criteria, page }: videoRouter.videoListRequest) => Promise<AxiosResponse<videoRouter.videoListResponse>>
+type videoListAPIFunctionType = ({ criteria, page }: videoRouter.videoListRequest) => Promise<AxiosResponse<videoRouter.videoListSuccessResponse>>
 export const videoList: videoListAPIFunctionType = ({ criteria, page }: videoRouter.videoListRequest) => client.get(`/video/sort/${criteria}/?page=${page}`);
 
 type videoAPIUploadFunctionType = ({
     title, discription, url, thumbnail, tags,
-}: videoRouter.videoUploadRequest) => Promise<AxiosResponse<videoRouter.videoUploadResponse>>
+}: videoRouter.videoUploadRequest) => Promise<AxiosResponse<videoRouter.videoUploadSuccessResponse>>
 export const videoUpload: videoAPIUploadFunctionType = ({
     title, discription, url, thumbnail, tags,
 }: videoRouter.videoUploadRequest) => client.post('/video/upload', {
     title, discription, url, thumbnail, tags,
 });
 
-type videoAPIUserFunctionType = ({ uploader }: videoRouter.userVideoRequest) => Promise<AxiosResponse<videoRouter.userVideoResponse>>
+type videoAPIUserFunctionType = ({ uploader }: videoRouter.userVideoRequest) => Promise<AxiosResponse<videoRouter.userVideoSuccessResponse>>
 export const videoUser: videoAPIUserFunctionType = ({ uploader }: videoRouter.userVideoRequest) => client.get(`/video/${uploader}/list/?page=1`);
 
-type videoAPILikeFunctionType = ({ videoId }: videoRouter.videoLikeRequest) => Promise<AxiosResponse<videoRouter.videoLikeResponse>>
+type videoAPILikeFunctionType = ({ videoId }: videoRouter.videoLikeRequest) => Promise<AxiosResponse<videoRouter.videoLikeSuccessResponse>>
 export const videoLike: videoAPILikeFunctionType = ({ videoId }: videoRouter.videoLikeRequest) => client.patch(`/video/${videoId}/like`);
