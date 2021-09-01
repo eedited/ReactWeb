@@ -16,17 +16,15 @@ function binarySearch(r: number, h: number, w: number, tofind: number) {
 function toRad(deg: number) {
     return (Math.PI * deg) / 180;
 }
-
-const MyPageGraph: React.FC = () => {
+interface props{
+    tags: {[key: string]: number}
+}
+const MyPageGraph: React.FC<props> = ({ tags }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
-        const tags: string[] = ['브이로그', '브이로그', '브이로그', '태그', '태그', '태그'];
-        const tagNum: {[key: string]: number} = {};
-        tags.forEach((tag: string) => {
-            if (tagNum[tag] === undefined) tagNum[tag] = 0;
-            tagNum[tag] += 1;
-        });
-        const tagArray: [string, number][] = Object.entries(tagNum).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
+        const tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
+        let tagNum: number = 0;
+        for (let i: number = 0; i < tagArray.length; i += 1) tagNum += tagArray[i][1];
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -55,7 +53,7 @@ const MyPageGraph: React.FC = () => {
             ctx.drawImage(img, x - radius + 10 / dpr, y - radius + 10 / dpr, x + radius - 10 / dpr, y + radius - 10 / dpr);
             ctx.restore();
 
-            const step: number = (360 - (tagArray.length) * gap) / tags.length;
+            const step: number = (360 - (tagArray.length) * gap) / tagNum;
             let cur: number = 0;
             let prevAngle: number = 0;
             let nextAngle: number = tagArray[0][1] * step;
@@ -86,7 +84,7 @@ const MyPageGraph: React.FC = () => {
                         ctx.fillText(key, y + fontSize + (radius) * Math.cos(a), y + fontSize + (radius) * Math.sin(a));
                     }
                     prevAngle = currentAngle + (Math.PI * gap) / 180;
-                    rgb = [rgb[0] + 40, rgb[1] + 40, rgb[2] + 40];
+                    rgb = [rgb[0] + 10, rgb[1] + 10, rgb[2] + 10];
                 });
             }
 
@@ -96,7 +94,7 @@ const MyPageGraph: React.FC = () => {
                     setTimeout(drawTag, 15);
                     return;
                 }
-                ctx.strokeStyle = `rgb(${rgb[0] + 40 * currentIdx},${rgb[1] + 40 * currentIdx},${rgb[2] + 40 * currentIdx})`;
+                ctx.strokeStyle = `rgb(${rgb[0] + 10 * currentIdx},${rgb[1] + 10 * currentIdx},${rgb[2] + 10 * currentIdx})`;
                 if (prevAngle <= cur && cur + 1 <= nextAngle) {
                     // cur~cur+1까지 그려.
                     ctx.beginPath();
@@ -160,10 +158,10 @@ const MyPageGraph: React.FC = () => {
             }); */
         };
         img.src = '/problem.png';
-    }, []);
+    }, [tags]);
     return (
         <canvas ref={canvasRef} />
     );
 };
 
-export default React.memo(MyPageGraph);
+export default (MyPageGraph);

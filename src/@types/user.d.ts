@@ -2,6 +2,20 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 export declare global {
+    namespace userRouter{
+        interface myPageRequest{
+            userId: string
+        }
+        interface myPageSuccessResponse extends USER{
+            Video: (VIDEO & { WhoVideoUploadTag: {tagName: string}[]})[]
+            followFrom: {followingId: string}[]
+            tags: {[key: string]: number}
+        }
+        interface myPageFailureResponse{
+            info: string
+        }
+        type myPageResponse = myPageSuccessResponse | myPageFailureResponse
+    }
     namespace userModule{
         interface checkFailureResponse extends authRouter.authFailureResponse{
             error: Error

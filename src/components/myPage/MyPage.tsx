@@ -1,42 +1,48 @@
-import React, { useEffect, useRef } from 'react';
+import { AxiosResponse } from 'axios';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { AnyAction } from 'redux';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { myPage } from '../../library/api/user';
 import { videoAction } from '../../redux/Video/video';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 
-interface fromReducerType{
-    user: authRouter.checkSuccessResponse|null
-    video: videoRouter.userVideoSuccessResponse|null
+interface props{
+    userId: string
 }
+interface myPageResponseType{
+    success: userRouter.myPageSuccessResponse | null
+    failure: userRouter.myPageFailureResponse | null
+}
+const MyPage: React.FC<props> = ({ userId }: props) => {
+    const [myPageResponse, setMyPageResponse]: [myPageResponseType, React.Dispatch<React.SetStateAction<myPageResponseType>>] = useState<myPageResponseType>({ success: null, failure: null });
 
-const MyPage: React.FC = () => {
-    const { videoUserUploaded }: videoModule.ActionType = videoAction;
-    const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
-    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-    const {
-        user,
-        video,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
-        user: state.userReducer.user,
-        video: state.videoReducer.videoUserUpload,
-    }));
     useEffect(() => {
-        if (user) {
-            dispatch(videoUserUploaded({ uploader: user.userId }));
-        }
-    }, [dispatch, user, videoUserUploaded]);
+        async function fetchMyPage() {
+            setMyPageResponse({ success: null, failure: null });
+            try {
+                const response: AxiosResponse<userRouter.myPageSuccessResponse> = await myPage({ userId });
 
-    /* Object.entries(tagNum).map(([key, value]: [key:string, value : number]) => {
-    }); */
-    if (!user) return <div>로그인이 필요합니다.</div>;
+                setMyPageResponse({ success: response.data, failure: null });
+            }
+            catch (err) {
+                setMyPageResponse({ success: null, failure: err.response.data });
+            }
+        }
+        fetchMyPage();
+    }, [userId]);
+    if (myPageResponse.failure) {
+        return <div>{myPageResponse.failure.info}</div>;
+    }
+    if (myPageResponse.success === null) return <div>로딩중</div>;
     return (
         <div className="mypage">
             <div className="mypage__header">
                 <div className="mypage__header__title">
                     <div className="mypage__header__title__name">
-                        {user.nickname}
+                        {myPageResponse.success.nickname}
                         <div className="mypage__header__title__name__icons">
                             <div className="mypage__header__title__name__iconBackGround">
                                 <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
@@ -47,14 +53,14 @@ const MyPage: React.FC = () => {
                         </div>
                     </div>
                     <div className="mypage__header__title__description">
-                        {user.email}
+                        {myPageResponse.success.email}
                     </div>
                 </div>
-                <MyPageGraph />
+                <MyPageGraph tags={myPageResponse.success.tags} />
             </div>
             <hr className="mypage__horizenline" />
             <div className="mypage__videoGrid">
-                {video && video.videos.map((videoInfo: VIDEO) => (
+                {myPageResponse.success.Video.map((videoInfo: VIDEO) => (
                     <VideoContainer videoInfo={videoInfo} />
                 ))}
             </div>
