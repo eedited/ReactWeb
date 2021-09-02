@@ -1,11 +1,8 @@
 import { AxiosResponse } from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
-
-import { AnyAction } from 'redux';
+import React, { useEffect, useState } from 'react';
 import VideoContainer from '../../containers/landing/VideoContainer';
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { myPage } from '../../library/api/user';
-import { videoAction } from '../../redux/Video/video';
+import VideoDescription2 from '../Landing/VideoGrid/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 
@@ -24,7 +21,6 @@ const MyPage: React.FC<props> = ({ userId }: props) => {
             setMyPageResponse({ success: null, failure: null });
             try {
                 const response: AxiosResponse<userRouter.myPageSuccessResponse> = await myPage({ userId });
-
                 setMyPageResponse({ success: response.data, failure: null });
             }
             catch (err) {
@@ -61,7 +57,10 @@ const MyPage: React.FC<props> = ({ userId }: props) => {
             <hr className="mypage__horizenline" />
             <div className="mypage__videoGrid">
                 {myPageResponse.success.Video.map((videoInfo: VIDEO) => (
-                    <VideoContainer videoInfo={videoInfo} />
+                    <div key={videoInfo.id}>
+                        <VideoContainer videoInfo={videoInfo} />
+                        <VideoDescription2 videoInfo={videoInfo} />
+                    </div>
                 ))}
             </div>
         </div>

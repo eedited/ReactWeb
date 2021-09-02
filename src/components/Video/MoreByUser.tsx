@@ -1,5 +1,6 @@
 import React from 'react';
 import VideoContainer from '../../containers/landing/VideoContainer';
+import VideoDescription2 from '../Landing/VideoGrid/VideoDescription2';
 
 import './MoreByUser.scss';
 
@@ -14,10 +15,10 @@ const MoreByUser: React.FC<props> = ({ videos }: props) => (
                 videos.map((video: VIDEO, idx: number) => {
                     if (idx < 6) {
                         return (
-                            <VideoContainer
-                                key={video.id}
-                                videoInfo={video}
-                            />
+                            <div key={video.id}>
+                                <VideoContainer videoInfo={video} />
+                                <VideoDescription2 videoInfo={video} />
+                            </div>
                         );
                     }
                     return <div key={`uniquekey${idx * 2}`} />;

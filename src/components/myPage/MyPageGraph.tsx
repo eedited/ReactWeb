@@ -52,7 +52,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
             ctx.clip();
             ctx.drawImage(img, x - radius + 10 / dpr, y - radius + 10 / dpr, x + radius - 10 / dpr, y + radius - 10 / dpr);
             ctx.restore();
-
+            if (tagArray.length === 0) return;
             const step: number = (360 - (tagArray.length) * gap) / tagNum;
             let cur: number = 0;
             let prevAngle: number = 0;
@@ -95,13 +95,13 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                     return;
                 }
                 ctx.strokeStyle = `rgb(${rgb[0] + 10 * currentIdx},${rgb[1] + 10 * currentIdx},${rgb[2] + 10 * currentIdx})`;
-                if (prevAngle <= cur && cur + 1 <= nextAngle) {
+                if (prevAngle <= cur && cur + 4 <= nextAngle) {
                     // cur~cur+1까지 그려.
                     ctx.beginPath();
-                    ctx.arc(x, y, radius, toRad(cur) - Math.PI / 2, toRad(cur + 1) - Math.PI / 2);
+                    ctx.arc(x, y, radius, toRad(cur) - Math.PI / 2, toRad(cur + 4) - Math.PI / 2);
                     ctx.stroke();
                 }
-                else if (prevAngle <= cur && cur + 1 > nextAngle) {
+                else if (prevAngle <= cur && cur + 4 > nextAngle) {
                     // cur ~ nextAngle 까지 그려.
                     // prevAngle, nextAngle 다시 계산.
                     ctx.beginPath();
@@ -113,49 +113,20 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                     nextAngle = prevAngle + ((step * tagArray[currentIdx][1]));
                     ctx.stroke();
                 }
-                else if (prevAngle > cur && cur + 1 < prevAngle) {
+                else if (prevAngle > cur && cur + 4 < prevAngle) {
                     // 아무것도 그리지 마.
                 }
-                else if (prevAngle > cur && cur + 1 >= prevAngle) {
+                else if (prevAngle > cur && cur + 4 >= prevAngle) {
                     // prevAngle ~ cur+1까지 그려.
                     ctx.beginPath();
-                    ctx.arc(x, y, radius, toRad(prevAngle) - Math.PI / 2, toRad(cur + 1) - Math.PI / 2);
+                    ctx.arc(x, y, radius, toRad(prevAngle) - Math.PI / 2, toRad(cur + 4) - Math.PI / 2);
                     ctx.stroke();
                 }
-                cur += 1;
+                cur += 4;
                 setTimeout(forSetInterval, 8);
             }
             ctx.lineWidth = lineWidth;
             setTimeout(forSetInterval, 8);
-            /*
-            tagArray.forEach(([key, value]: [string, number]) => {
-                ctx.strokeStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-                ctx.lineWidth = lineWidth;
-                ctx.beginPath();
-                const currentAngle: number = prevAngle + (Math.PI * (step * value)) / 180;
-                ctx.arc(x, y, radius, prevAngle - Math.PI / 2, currentAngle - Math.PI / 2);
-                const centerAngle: number = (currentAngle + prevAngle - Math.PI) / 2;
-                ctx.font = `${fontSize}px NotoSansKRMedium`;
-                ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-                const a: number = binarySearch(radius, fontSize, ctx.measureText(key).width, Math.tan(centerAngle));
-                if (centerAngle > Math.PI / 2) {
-                    if (Math.sin(a) < 0) {
-                        ctx.fillText(key, x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a), y + fontSize - (radius) * Math.sin(a));
-                    }
-                    else {
-                        ctx.fillText(key, x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a), y - (radius) * Math.sin(a));
-                    }
-                }
-                else if (Math.sin(a) < 0) {
-                    ctx.fillText(key, x + fontSize + (radius) * Math.cos(a), y + (radius) * Math.sin(a));
-                }
-                else {
-                    ctx.fillText(key, y + fontSize + (radius) * Math.cos(a), y + fontSize + (radius) * Math.sin(a));
-                }
-                ctx.stroke();
-                prevAngle = currentAngle + (Math.PI * gap) / 180;
-                rgb = [rgb[0] + 40, rgb[1] + 40, rgb[2] + 40];
-            }); */
         };
         img.src = '/problem.png';
     }, [tags]);
@@ -164,4 +135,4 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
     );
 };
 
-export default (MyPageGraph);
+export default React.memo(MyPageGraph);
