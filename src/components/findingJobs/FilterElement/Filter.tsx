@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import FilterElement from '../../components/findingJobs/FilterElement/FilterElement';
-import './FilterContainer.scss';
+import FilterElement from './FilterElement';
+import './Filter.scss';
 
-const FilterContainer: React.FC = () => (
-    <div className="filter">
+const Filter: React.FC = () => (
+    <div className="job__filter">
         <FilterElement name="키워드" searchbox="키워드" />
         <FilterElement name="채용방식" checkboxes={['파트타임', '풀타임']} />
         <FilterElement name="지역" checkboxes={['원격근무', '현장근무']} searchbox="지역선택" />
@@ -12,4 +12,4 @@ const FilterContainer: React.FC = () => (
     </div>
 );
 
-export default FilterContainer;
+export default Filter;

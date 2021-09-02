@@ -9,23 +9,23 @@ interface props{
 }
 
 const FilterElement: React.FC<props> = ({ name, checkboxes, searchbox, selectbox }: props) => (
-    <div className="filter__element">
-        <div className="filter__element__title">{name}</div>
+    <div className="jobFilter__element">
+        <div className="jobFilter__element__title">{name}</div>
         {
             checkboxes
             && checkboxes.map((e: string) => (
                 <div>
-                    <input type="checkbox" className="checkbox" />
+                    <input type="checkbox" className="jobFilter__element__checkbox" />
                     {' '}
                     {e}
                 </div>
             ))
         }
         {
-            searchbox && <input className="searchbox" placeholder={searchbox} />
+            searchbox && <input className="jobFilter__element__searchbox" placeholder={searchbox} />
         }
         {
-            selectbox && <div className="selectbox">{selectbox[0]}</div>
+            selectbox && <div className="jobFilter__element__selectbox">{selectbox[0]}</div>
         }
     </div>
 );

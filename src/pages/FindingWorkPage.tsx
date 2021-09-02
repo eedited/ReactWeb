@@ -1,16 +1,15 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
-import HeroContainer from '../containers/findingWork/HeroContainer';
-import FilterContainer from '../containers/findingWork/FilterContainer';
-import ContentContainer from '../containers/findingWork/ContentContainer';
-import './FindingWorkPage.scss';
+import Filter from '../components/findingJobs/FilterElement/Filter';
+import HeroDescription from '../components/findingJobs/HeroDescription/HeroDescription';
+import EditorInfo from '../components/findingJobs/EditorInfo/EditorInfo';
 
 const FindingIdPage: React.FC = () => (
     <BaseTemplate>
-        <HeroContainer />
-        <div className="content">
-            <FilterContainer />
-            <ContentContainer />
+        <HeroDescription />
+        <div className="content" style={{ maxWidth: '1500px', marginLeft: 'auto', display: 'flex' }}>
+            <Filter />
+            <EditorInfo />
         </div>
     </BaseTemplate>
 );

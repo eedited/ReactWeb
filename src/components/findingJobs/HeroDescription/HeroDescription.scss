@@ -1,27 +1,26 @@
-.hero {
+.jobHero {
     display: flex;
     height: 46.875rem;
     background-color: rgb(247, 247, 247);
     align-items: center;
     justify-content: center;
-    .hero__description{
+    .jobHero__description{
         z-index: 2;
         padding-right: 6em;
         transform: translate(-7rem, 0);
-        .hero__description__title{
-
+        .jobHero__description__title{
             font-family: 'NotoSansKRBold';
             font-size: 3.125rem;
             line-height: 4.375rem;
         }
-        .hero__description__body {
+        .jobHero__description__body {
             font-family: 'NotoSansKRMedium';
             font-size: 0.625rem;
             line-height: 1rem;
         }
     }
 
-    .hero__img{
+    .jobHero__img{
         height: 40rem;
         z-index: 1;
     }

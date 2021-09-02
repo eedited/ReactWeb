@@ -1,0 +1,54 @@
+.jobProfile{
+    margin-left: 30px;
+    .jobProfile__header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width : 1000px;
+        .jobProfile__title{
+            .jobProfile__title__name{
+                display: flex;
+                flex-direction: row;
+                font-size : 15px;
+                line-height: 43px;
+                gap : 5px;
+                .jobProfile__title__protag{
+                    position: relative;
+                    margin : auto 0;
+                    background-color: rgb(247, 247, 247);
+                    color: rgb(112, 112, 112);
+                    width: 36px;
+                    line-height: 15px;
+                    border-radius: 5px;
+                    font-size: 11px;
+                    text-align: center;
+                }
+            }
+            .jobProfile__title__info{
+                font-size: 14px;
+            }
+        }
+        .jobProfile__title__buttons{
+            display : flex;
+            align-items: flex-end;
+            gap : 5px;
+            .jobProfile__title__button{
+                padding : 12px;
+                width: 44px;
+                height: 44px;
+                border-radius: 50%;
+                background-color: rgb(247, 247, 247);
+            }
+        }
+    }
+    .jobProfile__video{
+        display: flex;
+        width: 1000px;
+        flex-flow: row nowrap;
+        overflow-x: auto;
+        gap : 15px;
+        .jobProfile__video__videoElement{
+            flex: 0 0 45%;
+        }
+    }   
+}
