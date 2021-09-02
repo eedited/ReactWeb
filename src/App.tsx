@@ -13,7 +13,7 @@ import VideoPage from './pages/VideoPage';
 import Page404 from './pages/NotFound';
 import ScrollTop from './components/common/ScrollTop';
 import UploadPage from './pages/UploadPage';
-import FindingJobPage from './pages/FindingJobPage';
+import FindingWorkPage from './pages/FindingWorkPage';
 import HiringJobPage from './pages/HiringJobPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
@@ -34,7 +34,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/findPw" component={FindingPwPage} />
                 <Route path="/upload" component={UploadPage} exact />
                 <Route path="/404NotFound" component={Page404} />
-                <Route path="/finding" component={FindingJobPage} />
+                <Route path="/finding" component={FindingWorkPage} />
                 <Route path="/hiring" component={HiringJobPage} />
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/chat" component={ChatPage} />

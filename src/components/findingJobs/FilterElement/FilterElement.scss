@@ -1,0 +1,18 @@
+.filter__element {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .filter__element__title {
+        font-style: bold;
+        color: gray;
+    }
+
+    .checkbox {
+    }
+
+    .searchbox {
+    }
+
+    .selectbox {
+    }
+}
