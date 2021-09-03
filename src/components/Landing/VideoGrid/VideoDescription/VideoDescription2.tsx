@@ -1,5 +1,5 @@
 import React from 'react';
-import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
+import LikeButtonCountContainer from '../../../../containers/landing/LikeButtonCountContainer';
 import './VideoDescription2.scss';
 
 interface props{

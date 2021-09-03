@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
+import LikeButtonCountContainer from '../../../../containers/landing/LikeButtonCountContainer';
 import './VideoDescription1.scss';
 
 interface props{

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import { myPage } from '../../library/api/user';
-import VideoDescription2 from '../Landing/VideoGrid/VideoDescription2';
+import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 

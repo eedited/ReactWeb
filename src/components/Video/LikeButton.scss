@@ -1,3 +1,4 @@
+@import '/src/public/scss/public.scss';
 .likeButton{
     cursor : pointer;
     background-color: transparent;
@@ -5,11 +6,12 @@
     border : 0;
     outline : 0;
     background-color: rgb(247,247,247);
-    padding : 0.85vw 1vw 0.85vw 1vw;
-    border-radius: 1.5vw;
+    height: rem(48);
+    padding : rem(16);
+    border-radius: 50%;
+    text-align: center;
     .likeButton__img{
-        margin-top : 0.2vw;
-        width : 1.1vw;
-        height: 1vw;
+        width : rem(16);
+        height: rem(16);
     }
 }

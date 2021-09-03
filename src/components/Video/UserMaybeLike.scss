@@ -1,14 +1,16 @@
-.user-may-be-like {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    row-gap: 40px;
-    column-gap: 40px;
-    padding-left: 19.5%;
-    padding-right: 19.5%;
-    padding-bottom: 40px;
-}
-.user-may-be-like__title {
-    font-family: NotoSansKRBold;
-    padding-left: 19.5%;
+@import '/src/public/scss/public.scss';
+.user-may-be-like{
+    width : 61%;
+    margin: 0 auto;
+    .user-may-be-like__video {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+        row-gap: rem(40);
+        column-gap: rem(40);
+        padding-bottom: rem(40);
+    }
+    .user-may-be-like__title {
+        font-family: NotoSansKRBold;
+    }
 }

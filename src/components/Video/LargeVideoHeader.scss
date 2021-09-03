@@ -1,11 +1,12 @@
+@import '/src/public/scss/public.scss';
 .LargeVideoHeader {
     position: relative;
     display: flex;
     justify-content: space-between;
     width: 61%;
-    height: 80px;
+    height: rem(80);
     left: 19.5%;
-    font-size: 1em;
+    font-size: rem(16);
     padding-top: 2vh;
 
     .LargeVideoHeader__main {
@@ -13,8 +14,8 @@
         align-items: center;
 
         .LargeVideoHeader__main__profileIcon {
-            width: 50px;
-            height: 50px;
+            width: rem(50);
+            height: rem(50);
         }
         .LargeVideoHeader__main__rest__title {
             font-weight: bold;
@@ -25,12 +26,10 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        gap : 0.5vw;
+        gap : rem(8);
         .LargeVideoHeader_iconlist__icon {
-            width: 3vw;
-            height: 3vw;
-
-            
+            width: rem(48);
+            height: rem(48);
         }
     }
 }

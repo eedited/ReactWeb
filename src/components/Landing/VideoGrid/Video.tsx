@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
 import './Video.scss';
-import VideoDescription1 from './VideoDescription1';
+import VideoDescription1 from './VideoDescription/VideoDescription1';
 
 interface props{
     onLoad: (player: ReactPlayer) => void

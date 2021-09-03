@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoContainer from '../../../containers/landing/VideoContainer';
-import VideoDescription1 from './VideoDescription1';
+import VideoDescription1 from './VideoDescription/VideoDescription1';
 import './VideoGrid.scss';
 
 type videoInfo = VIDEO
