@@ -5,10 +5,10 @@ import createRequestSaga, { createRequestSagaReturnType } from '../../library/cr
 import { videoAction } from './video';
 import * as videoAPI from '../../library/api/video';
 
-const videoSaga: createRequestSagaReturnType<videoRouter.videoRequest, videoRouter.videoResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
-const videoListSaga: createRequestSagaReturnType<videoRouter.videoListRequest, videoRouter.videoListResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
-const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
-const videoMoreByUserSaga: createRequestSagaReturnType<videoRouter.userVideoRequest, videoRouter.userVideoResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
+const videoSaga: createRequestSagaReturnType<videoRouter.videoRequest, videoRouter.videoSuccessResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
+const videoListSaga: createRequestSagaReturnType<videoRouter.videoListRequest, videoRouter.videoListSuccessResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
+const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadSuccessResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
+const videoMoreByUserSaga: createRequestSagaReturnType<videoRouter.userVideoRequest, videoRouter.userVideoSuccessResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
 
 export default function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     const {

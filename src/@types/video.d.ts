@@ -45,7 +45,6 @@ export declare global{
         interface videoFailureResponse{
             info: string
         }
-        type videoResponse = videoSuccessResponse|videoFailureResponse;
 
         interface videoListRequest{
             criteria: string
@@ -57,7 +56,6 @@ export declare global{
         interface videoListFailureResponse{
             info: string
         }
-        type videoListResponse = videoListSuccessResponse|videoListFailureResponse;
 
         type videoUploadRequest = VIDEO_UPLOAD
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -65,7 +63,6 @@ export declare global{
         interface videoUploadFailureResponse {
             info: string
         }
-        type videoUploadResponse = videoUploadSuccessResponse | videoUploadFailureResponse;
 
         interface userVideoRequest{
             uploader: string
@@ -76,7 +73,6 @@ export declare global{
         interface userVideoFailureResponse{
             info: string
         }
-        type userVideoResponse = userVideoSuccessResponse | userVideoFailureResponse
 
         interface videoLikeRequest{
             videoId: string
@@ -86,7 +82,6 @@ export declare global{
         interface videoLikeFailureResponse{
             info: string
         }
-        type videoLikeResponse = videoLikeSuccessResponse | videoLikeFailureResponse
 
     }
     namespace videoModule{

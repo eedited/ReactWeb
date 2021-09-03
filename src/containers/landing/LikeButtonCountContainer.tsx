@@ -30,8 +30,8 @@ const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
     const onButtonClick: (VIDEOID: string) => void = useCallback(async (VIDEOID: string) => {
         setLikeResponse({ success: null, failure: null });
         try {
-            const response: AxiosResponse<videoRouter.videoLikeResponse> = await videoLike({ videoId: VIDEOID });
-            setLikeResponse({ ...likeResponse, success: response });
+            const response: AxiosResponse<videoRouter.videoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
+            setLikeResponse({ ...likeResponse, success: response.data });
             if (likeButtonState.toggle) {
                 toggleClickLikeButton({ toggle: !likeButtonState.toggle, likeCnt: likeButtonState.likeCnt - 1 });
             }

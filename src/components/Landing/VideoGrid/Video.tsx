@@ -6,6 +6,7 @@ import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
 import './Video.scss';
+import VideoDescription1 from './VideoDescription/VideoDescription1';
 
 interface props{
     onLoad: (player: ReactPlayer) => void
@@ -54,24 +55,6 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                 />
             </div>
         </Link>
-        <div className="video__title">{videoInfo.title}</div>
-        <div className="video__detail">
-            <div className="video__uploader">
-                <div className="video__uploader__name">{videoInfo.User.nickname}</div>
-                <div className="vidoe__uploader__follow">
-                    {/* onClick함수 필요함. */}
-                    <img className="video__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
-                    <div>
-                        {' '}
-                        팔로우
-                    </div>
-
-                </div>
-            </div>
-            <div className="video__detail__like">
-                <LikeButtonCountContainer Video={videoInfo} />
-            </div>
-        </div>
     </div>
 ));
 

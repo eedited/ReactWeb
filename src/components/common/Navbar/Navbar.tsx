@@ -69,7 +69,7 @@ const Navbar: React.FC<props> = ({
                                                     src="/icons/mypage-icon.png"
                                                     alt="mypage-icon"
                                                 />
-                                                <Link to="/profile">마이페이지</Link>
+                                                <Link to={`/profile?userId=${user.userId}`}>마이페이지</Link>
                                             </div>
                                         </button>
                                     </li>

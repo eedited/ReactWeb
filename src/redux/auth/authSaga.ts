@@ -3,8 +3,8 @@ import createRequestSaga, { createRequestSagaReturnType } from '../../library/cr
 import { authAction } from './auth';
 import * as authAPI from '../../library/api/auth';
 
-const signupSaga: createRequestSagaReturnType<authRouter.singupRequest, authRouter.authResponse> = createRequestSaga('AUTH/signup', authAPI.signup);
-const loginSaga: createRequestSagaReturnType<authRouter.loginRequest, authRouter.authResponse> = createRequestSaga('AUTH/login', authAPI.login);
+const signupSaga: createRequestSagaReturnType<authRouter.singupRequest, authRouter.authSuccessResponse> = createRequestSaga('AUTH/signup', authAPI.signup);
+const loginSaga: createRequestSagaReturnType<authRouter.loginRequest, authRouter.authSuccessResponse> = createRequestSaga('AUTH/login', authAPI.login);
 
 export default function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     const { signup, login }: authModule.ActionType = authAction;
