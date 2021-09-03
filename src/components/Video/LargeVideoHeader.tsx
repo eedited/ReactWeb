@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
 import './LargeVideoHeader.scss';
 
@@ -12,7 +13,7 @@ const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
             <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
             <div className="LargeVideoHeader__main__rest">
                 <div className="LargeVideoHeader__main__rest__title">{ video.title }</div>
-                <div className="LargeVideoHeader__main__rest__nickname">{ video.User.nickname }</div>
+                <Link className="LargeVideoHeader__main__rest__nickname" to={`/profile?userId=${video.uploader}`}>{ video.User.nickname }</Link>
             </div>
         </div>
         <div className="LargeVideoHeader__iconlist">

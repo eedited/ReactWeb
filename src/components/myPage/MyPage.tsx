@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import { myPage } from '../../library/api/user';
 import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
@@ -30,7 +31,7 @@ const MyPage: React.FC<props> = ({ userId }: props) => {
         fetchMyPage();
     }, [userId]);
     if (myPageResponse.failure) {
-        return <div>{myPageResponse.failure.info}</div>;
+        return <Redirect to="404NotFound" />;
     }
     if (myPageResponse.success === null) return <div>로딩중</div>;
     return (
