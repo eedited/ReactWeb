@@ -22,6 +22,9 @@ export declare global{
         deleted: Date | null
         User: {
             nickname: string
+            followTo?: {
+                followerId: string
+            }[]
         }
         WhatVideoUpload?: {
             liker: string

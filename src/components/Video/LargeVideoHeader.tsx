@@ -1,5 +1,6 @@
 import React from 'react';
 import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
+import FollowButtonContainer from '../../containers/Video/FollowButtonContainer';
 import './LargeVideoHeader.scss';
 
 interface props {
@@ -16,7 +17,7 @@ const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
             </div>
         </div>
         <div className="LargeVideoHeader__iconlist">
-            <img className="LargeVideoHeader_iconlist__icon" src="/icons/follow-button.png" alt="" />
+            <FollowButtonContainer video={video} />
             <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-button.png" alt="" />
             <LikeButtonContainer video={video} />
         </div>

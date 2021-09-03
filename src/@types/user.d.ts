@@ -24,4 +24,15 @@ export declare global {
             setUser(state: WritableDraft<StateType>, action: PayloadAction<USER>): void;
         }>
     }
+    namespace userRouter{
+        interface userFollowRequest{
+            userId: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface userFollowSuccessResponse{}
+        interface userFollowFailureResponse{
+            info: string
+        }
+        type userFollowResponse = userFollowSuccessResponse | userFollowFailureResponse
+    }
 }

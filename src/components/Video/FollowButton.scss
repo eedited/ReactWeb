@@ -1,0 +1,29 @@
+.FollowButton{
+    cursor : pointer;
+    background-color: transparent;
+    box-sizing: border-box;
+    border : 0;
+    outline : 0;
+    padding : 0.85vw 1vw 0.85vw 1vw;
+    border-radius: 1.5vw;
+    background-color: rgb(247,247,247);
+    .FollowButton__default{
+        margin-top : 0.2vw;
+        width : 1.1vw;
+        height: 1vw;
+    }
+}
+.FollowingButton{
+    background-color: transparent;
+    box-sizing: border-box;
+    border : 0;
+    outline : 0;
+    padding : 0.85vw 1vw 0.85vw 1vw;
+    border-radius: 1.5vw;
+    background-color: rgb(88, 126, 252);
+    .FollowingButton__default{
+        margin-top : 0.2vw;
+        width : 1.1vw;
+        height: 1vw;
+    }
+}
