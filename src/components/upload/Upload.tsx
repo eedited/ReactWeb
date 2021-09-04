@@ -17,11 +17,12 @@ interface props{
     error: string|null
     description: string
     onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    onBlurTag: React.FocusEventHandler<HTMLInputElement>
     onTagRemove: (id: number) => void
     tags: tagType[]
 }
 const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove,
+    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
@@ -79,6 +80,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                                 name="currentTag"
                                 value={inputState.currentTag}
                                 onKeyPress={onKeyPressTag}
+                                onBlur={onBlurTag}
                             />
                         </div>
                     </div>

@@ -106,6 +106,18 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const onTagRemove: (id: number) => void = useCallback((id: number) => {
         onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
     }, [tags]);
+    const onBlurTag: React.FocusEventHandler<HTMLInputElement> = () => {
+        if (inputState.currentTag !== '') {
+            const tag: string = inputState.currentTag;
+            const nextTag: tagType = {
+                id: tagId.current,
+                tag,
+            };
+            onTagsChange(() => tags.concat(nextTag));
+            tagId.current += 1;
+            onInputClear('currentTag');
+        }
+    };
     return (
         <Upload
             uploadSubmit={uploadSubmit}
@@ -118,7 +130,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             onKeyPressTag={onKeyPressTag}
             onTagRemove={onTagRemove}
             tags={tags}
-
+            onBlurTag={onBlurTag}
         />
     );
 };
