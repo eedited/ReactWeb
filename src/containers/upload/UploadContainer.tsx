@@ -4,11 +4,14 @@ import React, {
 import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
+import QueryString, { parse } from 'qs';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
 import useInputs, { inputType } from '../../library/hooks/useInputs';
 import Upload, { tagType } from '../../components/upload/Upload';
 
+const validPathname: RegExp = /^.*\/([a-zA-Z0-9_-]{11})$/;
+const validId: RegExp = /^([a-zA-Z0-9_-]{11})$/;
 interface fromReducerType{
     uploadError: videoModule.videoUploadFailureResponse|null
     uploadSuccess: videoRouter.videoUploadSuccessResponse|null
@@ -29,7 +32,6 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const [inputState, onInputChange, onInputClear]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string) => void] = useInputs({
         title: '',
         videoLink: '',
-        thumbnailLink: '',
         currentTag: '',
     });
     const [description, onDescriptionChange]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
@@ -39,7 +41,11 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if ([inputState.title, inputState.videoLink, inputState.thumbnailLink, description].includes('')) {
+        if ([inputState.title, inputState.videoLink, description].includes('')) {
+            setError('빈 칸을 모두 입력하세요');
+            return;
+        }
+        if (tags.length === 0) {
             setError('빈 칸을 모두 입력하세요');
             return;
         }
@@ -47,13 +53,27 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             setError('올바르지 못한 video Url 입니다');
             return;
         }
+        /* 썸네일 url 파싱  https://github.com/iktakahiro/youtube-url-parser/blob/master/src/parser.ts */
+        const parser: HTMLAnchorElement = document.createElement('a');
+        parser.href = inputState.videoLink;
+        const query: QueryString.ParsedQs = parse(parser.search, { ignoreQueryPrefix: true });
+        let id: string|null = (validPathname.exec(parser.pathname) || [])[1] || null;
+        if (id === null) {
+            const { v }: QueryString.ParsedQs = query;
+            id = (validId.exec(v as string) || [])[1] || null;
+        }
+        if (id === null) {
+            setError('올바르지 못한 video Url 입니다');
+            return;
+        }
+        const thumbnailUrl: string = `https://img.youtube.com/vi/${id}/0.jpg`;
         dispatch(
             videoAction.videoUpload(
                 {
                     title: inputState.title,
                     discription: description,
                     url: inputState.videoLink,
-                    thumbnail: inputState.thumbnailLink,
+                    thumbnail: thumbnailUrl,
                     tags: tags.map((tag: tagType) => tag.tag),
                 },
             ),

@@ -53,16 +53,6 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                         />
                     </div>
                     <div className="upload__info__item">
-                        <div className="upload__info__title">썸네일 링크</div>
-                        <input
-                            className="upload__info__title__input"
-                            onChange={onInputChange}
-                            name="thumbnailLink"
-                            value={inputState.value}
-                            placeholder="https://img.youtube.com/vi/{videoId}/0.jpg"
-                        />
-                    </div>
-                    <div className="upload__info__item">
                         <div className="upload__info__title">태그</div>
                         <div className="upload__info__tag">
                             {tags.map((tag: tagType) => (
