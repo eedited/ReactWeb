@@ -66,7 +66,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             setError('올바르지 못한 video Url 입니다');
             return;
         }
-        const thumbnailUrl: string = `https://img.youtube.com/vi/${id}/0.jpg`;
+        const thumbnailUrl: string = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
         dispatch(
             videoAction.videoUpload(
                 {
