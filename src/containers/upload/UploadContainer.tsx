@@ -91,7 +91,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (inputState.currentTag !== '') {
+            if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
                 const tag: string = inputState.currentTag;
                 const nextTag: tagType = {
                     id: tagId.current,
@@ -99,15 +99,15 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
                 };
                 onTagsChange(() => tags.concat(nextTag));
                 tagId.current += 1;
-                onInputClear('currentTag');
             }
+            onInputClear('currentTag');
         }
     }, [inputState.currentTag, onInputClear, tags]);
     const onTagRemove: (id: number) => void = useCallback((id: number) => {
         onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
     }, [tags]);
-    const onBlurTag: React.FocusEventHandler<HTMLInputElement> = () => {
-        if (inputState.currentTag !== '') {
+    const onBlurTag: React.FocusEventHandler<HTMLInputElement> = useCallback(() => {
+        if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
             const tag: string = inputState.currentTag;
             const nextTag: tagType = {
                 id: tagId.current,
@@ -115,9 +115,9 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             };
             onTagsChange(() => tags.concat(nextTag));
             tagId.current += 1;
-            onInputClear('currentTag');
         }
-    };
+        onInputClear('currentTag');
+    }, [inputState.currentTag, onInputClear, tags]);
     return (
         <Upload
             uploadSubmit={uploadSubmit}
