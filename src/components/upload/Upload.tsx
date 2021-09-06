@@ -97,7 +97,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                         />
                     </div>
                     <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">업로드하기</BlueButton>
-                    {error && <div>{error}</div>}
+                    {error && <div className="upload__info__error">{error}</div>}
                 </div>
             </form>
             <div className="upload__preview">
