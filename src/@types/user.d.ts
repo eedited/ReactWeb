@@ -7,7 +7,7 @@ export declare global {
             userId: string
         }
         interface myPageSuccessResponse extends USER{
-            Video: (VIDEO & { WhoVideoUploadTag: {tagName: string}[]})[]
+            Video: (VIDEO & { WhoVideoUploadTag?: {tagName: string}[]})[]
             followFrom: {followingId: string}[]
             tags: {[key: string]: number}
         }
