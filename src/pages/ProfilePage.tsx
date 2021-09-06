@@ -1,8 +1,8 @@
 import React from 'react';
 import qs from 'qs';
 import { Redirect, RouteComponentProps } from 'react-router';
-import MyPage from '../components/myPage/MyPage';
 import BaseTemplate from './BaseTemplate';
+import MyPageContainer from '../containers/myPage/MyPageContainer';
 
 type props = RouteComponentProps
 const ProfilePage: React.FC<props> = ({ location }: props) => {
@@ -15,7 +15,7 @@ const ProfilePage: React.FC<props> = ({ location }: props) => {
             <>
                 {
                     typeof (userId) === 'string'
-                        ? <MyPage userId={userId} />
+                        ? <MyPageContainer userId={userId} />
                         : (
                             <Redirect to={{
                                 pathname: '/404NotFound',

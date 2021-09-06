@@ -22,6 +22,10 @@
             border-right: 1px solid rgba(32, 32, 32,0.102);
         }
         .upload__info{
+            .upload__tag__error{
+                color : red;
+                font-size : 16px;
+            }
             .upload__info__item{
                 margin-top : 30px;
                 .upload__info__title{
@@ -145,16 +149,4 @@
             
         }
     }
-}
-
-
-.tag_background {
-  border-radius: 10px;
-  background-color: rgb(255, 255, 255);
-  position: absolute;
-  left: 1083px;
-  top: 1207px;
-  width: 162px;
-  height: 60px;
-  z-index: 93;
 }
