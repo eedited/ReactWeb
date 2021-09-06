@@ -15,6 +15,7 @@ interface props{
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
     inputState: inputType
     error: string|null
+    tagError: string | null
     description: string
     onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void
     onBlurTag: React.FocusEventHandler<HTMLInputElement>
@@ -22,7 +23,7 @@ interface props{
     tags: tagType[]
 }
 const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag,
+    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
@@ -84,6 +85,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             />
                         </div>
                     </div>
+                    <div className="upload__tag__error">{tagError}</div>
                     <div className="upload__info__item">
                         <div className="upload__info__title">설명</div>
                         <textarea

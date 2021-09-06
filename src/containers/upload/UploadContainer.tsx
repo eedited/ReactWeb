@@ -39,6 +39,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
+    const [tagError, seTagError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if ([inputState.title, inputState.videoLink, description].includes('')) {
@@ -91,15 +92,25 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
-                const tag: string = inputState.currentTag;
-                const nextTag: tagType = {
-                    id: tagId.current,
-                    tag,
-                };
-                onTagsChange(() => tags.concat(nextTag));
-                tagId.current += 1;
+            if (!inputState.currentTag || inputState.currentTag === '') {
+                seTagError('최소한 한글자 이상 입력해주세요.');
+                return;
             }
+            if (tags.some((item: tagType) => item.tag === inputState.currentTag)) {
+                seTagError('중복되는 태그가 있습니다.');
+                return;
+            }
+            if (inputState.currentTag.length > 8) {
+                seTagError('8글자 이내로 입력해 주세요!');
+                return;
+            }
+            const tag: string = inputState.currentTag;
+            const nextTag: tagType = {
+                id: tagId.current,
+                tag,
+            };
+            onTagsChange(() => tags.concat(nextTag));
+            tagId.current += 1;
             onInputClear('currentTag');
         }
     }, [inputState.currentTag, onInputClear, tags]);
@@ -118,10 +129,15 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         }
         onInputClear('currentTag');
     }, [inputState.currentTag, onInputClear, tags]);
+    const onInputChangeWithClearError: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onInputChange(e);
+        seTagError('');
+        setError('');
+    };
     return (
         <Upload
             uploadSubmit={uploadSubmit}
-            onInputChange={onInputChange}
+            onInputChange={onInputChangeWithClearError}
             onDescriptionChange={onDescriptionChange}
             inputState={inputState}
             error={error}
@@ -131,6 +147,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             onTagRemove={onTagRemove}
             tags={tags}
             onBlurTag={onBlurTag}
+            tagError={tagError}
         />
     );
 };
