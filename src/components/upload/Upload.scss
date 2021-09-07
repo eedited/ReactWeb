@@ -156,8 +156,23 @@
 }
 
 @media screen and (max-width: 1100px) {
+
     .upload{
         width : 80%;
+        .upload__haeder{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-family : NotoSansKRBold;
+            border-bottom: 1px solid rgba(32, 32, 32,0.102);
+            .upload__header__title{
+                font-size : rem(25);
+            }
+            .upload__haeder__img{
+                height: rem(150);
+            }
+        }
         .upload__body{
             .upload__form{
                 width : 100%;
