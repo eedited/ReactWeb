@@ -10,6 +10,7 @@ export interface tagType{
     tag: string
 }
 interface props{
+    type: 'upload'|'change'
     uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
@@ -23,12 +24,12 @@ interface props{
     tags: tagType[]
 }
 const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
+    type, uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
 }: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
         <div className="upload__haeder">
-            <div className="upload__header__title">업로드</div>
+            <div className="upload__header__title">{type === 'change' ? '수정' : '업로드'}</div>
             <img alt="upload__haeder__img" src="/upload_temp.png" className="upload__haeder__img" />
         </div>
         <div className="upload__body">
@@ -50,7 +51,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             className="upload__info__title__input"
                             onChange={onInputChange}
                             name="videoLink"
-                            value={inputState.value}
+                            value={inputState.videoLink}
                             placeholder="youtube 또는 Viemo링크를 입력하세요"
                         />
                     </div>
@@ -96,8 +97,10 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             value={description}
                         />
                     </div>
-                    <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">업로드하기</BlueButton>
+
+                    <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : '업로드하기'}</BlueButton>
                     {error && <div className="upload__info__error">{error}</div>}
+
                 </div>
             </form>
             <div className="upload__preview">
