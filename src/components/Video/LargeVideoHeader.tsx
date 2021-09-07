@@ -6,9 +6,10 @@ import './LargeVideoHeader.scss';
 
 interface props {
     video: videoRouter.videoSuccessResponse
+    user: authRouter.checkSuccessResponse | null
 }
 
-const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
+const LargeVideoDescription: React.FC<props> = ({ video, user }: props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
             <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
@@ -21,6 +22,12 @@ const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
             <FollowButtonContainer video={video} />
             <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-button.png" alt="" />
             <LikeButtonContainer video={video} />
+            {user && user.userId === video.uploader
+            && (
+                <Link to={`/change/?videoId=${video.id}`}>
+                    <img className="" src="/icons/category-icon.png" alt="" />
+                </Link>
+            )}
         </div>
     </div>
 );

@@ -17,6 +17,7 @@ import FindingJobPage from './pages/FindingJobPage';
 import HiringJobPage from './pages/HiringJobPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
+import VideoChangePage from './pages/VideoChangePage';
 
 type AppType = () => JSX.Element;
 
@@ -38,6 +39,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/hiring" component={HiringJobPage} />
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/chat" component={ChatPage} />
+                <Route path="/change" component={VideoChangePage} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>

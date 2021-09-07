@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
@@ -13,21 +13,26 @@ import Upload, { tagType } from '../../components/upload/Upload';
 const validPathname: RegExp = /^.*\/([a-zA-Z0-9_-]{11})$/;
 const validId: RegExp = /^([a-zA-Z0-9_-]{11})$/;
 interface fromReducerType{
-    uploadError: videoModule.videoUploadFailureResponse|null
-    uploadSuccess: videoRouter.videoUploadSuccessResponse|null
+    modifyError: videoModule.videoModifyFailureResponse|null
+    modifySuccess: videoRouter.videoModifySuccessResponse|null
+    Video: videoRouter.videoSuccessResponse | null
 }
-interface props{
-    history: RouteComponentProps['history']
+interface props extends RouteComponentProps{
+    videoId: string
+    user: USER|null
 }
 
-const UploadContainer: React.FC<props> = ({ history }: props) => {
+const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props) => {
+    const { video, videoClear }: videoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
-        uploadError,
-        uploadSuccess,
+        modifyError,
+        modifySuccess,
+        Video,
     }: fromReducerType = useAppSelector((state: selectorStateType) => ({
-        uploadError: state.videoReducer.videoUploadError,
-        uploadSuccess: state.videoReducer.videoUploadSuccess,
+        modifyError: state.videoReducer.videoModifyError,
+        modifySuccess: state.videoReducer.videoModifySuccess,
+        Video: state.videoReducer.video,
     }));
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         title: '',
@@ -40,6 +45,27 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const [tagError, seTagError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
+    useEffect(() => {
+        dispatch(videoClear());
+    }, [dispatch, videoClear]);
+    useEffect(() => {
+        dispatch(video({ videoId }));
+    }, [dispatch, video, videoId]);
+    useEffect(() => {
+        if (user && Video && user.userId !== Video.uploader) {
+            history.push('/404NotFound');
+        }
+    });
+    useEffect(() => {
+        if (Video) {
+            onDescriptionChange((prevState: string) => (Video.discription));
+            onTagsChange((prevState: tagType[]) => (Video.WhatVideoUploadTag.map((tag: {tagName: string}, idx: number) => ({ id: idx, tag: tag.tagName }))));
+            setInput('title', Video.title);
+            setInput('videoLink', Video.url);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [Video]);
+
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if ([inputState.title, inputState.videoLink, description].includes('')) {
@@ -69,8 +95,9 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         }
         const thumbnailUrl: string = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
         dispatch(
-            videoAction.videoUpload(
+            videoAction.videoModify(
                 {
+                    id: videoId,
                     title: inputState.title,
                     discription: description,
                     url: inputState.videoLink,
@@ -81,13 +108,13 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         );
     };
     useEffect(() => {
-        if (uploadError) {
-            setError(`업로드 실패 ${uploadError.info}`);
+        if (modifyError) {
+            setError(`업로드 실패 ${modifyError.info}`);
         }
-        if (uploadSuccess) {
+        if (modifySuccess) {
             history.push('/');
         }
-    }, [history, uploadError, uploadSuccess]);
+    }, [history, modifyError, modifySuccess]);
 
     const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -118,6 +145,11 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
     }, [tags]);
     const onBlurTag: React.FocusEventHandler<HTMLInputElement> = useCallback(() => {
+        if (inputState.currentTag.length > 8) {
+            seTagError('8글자 이내로 입력해 주세요!');
+            setInput('currentTag', '');
+            return;
+        }
         if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
             const tag: string = inputState.currentTag;
             const nextTag: tagType = {
@@ -130,13 +162,14 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         setInput('currentTag', '');
     }, [inputState.currentTag, setInput, tags]);
     const onInputChangeWithClearError: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('들어는 오냐?');
         onInputChange(e);
         seTagError('');
         setError('');
     };
     return (
         <Upload
-            type="upload"
+            type="change"
             uploadSubmit={uploadSubmit}
             onInputChange={onInputChangeWithClearError}
             onDescriptionChange={onDescriptionChange}
@@ -153,4 +186,4 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
     );
 };
 
-export default withRouter(UploadContainer);
+export default withRouter(VideoChangeContainer);
