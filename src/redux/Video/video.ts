@@ -11,6 +11,8 @@ const initialState: videoModule.StateType = {
     videoUserUpload: null,
     videoUserUploadError: null,
     videoUploadSuccess: null,
+    videoModifySuccess: null,
+    videoModifyError: null,
 };
 type videoSliceType = Slice<videoModule.StateType, {
     videoClear(state: WritableDraft<videoModule.StateType>): void;
@@ -26,6 +28,9 @@ type videoSliceType = Slice<videoModule.StateType, {
     videoUserUploaded(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoRequest>): void;
     videoUserUploadedSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>): void
     videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>): void
+    videoModify(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifyRequest>): void;
+    videoModifySuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifySuccessResponse>): void;
+    videoModifyFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoModifyFailureResponse>): void;
 }, 'VIDEO'>
 
 const videoSlice: videoSliceType = createSlice({
@@ -40,6 +45,8 @@ const videoSlice: videoSliceType = createSlice({
             state.videoUploadError = null;
             state.videoUserUpload = null;
             state.videoUserUploadError = null;
+            state.videoModifyError = null;
+            state.videoModifySuccess = null;
         },
 
         video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>) {},
@@ -77,6 +84,13 @@ const videoSlice: videoSliceType = createSlice({
         },
         videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>) {
             state.videoUserUploadError = action.payload;
+        },
+        videoModify(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifyRequest>) {},
+        videoModifySuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifySuccessResponse>) {
+            state.videoModifySuccess = action.payload;
+        },
+        videoModifyFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoModifyFailureResponse>) {
+            state.videoModifyError = action.payload;
         },
     },
 });

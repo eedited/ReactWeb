@@ -9,13 +9,14 @@ const videoSaga: createRequestSagaReturnType<videoRouter.videoRequest, videoRout
 const videoListSaga: createRequestSagaReturnType<videoRouter.videoListRequest, videoRouter.videoListSuccessResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
 const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadSuccessResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
 const videoMoreByUserSaga: createRequestSagaReturnType<videoRouter.userVideoRequest, videoRouter.userVideoSuccessResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
-
+const videoModifySaga: createRequestSagaReturnType<videoRouter.videoModifyRequest, videoRouter.videoModifySuccessResponse> = createRequestSaga('VIDEO/videoModify', videoAPI.videoModify);
 export default function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     const {
-        video, videoList, videoUpload, videoUserUploaded,
+        video, videoList, videoUpload, videoUserUploaded, videoModify,
     }: videoModule.ActionType = videoAction;
     yield takeLatest(video, videoSaga);
     yield takeLatest(videoList, videoListSaga);
     yield takeLatest(videoUpload, videoUploadSaga);
     yield takeLatest(videoUserUploaded, videoMoreByUserSaga);
+    yield takeLatest(videoModify, videoModifySaga);
 }

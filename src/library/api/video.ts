@@ -16,6 +16,15 @@ export const videoUpload: videoAPIUploadFunctionType = ({
     title, discription, url, thumbnail, tags,
 });
 
+type videoAPIModifyFunctionType = ({
+    id, title, discription, url, thumbnail, tags,
+}: videoRouter.videoModifyRequest) => Promise<AxiosResponse<videoRouter.videoModifySuccessResponse>>
+export const videoModify: videoAPIModifyFunctionType = ({
+    id, title, discription, url, thumbnail, tags,
+}: videoRouter.videoModifyRequest) => client.patch('/video/upload', {
+    id, title, discription, url, thumbnail, tags,
+});
+
 type videoAPIUserFunctionType = ({ uploader }: videoRouter.userVideoRequest) => Promise<AxiosResponse<videoRouter.userVideoSuccessResponse>>
 export const videoUser: videoAPIUserFunctionType = ({ uploader }: videoRouter.userVideoRequest) => client.get(`/video/${uploader}/list/?page=1`);
 

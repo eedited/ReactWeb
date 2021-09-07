@@ -82,6 +82,19 @@ export declare global{
         interface videoLikeFailureResponse{
             info: string
         }
+        interface videoModifyRequest{
+            id: string,
+            title: string,
+            discription: string,
+            url: string,
+            thumbnail: string,
+            tags: string[]
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface videoModifySuccessResponse{}
+        interface videoModifyFailureResponse{
+            info: string
+        }
 
     }
     namespace videoModule{
@@ -98,14 +111,19 @@ export declare global{
         interface userVideoFailureResponse extends videoRouter.userVideoFailureResponse{
             error: Error
         }
+        interface videoModifyFailureResponse extends videoRouter.videoModifyFailureResponse{
+            error: Error
+        }
         export interface StateType{
             video: videoRouter.videoSuccessResponse|null
             videoList: videoRouter.videoListSuccessResponse|null
             videoUserUpload: videoRouter.userVideoSuccessResponse|null
             videoUploadSuccess: videoRouter.videoUploadSuccessResponse|null
+            videoModifySuccess: videoRouter.videoModifySuccessResponse | null
             getVideoError: videoFailureResponse|null
             videoUploadError: videoUploadFailureResponse|null
             videoUserUploadError: userVideoFailureResponse|null
+            videoModifyError: videoModifyFailureResponse | null
         }
 
         export type ActionType=CaseReducerActions<{
@@ -122,6 +140,9 @@ export declare global{
             videoUserUploaded(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.userVideoRequest>): void;
             videoUserUploadedSuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>): void
             videoUserUploadedFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>): void
+            videoModify(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoModifyRequest>): void;
+            videoModifySuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoModifySuccessResponse>): void;
+            videoModifyFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModifyFailureResponse>): void;
         }>
     }
 
