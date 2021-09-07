@@ -66,14 +66,9 @@ table {
     src: url('./public/fonts/Pretendard-Medium.woff2');
 }
 html, body{
-    font-size: 62.5%;
     line-height: 1.285;
 }
-@media screen and (max-width: 1300px) {
-		html {
-			font-size: 55%;
-		}
-}
+
 body {
     font-family: NotoSansKRMedium;
 }
