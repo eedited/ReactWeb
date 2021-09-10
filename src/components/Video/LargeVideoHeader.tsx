@@ -20,12 +20,16 @@ const LargeVideoDescription: React.FC<props> = ({ video, user }: props) => (
         </div>
         <div className="LargeVideoHeader__iconlist">
             <FollowButtonContainer video={video} />
-            <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-button.png" alt="" />
+            <div className="LargeVideoHeader_iconlist__icon__wrapper">
+                <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" alt="" />
+            </div>
             <LikeButtonContainer video={video} />
             {user && user.userId === video.uploader
             && (
                 <Link to={`/change/?videoId=${video.id}`}>
-                    <img className="" src="/icons/category-icon.png" alt="" />
+                    <div className="LargeVideoHeader_iconlist__icon__wrapper">
+                        <img className="LargeVideoHeader_iconlist__icon" src="/icons/setting-icon.png" alt="" />
+                    </div>
                 </Link>
             )}
         </div>
