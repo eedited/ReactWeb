@@ -1,0 +1,44 @@
+@import '/src/public/scss/public.scss';
+.authForm{
+    display: flex;
+    height: 100vh;
+    .authForm__img{
+        background-color: $orange;
+        width : rem(500);
+        display: flex;
+        align-items: center;    
+        img{
+            width : 100%;
+            filter: invert(40%);
+        }
+    }
+    .authForm__main{
+        width : rem(950);
+        padding : 0 rem(250);
+        margin : auto;
+        .authForm__inputs{
+            display: flex;
+            flex-direction: column;
+            gap : rem(15);
+            .authForm__input{
+                display: flex;
+                flex-direction: column;
+                .authForm__input__field{
+                    border: none;
+                    background-color: $gray;
+                    height: rem(40);   
+                    border-radius: rem(10); 
+                }
+                .authForm__input__field:focus{
+                    background-color: $white;
+                    outline: none;
+                    box-shadow: 0 0 0 2px $orange;
+                }
+                .authForm__input__field:hover{
+                    background-color: $white;
+                    box-shadow: 0 0 0 2px $orange;
+                }
+            }
+        }
+    }
+}
