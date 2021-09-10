@@ -24,7 +24,7 @@ const DropDown: React.FC<props> = ({
             <div className="dropDown__header__title">
                 <div className="dropDown__header__title__flexFirst">
                     <img className="dropDown__header__title__icon" src={imgSrc} alt="img" />
-                    {ddItem.find((item: dropDownProp) => item.selected === true)?.title}
+                    <div>{ddItem.find((item: dropDownProp) => item.selected === true)?.title}</div>
                 </div>
                 <img className="dropDown__haeder__title__toggle" src="/icons/toggle-arrow.png" alt="toggle" />
             </div>
