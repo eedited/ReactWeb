@@ -3,9 +3,9 @@ import LoginForm from '../containers/auth/LoginForm';
 import BaseTemplate from './BaseTemplate';
 
 const LoginPage: React.FC = () => (
-    <BaseTemplate>
-        <LoginForm />
-    </BaseTemplate>
+
+    <LoginForm />
+
 );
 
 export default LoginPage;

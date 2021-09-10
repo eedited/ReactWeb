@@ -30,7 +30,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
     <div className="upload">
         <div className="upload__haeder">
             <div className="upload__header__title">{type === 'change' ? '수정' : '업로드'}</div>
-            <img alt="upload__haeder__img" src="/upload_temp.png" className="upload__haeder__img" />
+            <img alt="upload__haeder__img" src="/images/uploadImg.png" className="upload__haeder__img" />
         </div>
         <div className="upload__body">
             <form onSubmit={uploadSubmit} className="upload__form">
