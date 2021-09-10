@@ -13,6 +13,7 @@ const initialState: videoModule.StateType = {
     videoUploadSuccess: null,
     videoModifySuccess: null,
     videoModifyError: null,
+    endVideoList: false,
 };
 type videoSliceType = Slice<videoModule.StateType, {
     videoClear(state: WritableDraft<videoModule.StateType>): void;
@@ -47,6 +48,7 @@ const videoSlice: videoSliceType = createSlice({
             state.videoUserUploadError = null;
             state.videoModifyError = null;
             state.videoModifySuccess = null;
+            state.endVideoList = false;
         },
 
         video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>) {},
@@ -64,6 +66,9 @@ const videoSlice: videoSliceType = createSlice({
             }
             else {
                 state.videoList.videos = state.videoList.videos.concat(action.payload.videos);
+                if (action.payload.videos.length < 20) {
+                    state.endVideoList = true;
+                }
             }
         },
         videoListFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>) {

@@ -8,7 +8,6 @@ interface props{
     videoInfos: VIDEO[]|null
 }
 const VideoGrid: React.FC<props> = ({ videoInfos }: props) => (
-
     <div className="videoGrid">
         {videoInfos === null
             ? <div>loading</div>

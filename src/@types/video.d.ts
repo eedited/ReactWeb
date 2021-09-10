@@ -117,6 +117,7 @@ export declare global{
         export interface StateType{
             video: videoRouter.videoSuccessResponse|null
             videoList: videoRouter.videoListSuccessResponse|null
+            endVideoList: boolean
             videoUserUpload: videoRouter.userVideoSuccessResponse|null
             videoUploadSuccess: videoRouter.videoUploadSuccessResponse|null
             videoModifySuccess: videoRouter.videoModifySuccessResponse | null
