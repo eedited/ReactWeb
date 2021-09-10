@@ -20,7 +20,7 @@ const Description: React.FC = () => (
                 한눈에 살펴보고 바로 소통해보세요!
             </p>
         </div>
-        <img className="hero__img" alt="hero__img" src="/heroImg.png" />
+        <img className="hero__img" alt="hero__img" src="/images/heroImg.png" />
     </div>
 
 );
