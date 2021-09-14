@@ -1,4 +1,4 @@
-@import '/src/public/scss/public.scss';
+@import '/src/App.scss';
 
 .hero {
     display: flex;
@@ -6,9 +6,9 @@
     background-color: rgb(247, 247, 247);
     align-items: center;
     justify-content: center;
-    gap : rem(180);
-    .hero__description{
-        .hero__description__title{
+    gap: rem(180);
+    .hero__description {
+        .hero__description__title {
             font-family: 'NotoSansKRBold';
             font-size: rem(60);
             line-height: rem(80);
@@ -21,8 +21,8 @@
         }
     }
 
-    .hero__img{
+    .hero__img {
         height: rem(663);
-        width : rem(576);
+        width: rem(576);
     }
 }

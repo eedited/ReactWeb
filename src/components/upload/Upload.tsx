@@ -14,7 +14,7 @@ interface Props {
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
     inputState: inputType
-    error: string|null
+    error: string | null
     tagError: string | null
     description: string
     onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void
@@ -124,7 +124,7 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
                     : (
                         <>
                             <div className="upload__preview__img__wrapper">
-                                <img className="upload__preview__img" src="/play-button.png" alt="play-button" />
+                                <img className="upload__preview__img" src="/images/buttons/play-button.png" alt="play-button" />
                             </div>
                             <div className="upload__preview__img__title">이곳에 미리보기가 표시됩니다.</div>
                         </>
