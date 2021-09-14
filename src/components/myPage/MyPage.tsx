@@ -5,11 +5,11 @@ import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescri
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 
-export interface myPageResponseType{
-    success: userRouter.myPageSuccessResponse | null
-    failure: userRouter.myPageFailureResponse | null
+export interface myPageResponseType {
+    success: UserRouter.MyPageSuccessResponse | null
+    failure: UserRouter.MyPageFailureResponse | null
 }
-interface props{
+interface props {
     myPageResponse: myPageResponseType
 }
 const MyPage: React.FC<props> = ({ myPageResponse }: props) => {
@@ -42,7 +42,7 @@ const MyPage: React.FC<props> = ({ myPageResponse }: props) => {
             </div>
             <hr className="mypage__horizenline" />
             <div className="mypage__videoGrid">
-                {myPageResponse.success && myPageResponse.success.Video.map((videoInfo: VIDEO) => (
+                {myPageResponse.success && myPageResponse.success.Video.map((videoInfo: Video) => (
                     <div key={videoInfo.id}>
                         <VideoContainer videoInfo={videoInfo} />
                         <VideoDescription2 videoInfo={videoInfo} />
