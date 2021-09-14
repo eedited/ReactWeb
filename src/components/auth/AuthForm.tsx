@@ -2,20 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AuthForm.scss';
 
-interface props{
+interface props {
     type: string
-    form: authModule.SIGNUPFORM | LOGIN
-    error: string|null
+    form: RDXAuthModule.SignupForm | Login
+    error: string | null
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
-interface textMapType{
+interface textMapType {
     [type: string]: string
 }
+
 const textMap: textMapType = {
     login: '로그인',
     signup: '회원가입',
 };
+
 const AuthForm: React.FC<props> = ({
     type, form, onChange, onSubmit, error,
 }: props) => (

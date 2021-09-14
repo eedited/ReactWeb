@@ -1,15 +1,15 @@
 import React from 'react';
 
-interface findPwSuccessType{
+interface findPwSuccessType {
     password: string,
 }
-interface findPwFailureType{
+interface findPwFailureType {
     info: string
     error: Error
 }
 export type findPwResponseType = findPwFailureType | findPwSuccessType
 
-interface props{
+interface props {
     email: string
     id: string
     isSubmit: boolean
