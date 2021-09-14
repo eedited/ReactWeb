@@ -2,18 +2,20 @@ import React from 'react';
 import Footer from '../components/common/Footer/Footer';
 import NavbarContainer from '../containers/common/NavbarContainer';
 
-interface props{
+interface Props {
     children?: React.ReactNode
 }
 
-const BaseTemplate: React.FC<props> = ({ children }: props) => (
+const BaseTemplate: React.FC<Props> = ({ children }: Props) => (
     <>
         <NavbarContainer />
         {children}
         <Footer />
     </>
 );
+
 BaseTemplate.defaultProps = {
     children: '',
 };
+
 export default BaseTemplate;

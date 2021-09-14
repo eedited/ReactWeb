@@ -5,43 +5,44 @@ import {
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-const initialState: userModule.StateType = {
+const initialState: RDXUserModule.StateType = {
     user: null,
     checkError: null,
     logoutError: null,
 };
-type userSliceType=Slice<userModule.StateType, {
-    logout(state: WritableDraft<userModule.StateType>): void;
-    logoutSuccess(state: WritableDraft<userModule.StateType>): void;
-    logoutFailure(state: WritableDraft<userModule.StateType>, action: PayloadAction<userModule.logoutFailureResonse>): void;
-    check(state: WritableDraft<userModule.StateType>): void;
-    checkSuccess(state: WritableDraft<userModule.StateType>, action: PayloadAction<authRouter.checkSuccessResponse>): void;
-    checkFailure(state: WritableDraft<userModule.StateType>, action: PayloadAction<userModule.checkFailureResponse>): void;
-    setUser(state: WritableDraft<userModule.StateType>, action: PayloadAction<authRouter.checkSuccessResponse>): void
+
+type userSliceType = Slice<RDXUserModule.StateType, {
+    logout(state: WritableDraft<RDXUserModule.StateType>): void;
+    logoutSuccess(state: WritableDraft<RDXUserModule.StateType>): void;
+    logoutFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.LogoutFailureResonse>): void;
+    check(state: WritableDraft<RDXUserModule.StateType>): void;
+    checkSuccess(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>): void;
+    checkFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.CheckFailureResponse>): void;
+    setUser(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>): void
 }, 'USER'>;
 const userSlice: userSliceType = createSlice({
     name: 'USER',
     initialState,
     reducers: {
-        logout(state: WritableDraft<userModule.StateType>) {
+        logout(state: WritableDraft<RDXUserModule.StateType>) {
             state.user = null;
         },
-        logoutSuccess(state: WritableDraft<userModule.StateType>) {},
-        logoutFailure(state: WritableDraft<userModule.StateType>, action: PayloadAction<userModule.logoutFailureResonse>) {
+        logoutSuccess(state: WritableDraft<RDXUserModule.StateType>) {},
+        logoutFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.LogoutFailureResonse>) {
             state.logoutError = action.payload;
         },
-        check(state: WritableDraft<userModule.StateType>) {},
-        checkSuccess(state: WritableDraft<userModule.StateType>, action: PayloadAction<authRouter.checkSuccessResponse>) {
+        check(state: WritableDraft<RDXUserModule.StateType>) {},
+        checkSuccess(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {
             state.user = action.payload;
         },
-        checkFailure(state: WritableDraft<userModule.StateType>, action: PayloadAction<userModule.checkFailureResponse>) {
+        checkFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.CheckFailureResponse>) {
             state.checkError = action.payload;
             if (state.user) {
                 state.user = null;
                 localStorage.removeItem('user');
             }
         },
-        setUser(state: WritableDraft<userModule.StateType>, action: PayloadAction<authRouter.checkSuccessResponse>) {
+        setUser(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {
             state.user = action.payload;
         },
     },
@@ -49,4 +50,4 @@ const userSlice: userSliceType = createSlice({
 
 export const USER: string = userSlice.name;
 export default userSlice.reducer;
-export const userAction: userModule.ActionType = userSlice.actions;
+export const userAction: RDXUserModule.ActionType = userSlice.actions;

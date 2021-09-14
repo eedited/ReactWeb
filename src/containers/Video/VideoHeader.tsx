@@ -1,23 +1,20 @@
 import React from 'react';
-import { selectorStateType, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppSelector } from '../../hooks';
 import LargeVideoHeader from '../../components/Video/LargeVideoHeader';
 
-interface fromReducerType{
-    Video: videoRouter.videoSuccessResponse|null
-    User: authRouter.checkSuccessResponse | null
+interface FromReducerType {
+    Video: VideoRouter.VideoSuccessResponse | null
+    User: AuthRouter.CheckSuccessResponse | null
 }
 
 const LargeVideoHeaderContainer: React.FC = () => {
     const {
         Video, User,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         Video: state.videoReducer.video,
         User: state.userReducer.user,
     }));
-    if (Video === null) {
-        return <div />;
-    }
-    return (
+    return (Video === null) ? <div /> : (
         <LargeVideoHeader video={Video} user={User} />
     );
 };

@@ -6,20 +6,18 @@ import Description from '../components/Landing/Hero/Hero';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
 
-interface matchParams{
+interface MatchParams {
     criteria: string
 }
-interface props{
-    match: router.match<matchParams>
+interface Props {
+    match: router.match<MatchParams>
 }
+
 const validMatch: string[] = ['thumbup', 'latest'];
-const Landing: React.FC<props> = ({ match }: props) => {
+const Landing: React.FC<Props> = ({ match }: Props) => {
     let criteria: string = '';
-    useEffect(() => {
-        console.log(criteria);
-    }, [criteria]);
+
     if (match.params.criteria !== undefined && !validMatch.includes(match.params.criteria)) {
-        // 404로 보내버렷!``
         return (
             <Redirect to={{
                 pathname: '/404NotFound',
@@ -27,6 +25,7 @@ const Landing: React.FC<props> = ({ match }: props) => {
             />
         );
     }
+
     if (match.params.criteria === undefined) criteria = 'latest';
     else criteria = match.params.criteria;
 

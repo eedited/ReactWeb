@@ -4,15 +4,15 @@ import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescri
 
 import './MoreByUser.scss';
 
-interface props{
-    videos: VIDEO[]
+interface Props {
+    videos: Video[]
 }
-const MoreByUser: React.FC<props> = ({ videos }: props) => (
+const MoreByUser: React.FC<Props> = ({ videos }: Props) => (
     <div className="more-by-user">
         <div className="more-by-user__title">이 편집자의 다른 동영상</div>
         <div className="more-by-user__video">
             {
-                videos.map((video: VIDEO, idx: number) => {
+                videos.map((video: Video, idx: number) => {
                     if (idx < 6) {
                         return (
                             <div key={video.id}>

@@ -1,36 +1,39 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { videoLike } from '../../library/api/video';
+import { videoLike } from '../../api/video';
 import LikeButtonCount from '../../components/Landing/VideoGrid/Buttons/LikeButtonCount';
 
-interface likeButtonStateType{
+interface LikeButtonStateType {
     toggle: boolean,
     likeCnt: number
 }
-interface props{
-    Video: VIDEO|null
+interface Props {
+    Video: Video | null
 }
-interface liekResponse{
-    success: videoRouter.videoLikeSuccessResponse | null
-    failure: videoRouter.videoLikeFailureResponse | null
+interface LikeResponse {
+    success: VideoRouter.VideoLikeSuccessResponse | null
+    failure: VideoRouter.VideoLikeFailureResponse | null
 }
-const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
-    const [likeButtonState, toggleClickLikeButton]: [likeButtonStateType, React.Dispatch<React.SetStateAction<likeButtonStateType>>] = useState<likeButtonStateType>({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
-    const [likeResponse, setLikeResponse]: [liekResponse, React.Dispatch<React.SetStateAction<liekResponse>>] = useState<liekResponse>({ success: null, failure: null });
+
+const LikeButtonCountContainer: React.FC<Props> = ({ Video }: Props) => {
+    const [likeButtonState, toggleClickLikeButton]: [LikeButtonStateType, React.Dispatch<React.SetStateAction<LikeButtonStateType>>] = useState<LikeButtonStateType>({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
+    const [likeResponse, setLikeResponse]: [LikeResponse, React.Dispatch<React.SetStateAction<LikeResponse>>] = useState<LikeResponse>({ success: null, failure: null });
+
     useEffect(() => {
         toggleClickLikeButton({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
         if (Video) {
             if (Video.WhatVideoUpload) {
                 if (Video.WhatVideoUpload.length > 0) {
-                    toggleClickLikeButton((prevState: likeButtonStateType) => ({ ...prevState, toggle: true }));
+                    toggleClickLikeButton((prevState: LikeButtonStateType) => ({ ...prevState, toggle: true }));
                 }
             }
         }
     }, [Video]);
+
     const onButtonClick: (VIDEOID: string) => void = useCallback(async (VIDEOID: string) => {
         setLikeResponse({ success: null, failure: null });
         try {
-            const response: AxiosResponse<videoRouter.videoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
+            const response: AxiosResponse<VideoRouter.VideoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
             setLikeResponse({ ...likeResponse, success: response.data });
             if (likeButtonState.toggle) {
                 toggleClickLikeButton({ toggle: !likeButtonState.toggle, likeCnt: likeButtonState.likeCnt - 1 });
@@ -43,9 +46,12 @@ const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
             setLikeResponse({ ...likeResponse, failure: err.response.data });
         }
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
-    if (Video === null) return <div />;
-    return (
-        <LikeButtonCount likeButtonState={likeButtonState} onButtonClick={() => onButtonClick(Video.id)} />
+
+    return (Video === null) ? <div /> : (
+        <LikeButtonCount
+            likeButtonState={likeButtonState}
+            onButtonClick={() => onButtonClick(Video.id)}
+        />
     );
 };
 

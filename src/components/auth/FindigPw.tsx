@@ -1,13 +1,13 @@
 import React from 'react';
 
-interface findPwSuccessType {
+interface FindPwSuccessType {
     password: string,
 }
-interface findPwFailureType {
+interface FindPwFailureType {
     info: string
     error: Error
 }
-export type findPwResponseType = findPwFailureType | findPwSuccessType
+export type FindPwResponseType = FindPwFailureType | FindPwSuccessType
 
 interface props {
     email: string
@@ -15,7 +15,7 @@ interface props {
     isSubmit: boolean
     loading: 'start'|'success'|'failure'
     validationString: string
-    findPwResponse: findPwResponseType
+    findPwResponse: FindPwResponseType
     onEmailSubmit: () => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

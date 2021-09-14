@@ -1,16 +1,16 @@
 import React from 'react';
 import './LikebuttonCount.scss';
 
-export interface likeButtonStateType {
+export interface LikeButtonStateType {
     toggle: boolean,
     likeCnt: number
 }
-interface props {
-    likeButtonState: likeButtonStateType
+interface Props {
+    likeButtonState: LikeButtonStateType
     onButtonClick: () => void
 }
 
-const LikeButtonCount: React.FC<props> = ({ likeButtonState, onButtonClick }: props) => (
+const LikeButtonCount: React.FC<Props> = ({ likeButtonState, onButtonClick }: Props) => (
     <button className="likebutton" onClick={onButtonClick} type="button">
         {!likeButtonState.toggle
             ? <img className="likebutton__img" src="/icons/heart-icon.png" alt="like" />

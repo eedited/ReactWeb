@@ -3,18 +3,20 @@ import qs from 'qs';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import BaseTemplate from './BaseTemplate';
 import VideoChangeContainer from '../containers/upload/VideoChangeContainer';
-import { selectorStateType, useAppSelector } from '../hooks';
+import { SelectorStateType, useAppSelector } from '../hooks';
 
-interface fromReducerType{
-    user: USER|null
+interface FromReducerType {
+    user: User | null
 }
-type props = RouteComponentProps
-const VideoChangePage: React.FC<props> = ({ history, location }: props) => {
+type Props = RouteComponentProps;
+
+const VideoChangePage: React.FC<Props> = ({ history, location }: Props) => {
     const {
         user,
-    }: fromReducerType = useAppSelector(((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector(((state: SelectorStateType) => ({
         user: state.userReducer.user,
     })));
+
     if (!user) {
         history.push('/404NotFound');
     }
@@ -22,6 +24,7 @@ const VideoChangePage: React.FC<props> = ({ history, location }: props) => {
         ignoreQueryPrefix: true,
     });
     const { videoId }: qs.ParsedQs = query;
+
     return (
         <BaseTemplate>
             <>
@@ -31,10 +34,8 @@ const VideoChangePage: React.FC<props> = ({ history, location }: props) => {
                         : (
                             <Redirect to={{ pathname: '/404NotFound' }} />
                         )
-
                 }
             </>
-
         </BaseTemplate>
     );
 };

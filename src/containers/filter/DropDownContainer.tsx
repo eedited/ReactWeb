@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import DropDown from '../../components/common/DropDown/DropDown';
 
-interface dropDownProp{
+interface DropDownProp {
     id: number,
     title: string,
     selected: boolean,
     key: string
     set: string
 }
-interface props{
+interface Props {
     imgSrc: string
-    initialStateDD: dropDownProp[]
+    initialStateDD: DropDownProp[]
 }
-const DropDownContainer: React.FC<props> = ({ initialStateDD, imgSrc }: props) => {
-    const [ddItem, setDD]: [dropDownProp[], React.Dispatch<React.SetStateAction<dropDownProp[]>>] = useState<dropDownProp[]>(initialStateDD);
+const DropDownContainer: React.FC<Props> = ({ initialStateDD, imgSrc }: Props) => {
+    const [ddItem, setDD]: [DropDownProp[], React.Dispatch<React.SetStateAction<DropDownProp[]>>] = useState<DropDownProp[]>(initialStateDD);
     const [isListOpen, setIsListOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
-    const selectItem: (item: dropDownProp) => void = (item: dropDownProp) => {
+    const selectItem: (item: DropDownProp) => void = (item: DropDownProp) => {
         setIsListOpen(false);
-        let temp: dropDownProp[] = [...ddItem];
-        temp = temp.map((x: dropDownProp) => ({
+        let temp: DropDownProp[] = [...ddItem];
+        temp = temp.map((x: DropDownProp) => ({
             ...x,
             selected: false,
         }));
-        temp = temp.map((x: dropDownProp) => {
+        temp = temp.map((x: DropDownProp) => {
             if (x.id === item.id) {
                 return {
                     ...x,
@@ -33,6 +33,7 @@ const DropDownContainer: React.FC<props> = ({ initialStateDD, imgSrc }: props) =
         });
         setDD(temp);
     };
+
     return (
         <DropDown
             ddItem={ddItem}

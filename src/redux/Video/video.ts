@@ -3,7 +3,7 @@
 import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-const initialState: videoModule.StateType = {
+const initialState: RDXVideoModule.StateType = {
     video: null,
     videoList: null,
     getVideoError: null,
@@ -15,30 +15,30 @@ const initialState: videoModule.StateType = {
     videoModifyError: null,
     endVideoList: false,
 };
-type videoSliceType = Slice<videoModule.StateType, {
-    videoClear(state: WritableDraft<videoModule.StateType>): void;
-    video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>): void;
-    videoSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoSuccessResponse>): void;
-    videoFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>): void;
-    videoList(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListRequest>): void;
-    videoListSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListSuccessResponse>): void;
-    videoListFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoListFailureResponse>): void;
-    videoUpload(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadRequest>): void;
-    videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>): void;
-    videoUploadFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>): void;
-    videoUserUploaded(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoRequest>): void;
-    videoUserUploadedSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>): void
-    videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>): void
-    videoModify(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifyRequest>): void;
-    videoModifySuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifySuccessResponse>): void;
-    videoModifyFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoModifyFailureResponse>): void;
+type VideoSliceType = Slice<RDXVideoModule.StateType, {
+    videoClear(state: WritableDraft<RDXVideoModule.StateType>): void;
+    video(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoRequest>): void;
+    videoSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoSuccessResponse>): void;
+    videoFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>): void;
+    videoList(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListRequest>): void;
+    videoListSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListSuccessResponse>): void;
+    videoListFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoListFailureResponse>): void;
+    videoUpload(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoUploadRequest>): void;
+    videoUploadSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoUploadSuccessResponse>): void;
+    videoUploadFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoUploadFailureResponse>): void;
+    videoUserUploaded(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.UserVideoRequest>): void;
+    videoUserUploadedSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.UserVideoSuccessResponse>): void
+    videoUserUploadedFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.UserVideoFailureResponse>): void
+    videoModify(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifyRequest>): void;
+    videoModifySuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifySuccessResponse>): void;
+    videoModifyFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoModifyFailureResponse>): void;
 }, 'VIDEO'>
 
-const videoSlice: videoSliceType = createSlice({
+const videoSlice: VideoSliceType = createSlice({
     name: 'VIDEO',
     initialState,
     reducers: {
-        videoClear(state: WritableDraft<videoModule.StateType>) {
+        videoClear(state: WritableDraft<RDXVideoModule.StateType>) {
             state.videoList = null;
             state.video = null;
             state.videoUploadSuccess = null;
@@ -51,16 +51,16 @@ const videoSlice: videoSliceType = createSlice({
             state.endVideoList = false;
         },
 
-        video(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoRequest>) {},
-        videoSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoSuccessResponse>) {
+        video(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoRequest>) {},
+        videoSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoSuccessResponse>) {
             state.video = action.payload;
         },
-        videoFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>) {
+        videoFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>) {
             state.getVideoError = action.payload;
         },
 
-        videoList(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListRequest>) {},
-        videoListSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoListSuccessResponse>) {
+        videoList(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListRequest>) {},
+        videoListSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListSuccessResponse>) {
             if (state.videoList == null) {
                 state.videoList = { videos: action.payload.videos };
             }
@@ -71,30 +71,30 @@ const videoSlice: videoSliceType = createSlice({
                 }
             }
         },
-        videoListFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoFailureResponse>) {
+        videoListFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>) {
             state.getVideoError = action.payload;
         },
 
-        videoUpload(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadRequest>) {},
-        videoUploadSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>) {
+        videoUpload(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoUploadRequest>) {},
+        videoUploadSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoUploadSuccessResponse>) {
             state.videoUploadSuccess = action.payload;
         },
-        videoUploadFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>) {
+        videoUploadFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoUploadFailureResponse>) {
             state.videoUploadError = action.payload;
         },
 
-        videoUserUploaded(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoRequest>) {},
-        videoUserUploadedSuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>) {
+        videoUserUploaded(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.UserVideoRequest>) {},
+        videoUserUploadedSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.UserVideoSuccessResponse>) {
             state.videoUserUpload = action.payload;
         },
-        videoUserUploadedFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>) {
+        videoUserUploadedFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.UserVideoFailureResponse>) {
             state.videoUserUploadError = action.payload;
         },
-        videoModify(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifyRequest>) {},
-        videoModifySuccess(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoRouter.videoModifySuccessResponse>) {
+        videoModify(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifyRequest>) {},
+        videoModifySuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifySuccessResponse>) {
             state.videoModifySuccess = action.payload;
         },
-        videoModifyFailure(state: WritableDraft<videoModule.StateType>, action: PayloadAction<videoModule.videoModifyFailureResponse>) {
+        videoModifyFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoModifyFailureResponse>) {
             state.videoModifyError = action.payload;
         },
     },
@@ -102,4 +102,4 @@ const videoSlice: videoSliceType = createSlice({
 
 export const VIDEO: string = videoSlice.name;
 export default videoSlice.reducer;
-export const videoAction: videoModule.ActionType = videoSlice.actions;
+export const videoAction: RDXVideoModule.ActionType = videoSlice.actions;

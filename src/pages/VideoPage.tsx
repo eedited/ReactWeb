@@ -9,28 +9,25 @@ import UserMabyLike from '../containers/Video/UserMaybeLike';
 import VideoHeader from '../containers/Video/VideoHeader';
 import HorizonLine from '../components/common/HorizonLine/HorizonLine';
 
-type props = RouteComponentProps
+type Props = RouteComponentProps;
 
-const VideoPage: React.FC<props> = ({ location }: props) => {
+const VideoPage: React.FC<Props> = ({ location }: Props) => {
     const query: qs.ParsedQs = qs.parse(location.search, {
         ignoreQueryPrefix: true,
     });
     const { videoId }: qs.ParsedQs = query;
+
     return (
         <BaseTemplate>
             <VideoHeader />
-            <>
-                {
-                    typeof (videoId) === 'string'
-                        ? <VideoInfoContainer videoId={videoId} />
-                        : (
-                            <Redirect to={{
-                                pathname: '/404NotFound',
-                            }}
-                            />
-                        )
-                }
-            </>
+            {
+                typeof (videoId) === 'string' ? <VideoInfoContainer videoId={videoId} /> : (
+                    <Redirect to={{
+                        pathname: '/404NotFound',
+                    }}
+                    />
+                )
+            }
             <LargeVideoDescription />
             <HorizonLine />
             <MoreByUser />

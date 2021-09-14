@@ -5,27 +5,28 @@ import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
-import useInputs, { inputType } from '../../library/hooks/useInputs';
-import Upload, { tagType } from '../../components/upload/Upload';
+import useInputs, { inputType } from '../../hooks/useInputs';
+import Upload, { TagType } from '../../components/upload/Upload';
 
 const validPathname: RegExp = /^.*\/([a-zA-Z0-9_-]{11})$/;
 const validId: RegExp = /^([a-zA-Z0-9_-]{11})$/;
-interface fromReducerType{
-    uploadError: videoModule.videoUploadFailureResponse|null
-    uploadSuccess: videoRouter.videoUploadSuccessResponse|null
+
+interface FromReducerType {
+    uploadError: RDXVideoModule.VideoUploadFailureResponse | null
+    uploadSuccess: VideoRouter.VideoUploadSuccessResponse | null
 }
-interface props{
+interface Props {
     history: RouteComponentProps['history']
 }
 
-const UploadContainer: React.FC<props> = ({ history }: props) => {
+const UploadContainer: React.FC<Props> = ({ history }: Props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         uploadError,
         uploadSuccess,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         uploadError: state.videoReducer.videoUploadError,
         uploadSuccess: state.videoReducer.videoUploadSuccess,
     }));
@@ -35,7 +36,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         currentTag: '',
     });
     const [description, onDescriptionChange]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
-    const [tags, onTagsChange]: [tagType[], React.Dispatch<React.SetStateAction<tagType[]>>] = useState([] as tagType[]);
+    const [tags, onTagsChange]: [TagType[], React.Dispatch<React.SetStateAction<TagType[]>>] = useState([] as TagType[]);
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
@@ -54,6 +55,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             setError('올바르지 못한 video Url 입니다');
             return;
         }
+
         /* 썸네일 url 파싱  https://github.com/iktakahiro/youtube-url-parser/blob/master/src/parser.ts */
         const parser: HTMLAnchorElement = document.createElement('a');
         parser.href = inputState.videoLink;
@@ -75,11 +77,12 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
                     discription: description,
                     url: inputState.videoLink,
                     thumbnail: thumbnailUrl,
-                    tags: tags.map((tag: tagType) => tag.tag),
+                    tags: tags.map((tag: TagType) => tag.tag),
                 },
             ),
         );
     };
+
     useEffect(() => {
         if (uploadError) {
             setError(`업로드 실패 ${uploadError.info}`);
@@ -96,7 +99,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
                 seTagError('최소한 한글자 이상 입력해주세요.');
                 return;
             }
-            if (tags.some((item: tagType) => item.tag === inputState.currentTag)) {
+            if (tags.some((item: TagType) => item.tag === inputState.currentTag)) {
                 seTagError('중복되는 태그가 있습니다.');
                 return;
             }
@@ -105,7 +108,7 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
                 return;
             }
             const tag: string = inputState.currentTag;
-            const nextTag: tagType = {
+            const nextTag: TagType = {
                 id: tagId.current,
                 tag,
             };
@@ -114,13 +117,15 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
             setInput('currentTag', '');
         }
     }, [inputState.currentTag, setInput, tags]);
+
     const onTagRemove: (id: number) => void = useCallback((id: number) => {
-        onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
+        onTagsChange(tags.filter((tag: TagType) => tag.id !== id));
     }, [tags]);
+
     const onBlurTag: React.FocusEventHandler<HTMLInputElement> = useCallback(() => {
-        if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
+        if (inputState.currentTag !== '' && !tags.some((item: TagType) => item.tag === inputState.currentTag)) {
             const tag: string = inputState.currentTag;
-            const nextTag: tagType = {
+            const nextTag: TagType = {
                 id: tagId.current,
                 tag,
             };
@@ -129,11 +134,13 @@ const UploadContainer: React.FC<props> = ({ history }: props) => {
         }
         setInput('currentTag', '');
     }, [inputState.currentTag, setInput, tags]);
+
     const onInputChangeWithClearError: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         onInputChange(e);
         seTagError('');
         setError('');
     };
+
     return (
         <Upload
             type="upload"

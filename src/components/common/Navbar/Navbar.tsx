@@ -7,7 +7,7 @@ import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
 
-interface props{
+interface Props {
     user: User | null
     isSearchClick: boolean
     onLogout: () => void
@@ -17,9 +17,9 @@ interface props{
     onUpload: () => void
 }
 
-const Navbar: React.FC<props> = ({
+const Navbar: React.FC<Props> = ({
     user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload,
-}: props) => (
+}: Props) => (
     <>
         <div className="navbar">
             <div className="navbar__menu">

@@ -4,28 +4,29 @@ import {
 } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-export interface loadingStateType{
+export interface LoadingStateType {
     [key: string]: boolean
 }
 
-const initialState: loadingStateType = {};
-type loadingSliceType = Slice<loadingStateType, {
-    startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+const initialState: LoadingStateType = {};
+
+type LoadingSliceType = Slice<LoadingStateType, {
+    startLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{
         status: string;
     }>): void;
-    finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+    finishLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{
         status: string;
     }>): void;
 }, 'LOADING'>
 
-const loadingSlice: loadingSliceType = createSlice({
+const loadingSlice: LoadingSliceType = createSlice({
     name: 'LOADING',
     initialState,
     reducers: {
-        startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{status: string}>) {
+        startLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{status: string}>) {
             state[action.payload.status] = true;
         },
-        finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{status: string}>) {
+        finishLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{status: string}>) {
             state[action.payload.status] = false;
         },
     },
@@ -34,10 +35,10 @@ const loadingSlice: loadingSliceType = createSlice({
 export const LOADING: string = loadingSlice.name;
 export default loadingSlice.reducer;
 export const loadingAction: CaseReducerActions<{
-    startLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+    startLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{
         status: string;
     }>): void;
-    finishLoading(state: WritableDraft<loadingStateType>, action: PayloadAction<{
+    finishLoading(state: WritableDraft<LoadingStateType>, action: PayloadAction<{
         status: string;
     }>): void;
 }> = loadingSlice.actions;

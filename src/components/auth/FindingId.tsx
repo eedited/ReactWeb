@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface props {
+interface Props {
     email: string;
     isSubmit: boolean;
     loading: string;
@@ -9,7 +9,7 @@ interface props {
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FindingId: React.FC<props> = ({ onInputChange, email, onEmailSubmit, isSubmit, loading, validationString }: props) => (
+const FindingId: React.FC<Props> = ({ onInputChange, email, onEmailSubmit, isSubmit, loading, validationString }: Props) => (
     <div>
         <form>
             <h2>ID 찾기</h2>

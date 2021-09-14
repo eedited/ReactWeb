@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import './DropDown.scss';
 
-interface dropDownProp {
+interface DropDownProp {
     id: number,
     title: string,
     selected: boolean,
     key: string
     set: string
 }
-interface props {
+interface Props {
     className?: string
-    ddItem: dropDownProp[]
+    ddItem: DropDownProp[]
     isListOpen: boolean
     imgSrc: string
     clickTitle: () => void
-    selectItem: (item: dropDownProp) => void
+    selectItem: (item: DropDownProp) => void
 }
 
-const DropDown: React.FC<props> = ({
+const DropDown: React.FC<Props> = ({
     className, ddItem, imgSrc, clickTitle, selectItem, isListOpen,
-}: props) => (
+}: Props) => (
     <div className="dropDown">
         <button className="dropDown__header dropDown__item" onClick={clickTitle} type="button">
             <div className="dropDown__header__title">
                 <div className="dropDown__header__title__flexFirst">
                     <img className="dropDown__header__title__icon" src={imgSrc} alt="img" />
-                    <div>{ddItem.find((item: dropDownProp) => item.selected === true)?.title}</div>
+                    <div>{ddItem.find((item: DropDownProp) => item.selected === true)?.title}</div>
                 </div>
                 <img className="dropDown__haeder__title__toggle" src="/icons/toggle-arrow.png" alt="toggle" />
             </div>
@@ -33,7 +33,7 @@ const DropDown: React.FC<props> = ({
         {isListOpen
             && (
                 <div className="dropDown__list">
-                    {ddItem.map((item: dropDownProp, idx: number) => {
+                    {ddItem.map((item: DropDownProp, idx: number) => {
                         let name: string = 'dropDown__list__item dropDown__item';
                         if (idx === 0) {
                             name += ' dropDown__list__first';

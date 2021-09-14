@@ -2,19 +2,20 @@ import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import LikeButton from '../../components/Video/LikeButton';
 
-import { videoLike } from '../../library/api/video';
+import { videoLike } from '../../api/video';
 
-interface liekResponse{
-    success: videoRouter.videoLikeSuccessResponse | null
-    failure: videoRouter.videoLikeFailureResponse | null
+interface LikeResponse {
+    success: VideoRouter.VideoLikeSuccessResponse | null
+    failure: VideoRouter.VideoLikeFailureResponse | null
+}
+interface Props {
+    video: VideoRouter.VideoSuccessResponse
 }
 
-interface Props{
-    video: videoRouter.videoSuccessResponse
-}
 const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
-    const [likeResponse, setLikeResponse]: [liekResponse, React.Dispatch<React.SetStateAction<liekResponse>>] = useState<liekResponse>({ success: null, failure: null });
+    const [likeResponse, setLikeResponse]: [LikeResponse, React.Dispatch<React.SetStateAction<LikeResponse>>] = useState<LikeResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+
     useEffect(() => {
         setToggle(false);
         if (video) {
@@ -25,10 +26,11 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
             }
         }
     }, [video]);
+
     const onButtonClick: (VIDEOID: string) => Promise<void> = useCallback(async (VIDEOID: string) => {
         setLikeResponse({ success: null, failure: null });
         try {
-            const response: AxiosResponse<videoRouter.videoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
+            const response: AxiosResponse<VideoRouter.VideoLikeSuccessResponse> = await videoLike({ videoId: VIDEOID });
             setLikeResponse({ ...likeResponse, success: response });
             setToggle((prevState: boolean) => !prevState);
         }
@@ -36,6 +38,7 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
             setLikeResponse({ ...likeResponse, failure: err.response.data });
         }
     }, [likeResponse]);
+
     return (
         <LikeButton onButtonClick={() => onButtonClick(video.id)} toggle={toggle} />
     );

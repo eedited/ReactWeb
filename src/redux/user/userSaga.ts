@@ -4,11 +4,11 @@ import {
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
 
-import * as api from '../../library/api/auth';
+import * as api from '../../api/auth';
 import { loadingAction } from '../loading/loading';
 
 function* logoutSaga() {
-    const { intializeForm }: authModule.ActionType = authAction;
+    const { intializeForm }: RDXAuthModule.ActionType = authAction;
     yield put(loadingAction.startLoading({ status: 'USER/logout' }));
     try {
         yield call(api.logout);
@@ -28,7 +28,7 @@ function* logoutSaga() {
 function* checkSaga() {
     yield put(loadingAction.startLoading({ status: 'USER/check' }));
     try {
-        const response: {data: authRouter.checkSuccessResponse} = yield call(api.check);
+        const response: {data: AuthRouter.CheckSuccessResponse} = yield call(api.check);
         yield put({
             type: 'USER/checkSuccess',
             payload: {
@@ -48,7 +48,7 @@ function* checkSaga() {
     yield put(loadingAction.finishLoading({ status: 'USER/logout' }));
 }
 export default function* userSaga(): Generator<ForkEffect<never>, void, unknown> {
-    const { logout, check }: userModule.ActionType = userAction;
+    const { logout, check }: RDXUserModule.ActionType = userAction;
     yield takeLatest(logout, logoutSaga);
     yield takeLatest(check, checkSaga);
 }

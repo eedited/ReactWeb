@@ -5,31 +5,32 @@ import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
-import useInputs, { inputType } from '../../library/hooks/useInputs';
-import Upload, { tagType } from '../../components/upload/Upload';
+import useInputs, { inputType } from '../../hooks/useInputs';
+import Upload, { TagType } from '../../components/upload/Upload';
 
 const validPathname: RegExp = /^.*\/([a-zA-Z0-9_-]{11})$/;
 const validId: RegExp = /^([a-zA-Z0-9_-]{11})$/;
-interface fromReducerType{
-    modifyError: videoModule.videoModifyFailureResponse|null
-    modifySuccess: videoRouter.videoModifySuccessResponse|null
-    Video: videoRouter.videoSuccessResponse | null
+
+interface FromReducerType {
+    modifyError: RDXVideoModule.VideoModifyFailureResponse | null
+    modifySuccess: VideoRouter.VideoModifySuccessResponse | null
+    Video: VideoRouter.VideoSuccessResponse | null
 }
-interface props extends RouteComponentProps{
+interface Props extends RouteComponentProps {
     videoId: string
-    user: USER|null
+    user: User | null
 }
 
-const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props) => {
-    const { video, videoClear }: videoModule.ActionType = videoAction;
+const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props) => {
+    const { video, videoClear }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         modifyError,
         modifySuccess,
         Video,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         modifyError: state.videoReducer.videoModifyError,
         modifySuccess: state.videoReducer.videoModifySuccess,
         Video: state.videoReducer.video,
@@ -40,26 +41,30 @@ const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props
         currentTag: '',
     });
     const [description, onDescriptionChange]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
-    const [tags, onTagsChange]: [tagType[], React.Dispatch<React.SetStateAction<tagType[]>>] = useState([] as tagType[]);
+    const [tags, onTagsChange]: [TagType[], React.Dispatch<React.SetStateAction<TagType[]>>] = useState([] as TagType[]);
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
     const [tagError, seTagError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
+
     useEffect(() => {
         dispatch(videoClear());
     }, [dispatch, videoClear]);
+
     useEffect(() => {
         dispatch(video({ videoId }));
     }, [dispatch, video, videoId]);
+
     useEffect(() => {
         if (user && Video && user.userId !== Video.uploader) {
             history.push('/404NotFound');
         }
     });
+
     useEffect(() => {
         if (Video) {
             onDescriptionChange((prevState: string) => (Video.discription));
-            onTagsChange((prevState: tagType[]) => (Video.WhatVideoUploadTag.map((tag: {tagName: string}, idx: number) => ({ id: idx, tag: tag.tagName }))));
+            onTagsChange((prevState: TagType[]) => (Video.WhatVideoUploadTag.map((tag: {tagName: string}, idx: number) => ({ id: idx, tag: tag.tagName }))));
             setInput('title', Video.title);
             setInput('videoLink', Video.url);
         }
@@ -102,11 +107,12 @@ const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props
                     discription: description,
                     url: inputState.videoLink,
                     thumbnail: thumbnailUrl,
-                    tags: tags.map((tag: tagType) => tag.tag),
+                    tags: tags.map((tag: TagType) => tag.tag),
                 },
             ),
         );
     };
+
     useEffect(() => {
         if (modifyError) {
             setError(`업로드 실패 ${modifyError.info}`);
@@ -123,7 +129,7 @@ const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props
                 seTagError('최소한 한글자 이상 입력해주세요.');
                 return;
             }
-            if (tags.some((item: tagType) => item.tag === inputState.currentTag)) {
+            if (tags.some((item: TagType) => item.tag === inputState.currentTag)) {
                 seTagError('중복되는 태그가 있습니다.');
                 return;
             }
@@ -131,28 +137,32 @@ const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props
                 seTagError('8글자 이내로 입력해 주세요!');
                 return;
             }
+
             const tag: string = inputState.currentTag;
-            const nextTag: tagType = {
+            const nextTag: TagType = {
                 id: tagId.current,
                 tag,
             };
+
             onTagsChange(() => tags.concat(nextTag));
             tagId.current += 1;
             setInput('currentTag', '');
         }
     }, [inputState.currentTag, setInput, tags]);
+
     const onTagRemove: (id: number) => void = useCallback((id: number) => {
-        onTagsChange(tags.filter((tag: tagType) => tag.id !== id));
+        onTagsChange(tags.filter((tag: TagType) => tag.id !== id));
     }, [tags]);
+
     const onBlurTag: React.FocusEventHandler<HTMLInputElement> = useCallback(() => {
         if (inputState.currentTag.length > 8) {
             seTagError('8글자 이내로 입력해 주세요!');
             setInput('currentTag', '');
             return;
         }
-        if (inputState.currentTag !== '' && !tags.some((item: tagType) => item.tag === inputState.currentTag)) {
+        if (inputState.currentTag !== '' && !tags.some((item: TagType) => item.tag === inputState.currentTag)) {
             const tag: string = inputState.currentTag;
-            const nextTag: tagType = {
+            const nextTag: TagType = {
                 id: tagId.current,
                 tag,
             };
@@ -161,12 +171,13 @@ const VideoChangeContainer: React.FC<props> = ({ history, videoId, user }: props
         }
         setInput('currentTag', '');
     }, [inputState.currentTag, setInput, tags]);
+
     const onInputChangeWithClearError: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('들어는 오냐?');
         onInputChange(e);
         seTagError('');
         setError('');
     };
+
     return (
         <Upload
             type="change"

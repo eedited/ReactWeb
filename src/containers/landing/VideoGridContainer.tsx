@@ -1,6 +1,3 @@
-// TODO : 당장은 페이지를 내렸을 때 추가되는 코드가 없으나, 추가해야할 필요가 있음. 아마 스크롤이 충분히 내려왔을 때
-// page의 값을 setPage로 1 증가시키면 될 것을 보임.
-
 import React, {
     useEffect, useRef, useCallback,
 } from 'react';
@@ -8,18 +5,18 @@ import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { videoAction } from '../../redux/Video/video';
 
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
-interface fromReducerType{
-    videos: videoRouter.videoListSuccessResponse|null
+interface FromReducerType {
+    videos: VideoRouter.VideoListSuccessResponse | null
     videoLoading: boolean
     endVideoList: boolean
 }
-interface props{
+interface Props {
     criteria: string
 }
-const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
-    const { videoClear, videoList }: videoModule.ActionType = videoAction;
+const VideoGridContainer: React.FC<Props> = ({ criteria }: Props) => {
+    const { videoClear, videoList }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const page: React.MutableRefObject<number> = useRef(1);
     const targetRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -27,14 +24,16 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
         videos,
         videoLoading,
         endVideoList,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         videos: state.videoReducer.videoList,
         endVideoList: state.videoReducer.endVideoList,
         videoLoading: state.loadingReducer['VIDEO/videoList'],
     }));
+
     useEffect(() => {
         dispatch(videoClear());
     }, [dispatch, videoClear]);
+
     useEffect(() => {
         dispatch((videoList({
             criteria,
@@ -76,15 +75,13 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
             observer.unobserve(target);
         };
     }, [f, videoLoading, videos, targetRef, endVideoList]);
-    if (videos !== null) {
-        return (
-            <div>
-                <VideoGrid videoInfos={videos.videos} />
-                <div ref={targetRef} />
-            </div>
-        );
-    }
-    return <div />;
+
+    return (videos === null) ? <div /> : (
+        <div>
+            <VideoGrid videoInfos={videos.videos} />
+            <div ref={targetRef} />
+        </div>
+    );
 };
 
 export default VideoGridContainer;

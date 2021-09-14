@@ -4,15 +4,15 @@ import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescri
 
 import './UserMaybeLike.scss';
 
-interface props{
-    videos: VIDEO[]
+interface Props {
+    videos: Video[]
 }
-const MoreByUser: React.FC<props> = ({ videos }: props) => (
+const MoreByUser: React.FC<Props> = ({ videos }: Props) => (
     <div className="user-may-be-like">
         <div className="user-may-be-like__title">추천동영상</div>
         <div className="user-may-be-like__video">
             {
-                videos.map((video: VIDEO, idx: number) => {
+                videos.map((video: Video, idx: number) => {
                     if (idx < 6) {
                         return (
                             <div key={video.id}>

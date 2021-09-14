@@ -1,7 +1,7 @@
 import React from 'react';
 import './FollowButton.scss';
 
-interface Props{
+interface Props {
     onButtonClick: () => void
     toggle: boolean
 }

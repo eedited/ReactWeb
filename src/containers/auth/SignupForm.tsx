@@ -3,28 +3,31 @@ import { AnyAction } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
 
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 
-interface formReduceType{
-    form: authModule.SIGNUPFORM
-    Auth?: authRouter.authSuccessResponse|null
-    AuthError?: authModule.authFailureResponse|null
+interface formReduceType {
+    form: RDXAuthModule.SignupForm
+    Auth?: AuthRouter.AuthSuccessResponse | null
+    AuthError?: RDXAuthModule.AuthFailureResponse | null
 }
-interface props{
+interface Props {
     history: RouteComponentProps['history']
 }
-const SignupForm: React.FC<props> = ({ history }: props) => {
-    const { changeField, signup, intializeForm }: authModule.ActionType = authAction;
-    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+
+const SignupForm: React.FC<Props> = ({ history }: Props) => {
+    const { changeField, signup, intializeForm }: RDXAuthModule.ActionType = authAction;
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
+
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError,
-    }: formReduceType = useAppSelector(((state: selectorStateType) => ({
+    }: formReduceType = useAppSelector(((state: SelectorStateType) => ({
         form: state.authReducer.signup,
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
     })));
+
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
         dispatch(
@@ -35,6 +38,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
+
     const ValidateEmail: (main: string) => boolean = (mail: string) => {
         const re: RegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (re.test(String(mail).toLowerCase())) {
@@ -42,6 +46,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
         }
         return false;
     };
+
     const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const {
@@ -76,9 +81,11 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             nickname,
         }));
     };
+
     useEffect(() => () => {
         dispatch(intializeForm());
     }, [dispatch, intializeForm]);
+
     useEffect(() => {
         if (AuthError) {
             setError(`회원가입 실패 ${AuthError.info}`);
@@ -87,6 +94,7 @@ const SignupForm: React.FC<props> = ({ history }: props) => {
             history.push('/login');
         }
     }, [Auth, AuthError, history]);
+
     return (
         <AuthForm
             type="signup"

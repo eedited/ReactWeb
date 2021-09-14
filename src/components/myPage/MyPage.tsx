@@ -5,14 +5,14 @@ import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescri
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 
-export interface myPageResponseType {
+export interface MyPageResponseType {
     success: UserRouter.MyPageSuccessResponse | null
     failure: UserRouter.MyPageFailureResponse | null
 }
-interface props {
-    myPageResponse: myPageResponseType
+interface Props {
+    myPageResponse: MyPageResponseType
 }
-const MyPage: React.FC<props> = ({ myPageResponse }: props) => {
+const MyPage: React.FC<Props> = ({ myPageResponse }: Props) => {
     if (myPageResponse.failure) {
         return <Redirect to="404NotFound" />;
     }

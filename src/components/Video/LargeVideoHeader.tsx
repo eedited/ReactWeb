@@ -4,12 +4,12 @@ import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
 import FollowButtonContainer from '../../containers/Video/FollowButtonContainer';
 import './LargeVideoHeader.scss';
 
-interface props {
-    video: videoRouter.videoSuccessResponse
-    user: authRouter.checkSuccessResponse | null
+interface Props {
+    video: VideoRouter.VideoSuccessResponse
+    user: AuthRouter.CheckSuccessResponse | null
 }
 
-const LargeVideoDescription: React.FC<props> = ({ video, user }: props) => (
+const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
             <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />

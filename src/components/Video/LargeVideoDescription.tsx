@@ -1,12 +1,12 @@
 import React from 'react';
 import './LargeVideoDescription.scss';
 
-interface props {
+interface Props {
     description: string
     tags: {tagName: string}[]
 }
 
-const LargeVideoDescription: React.FC<props> = ({ description, tags }: props) => (
+const LargeVideoDescription: React.FC<Props> = ({ description, tags }: Props) => (
     <div className="LargeVideoDescription">
         <div className="LargeVideoDescription__txt">
             { description.split('\n').map((line: string, idx: number) => (

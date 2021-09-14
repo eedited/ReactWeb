@@ -1,16 +1,15 @@
-import React, { cloneElement, forwardRef, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
 import BlueButton from '../common/Button/BlueButton';
-import VideoContainer from '../../containers/landing/VideoContainer';
-import { inputType } from '../../library/hooks/useInputs';
+import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
 
-export interface tagType{
+export interface TagType {
     id: number,
     tag: string
 }
-interface props{
-    type: 'upload'|'change'
+interface Props {
+    type: 'upload' | 'change'
     uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
@@ -21,11 +20,12 @@ interface props{
     onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void
     onBlurTag: React.FocusEventHandler<HTMLInputElement>
     onTagRemove: (id: number) => void
-    tags: tagType[]
+    tags: TagType[]
 }
-const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
+
+const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
     type, uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
-}: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
+}: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
         <div className="upload__haeder">
@@ -58,7 +58,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                     <div className="upload__info__item">
                         <div className="upload__info__title">태그</div>
                         <div className="upload__info__tag">
-                            {tags.map((tag: tagType) => (
+                            {tags.map((tag: TagType) => (
                                 <div className="upload__info__tag__element" key={tag.id}>
                                     {tag.tag}
                                     <button

@@ -3,40 +3,41 @@ import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
-interface props{
+interface Props {
     history: RouteComponentProps['history']
 }
-interface userContainerType{
-    User: USER|null
-    logoutError: userModule.logoutFailureResonse|null
+interface UserContainerType {
+    User: User | null
+    logoutError: RDXUserModule.LogoutFailureResonse | null
 }
 
-const NavbarContainer: React.FC<props> = ({ history }: props) => {
-    const { User, logoutError }: userContainerType = useAppSelector((state: selectorStateType) => ({
+const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
+    const { User, logoutError }: UserContainerType = useAppSelector((state: SelectorStateType) => ({
         User: state.userReducer.user,
         logoutError: state.userReducer.logoutError,
     }));
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
+
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
+
     const onLogout: () => void = () => {
         dispatch(userAction.logout());
     };
+
     const onLogin: () => void = () => {
         history.push('/login');
     };
+
     const onSignup: () => void = () => {
         history.push('/signup');
     };
+
     const onUpload: () => void = () => {
         history.push('/upload');
     };
-    /*    useEffect(() => {
-        if (logoutError) {
-            alert(logoutError);
-        }
-    }, [logoutError]); */
+
     return (
         <Navbar
             user={User}

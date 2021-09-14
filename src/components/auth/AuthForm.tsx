@@ -2,25 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AuthForm.scss';
 
-interface props {
+interface Props {
     type: string
     form: RDXAuthModule.SignupForm | Login
     error: string | null
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
-interface textMapType {
+interface TextMapType {
     [type: string]: string
 }
 
-const textMap: textMapType = {
+const textMap: TextMapType = {
     login: '로그인',
     signup: '회원가입',
 };
 
-const AuthForm: React.FC<props> = ({
+const AuthForm: React.FC<Props> = ({
     type, form, onChange, onSubmit, error,
-}: props) => (
+}: Props) => (
     <div className="authForm">
         <div className="authForm__img">
             <img src="images/loginImg.png" alt="loginImg" />

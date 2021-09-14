@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
 import './Video.scss';
 
-interface props {
+interface Props {
     onLoad: (player: ReactPlayer) => void
     play: () => void
     pause: () => void
@@ -11,9 +11,9 @@ interface props {
     videoInfo: Video
     key: string|undefined
 }
-const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
+const Video: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
     onLoad, play, pause, setOpacity, videoInfo, key,
-}: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
+}: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     <div className="videoElement" key={key}>
         <Link to={`/videoInfo?videoId=${videoInfo.id}`}>
             <div className="video">
