@@ -8,7 +8,7 @@ import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
 
 interface props{
-    user: USER|null
+    user: User | null
     isSearchClick: boolean
     onLogout: () => void
     onLogin: () => void

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-interface props{
+interface props {
     history: RouteComponentProps['history'],
     children?: React.ReactNode
 }
+
 const ScrollTop: React.FC<props> = ({ history, children }: props) => {
     useEffect(() => {
         const unlisten: () => void = history.listen(() => {
@@ -16,6 +17,7 @@ const ScrollTop: React.FC<props> = ({ history, children }: props) => {
     }, [history]);
     return <>{children}</>;
 };
+
 ScrollTop.defaultProps = {
     children: '',
 };

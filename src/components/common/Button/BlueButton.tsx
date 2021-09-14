@@ -1,7 +1,7 @@
 import React from 'react';
 import './BlueButton.scss';
 
-interface props{
+interface props {
     onClick: () => void,
     children?: React.ReactNode
     className?: string

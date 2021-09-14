@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './DropDown.scss';
 
-interface dropDownProp{
+interface dropDownProp {
     id: number,
     title: string,
     selected: boolean,
     key: string
     set: string
 }
-interface props{
+interface props {
     className?: string
     ddItem: dropDownProp[]
     isListOpen: boolean
@@ -16,6 +16,7 @@ interface props{
     clickTitle: () => void
     selectItem: (item: dropDownProp) => void
 }
+
 const DropDown: React.FC<props> = ({
     className, ddItem, imgSrc, clickTitle, selectItem, isListOpen,
 }: props) => (
@@ -46,7 +47,9 @@ const DropDown: React.FC<props> = ({
             )}
     </div>
 );
+
 DropDown.defaultProps = {
     className: '',
 };
+
 export default DropDown;
