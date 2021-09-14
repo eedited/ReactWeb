@@ -3,9 +3,9 @@ import VideoContainer from '../../../containers/landing/VideoContainer';
 import VideoDescription1 from './VideoDescription/VideoDescription1';
 import './VideoGrid.scss';
 
-type videoInfo = VIDEO
+type videoInfo = Video
 interface props{
-    videoInfos: VIDEO[]|null
+    videoInfos: Video[] | null
 }
 const VideoGrid: React.FC<props> = ({ videoInfos }: props) => (
     <div className="videoGrid">

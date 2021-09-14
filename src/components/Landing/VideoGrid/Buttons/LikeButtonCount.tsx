@@ -1,14 +1,15 @@
 import React from 'react';
 import './LikebuttonCount.scss';
 
-export interface likeButtonStateType{
+export interface likeButtonStateType {
     toggle: boolean,
     likeCnt: number
 }
-interface props{
+interface props {
     likeButtonState: likeButtonStateType
     onButtonClick: () => void
 }
+
 const LikeButtonCount: React.FC<props> = ({ likeButtonState, onButtonClick }: props) => (
     <button className="likebutton" onClick={onButtonClick} type="button">
         {!likeButtonState.toggle

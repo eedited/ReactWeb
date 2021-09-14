@@ -1,19 +1,14 @@
-// TODO: 투명한 사각형을 하나 올려서 거지같은 유튜브 로고도 없앨 수 있을거 같고, 클랙했을 때, 마우스 올라왔을 때 등등의 이벤트도 몰아서 처리하면 될거 같음. 그런데 이게 이미지에 이벤트 핸들링 하는거랑 다를게 있는가? 는 좀 생각해 볼 필요가 있음.
-
 import React, { forwardRef } from 'react';
-
 import ReactPlayer from 'react-player';
 import { Link } from 'react-router-dom';
-import LikeButtonCountContainer from '../../../containers/landing/LikeButtonCountContainer';
 import './Video.scss';
-import VideoDescription1 from './VideoDescription/VideoDescription1';
 
-interface props{
+interface props {
     onLoad: (player: ReactPlayer) => void
     play: () => void
     pause: () => void
     setOpacity: () => number
-    videoInfo: VIDEO
+    videoInfo: Video
     key: string|undefined
 }
 const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({

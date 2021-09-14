@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import LikeButtonCountContainer from '../../../../containers/landing/LikeButtonCountContainer';
 import './VideoDescription1.scss';
 
-interface props{
-    videoInfo: VIDEO
+interface props {
+    videoInfo: Video
 }
 
 const VideoDescription1: React.FC<props> = ({ videoInfo }: props) => (

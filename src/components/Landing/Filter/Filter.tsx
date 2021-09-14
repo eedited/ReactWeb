@@ -2,14 +2,14 @@ import React from 'react';
 import DropDownContainer from '../../../containers/filter/DropDownContainer';
 import './Filter.scss';
 
-interface dropDownProp{
+interface dropDownProp {
     id: number,
     title: string,
     selected: boolean,
     key: string
     set: string
 }
-interface props{
+interface props {
     imgSrc: string[]
     initialDD: dropDownProp[][]
 }
