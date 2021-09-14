@@ -46,7 +46,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
         canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const img: HTMLImageElement = new Image();
-        img.onload = function () {
+        img.onload = () => {
             const radius: number = Math.min(height, width) / 3;
             const x: number = width / 2;
             const y: number = height / 2;
@@ -102,20 +102,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                     else {
                         sx = x + fontSize + (radius) * Math.cos(a);
                         sy = y + textHeight + (radius) * Math.sin(a);
-                    }/*
-                    let line: string = '';
-                    for (let i: number = 0; i < key.length; i += 1) {
-                        const testLine: string = line + key[i];
-                        const testWidth: number = ctx.measureText(testLine).width;
-                        if (testWidth > textWidth) {
-                            ctx.fillText(line, sx, sy);
-                            line = '';
-                            sy += fontSize;
-                        }
-                        else {
-                            line += key[i];
-                        }
-                    } */
+                    }
                     ctx.fillText(key, sx, sy);
                     ctx.restore();
                     prevAngle = currentAngle + (Math.PI * gap) / 180;
