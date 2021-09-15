@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 // import Landing from './pages/Landing';
 // import logo from './logo.svg';
@@ -27,7 +27,7 @@ const App: AppType = (): JSX.Element => (
             <Switch>
                 <Route path="/" component={Landing} exact />
                 <Route path="/video" component={Landing} />
-                <Route path="/videos/:criteria" component={Landing} />
+                <Route path="/videos" component={Landing} />
                 <Route path="/videoInfo" component={VideoPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />

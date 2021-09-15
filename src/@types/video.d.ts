@@ -47,7 +47,10 @@ export declare global{
         }
 
         interface videoListRequest{
-            criteria: string
+            category: string
+            platform: string
+            program: string
+            sorting: string
             page: number
         }
         interface videoListSuccessResponse{
