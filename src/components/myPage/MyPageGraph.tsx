@@ -34,7 +34,6 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
             }
             // tagArray = [tagArray[0], tagArray[1], tagArray[2], etc];
         }
-
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -46,7 +45,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
         canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const img: HTMLImageElement = new Image();
-        img.onload = function () {
+        img.onload = () => {
             const radius: number = Math.min(height, width) / 3;
             const x: number = width / 2;
             const y: number = height / 2;
@@ -163,7 +162,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
             ctx.lineWidth = lineWidth;
             setTimeout(forSetInterval, 8);
         };
-        img.src = '/problem.png';
+        img.src = '/images/problem.png';
     }, [tags]);
     return (
         <canvas ref={canvasRef} />

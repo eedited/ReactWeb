@@ -12,6 +12,9 @@
         font-size: rem(40);
         font-family : NotoSansKRBold;
         border-bottom: 1px solid rgba(32, 32, 32,0.102);
+        .upload__haeder__img{
+            height: rem(250);
+        }
     }
     .upload__body{
         display : flex;

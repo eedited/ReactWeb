@@ -1,7 +1,6 @@
-import React, { cloneElement, forwardRef, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
 import BlueButton from '../common/Button/BlueButton';
-import VideoContainer from '../../containers/landing/VideoContainer';
 import { inputType } from '../../library/hooks/useInputs';
 import './Upload.scss';
 
@@ -52,7 +51,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             onChange={onInputChange}
                             name="videoLink"
                             value={inputState.videoLink}
-                            placeholder="youtube 또는 Viemo링크를 입력하세요"
+                            placeholder="youtube 링크를 입력하세요"
                         />
                     </div>
                     <div className="upload__info__item">
