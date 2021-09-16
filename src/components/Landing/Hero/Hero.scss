@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     gap: rem(180);
+
     .hero__description {
         .hero__description__title {
             font-family: 'NotoSansKRBold';
@@ -14,6 +15,7 @@
             line-height: rem(80);
             margin-bottom: rem(58);
         }
+        
         .hero__description__body {
             font-family: 'NotoSansKRMedium';
             font-size: rem(20);

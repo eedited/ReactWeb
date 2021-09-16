@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
+import { validateEmail } from '../../services/regex';
 
 interface formReduceType {
     form: RDXAuthModule.SignupForm
@@ -39,14 +39,6 @@ const SignupForm: React.FC<Props> = ({ history }: Props) => {
         );
     };
 
-    const ValidateEmail: (main: string) => boolean = (mail: string) => {
-        const re: RegExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(mail).toLowerCase())) {
-            return true;
-        }
-        return false;
-    };
-
     const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const {
@@ -70,7 +62,7 @@ const SignupForm: React.FC<Props> = ({ history }: Props) => {
             }));
             return;
         }
-        if (!ValidateEmail(email)) {
+        if (!validateEmail(email)) {
             setError('올바른 형식의 이메일이 아닙니다');
             return;
         }

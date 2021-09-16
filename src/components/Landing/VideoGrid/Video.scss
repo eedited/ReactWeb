@@ -4,13 +4,15 @@
     position: relative;
     padding-top: 56.25%;
     margin-bottom: rem(20);
-    .video__player{
-        position:absolute;
-        margin:0;
-        top:0;
-        left:0;
+
+    .video__player {
+        position: absolute;
+        margin: 0;
+        top: 0;
+        left: 0;
     }
-    .video__img{
+    
+    .video__img {
         position: absolute;
         border-radius: 10px;
         margin: 0;

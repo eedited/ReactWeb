@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import LikeButton from '../../components/Video/LikeButton';
-
 import { videoLike } from '../../api/video';
 
 interface LikeResponse {
@@ -39,9 +38,7 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
         }
     }, [likeResponse]);
 
-    return (
-        <LikeButton onButtonClick={() => onButtonClick(video.id)} toggle={toggle} />
-    );
+    return <LikeButton onButtonClick={() => onButtonClick(video.id)} toggle={toggle} />;
 };
 
 export default LikeButtonContainer;

@@ -8,15 +8,13 @@ interface FromReducerType {
 }
 
 const LargeVideoHeaderContainer: React.FC = () => {
-    const {
-        Video, User,
-    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
+    const { Video, User }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         Video: state.videoReducer.video,
         User: state.userReducer.user,
     }));
-    return (Video === null) ? <div /> : (
-        <LargeVideoHeader video={Video} user={User} />
-    );
+    return Video === null
+        ? <div />
+        : <LargeVideoHeader video={Video} user={User} />;
 };
 
 export default LargeVideoHeaderContainer;

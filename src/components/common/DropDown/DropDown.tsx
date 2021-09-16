@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './DropDown.scss';
 
 interface DropDownProp {
@@ -30,10 +30,10 @@ const DropDown: React.FC<Props> = ({
                 <img className="dropDown__haeder__title__toggle" src="/icons/toggle-arrow.png" alt="toggle" />
             </div>
         </button>
-        {isListOpen
-            && (
-                <div className="dropDown__list">
-                    {ddItem.map((item: DropDownProp, idx: number) => {
+        {isListOpen && (
+            <div className="dropDown__list">
+                {
+                    ddItem.map((item: DropDownProp, idx: number) => {
                         let name: string = 'dropDown__list__item dropDown__item';
                         if (idx === 0) {
                             name += ' dropDown__list__first';
@@ -41,10 +41,11 @@ const DropDown: React.FC<Props> = ({
                         if (idx === ddItem.length - 1) {
                             name += ' dropDown__list__last';
                         }
-                        return (<button type="button" className={name} onClick={() => selectItem(item)}>{item.title}</button>);
-                    })}
-                </div>
-            )}
+                        return <button type="button" className={name} onClick={() => selectItem(item)}>{item.title}</button>;
+                    })
+                }
+            </div>
+        )}
     </div>
 );
 

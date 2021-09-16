@@ -1,30 +1,34 @@
 @import '/src/App.scss';
 
-.video__description2{
-    width : 96%;
+.video__description2 {
+    width: 96%;
     margin-left: 2%;
+
     .video__description__title {
         font-family: Pretendard-Bold;
         font-size: rem(15);
         line-height: rem(23);
     }
-    .video__description__detail{
+
+    .video__description__detail {
         font-family: NotoSansKRMedium;
         display: flex;
         justify-content: flex-start;
         flex-direction: row;
         line-height: rem(23);
         font-size: rem(13);
-        gap : rem(13);
-        .video__description__detail__viewCount{
+        gap: rem(13);
+
+        .video__description__detail__viewCount {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            gap : rem(3);
-            .video__description__detail__viewCount__icon{
-                width : rem(15);
+            gap: rem(3);
+            
+            .video__description__detail__viewCount__icon {
+                width: rem(15);
                 height: rem(10);
-            }   
+            }
         }
     }
 }

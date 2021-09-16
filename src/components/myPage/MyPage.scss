@@ -1,37 +1,43 @@
 @import '/src/App.scss';
 
-.mypage{
-    width : 61%;
-    margin-left : 19.5%;
-    .mypage__header{
+.mypage {
+    width: 61%;
+    margin-left: 19.5%;
+
+    .mypage__header {
         display: flex;
         justify-content: space-between;
-        width : 100%;
+        width: 100%;
         min-height: rem(300);
         margin-bottom: rem(50);
-        .mypage__header__title{
-            margin-top : rem(105);
-            width : 50%;
-            .mypage__header__title__name{
-                width : rem(300);
+
+        .mypage__header__title {
+            margin-top: rem(105);
+            width: 50%;
+
+            .mypage__header__title__name {
+                width: rem(300);
                 font-size: rem(45);
                 line-height: rem(80);
                 font-family: NotoSansKRBold;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                .mypage__header__title__name__icons{
+
+                .mypage__header__title__name__icons {
                     display: flex;
-                    .mypage__header__title__name__iconBackGround{
+
+                    .mypage__header__title__name__iconBackGround {
                         position: relative;
-                        width : rem(44);
+                        width: rem(44);
                         height: rem(44);
                         gap: rem(3);
                         background-color: $gray;
                         border-radius: 50%;
-                        .mypage__header__title__name__icon{
+
+                        .mypage__header__title__name__icon {
                             position: absolute;
-                            width : rem(20);
+                            width: rem(20);
                             height: rem(20);
                             margin-top: rem(12);
                             margin-left: rem(12);
@@ -39,21 +45,23 @@
                     }
                 }
             }
-            .mypage__header__title__description{
+
+            .mypage__header__title__description {
                 font-size: rem(17);
                 line-height: rem(28);
-            }   
+            }
         }
-        .mypage__hader__graph{
-            margin-top : rem(40);
+        
+        .mypage__hader__graph {
+            margin-top: rem(40);
         }
     }
-    .mypage__videoGrid{
+    .mypage__videoGrid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         justify-content: center;
         column-gap: rem(25);
         row-gap: rem(60);
-        margin : rem(60) 0;
+        margin: rem(60) 0;
     }
 }

@@ -12,6 +12,7 @@ interface Props {
     imgSrc: string
     initialStateDD: DropDownProp[]
 }
+
 const DropDownContainer: React.FC<Props> = ({ initialStateDD, imgSrc }: Props) => {
     const [ddItem, setDD]: [DropDownProp[], React.Dispatch<React.SetStateAction<DropDownProp[]>>] = useState<DropDownProp[]>(initialStateDD);
     const [isListOpen, setIsListOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);

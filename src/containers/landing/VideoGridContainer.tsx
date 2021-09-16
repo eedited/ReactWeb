@@ -1,10 +1,7 @@
-import React, {
-    useEffect, useRef, useCallback,
-} from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
 import { videoAction } from '../../redux/Video/video';
-
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface FromReducerType {
@@ -15,6 +12,7 @@ interface FromReducerType {
 interface Props {
     criteria: string
 }
+
 const VideoGridContainer: React.FC<Props> = ({ criteria }: Props) => {
     const { videoClear, videoList }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -76,12 +74,14 @@ const VideoGridContainer: React.FC<Props> = ({ criteria }: Props) => {
         };
     }, [f, videoLoading, videos, targetRef, endVideoList]);
 
-    return (videos === null) ? <div /> : (
-        <div>
-            <VideoGrid videoInfos={videos.videos} />
-            <div ref={targetRef} />
-        </div>
-    );
+    return videos === null
+        ? <div />
+        : (
+            <div>
+                <VideoGrid videoInfos={videos.videos} />
+                <div ref={targetRef} />
+            </div>
+        );
 };
 
 export default VideoGridContainer;

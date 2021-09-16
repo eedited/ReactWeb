@@ -1,17 +1,14 @@
-import React, {
-    useCallback, useEffect, useRef, useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
-import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
-
-const validPathname: RegExp = /^.*\/([a-zA-Z0-9_-]{11})$/;
-const validId: RegExp = /^([a-zA-Z0-9_-]{11})$/;
+import { rgxId, rgxPath } from '../../services/regex';
+import { thumbnailURL } from '../../services/youtube';
 
 interface FromReducerType {
     modifyError: RDXVideoModule.VideoModifyFailureResponse | null
@@ -44,8 +41,8 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
     const [tags, onTagsChange]: [TagType[], React.Dispatch<React.SetStateAction<TagType[]>>] = useState([] as TagType[]);
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
-    const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
-    const [tagError, seTagError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+    const [tagError, seTagError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
 
     useEffect(() => {
         dispatch(videoClear());
@@ -89,16 +86,16 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
         const parser: HTMLAnchorElement = document.createElement('a');
         parser.href = inputState.videoLink;
         const query: QueryString.ParsedQs = parse(parser.search, { ignoreQueryPrefix: true });
-        let id: string|null = (validPathname.exec(parser.pathname) || [])[1] || null;
+        let id: string | null = (rgxPath.exec(parser.pathname) || [])[1] || null;
         if (id === null) {
             const { v }: QueryString.ParsedQs = query;
-            id = (validId.exec(v as string) || [])[1] || null;
+            id = (rgxId.exec(v as string) || [])[1] || null;
         }
         if (id === null) {
             setError('올바르지 못한 video Url 입니다');
             return;
         }
-        const thumbnailUrl: string = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+
         dispatch(
             videoAction.videoModify(
                 {
@@ -106,7 +103,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
                     title: inputState.title,
                     discription: description,
                     url: inputState.videoLink,
-                    thumbnail: thumbnailUrl,
+                    thumbnail: thumbnailURL(id),
                     tags: tags.map((tag: TagType) => tag.tag),
                 },
             ),

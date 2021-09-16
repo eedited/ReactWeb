@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
-
 import MoreByUser from '../../components/Video/MoreByUser';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/Video/video';
@@ -9,6 +8,7 @@ interface FromReducerType {
     video: VideoRouter.VideoSuccessResponse | null
     userUploadedVideo: VideoRouter.UserVideoSuccessResponse | null
 }
+
 const MoreByUserContainer: React.FC = () => {
     const { videoUserUploaded }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -25,9 +25,9 @@ const MoreByUserContainer: React.FC = () => {
         }
     }, [dispatch, video, videoUserUploaded]);
 
-    return (userUploadedVideo === null) ? <div /> : (
-        <MoreByUser videos={userUploadedVideo.videos.filter((Video: Video) => Video.id !== video?.id)} />
-    );
+    return userUploadedVideo === null
+        ? <div />
+        : <MoreByUser videos={userUploadedVideo.videos.filter((Video: Video) => Video.id !== video?.id)} />;
 };
 
 export default MoreByUserContainer;

@@ -11,9 +11,7 @@ const ScrollTop: React.FC<Props> = ({ history, children }: Props) => {
         const unlisten: () => void = history.listen(() => {
             window.scrollTo(0, 0);
         });
-        return () => {
-            unlisten();
-        };
+        return unlisten;
     }, [history]);
     return <>{children}</>;
 };

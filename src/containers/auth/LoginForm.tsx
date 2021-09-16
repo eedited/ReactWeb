@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';

@@ -1,34 +1,40 @@
 @import '/src/App.scss';
 
-.video__description1{
-    width : 96%;
+.video__description1 {
+    width: 96%;
     margin-left: 2%;
+
     .video__description__title {
         font-family: Pretendard-Bold;
         font-size: rem(15);
         line-height: rem(23);
     }
-    .video__description__detail{
+
+    .video__description__detail {
         font-family: NotoSansKRMedium;
         display: flex;
         justify-content: space-between;
         flex-direction: row;
         line-height: rem(23);
         font-size: rem(13);
+
         .video__description__uploader {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+
             .video__description__uploader__name {
                 color: #707070;
                 margin-right: rem(9);
             }
+
             .video__description__uploader__follow {
                 display: flex;
                 align-items: center;
-                gap : rem(3);
+                gap: rem(3);
                 color: #6080f4;
+                
                 .video__description__uploader__follow__icon {
                     width: rem(13);
                     height: rem(13);

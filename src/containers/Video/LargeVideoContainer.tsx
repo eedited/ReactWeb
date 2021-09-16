@@ -1,9 +1,4 @@
-import React, {
-    useRef, useState,
-    useEffect,
-    useCallback,
-} from 'react';
-
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
@@ -23,9 +18,7 @@ const LargeVideoContainer: React.FC<Props> = ({ history, videoId }: Props) => {
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-    const {
-        Video,
-    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
+    const { Video }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         Video: state.videoReducer.video,
     }));
 
@@ -45,16 +38,18 @@ const LargeVideoContainer: React.FC<Props> = ({ history, videoId }: Props) => {
 
     return (
         <div>
-            { Video === null
-                ? <div />
-                : (
-                    <Largevideo
-                        onLoad={onLoad}
-                        videoInfo={Video}
-                        ref={youtubeRef}
-                        setOpacity={setOpacity}
-                    />
-                )}
+            {
+                Video === null
+                    ? <div />
+                    : (
+                        <Largevideo
+                            onLoad={onLoad}
+                            videoInfo={Video}
+                            ref={youtubeRef}
+                            setOpacity={setOpacity}
+                        />
+                    )
+            }
         </div>
     );
 };

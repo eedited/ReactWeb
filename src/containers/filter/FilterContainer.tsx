@@ -61,9 +61,7 @@ const FilterContainer: React.FC = () => {
             },
         ],
     ];
-    return (
-        <Filter imgSrc={imgSrc} initialDD={initialDD} />
-    );
+    return <Filter imgSrc={imgSrc} initialDD={initialDD} />;
 };
 
 export default FilterContainer;

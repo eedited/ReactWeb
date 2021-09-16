@@ -42,19 +42,19 @@ const FindingPw: React.FC<props> = ({
             >
                 제출
             </button>
-            {(isSubmit && loading === 'success')
-                ? (
-                    <div>
-                        새로운 비밀번호가 발송되었습니다.
-                    </div>
-
-                )
-                : (
-                    <div>
-                        비밀번호 발송에 실패하였습니다.
-                    </div>
-
-                ) }
+            {
+                isSubmit && loading === 'success'
+                    ? (
+                        <div>
+                            새로운 비밀번호가 발송되었습니다.
+                        </div>
+                    )
+                    : (
+                        <div>
+                            비밀번호 발송에 실패하였습니다.
+                        </div>
+                    )
+            }
         </form>
     </div>
 );

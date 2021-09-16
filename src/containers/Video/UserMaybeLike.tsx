@@ -97,9 +97,7 @@ const UserMaybeLikeContainer: React.FC = () => {
         ],
     };
 
-    return (
-        <UserMaybeLike videos={videos.videos} />
-    );
+    return <UserMaybeLike videos={videos.videos} />;
 };
 
 export default UserMaybeLikeContainer;

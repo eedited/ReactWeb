@@ -9,8 +9,9 @@ interface Props {
     pause: () => void
     setOpacity: () => number
     videoInfo: Video
-    key: string|undefined
+    key: string | undefined
 }
+
 const Video: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
     onLoad, play, pause, setOpacity, videoInfo, key,
 }: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (

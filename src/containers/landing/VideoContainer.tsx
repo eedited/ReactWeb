@@ -1,6 +1,4 @@
-import React, {
-    useRef, useState, useCallback,
-} from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import Video from '../../components/Landing/VideoGrid/Video';
 

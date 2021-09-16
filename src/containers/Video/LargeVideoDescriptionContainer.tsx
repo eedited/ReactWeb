@@ -8,12 +8,12 @@ interface FromReducerType {
 }
 
 const LargeVideoDescriptionContainer: React.FC = () => {
-    const {
-        Video,
-    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
+    const { Video }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         Video: state.videoReducer.video,
     }));
-    return Video !== null ? (<LargeVideoDescription description={Video.discription} tags={Video.WhatVideoUploadTag} />) : (<div />);
+    return Video === null
+        ? <div />
+        : <LargeVideoDescription description={Video.discription} tags={Video.WhatVideoUploadTag} />;
 };
 
 export default LargeVideoDescriptionContainer;

@@ -10,16 +10,15 @@ interface Props {
 
 const BlueButton: React.FC<Props> = ({
     onClick, children, className, type,
-}: Props) => {
-    if (type === 'submit') {
-        return (
-            <button className={`blueButton ${className}`} onClick={onClick} type="submit">{children}</button>
-        );
-    }
-    return (
-        <button className={`blueButton ${className}`} onClick={onClick} type="button">{children}</button>
-    );
-};
+}: Props) => (
+    <button
+        className={`blueButton ${className}`}
+        onClick={onClick}
+        type={type === 'submit' ? 'submit' : 'button'}
+    >
+        {children}
+    </button>
+);
 
 BlueButton.defaultProps = {
     children: '',

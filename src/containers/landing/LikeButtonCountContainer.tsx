@@ -47,12 +47,14 @@ const LikeButtonCountContainer: React.FC<Props> = ({ Video }: Props) => {
         }
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
 
-    return (Video === null) ? <div /> : (
-        <LikeButtonCount
-            likeButtonState={likeButtonState}
-            onButtonClick={() => onButtonClick(Video.id)}
-        />
-    );
+    return Video === null
+        ? <div />
+        : (
+            <LikeButtonCount
+                likeButtonState={likeButtonState}
+                onButtonClick={() => onButtonClick(Video.id)}
+            />
+        );
 };
 
 export default LikeButtonCountContainer;

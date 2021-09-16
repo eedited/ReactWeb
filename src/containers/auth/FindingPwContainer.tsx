@@ -5,6 +5,7 @@ import useInputs, { inputType } from '../../hooks/useInputs';
 import FindingPw, { FindPwResponseType } from '../../components/auth/FindigPw';
 
 type loadingState = 'start' | 'success' | 'failure';
+
 const FindingPwContainer: React.FC = () => {
     const [isSubmit, setIsSubmit]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [loading, setLoading]: [loadingState, React.Dispatch<React.SetStateAction<loadingState>>] = useState<loadingState>('start');

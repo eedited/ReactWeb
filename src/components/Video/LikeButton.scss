@@ -1,18 +1,18 @@
 @import '/src/App.scss';
 
-.likeButton{
-    cursor : pointer;
+.likeButton {
+    cursor: pointer;
     background-color: transparent;
     box-sizing: border-box;
-    border : 0;
-    outline : 0;
-    background-color: rgb(247,247,247);
+    border: 0;
+    outline: 0;
+    background-color: rgb(247, 247, 247);
     height: rem(48);
-    padding : rem(16);
+    padding: rem(16);
     border-radius: 50%;
     text-align: center;
-    .likeButton__img{
-        width : rem(16);
+    .likeButton__img {
+        width: rem(16);
         height: rem(16);
     }
 }

@@ -24,9 +24,7 @@ const MyPageContainer: React.FC<Props> = ({ userId }: Props) => {
         fetchMyPage();
     }, [userId]);
 
-    return (
-        <MyPage myPageResponse={myPageResponse} />
-    );
+    return <MyPage myPageResponse={myPageResponse} />;
 };
 
 export default MyPageContainer;

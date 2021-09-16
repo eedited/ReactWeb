@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import FollowButton from '../../components/Video/FollowButton';
-
 import { userFollow } from '../../api/user';
 
 interface FollowResponse {
@@ -41,9 +40,7 @@ const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
         }
     }, [followResponse]);
 
-    return (
-        <FollowButton onButtonClick={() => onButtonClick(video.uploader)} toggle={toggle} />
-    );
+    return <FollowButton onButtonClick={() => onButtonClick(video.uploader)} toggle={toggle} />;
 };
 
 export default FollowButtonContainer;
