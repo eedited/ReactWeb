@@ -13,9 +13,9 @@
         }
     }
     .authForm__main{
-        width : rem(900);
-        padding : 0 rem(250);
+        width : rem(500);
         margin : auto;
+        padding : 0 rem(50);
         .authForm__main__title{
             font-size: rem(30);
             line-height: rem(50);
@@ -65,6 +65,14 @@
                     box-shadow: 0 0 0 2px $orange;
                 }
             }
+        }
+    }
+}
+@media screen and (max-width: 1100px){
+    .authForm{
+        height: 100vh;
+        .authForm__img{
+            display: none;
         }
     }
 }
