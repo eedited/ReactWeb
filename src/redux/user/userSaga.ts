@@ -1,9 +1,6 @@
-import {
-    call, ForkEffect, put, takeLatest,
-} from 'redux-saga/effects';
+import { call, ForkEffect, put, takeLatest } from 'redux-saga/effects';
 import { userAction } from './user';
 import { authAction } from '../auth/auth';
-
 import * as api from '../../api/auth';
 import { loadingAction } from '../loading/loading';
 

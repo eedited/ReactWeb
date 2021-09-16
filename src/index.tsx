@@ -11,7 +11,7 @@ const store = createStore();
 export type AppDispatch = typeof store.dispatch;
 export type rootState = ReturnType<typeof store.getState>;
 
-function loadUser() {
+(function loadUser() {
     try {
         const { setUser, check }: RDXUserModule.ActionType = userAction;
         const user: string|null = localStorage.getItem('user');
@@ -22,9 +22,8 @@ function loadUser() {
     catch (err) {
         console.log('local storage doesn\'t work');
     }
-}
+}());
 
-loadUser();
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>

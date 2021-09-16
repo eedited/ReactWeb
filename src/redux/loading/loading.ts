@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-    CaseReducerActions, createSlice, PayloadAction, Slice,
-} from '@reduxjs/toolkit';
+import { CaseReducerActions, createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 export interface LoadingStateType {

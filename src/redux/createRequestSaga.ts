@@ -1,7 +1,4 @@
-import {
-    call, put, CallEffect, PutEffect,
-} from 'redux-saga/effects';
-
+import { call, put, CallEffect, PutEffect } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 import { loadingAction } from './loading/loading';
 

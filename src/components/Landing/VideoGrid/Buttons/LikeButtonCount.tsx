@@ -12,9 +12,11 @@ interface Props {
 
 const LikeButtonCount: React.FC<Props> = ({ likeButtonState, onButtonClick }: Props) => (
     <button className="likebutton" onClick={onButtonClick} type="button">
-        {!likeButtonState.toggle
-            ? <img className="likebutton__img" src="/icons/heart-icon.png" alt="like" />
-            : <img className="likebutton__img" src="/icons/heart-icon--filled.png" alt="like" />}
+        {
+            !likeButtonState.toggle
+                ? <img className="likebutton__img" src="/icons/heart-icon.png" alt="like" />
+                : <img className="likebutton__img" src="/icons/heart-icon--filled.png" alt="like" />
+        }
         {' '}
         <div className="likebutton__txt">{likeButtonState.likeCnt}</div>
     </button>

@@ -1,7 +1,5 @@
 /* eslint-disable no-param-reassign */
-import {
-    createSlice, PayloadAction, Slice,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 const initialState: RDXFilterModule.StateType = {

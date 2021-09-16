@@ -1,6 +1,4 @@
-import {
-    AnyAction, CombinedState, combineReducers, Reducer,
-} from '@reduxjs/toolkit';
+import { AnyAction, CombinedState, combineReducers, Reducer } from '@reduxjs/toolkit';
 import { all, AllEffect, ForkEffect } from 'redux-saga/effects';
 import authSaga from './auth/authSaga';
 import userSaga from './user/userSaga';
