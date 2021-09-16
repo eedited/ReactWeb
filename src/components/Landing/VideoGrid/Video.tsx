@@ -43,7 +43,7 @@ const Video: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPl
                                 youtube: {
                                     playerVars: {
                                         rel: 0,
-                                        origin: 'http://localhost:3000',
+                                        origin: 'http://localhost:4000',
                                     },
                                 },
                             }}

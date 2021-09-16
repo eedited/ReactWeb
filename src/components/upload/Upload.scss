@@ -48,6 +48,7 @@
                     background-color: rgb(247, 247, 247);
                     border:none;
                     font-size:rem(13);
+                    padding-left: rem(7);
                 }
                 .upload__info__title__input:focus{
                     background-color: rgb(255,255,255);
@@ -102,6 +103,8 @@
                     background-color: rgb(247, 247, 247);
                     border:none;
                     font-size:rem(13);
+                    padding-left: rem(7);
+                    padding-top : rem(7);
                 }
                 .upload__info__description__input:focus{
                     background-color: rgb(255,255,255);

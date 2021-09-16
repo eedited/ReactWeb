@@ -13,29 +13,55 @@
         }
     }
     .authForm__main{
-        width : rem(950);
+        width : rem(900);
         padding : 0 rem(250);
         margin : auto;
+        .authForm__main__title{
+            font-size: rem(30);
+            line-height: rem(50);
+            margin-bottom: rem(30);
+        }
         .authForm__inputs{
             display: flex;
             flex-direction: column;
+            width : 100%;
             gap : rem(15);
+            align-items: center; 
+            .authForm__input__button{
+                border: 0rem;
+                cursor: pointer;
+                background-color: $orange;
+                font-family: Pretendard-Medium;
+                width : 100%;
+                height : rem(44);
+                font-size : rem(18);
+                border-radius: rem(10);   
+            }
+            .authForm__agreement{
+                font-size: rem(14);
+                a{
+                    cursor: pointer;
+                }
+            }
             .authForm__input{
                 display: flex;
                 flex-direction: column;
+                width : 100%;
+                .authForm__input__title{
+                    font-size : rem(16);
+                    margin-bottom: rem(8);
+                }
                 .authForm__input__field{
-                    border: none;
-                    background-color: $gray;
+                    border: 1px solid rgb(150,150,150);
+                    background-color: $white;
+                    border-radius: 2px;
                     height: rem(40);   
-                    border-radius: rem(10); 
+                    padding-left: rem(8);
                 }
                 .authForm__input__field:focus{
+                    border: none;
                     background-color: $white;
                     outline: none;
-                    box-shadow: 0 0 0 2px $orange;
-                }
-                .authForm__input__field:hover{
-                    background-color: $white;
                     box-shadow: 0 0 0 2px $orange;
                 }
             }
