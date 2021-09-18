@@ -1,5 +1,5 @@
 import React from 'react';
-import UserMaybeLike from '../../components/Video/UserMaybeLike';
+import UserMaybeLike from '../../components/video/UserMaybeLike';
 
 const UserMaybeLikeContainer: React.FC = () => {
     const videos: VideoRouter.VideoListSuccessResponse = {

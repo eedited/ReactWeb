@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router';
 import router from 'react-router-dom';
 import BaseTemplate from './BaseTemplate';
-import Description from '../components/Landing/Hero/Hero';
+import HeroDescription from '../containers/landing/HeroDescription';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
 
@@ -31,7 +31,7 @@ const Landing: React.FC<Props> = ({ match }: Props) => {
 
     return (
         <BaseTemplate>
-            <Description />
+            <HeroDescription />
             <FilterContainer />
             <VideoGridContainer criteria={criteria} />
         </BaseTemplate>

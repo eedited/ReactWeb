@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, RouterProps } from 'react-router';
-import BlueButton from '../components/common/Button/BlueButton';
+import BlueButton from '../components/common/button/BlueButton';
 import BaseTemplate from './BaseTemplate';
 
 type Props = RouterProps;

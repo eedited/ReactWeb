@@ -7,7 +7,8 @@ import { SelectorStateType, useAppSelector } from '../hooks';
 interface FromReducerType {
     user: User | null
 }
-type props = RouteComponentProps
+type props = RouteComponentProps;
+
 const UploadPage: React.FC<props> = ({ history }: props) => {
     const {
         user,

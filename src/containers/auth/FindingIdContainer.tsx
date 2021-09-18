@@ -39,7 +39,8 @@ const FindingIdContainer: React.FC = () => {
     );
 
     const onEmailSubmit: () => void = () => {
-        setIsSubmit(true); responseFunction();
+        setIsSubmit(true);
+        responseFunction();
     };
 
     return (

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
-import FollowButton from '../../components/Video/FollowButton';
+import FollowButton from '../../components/video/FollowButton';
 import { userFollow } from '../../api/user';
 
 interface FollowResponse {
@@ -17,16 +17,10 @@ const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
 
     useEffect(() => {
         setToggle(false);
-        if (video) {
-            if (video.User) {
-                if (video.User.followTo) {
-                    if (video.User.followTo.length > 0) {
-                        setToggle(true);
-                    }
-                }
-            }
+        if (video.User.followTo && video.User.followTo.length > 0) {
+            setToggle(true);
         }
-    }, [video]);
+    }, [toggle, video]);
 
     const onButtonClick: (USERID: string) => Promise<void> = useCallback(async (USERID: string) => {
         setfollowResponse({ success: null, failure: null });

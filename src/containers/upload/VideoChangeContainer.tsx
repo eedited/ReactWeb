@@ -4,7 +4,7 @@ import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../redux/Video/video';
+import { videoAction } from '../../redux/video/video';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';

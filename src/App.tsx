@@ -3,7 +3,7 @@ import './App.scss';
 import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SingupPage';
+import SignupPage from './pages/SignupPage';
 import FindingIdPage from './pages/FindingIdPage';
 import FindingPwPage from './pages/FindingPwPage';
 import VideoPage from './pages/VideoPage';

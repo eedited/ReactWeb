@@ -44,6 +44,7 @@ const SignupForm: React.FC<Props> = ({ history }: Props) => {
         const {
             userId, password, passwordConfirm, email, nickname,
         }: {userId: string, password: string, passwordConfirm: string, email: string, nickname: string} = form;
+
         if ([userId, password, passwordConfirm].includes('')) {
             setError('빈 칸을 모두 입력하세요');
             return;
@@ -66,6 +67,7 @@ const SignupForm: React.FC<Props> = ({ history }: Props) => {
             setError('올바른 형식의 이메일이 아닙니다');
             return;
         }
+
         dispatch(signup({
             userId,
             password,

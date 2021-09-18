@@ -2,9 +2,9 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
-import Largevideo from '../../components/Video/Largevideo';
+import LargeVideo from '../../components/video/LargeVideo';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../redux/Video/video';
+import { videoAction } from '../../redux/video/video';
 
 interface FromReducerType {
     Video: VideoRouter.VideoSuccessResponse | null
@@ -42,7 +42,7 @@ const LargeVideoContainer: React.FC<Props> = ({ history, videoId }: Props) => {
                 Video === null
                     ? <div />
                     : (
-                        <Largevideo
+                        <LargeVideo
                             onLoad={onLoad}
                             videoInfo={Video}
                             ref={youtubeRef}

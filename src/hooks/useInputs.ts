@@ -1,20 +1,21 @@
 import React, { useReducer } from 'react';
 
-export interface inputType{
+export interface inputType {
     [key: string]: string
 }
-interface changeType{
+interface changeType {
     type: 'CHANGE'
     payload: HTMLInputElement
 }
-interface setType{
+interface setType {
     type: 'SET'
     payload: {
         name: string,
         value: string
     }
 }
-type reducerType = changeType | setType
+type reducerType = changeType | setType;
+
 function reducer(state: inputType, action: reducerType): inputType {
     if (action.type === 'CHANGE') {
         return {

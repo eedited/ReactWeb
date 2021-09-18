@@ -3,8 +3,8 @@ import { S3Image } from 'aws-amplify-react';
 import { Link } from 'react-router-dom';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import BlueButton from '../Button/BlueButton';
-import WhiteButton from '../Button/WhiteButton';
+import BlueButton from '../button/BlueButton';
+import WhiteButton from '../button/WhiteButton';
 import './Navbar.scss';
 
 interface Props {

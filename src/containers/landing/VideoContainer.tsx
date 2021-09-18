@@ -1,6 +1,6 @@
 import React, { useRef, useState, useCallback } from 'react';
 import ReactPlayer from 'react-player';
-import Video from '../../components/Landing/VideoGrid/Video';
+import Video from '../../components/landing/videoGrid/Video';
 
 interface Props {
     videoInfo: Video

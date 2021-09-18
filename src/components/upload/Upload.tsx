@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
-import BlueButton from '../common/Button/BlueButton';
+import BlueButton from '../common/button/BlueButton';
 import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
 
@@ -9,7 +9,7 @@ export interface TagType {
     tag: string
 }
 interface Props {
-    type: 'upload' | 'change'
+    type: 'upload' | 'change';
     uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
