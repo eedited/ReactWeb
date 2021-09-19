@@ -15,11 +15,11 @@ const VideoDescription1: React.FC<props> = ({ videoInfo }: props) => (
                 <Link to={`/profile?userId=${videoInfo.uploader}`} className="video__description__uploader__name">{videoInfo.User.nickname}</Link>
                 <div className="video__description__uploader__follow">
                     {/* onClick함수 필요함. */}
-                    <img className="video__description__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
+                    {/* <img className="video__description__uploader__follow__icon" src="/icons/follow-icon.png" alt="follow-icon" />
                     <div>
                         {' '}
                         팔로우
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <LikeButtonCountContainer Video={videoInfo} />

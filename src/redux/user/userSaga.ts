@@ -45,7 +45,7 @@ function* checkSaga() {
             },
         });
     }
-    yield put(loadingAction.finishLoading({ status: 'USER/logout' }));
+    yield put(loadingAction.finishLoading({ status: 'USER/check' }));
 }
 export default function* userSaga(): Generator<ForkEffect<never>, void, unknown> {
     const { logout, check }: userModule.ActionType = userAction;

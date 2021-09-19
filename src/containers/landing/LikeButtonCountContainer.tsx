@@ -17,6 +17,7 @@ interface liekResponse{
 const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
     const [likeButtonState, toggleClickLikeButton]: [likeButtonStateType, React.Dispatch<React.SetStateAction<likeButtonStateType>>] = useState<likeButtonStateType>({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
     const [likeResponse, setLikeResponse]: [liekResponse, React.Dispatch<React.SetStateAction<liekResponse>>] = useState<liekResponse>({ success: null, failure: null });
+    const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     useEffect(() => {
         toggleClickLikeButton({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
         if (Video) {
@@ -40,12 +41,21 @@ const LikeButtonCountContainer: React.FC<props> = ({ Video }: props) => {
             }
         }
         catch (err) {
+            setModalTrigger(true);
             setLikeResponse({ ...likeResponse, failure: err.response.data });
         }
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
+    const onBackgroundClick: () => void = () => {
+        setModalTrigger(false);
+    };
     if (Video === null) return <div />;
     return (
-        <LikeButtonCount likeButtonState={likeButtonState} onButtonClick={() => onButtonClick(Video.id)} />
+        <LikeButtonCount
+            likeButtonState={likeButtonState}
+            onButtonClick={() => onButtonClick(Video.id)}
+            onBackgroundClick={onBackgroundClick}
+            ModalTrigger={ModalTrigger}
+        />
     );
 };
 

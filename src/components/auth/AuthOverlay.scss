@@ -1,0 +1,117 @@
+@import '/src/public/scss/public.scss';
+.AuthOverlayBox{
+    position: fixed;
+    top : 0;
+    left : 0;
+    right : 0;
+    bottom : 0;
+    background: rgba(30,30,30,0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .AuthOverlay{
+        position: absolute;
+        width : rem(600);
+        background: white;
+        .AuthOverlay__header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(to left top, $orange, rgb(237,110,116));
+            .AuthOverlay__header__title{
+                text-align: center;
+                margin-top : rem(16);
+                margin-bottom: rem(32); 
+                height: rem(44);
+                line-height: rem(44);
+                border-radius: rem(10);
+                border : 1px solid white;
+                color : white;
+                width : 50%;
+            }
+            .AuthOverlay__header__hero{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                .AuthOverlay__header__hero__description{
+                    color : #e5e5e5;
+                    margin-top : rem(-50);
+                    .AuthOverlay__header__hero__title{
+                        font-family: 'NotoSansKRBold';
+                        font-size: rem(20);
+                        margin-bottom: rem(16);
+                    }
+                    .AuthOverlay__header__hero__body{
+                        font-family: 'NotoSansKRMedium';
+                        font-size: rem(16);
+                    }
+                }
+                .AuthOverlay__header__hero__img{
+                    width : 35%;
+                    margin-left: rem(-150);
+                    filter: invert(20%);
+                }
+            }
+        }
+        .authForm__main{
+            margin-bottom: rem(30);
+            padding : 0 rem(100);
+            margin-top : rem(50);
+            .authForm__inputs{
+                display: flex;
+                flex-direction: column;
+                gap : rem(15);
+                align-items: center; 
+            }
+            .authForm__input{
+                display: flex;
+                flex-direction: column;
+                width : 100%;
+                .authForm__input__title{
+                    font-size : rem(16);
+                    margin-bottom: rem(8);
+                    display: flex;
+                    justify-content: space-between;
+                    .authForm__input__title__find{
+                        font-size: rem(12);
+                        color: #4B89DC;
+                    }
+                }
+                .authForm__input__field{
+                    border: 1px solid rgb(150,150,150);
+                    background-color: $white;
+                    border-radius: 2px;
+                    height: rem(40);   
+                    padding-left: rem(8);
+                }
+                .authForm__input__field:focus{
+                    border: none;
+                    background-color: $white;
+                    outline: none;
+                    box-shadow: 0 0 0 2px $orange;
+                }
+            }
+            .authForm__input__button{
+                border: 0rem;
+                cursor: pointer;
+                background-color: $orange;
+                font-family: Pretendard-Medium;
+                width : 100%;
+                height : rem(44);
+                font-size : rem(18);
+                border-radius: rem(10);   
+            }
+            .authForm__toSignup{
+                cursor: pointer;
+                width: 100%;
+                font-size: rem(14);
+            }
+            .authForm__agreement{
+                font-size: rem(12);
+                width: 100%;
+            }
+        }
+    }
+}

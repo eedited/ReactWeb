@@ -6,10 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
+import AuthOverlay from '../../auth/AuthOverlay';
+import LoginOverlayContainer from '../../../containers/auth/LoginOverlayContainer';
+import SignupOverlayContainer from '../../../containers/auth/SignupOverlayContainer';
 
+export interface ModalTriggerType{
+    isModalOn: boolean,
+    type: 'login'|'signup'
+}
 interface props{
     user: USER|null
     isSearchClick: boolean
+    ModalTrigger: ModalTriggerType
     onLogout: () => void
     onLogin: () => void
     onSignup: () => void
@@ -18,7 +26,7 @@ interface props{
 }
 
 const Navbar: React.FC<props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload,
+    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger,
 }: props) => (
     <>
         <div className="navbar">
@@ -46,7 +54,22 @@ const Navbar: React.FC<props> = ({
                             <input className="navbar__utility__find__input" onSubmit={() => { /* submit 될때 해야할일 */ }} />
                         </div>
                     )}
-
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'login'))
+                                && (
+                                    <LoginOverlayContainer backgroundClicked={onLogin} />
+                                )
+                    }
+                </div>
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'signup'))
+                                && (
+                                    <SignupOverlayContainer backgroundClicked={onSignup} />
+                                )
+                    }
+                </div>
                 {user === null
                     ? (
                         <div className="navbar__utility__buttons">

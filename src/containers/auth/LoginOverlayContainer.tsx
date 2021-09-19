@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import AuthForm from '../../components/auth/AuthForm';
 
 import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
+import AuthOverlay from '../../components/auth/AuthOverlay';
 
 interface fromReducerType{
     form: LOGIN
@@ -13,13 +13,15 @@ interface fromReducerType{
     Auth?: authRouter.authSuccessResponse|null
     AuthError?: authModule.authFailureResponse|null
 }
-interface props{
-    history: RouteComponentProps['history'],
+interface props extends RouteComponentProps{
+    backgroundClicked: () => void
+    title?: (type: string) => string
 }
 
-const LoginForm: React.FC<props> = ({ history }: props) => {
+const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title }: props) => {
     const { changeField, intializeForm, login }: authModule.ActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+    const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('login');
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User,
@@ -62,24 +64,36 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
     }, [Auth, AuthError, dispatch]);
     useEffect(() => {
         if (User) {
+            console.log(User);
             try {
                 localStorage.setItem('user', JSON.stringify(User));
+                backgroundClicked();
             }
             catch (err) {
                 console.log('local storage not working');
             }
         }
-    }, [history, User]);
-
+    }, [history, User, backgroundClicked]);
+    const setType: () => void = () => {
+        if (authType === 'login') {
+            setAuthType('signup');
+        }
+        else setAuthType('login');
+    };
     return (
-        <AuthForm
-            type="login"
+        <AuthOverlay
+            title={title}
+            type={authType}
+            setType={setType}
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
+            backgroundClicked={backgroundClicked}
         />
     );
 };
-
-export default withRouter(LoginForm);
+LoginOverlayContainer.defaultProps = {
+    title: (type: string) => type.toUpperCase(),
+};
+export default withRouter(LoginOverlayContainer);
