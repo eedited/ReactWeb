@@ -12,8 +12,11 @@
         justify-content: space-between;
         line-height: rem(250);
         font-size: rem(40);
-        font-family: NotoSansKRBold;
-        border-bottom: 1px solid rgba(32, 32, 32, 0.102);
+        font-family : NotoSansKRBold;
+        border-bottom: 1px solid rgba(32, 32, 32,0.102);
+        .upload__haeder__img{
+            height: rem(250);
+        }
     }
 
     .upload__body {
@@ -52,8 +55,9 @@
                     margin-top: rem(16);
                     border-radius: rem(10);
                     background-color: rgb(247, 247, 247);
-                    border: none;
-                    font-size: rem(13);
+                    border:none;
+                    font-size:rem(13);
+                    padding-left: rem(7);
                 }
 
                 .upload__info__title__input:focus {
@@ -114,8 +118,10 @@
                     margin-top: rem(16);
                     border-radius: rem(10);
                     background-color: rgb(247, 247, 247);
-                    border: none;
-                    font-size: rem(13);
+                    border:none;
+                    font-size:rem(13);
+                    padding-left: rem(7);
+                    padding-top : rem(7);
                 }
 
                 .upload__info__description__input:focus {

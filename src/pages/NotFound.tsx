@@ -9,7 +9,7 @@ const NotFound: React.FC<Props> = ({ history }: Props) => (
     <BaseTemplate>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '83px', marginBottom: '110px' }}>
             <div style={{ fontSize: '45px', fontFamily: 'Pretendard-Medium' }}>Oops!</div>
-            <img src="/problem.png" style={{ width: '342px', marginTop: '83px' }} alt="problem" />
+            <img src="/images/heros/problem.png" style={{ width: '342px', marginTop: '83px' }} alt="problem" />
             <div style={{ textAlign: 'center', fontSize: '17px', lineHeight: '28px', fontFamily: 'Pretendard-Medium', marginTop: '83px', marginBottom: '52px' }}>
                 page Not Found
                 <br />

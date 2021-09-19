@@ -6,10 +6,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
+import AuthOverlay from '../../auth/AuthOverlay';
+import LoginOverlayContainer from '../../../containers/auth/LoginOverlayContainer';
+import SignupOverlayContainer from '../../../containers/auth/SignupOverlayContainer';
 
-interface Props {
-    user: User | null
+export interface ModalTriggerType{
+    isModalOn: boolean,
+    type: 'login'|'signup'
+}
+interface props{
+    user: User|null
     isSearchClick: boolean
+    ModalTrigger: ModalTriggerType
     onLogout: () => void
     onLogin: () => void
     onSignup: () => void
@@ -17,9 +25,9 @@ interface Props {
     onUpload: () => void
 }
 
-const Navbar: React.FC<Props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload,
-}: Props) => (
+const Navbar: React.FC<props> = ({
+    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger,
+}: props) => (
     <>
         <div className="navbar">
             <div className="navbar__menu">
@@ -35,21 +43,33 @@ const Navbar: React.FC<Props> = ({
                 </div>
             </div>
             <div className="navbar__utility">
-                {
-                    !isSearchClick
-                        ? (
-                            <div className="navbar__utility__find">
-                                <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
-                            </div>
-                        )
-                        : (
-                            <div className="navbar__utility__find find__activated">
-                                <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
-                                <input className="navbar__utility__find__input" onSubmit={() => { /* submit 될때 해야할일 */ }} />
-                            </div>
-                        )
-                }
-
+                {!isSearchClick ? (
+                    <div className="navbar__utility__find">
+                        <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
+                    </div>
+                )
+                    : (
+                        <div className="navbar__utility__find find__activated">
+                            <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
+                            <input className="navbar__utility__find__input" onSubmit={() => { /* submit 될때 해야할일 */ }} />
+                        </div>
+                    )}
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'login'))
+                                && (
+                                    <LoginOverlayContainer backgroundClicked={onLogin} />
+                                )
+                    }
+                </div>
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'signup'))
+                                && (
+                                    <SignupOverlayContainer backgroundClicked={onSignup} />
+                                )
+                    }
+                </div>
                 {
                     user === null
                         ? (

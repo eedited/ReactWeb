@@ -22,19 +22,26 @@ interface props{
 const MyPageGraph: React.FC<props> = ({ tags }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
-        const tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
+        let tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
 
         let tagNum: number = 0;
         for (let i: number = 0; i < tagArray.length; i += 1) tagNum += tagArray[i][1];
-
+        let tagIdx: number = 0;
         if (tagArray.length >= 4) {
             const etc: [string, number] = ['etc', 0];
-            for (let i: number = 4; i < tagArray.length; i += 1) {
+            for (let i: number = tagArray.length - 1; i >= 0; i -= 1) {
                 etc[1] += tagArray[i][1];
+                tagIdx = i;
+                if (etc[1] >= tagNum * 0.2) break;
             }
-            // tagArray = [tagArray[0], tagArray[1], tagArray[2], etc];
+            const newTagArray: [string, number][] = [];
+            for (let i: number = 0; i < tagIdx; i += 1) {
+                newTagArray.push(tagArray[i]);
+            }
+            newTagArray.push(etc);
+            tagArray = [...newTagArray];
         }
-
+        console.log(tagArray);
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -50,7 +57,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
             const radius: number = Math.min(height, width) / 3;
             const x: number = width / 2;
             const y: number = height / 2;
-            const gap: number = 3;
+            const gap: number = 8;
             let rgb: number[] = [8, 44, 172];
             const lineWidth: number = 5 / dpr;
             const fontSize: number = Math.ceil(12 / dpr);
@@ -73,6 +80,7 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                 if (!ctx) return;
                 prevAngle = 0;
                 tagArray.forEach(([key, value]: [string, number]) => {
+                    console.log(key, value);
                     const currentAngle: number = prevAngle + (Math.PI * (step * value)) / 180;
                     const centerAngle: number = (currentAngle + prevAngle - Math.PI) / 2;
                     ctx.save();
@@ -117,13 +125,13 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                     return;
                 }
                 ctx.strokeStyle = `rgb(${rgb[0] + 10 * currentIdx},${rgb[1] + 10 * currentIdx},${rgb[2] + 10 * currentIdx})`;
-                if (prevAngle <= cur && cur + 4 <= nextAngle) {
+                if (prevAngle <= cur && cur + 1 <= nextAngle) {
                     // cur~cur+1까지 그려.
                     ctx.beginPath();
                     ctx.arc(x, y, radius, toRad(cur) - Math.PI / 2, toRad(cur + 4) - Math.PI / 2);
                     ctx.stroke();
                 }
-                else if (prevAngle <= cur && cur + 4 > nextAngle) {
+                else if (prevAngle <= cur && cur + 1 > nextAngle) {
                     // cur ~ nextAngle 까지 그려.
                     // prevAngle, nextAngle 다시 계산.
                     ctx.beginPath();
@@ -135,22 +143,22 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                     nextAngle = prevAngle + ((step * tagArray[currentIdx][1]));
                     ctx.stroke();
                 }
-                else if (prevAngle > cur && cur + 4 < prevAngle) {
+                else if (prevAngle > cur && cur + 1 < prevAngle) {
                     // 아무것도 그리지 마.
                 }
-                else if (prevAngle > cur && cur + 4 >= prevAngle) {
+                else if (prevAngle > cur && cur + 1 >= prevAngle) {
                     // prevAngle ~ cur+1까지 그려.
                     ctx.beginPath();
-                    ctx.arc(x, y, radius, toRad(prevAngle) - Math.PI / 2, toRad(cur + 4) - Math.PI / 2);
+                    ctx.arc(x, y, radius, toRad(prevAngle) - Math.PI / 2, toRad(cur + 1) - Math.PI / 2);
                     ctx.stroke();
                 }
-                cur += 4;
-                setTimeout(forSetInterval, 8);
+                cur += 1;
+                setTimeout(forSetInterval, 2);
             }
             ctx.lineWidth = lineWidth;
-            setTimeout(forSetInterval, 8);
+            setTimeout(forSetInterval, 2);
         };
-        img.src = '/problem.png';
+        img.src = '/images/heros/problem.png';
     }, [tags]);
     return (
         <canvas ref={canvasRef} />

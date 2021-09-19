@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import DropDown from '../../components/common/DropDown/DropDown';
 
 interface DropDownProp {
@@ -8,36 +9,42 @@ interface DropDownProp {
     key: string
     set: string
 }
-interface Props {
+interface props extends RouteComponentProps{
     imgSrc: string
-    initialStateDD: DropDownProp[]
+    DDidx: number
+    initialStateFilter: DropDownProp[][]
 }
-
-const DropDownContainer: React.FC<Props> = ({ initialStateDD, imgSrc }: Props) => {
-    const [ddItem, setDD]: [DropDownProp[], React.Dispatch<React.SetStateAction<DropDownProp[]>>] = useState<DropDownProp[]>(initialStateDD);
+const DropDownContainer: React.FC<props> = ({ DDidx, initialStateFilter, imgSrc, history }: props) => {
     const [isListOpen, setIsListOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const selectItem: (item: DropDownProp) => void = (item: DropDownProp) => {
         setIsListOpen(false);
-        let temp: DropDownProp[] = [...ddItem];
-        temp = temp.map((x: DropDownProp) => ({
-            ...x,
-            selected: false,
-        }));
-        temp = temp.map((x: DropDownProp) => {
-            if (x.id === item.id) {
-                return {
-                    ...x,
-                    selected: true,
-                };
+        const paramName: string[] = ['category', 'platform', 'program', 'sorting'];
+        let pushString: string = '/videos';
+        let ch: boolean = false;
+        for (let i: number = 0; i < 4; i += 1) {
+            let concat: string = '&';
+            if (i !== DDidx) {
+                const tempStr: DropDownProp|undefined = initialStateFilter[i].find((x: DropDownProp) => x.selected === true);
+                if (tempStr && tempStr.set !== 'all') {
+                    if (ch === false) {
+                        concat = '?'; ch = true;
+                    }
+                    pushString += `${concat + paramName[i]}=${tempStr.set}`;
+                }
             }
-            return x;
-        });
-        setDD(temp);
+            else if (item.set !== 'all') {
+                if (ch === false) {
+                    concat = '?'; ch = true;
+                }
+                pushString += `${concat + paramName[i]}=${item.set}`;
+            }
+        }
+        history.push(pushString);
     };
 
     return (
         <DropDown
-            ddItem={ddItem}
+            ddItem={initialStateFilter[DDidx]}
             isListOpen={isListOpen}
             imgSrc={imgSrc}
             selectItem={selectItem}
@@ -46,4 +53,4 @@ const DropDownContainer: React.FC<Props> = ({ initialStateDD, imgSrc }: Props) =
     );
 };
 
-export default DropDownContainer;
+export default withRouter(DropDownContainer);

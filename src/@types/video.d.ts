@@ -55,7 +55,10 @@ export declare global {
         }
 
         interface VideoListRequest {
-            criteria: string;
+            category: string;
+            platform: string;
+            program: string;
+            sorting: string;
             page: number;
         }
 

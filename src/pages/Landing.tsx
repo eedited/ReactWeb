@@ -1,41 +1,51 @@
-import React, { useEffect } from 'react';
-import { Redirect } from 'react-router';
-import router from 'react-router-dom';
+import React, { useMemo } from 'react';
+import qs from 'qs';
+import { RouteComponentProps, withRouter } from 'react-router';
 import BaseTemplate from './BaseTemplate';
 import HeroDescription from '../containers/landing/HeroDescription';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
 
-interface MatchParams {
-    criteria: string
-}
-interface Props {
-    match: router.match<MatchParams>
-}
-
-const validMatch: string[] = ['thumbup', 'latest'];
-const Landing: React.FC<Props> = ({ match }: Props) => {
-    let criteria: string = '';
-
-    if (match.params.criteria !== undefined && !validMatch.includes(match.params.criteria)) {
-        return (
-            <Redirect to={{
-                pathname: '/404NotFound',
-            }}
-            />
-        );
-    }
-
-    if (match.params.criteria === undefined) criteria = 'latest';
-    else criteria = match.params.criteria;
-
+type Props = RouteComponentProps
+const paramValidmatch: string[][] = [['vlog', 'game', 'beauty'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];
+const Landing: React.FC<Props> = ({ location, history }: Props) => {
+    const parameters: string[] = useMemo(() => {
+        const query: qs.ParsedQs = qs.parse(location.search, {
+            ignoreQueryPrefix: true,
+        });
+        const { category, platform, program, sorting }: qs.ParsedQs = query;
+        const paramArray: (string | qs.ParsedQs | string[] | qs.ParsedQs[] | undefined)[] = [category, platform, program, sorting];
+        const params: string[] = paramArray.map((param: (string | qs.ParsedQs | string[] | qs.ParsedQs[] | undefined), idx: number) => {
+            let ret: string;
+            if (!param) {
+                ret = 'all';
+            }
+            else if (typeof param === 'string') {
+                if (paramValidmatch[idx].includes(param)) {
+                    ret = param;
+                }
+                else ret = 'not';
+            }
+            else ret = 'not';
+            return ret;
+        });
+        if (!sorting) {
+            params[3] = 'latest';
+        }
+        if (params.includes('not')) {
+            history.push('/404NotFound');
+        }
+        return params;
+    }, [history, location.search]);
     return (
         <BaseTemplate>
             <HeroDescription />
-            <FilterContainer />
-            <VideoGridContainer criteria={criteria} />
+            <FilterContainer
+                params={parameters}
+            />
+            <VideoGridContainer params={parameters} />
         </BaseTemplate>
     );
 };
 
-export default Landing;
+export default withRouter(Landing);

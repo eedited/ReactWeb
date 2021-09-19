@@ -9,35 +9,25 @@ interface Props {
 
 const VideoContainer: React.FC<Props> = ({ videoInfo, key }: Props) => {
     const [isLoading, setisLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(true);
-    const [isPlay, setisPlay]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
-
-    const play: () => void = () => {
-        if (!isLoading) {
-            setisPlay(true);
-            youtubeRef.current?.getInternalPlayer().playVideo();
-        }
-    };
-
-    const pause: () => void = () => {
-        if (!isLoading) {
-            youtubeRef.current?.getInternalPlayer().stopVideo();
-            setisPlay(false);
-        }
-    };
-
+    const [mouseOver, setMouseOver]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const onLoad: (plyaer: ReactPlayer) => void = (player: ReactPlayer) => {
         setisLoading(false);
     };
-
-    const setOpacity: () => number = useCallback(() => Number(!isLoading && isPlay), [isLoading, isPlay]);
-
+    const onMouseOver: () => void = useCallback(() => {
+        setMouseOver(true);
+    }, []);
+    const onMouseLeave: () => void = useCallback(() => {
+        setMouseOver(false);
+        setisLoading(true);
+    }, []);
     return (
         <Video
+            onMouseLeave={onMouseLeave}
+            onMouseOver={onMouseOver}
             onLoad={onLoad}
-            play={play}
-            pause={pause}
-            setOpacity={setOpacity}
+            isLoading={isLoading}
+            mouseOver={mouseOver}
             videoInfo={videoInfo}
             ref={youtubeRef}
             key={key}

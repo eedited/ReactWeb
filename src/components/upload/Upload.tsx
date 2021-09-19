@@ -30,7 +30,7 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
     <div className="upload">
         <div className="upload__haeder">
             <div className="upload__header__title">{type === 'change' ? '수정' : '업로드'}</div>
-            <img alt="upload__haeder__img" src="/images/uploadImg.png" className="upload__haeder__img" />
+            <img alt="upload__haeder__img" src="/images/heros/uploadImg.png" className="upload__haeder__img" />
         </div>
         <div className="upload__body">
             <form onSubmit={uploadSubmit} className="upload__form">
@@ -52,7 +52,7 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
                             onChange={onInputChange}
                             name="videoLink"
                             value={inputState.videoLink}
-                            placeholder="youtube 또는 Viemo링크를 입력하세요"
+                            placeholder="youtube 링크를 입력하세요"
                         />
                     </div>
                     <div className="upload__info__item">

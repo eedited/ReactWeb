@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
-import Navbar from '../../components/common/Navbar/Navbar';
+import Navbar, { ModalTriggerType } from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
@@ -19,7 +19,10 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
         logoutError: state.userReducer.logoutError,
     }));
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
-
+    const [ModalTrigger, setModalTrigger]: [ModalTriggerType, React.Dispatch<React.SetStateAction<ModalTriggerType>>] = useState<ModalTriggerType>({
+        isModalOn: false,
+        type: 'login',
+    });
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
 
     const onLogout: () => void = () => {
@@ -27,11 +30,17 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
     };
 
     const onLogin: () => void = () => {
-        history.push('/login');
+        setModalTrigger((prevState: ModalTriggerType) => ({
+            isModalOn: !prevState.isModalOn,
+            type: 'login',
+        }));
     };
 
     const onSignup: () => void = () => {
-        history.push('/signup');
+        setModalTrigger((prevState: ModalTriggerType) => ({
+            isModalOn: !prevState.isModalOn,
+            type: 'signup',
+        }));
     };
 
     const onUpload: () => void = () => {
@@ -40,6 +49,7 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
 
     return (
         <Navbar
+            ModalTrigger={ModalTrigger}
             user={User}
             onLogout={onLogout}
             onLogin={onLogin}

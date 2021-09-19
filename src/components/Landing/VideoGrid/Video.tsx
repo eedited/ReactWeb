@@ -5,50 +5,51 @@ import './Video.scss';
 
 interface Props {
     onLoad: (player: ReactPlayer) => void
-    play: () => void
-    pause: () => void
-    setOpacity: () => number
+    mouseOver: boolean
+    onMouseOver: () => void
+    onMouseLeave: () => void
     videoInfo: Video
-    key: string | undefined
+    key: string|undefined
+    isLoading: boolean
 }
-
 const Video: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
-    onLoad, play, pause, setOpacity, videoInfo, key,
+    onLoad, videoInfo, key, mouseOver, onMouseOver, isLoading, onMouseLeave,
 }: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     <div className="videoElement" key={key}>
         <Link to={`/videoInfo?videoId=${videoInfo.id}`}>
-            <div className="video">
-                <ReactPlayer
-                    className="video__player"
-                    url={videoInfo.url}
-                    ref={youtubeRef}
-                    muted
-                    width="100%"
-                    height="100%"
-                    onReady={onLoad}
-                    config={{
-                        youtube: {
-                            playerVars: {
-                                rel: 0,
-                                origin: 'http://localhost:3000',
-                            },
-                        },
-                    }}
-                    style={{
-                        opacity: setOpacity(),
-                        borderRadius: '20px',
-                    }}
-                />
+            <div
+                className="video"
+                onMouseEnter={onMouseOver}
+                onMouseLeave={onMouseLeave}
+            >
                 <img
                     className="video__img"
                     src={videoInfo.thumbnail}
                     alt="123"
-                    onMouseOver={play}
-                    onFocus={play}
-                    onMouseLeave={pause}
-                    onBlur={pause}
-                    style={{ opacity: (setOpacity() + 1) % 2 }}
+                    style={{ opacity: !isLoading && mouseOver ? 0 : 1, zIndex: 2 }}
                 />
+                {
+                    mouseOver && (
+                        <ReactPlayer
+                            className="video__player"
+                            url={videoInfo.url}
+                            ref={youtubeRef}
+                            muted
+                            width="100%"
+                            height="100%"
+                            onReady={onLoad}
+                            config={{
+                                youtube: {
+                                    playerVars: {
+                                        rel: 0,
+                                        origin: 'http://localhost:4000',
+                                    },
+                                },
+                            }}
+                            playing
+                        />
+                    )
+                }
             </div>
         </Link>
     </div>

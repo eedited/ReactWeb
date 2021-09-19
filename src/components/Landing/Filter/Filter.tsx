@@ -17,7 +17,7 @@ interface Props {
 const Filter: React.FC<Props> = ({ imgSrc, initialDD }: Props) => (
     <div className="filter">
         {
-            imgSrc.map((item: string, idx: number) => <DropDownContainer imgSrc={item} initialStateDD={initialDD[idx]} key={item} />)
+            imgSrc.map((item: string, idx: number) => <DropDownContainer imgSrc={item} DDidx={idx} initialStateFilter={initialDD} key={item} />)
         }
     </div>
 );

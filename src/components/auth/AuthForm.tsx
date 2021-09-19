@@ -23,12 +23,13 @@ const AuthForm: React.FC<Props> = ({
 }: Props) => (
     <div className="authForm">
         <div className="authForm__img">
-            <img src="images/loginImg.png" alt="loginImg" />
+            <img src="/images/heros/loginImg.png" alt="loginImg" />
         </div>
         <div className="authForm__main">
+            <div className="authForm__main__title">{textMap[type]}</div>
             <form onSubmit={onSubmit} className="authForm__inputs">
                 <div className="authForm__input">
-                    <h2 className="authForm__input__title">ID</h2>
+                    <h2 className="authForm__input__title">아이디</h2>
                     <input
                         className="authForm__input__field"
                         placeholder="아이디"
@@ -38,7 +39,7 @@ const AuthForm: React.FC<Props> = ({
                     />
                 </div>
                 <div className="authForm__input">
-                    <h2 className="authForm__input__title">Password</h2>
+                    <h2 className="authForm__input__title">비밀번호</h2>
                     <input
                         className="authForm__input__field"
                         type="password"
@@ -48,54 +49,57 @@ const AuthForm: React.FC<Props> = ({
                         onChange={onChange}
                     />
                 </div>
-                {
-                    type === 'signup'
-                        && (
-                            <>
-                                <div className="authForm__input">
-                                    <h2 className="authForm__input__title">passwd confirm:</h2>
-                                    <input
-                                        className="authForm__input__field"
-                                        type="password"
-                                        placeholder="비밀번호 확인"
-                                        name="passwordConfirm"
-                                        value={form.passwordConfirm}
-                                        onChange={onChange}
-                                    />
-                                </div>
-                                <div className="authForm__input">
-                                    <h2 className="authForm__input__title">email:</h2>
-                                    <input
-                                        className="authForm__input__field"
-                                        type="email"
-                                        placeholder="이메일"
-                                        name="email"
-                                        value={form.email}
-                                        onChange={onChange}
-                                    />
-                                </div>
-                                <div className="authForm__input">
-                                    <h2 className="authForm__input__title">닉네임</h2>
-                                    <input
-                                        className="authForm__input__field"
-                                        type="nickname"
-                                        placeholder="nickname"
-                                        name="nickname"
-                                        value={form.nickname}
-                                        onChange={onChange}
-                                    />
-                                </div>
-                            </>
-                        )
-                }
+                {type === 'signup' && (
+                    <>
+                        <div className="authForm__input">
+                            <h2 className="authForm__input__title">비밀번호 확인</h2>
+                            <input
+                                className="authForm__input__field"
+                                type="password"
+                                placeholder="비밀번호 확인"
+                                name="passwordConfirm"
+                                value={form.passwordConfirm}
+                                onChange={onChange}
+                            />
+                        </div>
+                        <div className="authForm__input">
+                            <h2 className="authForm__input__title">이메일</h2>
+                            <input
+                                className="authForm__input__field"
+                                type="email"
+                                placeholder="이메일"
+                                name="email"
+                                value={form.email}
+                                onChange={onChange}
+                            />
+                        </div>
+                        <div className="authForm__input">
+                            <h2 className="authForm__input__title">닉네임</h2>
+                            <input
+                                className="authForm__input__field"
+                                type="nickname"
+                                placeholder="nickname"
+                                name="nickname"
+                                value={form.nickname}
+                                onChange={onChange}
+                            />
+                        </div>
+                    </>
+                )}
                 {error && <div className="authForm__input__error" style={{ color: 'red' }}>{error}</div>}
-                <button type="submit">{textMap[type]}</button>
+                <button className="authForm__input__button" type="submit">{textMap[type]}</button>
+                {type === 'signup' && (
+                    <div className="authForm__agreement">
+                        가입 시, eedited의
+                        {' '}
+                        <Link to="/" style={{ color: '#4B89DC' }}>이용약관</Link>
+                        ,
+                        {' '}
+                        <Link to="/" style={{ color: '#4B89DC' }}>개인정보 취급방침</Link>
+                        에 동의합니다.
+                    </div>
+                )}
             </form>
-            {
-                type === 'login'
-                    ? (<Link to="/signup">회원가입</Link>)
-                    : (<Link to="/login">로그인</Link>)
-            }
             <br />
             {type === 'login' && (
                 <>

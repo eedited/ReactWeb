@@ -24,7 +24,7 @@ const App: AppType = (): JSX.Element => (
             <Switch>
                 <Route path="/" component={Landing} exact />
                 <Route path="/video" component={Landing} />
-                <Route path="/videos/:criteria" component={Landing} />
+                <Route path="/videos" component={Landing} />
                 <Route path="/videoInfo" component={VideoPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />

@@ -4,8 +4,8 @@ import client from './client';
 type VideoAPIFunctionType = ({ videoId }: VideoRouter.VideoRequest) => Promise<AxiosResponse<VideoRouter.VideoSuccessResponse>>;
 export const video: VideoAPIFunctionType = ({ videoId }: VideoRouter.VideoRequest) => client.get(`/video/${videoId}`);
 
-type VideoListAPIFunctionType = ({ criteria, page }: VideoRouter.VideoListRequest) => Promise<AxiosResponse<VideoRouter.VideoListSuccessResponse>>
-export const videoList: VideoListAPIFunctionType = ({ criteria, page }: VideoRouter.VideoListRequest) => client.get(`/video/sort/${criteria}/?page=${page}`);
+type videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => Promise<AxiosResponse<VideoRouter.VideoListSuccessResponse>>
+export const videoList: videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => client.get(`/video/sort/${sorting}/?page=${page}`);
 
 type VideoAPIUploadFunctionType = ({
     title, discription, url, thumbnail, tags,

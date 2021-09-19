@@ -14,11 +14,10 @@ interface LikeResponse {
     success: VideoRouter.VideoLikeSuccessResponse | null
     failure: VideoRouter.VideoLikeFailureResponse | null
 }
-
 const LikeButtonCountContainer: React.FC<Props> = ({ Video }: Props) => {
     const [likeButtonState, toggleClickLikeButton]: [LikeButtonStateType, React.Dispatch<React.SetStateAction<LikeButtonStateType>>] = useState<LikeButtonStateType>({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
     const [likeResponse, setLikeResponse]: [LikeResponse, React.Dispatch<React.SetStateAction<LikeResponse>>] = useState<LikeResponse>({ success: null, failure: null });
-
+    const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     useEffect(() => {
         toggleClickLikeButton({ toggle: false, likeCnt: Video ? Video.likeCnt : 0 });
         if (Video) {
@@ -43,18 +42,22 @@ const LikeButtonCountContainer: React.FC<Props> = ({ Video }: Props) => {
             }
         }
         catch (err) {
+            setModalTrigger(true);
             setLikeResponse({ ...likeResponse, failure: err.response.data });
         }
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
-
-    return Video === null
-        ? <div />
-        : (
-            <LikeButtonCount
-                likeButtonState={likeButtonState}
-                onButtonClick={() => onButtonClick(Video.id)}
-            />
-        );
+    const onBackgroundClick: () => void = () => {
+        setModalTrigger(false);
+    };
+    if (Video === null) return <div />;
+    return (
+        <LikeButtonCount
+            likeButtonState={likeButtonState}
+            onButtonClick={() => onButtonClick(Video.id)}
+            onBackgroundClick={onBackgroundClick}
+            ModalTrigger={ModalTrigger}
+        />
+    );
 };
 
 export default LikeButtonCountContainer;

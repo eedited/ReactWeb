@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import AuthForm from '../../components/auth/AuthForm';
+
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
+import AuthOverlay from '../../components/auth/AuthOverlay';
 
-interface FromReducerType {
+interface fromReducerType{
     form: Login
-    User: User | null
-    Auth?: AuthRouter.AuthSuccessResponse | null
-    AuthError?: RDXAuthModule.AuthFailureResponse | null
+    User: User|null
+    Auth?: AuthRouter.AuthSuccessResponse|null
+    AuthError?: RDXAuthModule.AuthFailureResponse|null
 }
-interface Props {
-    history: RouteComponentProps['history'],
+interface props extends RouteComponentProps{
+    backgroundClicked: () => void
+    title?: (type: string) => string
 }
 
-const LoginForm: React.FC<Props> = ({ history }: Props) => {
+const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title }: props) => {
     const { changeField, intializeForm, login }: RDXAuthModule.ActionType = authAction;
-    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
-
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+    const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('login');
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User,
-    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
+    }: fromReducerType = useAppSelector((state: SelectorStateType) => ({
         form: state.authReducer.login,
         User: state.userReducer.user,
         Auth: state.authReducer.auth,
@@ -40,7 +42,6 @@ const LoginForm: React.FC<Props> = ({ history }: Props) => {
             }),
         );
     };
-
     const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { userId, password }: {userId: string, password: string} = form;
@@ -49,11 +50,9 @@ const LoginForm: React.FC<Props> = ({ history }: Props) => {
             password,
         }));
     };
-
     useEffect(() => () => {
         dispatch(intializeForm());
     }, [dispatch, intializeForm]);
-
     useEffect(() => {
         if (AuthError) {
             if (AuthError.info) setError(AuthError.info);
@@ -63,27 +62,38 @@ const LoginForm: React.FC<Props> = ({ history }: Props) => {
             dispatch(userAction.check());
         }
     }, [Auth, AuthError, dispatch]);
-
     useEffect(() => {
         if (User) {
+            console.log(User);
             try {
                 localStorage.setItem('user', JSON.stringify(User));
+                backgroundClicked();
             }
             catch (err) {
                 console.log('local storage not working');
             }
         }
-    }, [history, User]);
-
+    }, [history, User, backgroundClicked]);
+    const setType: () => void = () => {
+        if (authType === 'login') {
+            setAuthType('signup');
+        }
+        else setAuthType('login');
+    };
     return (
-        <AuthForm
-            type="login"
+        <AuthOverlay
+            title={title}
+            type={authType}
+            setType={setType}
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
+            backgroundClicked={backgroundClicked}
         />
     );
 };
-
-export default withRouter(LoginForm);
+LoginOverlayContainer.defaultProps = {
+    title: (type: string) => type.toUpperCase(),
+};
+export default withRouter(LoginOverlayContainer);
