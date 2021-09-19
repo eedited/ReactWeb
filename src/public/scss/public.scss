@@ -1,8 +1,0 @@
-$gray : rgb(247, 247, 247);
-$white : rgb(255,255,255);
-$orange: rgb(233,144,65);
-$browser-context : 10;
-
-@function rem($px, $content : $browser-context){
-    @return #{$px/$content}rem;
-} 

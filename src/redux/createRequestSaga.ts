@@ -1,30 +1,26 @@
-
-import {
-    call, put, CallEffect, PutEffect,
-} from 'redux-saga/effects';
-
+import { call, put, CallEffect, PutEffect } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
-import { loadingAction } from '../redux/loading/loading';
+import { loadingAction } from './loading/loading';
 
-interface genericAction<T, P> {
+interface GenericAction<T, P> {
     type: T,
     payload: P
 }
-interface RetrunProp<P>{
+interface RetrunProp<P> {
     data: P
 }
-type genericRequest<P, R> = (payload: P) => Promise<AxiosResponse<R>>
+type GenericRequest<P, R> = (payload: P) => Promise<AxiosResponse<R>>
 
-export type createRequestSagaReturnType<P, R> = (action: genericAction<string, P>) => Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
+export type CreateRequestSagaReturnType<P, R> = (action: GenericAction<string, P>) => Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
     type: string;
     payload: unknown;
 }>, void, RetrunProp<R>>
 
-export default function createRequestSaga<P, R>(type: string, request: genericRequest<P, R>): createRequestSagaReturnType<P, R> {
+export default function createRequestSaga<P, R>(type: string, request: GenericRequest<P, R>): CreateRequestSagaReturnType<P, R> {
     const SUCCESS: string = `${type}Success`;
     const FAILURE: string = `${type}Failure`;
 
-    function* ret(action: genericAction<string, P>): Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
+    function* ret(action: GenericAction<string, P>): Generator<CallEffect<AxiosResponse<R>> | PutEffect<{
         type: string;
         payload: unknown;
     }>, void, RetrunProp<R>> {

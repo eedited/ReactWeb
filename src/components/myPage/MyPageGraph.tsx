@@ -23,21 +23,31 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
         const tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
+
         let tagNum: number = 0;
         for (let i: number = 0; i < tagArray.length; i += 1) tagNum += tagArray[i][1];
+
+        if (tagArray.length >= 4) {
+            const etc: [string, number] = ['etc', 0];
+            for (let i: number = 4; i < tagArray.length; i += 1) {
+                etc[1] += tagArray[i][1];
+            }
+            // tagArray = [tagArray[0], tagArray[1], tagArray[2], etc];
+        }
+
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
         if (!ctx) return;
         const dpr: number = window.devicePixelRatio || 1;
-        const width: number = 400 / dpr;
+        const width: number = 500 / dpr;
         const height: number = 400 / dpr;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const img: HTMLImageElement = new Image();
-        img.onload = function () {
-            const radius: number = width / 3;
+        img.onload = () => {
+            const radius: number = Math.min(height, width) / 3;
             const x: number = width / 2;
             const y: number = height / 2;
             const gap: number = 3;
@@ -65,24 +75,36 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
                 tagArray.forEach(([key, value]: [string, number]) => {
                     const currentAngle: number = prevAngle + (Math.PI * (step * value)) / 180;
                     const centerAngle: number = (currentAngle + prevAngle - Math.PI) / 2;
+                    ctx.save();
                     ctx.font = `${fontSize}px NotoSansKRMedium`;
                     ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+                    const standardText: string = '가나다라마바사아자차카';
+                    const textWidth: number = Math.min(ctx.measureText(standardText).width, ctx.measureText(key).width);
+                    const textHeight: number = fontSize;// (Math.ceil(textWidth / ctx.measureText(standardText).width)) * (ctx.measureText(standardText).actualBoundingBoxAscent + ctx.measureText(standardText).actualBoundingBoxDescent);
                     const a: number = binarySearch(radius, fontSize, ctx.measureText(key).width, Math.tan(centerAngle));
+                    let sx: number = 0;
+                    let sy: number = 0;
                     if (centerAngle > Math.PI / 2) {
                         if (Math.sin(a) < 0) {
                             ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-                            ctx.fillText(key, x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a), y + fontSize - (radius) * Math.sin(a));
+                            sx = x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a);
+                            sy = y + textHeight - (radius) * Math.sin(a);
                         }
                         else {
-                            ctx.fillText(key, x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a), y - (radius) * Math.sin(a));
+                            sx = x - fontSize - ctx.measureText(key).width - (radius) * Math.cos(a);
+                            sy = y - (radius) * Math.sin(a);
                         }
                     }
                     else if (Math.sin(a) < 0) {
-                        ctx.fillText(key, x + fontSize + (radius) * Math.cos(a), y + (radius) * Math.sin(a));
+                        sx = x + fontSize + (radius) * Math.cos(a);
+                        sy = y + (radius) * Math.sin(a);
                     }
                     else {
-                        ctx.fillText(key, y + fontSize + (radius) * Math.cos(a), y + fontSize + (radius) * Math.sin(a));
+                        sx = x + fontSize + (radius) * Math.cos(a);
+                        sy = y + textHeight + (radius) * Math.sin(a);
                     }
+                    ctx.fillText(key, sx, sy);
+                    ctx.restore();
                     prevAngle = currentAngle + (Math.PI * gap) / 180;
                     rgb = [rgb[0] + 10, rgb[1] + 10, rgb[2] + 10];
                 });

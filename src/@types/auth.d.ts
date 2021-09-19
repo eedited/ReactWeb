@@ -2,74 +2,101 @@ import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 export declare global {
-    interface SIGNUP{
+    interface Signup {
         [key: string]: string;
         userId: string;
         password: string;
         email: string;
         nickname: string;
     }
-    interface LOGIN{
+
+    interface Login {
         [key: string]: string;
         userId: string;
         password: string;
     }
-    interface USER{
-        userId: string
-        password: string
-        birthday: Date | null
-        nickname: string
-        email: string
-        profilePicture: string
-        followerCnt: number
-        uploadVideoCnt: number
-        proTag: boolean
-        createdAt: Date
-        updatedAt: Date
-        deletedAt: Date | null
+
+    interface User {
+        userId: string;
+        password: string;
+        birthday: Date | null;
+        nickname: string;
+        email: string;
+        profilePicture: string;
+        followerCnt: number;
+        uploadVideoCnt: number;
+        proTag: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+        deletedAt: Date | null;
     }
 
-    namespace authRouter{
-        type singupRequest = SIGNUP
-        type loginRequest = LOGIN
-        type checkSuccessResponse = USER
-        interface checkFailureResponse {
+    namespace AuthRouter {
+        type SignupRequest = Signup;
+        type LoginRequest = Login;
+        type CheckSuccessResponse = User;
+        interface CheckFailureResponse {
             info: string;
         }
-        interface authSuccessResponse {
+        interface AuthSuccessResponse {
             success: boolean;
         }
-        interface authFailureResponse {
+        interface AuthFailureResponse {
             success: boolean;
             info: string;
         }
     }
-    namespace authModule{
-        interface changeFieldType {
+
+    namespace RDXAuthModule {
+        type SignupForm = Signup & { passwordConfirm: string };
+
+        interface ChangeFieldType {
             form: 'signup' | 'login';
             key: string;
             value: string;
         }
-        type SIGNUPFORM = SIGNUP&{passwordConfirm: string}
-        interface authFailureResponse extends authRouter.authFailureResponse {
+
+        interface AuthFailureResponse extends AuthRouter.AuthFailureResponse {
             error: Error;
         }
 
         type ActionType = CaseReducerActions<{
-            changeField(state: WritableDraft<StateType>, action: PayloadAction<changeFieldType>): void;
+            changeField(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<changeFieldType>,
+            ): void;
             intializeForm(state: WritableDraft<StateType>): void;
-            signup(state: WritableDraft<StateType>, action: PayloadAction<authRouter.singupRequest>): void;
-            signupSuccess(state: WritableDraft<StateType>, action: PayloadAction<authRouter.authSuccessResponse>): void;
-            signupFailure(state: WritableDraft<StateType>, action: PayloadAction<authFailureResponse>): void;
-            login(state: WritableDraft<StateType>, action: PayloadAction<authRouter.loginRequest>): void;
-            loginSuccess(state: WritableDraft<StateType>, action: PayloadAction<authRouter.authSuccessResponse>): void;
-            loginFailure(state: WritableDraft<StateType>, action: PayloadAction<authFailureResponse>): void;
+            signup(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthRouter.SignupRequest>,
+            ): void;
+            signupSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthRouter.AuthSuccessResponse>,
+            ): void;
+            signupFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthFailureResponse>,
+            ): void;
+            login(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthRouter.LoginRequest>,
+            ): void;
+            loginSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthRouter.AuthSuccessResponse>,
+            ): void;
+            loginFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<AuthFailureResponse>,
+            ): void;
         }>;
+
         interface StateType {
-            signup: SIGNUP & { passwordConfirm: string };
-            login: LOGIN;
-            auth?: authRouter.authSuccessResponse | null;
-            authError?: authFailureResponse | null;
+            signup: Signup & { passwordConfirm: string };
+            login: Login;
+            auth?: AuthRouter.AuthSuccessResponse | null;
+            authError?: AuthFailureResponse | null;
         }
     }
 }

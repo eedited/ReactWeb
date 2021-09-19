@@ -1,8 +1,8 @@
 import React from 'react';
-import UserMaybeLike from '../../components/Video/UserMaybeLike';
+import UserMaybeLike from '../../components/video/UserMaybeLike';
 
 const UserMaybeLikeContainer: React.FC = () => {
-    const videos: videoRouter.videoListSuccessResponse = {
+    const videos: VideoRouter.VideoListSuccessResponse = {
         videos: [
             {
                 id: '1',
@@ -96,9 +96,8 @@ const UserMaybeLikeContainer: React.FC = () => {
             },
         ],
     };
-    return (
-        <UserMaybeLike videos={videos.videos} />
-    );
+
+    return <UserMaybeLike videos={videos.videos} />;
 };
 
 export default UserMaybeLikeContainer;

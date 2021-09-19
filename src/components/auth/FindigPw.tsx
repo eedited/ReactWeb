@@ -1,21 +1,21 @@
 import React from 'react';
 
-interface findPwSuccessType{
+interface FindPwSuccessType {
     password: string,
 }
-interface findPwFailureType{
+interface FindPwFailureType {
     info: string
     error: Error
 }
-export type findPwResponseType = findPwFailureType | findPwSuccessType
+export type FindPwResponseType = FindPwFailureType | FindPwSuccessType
 
-interface props{
+interface props {
     email: string
     id: string
     isSubmit: boolean
     loading: 'start'|'success'|'failure'
     validationString: string
-    findPwResponse: findPwResponseType
+    findPwResponse: FindPwResponseType
     onEmailSubmit: () => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
@@ -42,19 +42,19 @@ const FindingPw: React.FC<props> = ({
             >
                 제출
             </button>
-            {(isSubmit && loading === 'success')
-                ? (
-                    <div>
-                        새로운 비밀번호가 발송되었습니다.
-                    </div>
-
-                )
-                : (
-                    <div>
-                        비밀번호 발송에 실패하였습니다.
-                    </div>
-
-                ) }
+            {
+                isSubmit && loading === 'success'
+                    ? (
+                        <div>
+                            새로운 비밀번호가 발송되었습니다.
+                        </div>
+                    )
+                    : (
+                        <div>
+                            비밀번호 발송에 실패하였습니다.
+                        </div>
+                    )
+            }
         </form>
     </div>
 );

@@ -4,7 +4,7 @@
 import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-const initialState: authModule.StateType = {
+const initialState: RDXAuthModule.StateType = {
     signup: {
         userId: '',
         password: '',
@@ -20,27 +20,25 @@ const initialState: authModule.StateType = {
     authError: null,
 };
 
-type sliceAction = Slice<authModule.StateType,
-{
-    changeField(state: WritableDraft<authModule.StateType>, action: PayloadAction<authModule.changeFieldType>): void;
-    intializeForm(state: WritableDraft<authModule.StateType>): void;
-    signup(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.singupRequest>): void;
-    signupSuccess(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.authSuccessResponse>): void;
-    signupFailure(state: WritableDraft<authModule.StateType>, action: PayloadAction<authModule.authFailureResponse>): void;
-    login(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.loginRequest>): void;
-    loginSuccess(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.authSuccessResponse>): void;
-    loginFailure(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.authFailureResponse>): void;
-},
-'AUTH'
->;
-const authSlice: sliceAction = createSlice({
+type SliceAction = Slice<RDXAuthModule.StateType, {
+    changeField(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<RDXAuthModule.ChangeFieldType>): void;
+    intializeForm(state: WritableDraft<RDXAuthModule.StateType>): void;
+    signup(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.SignupRequest>): void;
+    signupSuccess(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.AuthSuccessResponse>): void;
+    signupFailure(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<RDXAuthModule.AuthFailureResponse>): void;
+    login(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.LoginRequest>): void;
+    loginSuccess(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.AuthSuccessResponse>): void;
+    loginFailure(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.AuthFailureResponse>): void;
+}, 'AUTH'>;
+
+const authSlice: SliceAction = createSlice({
     name: 'AUTH',
     initialState,
     reducers: {
-        changeField(state: WritableDraft<authModule.StateType>, action: PayloadAction<authModule.changeFieldType>) {
+        changeField(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<RDXAuthModule.ChangeFieldType>) {
             state[action.payload.form][action.payload.key] = action.payload.value;
         },
-        intializeForm(state: WritableDraft<authModule.StateType>) {
+        intializeForm(state: WritableDraft<RDXAuthModule.StateType>) {
             state.signup.userId = '';
             state.signup.password = '';
             state.signup.passwordConfirm = '';
@@ -51,24 +49,25 @@ const authSlice: sliceAction = createSlice({
             state.auth = null;
             state.authError = null;
         },
-        signup(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.singupRequest>) {},
-        signupSuccess(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.authSuccessResponse>) {
+        signup(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.SignupRequest>) {},
+        signupSuccess(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.AuthSuccessResponse>) {
             state.auth = action.payload;
             state.authError = null;
         },
-        signupFailure(state: WritableDraft<authModule.StateType>, action: PayloadAction<authModule.authFailureResponse>) {
+        signupFailure(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<RDXAuthModule.AuthFailureResponse>) {
             state.authError = action.payload;
         },
-        login(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.loginRequest>) {},
-        loginSuccess(state: WritableDraft<authModule.StateType>, action: PayloadAction<authRouter.authSuccessResponse>) {
+        login(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.LoginRequest>) {},
+        loginSuccess(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<AuthRouter.AuthSuccessResponse>) {
             state.auth = action.payload;
             state.authError = null;
         },
-        loginFailure(state: WritableDraft<authModule.StateType>, action: PayloadAction<authModule.authFailureResponse>) {
+        loginFailure(state: WritableDraft<RDXAuthModule.StateType>, action: PayloadAction<RDXAuthModule.AuthFailureResponse>) {
             state.authError = action.payload;
         },
     },
 });
+
 export const AUTH: string = authSlice.name;
 export default authSlice.reducer;
-export const authAction: authModule.ActionType = authSlice.actions;
+export const authAction: RDXAuthModule.ActionType = authSlice.actions;

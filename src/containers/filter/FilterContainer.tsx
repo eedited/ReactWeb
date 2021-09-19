@@ -1,7 +1,7 @@
 import React from 'react';
-import Filter from '../../components/Landing/Filter/Filter';
+import Filter from '../../components/landing/filter/Filter';
 
-interface dropDownProp{
+interface DropDownProp {
     id: number,
     title: string,
     selected: boolean,
@@ -16,7 +16,7 @@ const FilterContainer: React.FC = () => {
         '/icons/app-icon.png',
         '/icons/order-icon.png',
     ];
-    const initialDD: dropDownProp[][] = [
+    const initialDD: DropDownProp[][] = [
         [
             {
                 id: 0,
@@ -61,9 +61,7 @@ const FilterContainer: React.FC = () => {
             },
         ],
     ];
-    return (
-        <Filter imgSrc={imgSrc} initialDD={initialDD} />
-    );
+    return <Filter imgSrc={imgSrc} initialDD={initialDD} />;
 };
 
 export default FilterContainer;

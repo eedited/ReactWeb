@@ -1,128 +1,218 @@
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
-export declare global{
-    interface TAG{
-        name: string,
+export declare global {
+    interface Tag {
+        name: string;
     }
-    interface VIDEO_TAG{
-        videoTag: TAG[]
+
+    interface VideoTags {
+        videoTag: Tag[];
     }
-    interface VIDEO {
-        id: string
-        uploader: string
-        title: string
-        discription: string
-        url: string
-        thumbnail: string
-        likeCnt: number
-        viewCnt: number
-        createdAt: Date
-        updatedAt: Date
-        deleted: Date | null
+
+    interface Video {
+        id: string;
+        uploader: string;
+        title: string;
+        discription: string;
+        url: string;
+        thumbnail: string;
+        likeCnt: number;
+        viewCnt: number;
+        createdAt: Date;
+        updatedAt: Date;
+        deleted: Date | null;
         User: {
-            nickname: string
+            nickname: string;
             followTo?: {
-                followerId: string
-            }[]
-        }
+                followerId: string;
+            }[];
+        };
         WhatVideoUpload?: {
-            liker: string
-        }[]
+            liker: string;
+        }[];
     }
-    interface VIDEO_UPLOAD{
-        title: string,
-        discription: string,
-        url: string,
-        thumbnail: string
-        tags: string[]
+
+    interface VideoUpload {
+        title: string;
+        discription: string;
+        url: string;
+        thumbnail: string;
+        tags: string[];
     }
-    namespace videoRouter{
-        interface videoRequest{
-            videoId: string
-        }
-        type videoSuccessResponse = VIDEO&{ WhatVideoUploadTag: {tagName: string}[]}
-        interface videoFailureResponse{
-            info: string
+
+    namespace VideoRouter {
+        interface VideoRequest {
+            videoId: string;
         }
 
-        interface videoListRequest{
-            criteria: string
-            page: number
-        }
-        interface videoListSuccessResponse{
-            videos: VIDEO[]
-        }
-        interface videoListFailureResponse{
-            info: string
+        type VideoSuccessResponse = Video & {
+            WhatVideoUploadTag: { tagName: string }[];
+        };
+
+        interface VideoFailureResponse {
+            info: string;
         }
 
-        type videoUploadRequest = VIDEO_UPLOAD
+        interface VideoListRequest {
+            criteria: string;
+            page: number;
+        }
+
+        interface VideoListSuccessResponse {
+            videos: Video[];
+        }
+
+        interface VideoListFailureResponse {
+            info: string;
+        }
+
+        type VideoUploadRequest = VideoUpload;
+
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
-        interface videoUploadSuccessResponse {}
-        interface videoUploadFailureResponse {
-            info: string
+        interface VideoUploadSuccessResponse {}
+
+        interface VideoUploadFailureResponse {
+            info: string;
         }
 
-        interface userVideoRequest{
-            uploader: string
-        }
-        interface userVideoSuccessResponse{
-            videos: VIDEO[]
-        }
-        interface userVideoFailureResponse{
-            info: string
+        interface UserVideoRequest {
+            uploader: string;
         }
 
-        interface videoLikeRequest{
-            videoId: string
+        interface UserVideoSuccessResponse {
+            videos: Video[];
         }
+
+        interface UserVideoFailureResponse {
+            info: string;
+        }
+
+        interface VideoLikeRequest {
+            videoId: string;
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
-        interface videoLikeSuccessResponse{}
-        interface videoLikeFailureResponse{
-            info: string
+        interface VideoLikeSuccessResponse {}
+
+        interface VideoLikeFailureResponse {
+            info: string;
         }
 
+        interface VideoModifyRequest {
+            id: string;
+            title: string;
+            discription: string;
+            url: string;
+            thumbnail: string;
+            tags: string[];
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface VideoModifySuccessResponse {}
+
+        interface VideoModifyFailureResponse {
+            info: string;
+        }
     }
-    namespace videoModule{
 
-        interface videoFailureResponse extends videoRouter.videoFailureResponse{
-            error: Error
+    namespace RDXVideoModule {
+        interface VideoFailureResponse
+            extends VideoRouter.VideoFailureResponse {
+            error: Error;
         }
-        interface videoListFailureResponse extends videoRouter.videoListFailureResponse{
-            error: Error
+        interface VideoListFailureResponse
+            extends VideoRouter.VideoListFailureResponse {
+            error: Error;
         }
-        interface videoUploadFailureResponse extends videoRouter.videoUploadFailureResponse{
-            error: Error
+        interface VideoUploadFailureResponse
+            extends VideoRouter.VideoUploadFailureResponse {
+            error: Error;
         }
-        interface userVideoFailureResponse extends videoRouter.userVideoFailureResponse{
-            error: Error
+        interface UserVideoFailureResponse
+            extends VideoRouter.UserVideoFailureResponse {
+            error: Error;
         }
-        export interface StateType{
-            video: videoRouter.videoSuccessResponse|null
-            videoList: videoRouter.videoListSuccessResponse|null
-            videoUserUpload: videoRouter.userVideoSuccessResponse|null
-            videoUploadSuccess: videoRouter.videoUploadSuccessResponse|null
-            getVideoError: videoFailureResponse|null
-            videoUploadError: videoUploadFailureResponse|null
-            videoUserUploadError: userVideoFailureResponse|null
+        interface VideoModifyFailureResponse
+            extends VideoRouter.VideoModifyFailureResponse {
+            error: Error;
         }
 
-        export type ActionType=CaseReducerActions<{
+        export interface StateType {
+            video: VideoRouter.VideoSuccessResponse | null;
+            videoList: VideoRouter.VideoListSuccessResponse | null;
+            endVideoList: boolean;
+            videoUserUpload: VideoRouter.UserVideoSuccessResponse | null;
+            videoUploadSuccess: VideoRouter.VideoUploadSuccessResponse | null;
+            videoModifySuccess: VideoRouter.VideoModifySuccessResponse | null;
+            getVideoError: VideoFailureResponse | null;
+            videoUploadError: VideoUploadFailureResponse | null;
+            videoUserUploadError: UserVideoFailureResponse | null;
+            videoModifyError: VideoModifyFailureResponse | null;
+        }
+
+        export type ActionType = CaseReducerActions<{
             videoClear(state: WritableDraft<StateType>): void;
-            video(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoRequest>): void;
-            videoSuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoSuccessResponse>): void;
-            videoFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModule.videoFailureResponse>): void;
-            videoList(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoListRequest>): void;
-            videoListSuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoListSuccessResponse>): void;
-            videoListFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModule.videoListFailureResponse>): void;
-            videoUpload(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoUploadRequest>): void;
-            videoUploadSuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.videoUploadSuccessResponse>): void;
-            videoUploadFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModule.videoUploadFailureResponse>): void;
-            videoUserUploaded(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.userVideoRequest>): void;
-            videoUserUploadedSuccess(state: WritableDraft<StateType>, action: PayloadAction<videoRouter.userVideoSuccessResponse>): void
-            videoUserUploadedFailure(state: WritableDraft<StateType>, action: PayloadAction<videoModule.userVideoFailureResponse>): void
-        }>
+            video(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoRequest>,
+            ): void;
+            videoSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoSuccessResponse>,
+            ): void;
+            videoFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<RDXVideoModule.VideoFailureResponse>,
+            ): void;
+            videoList(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoListRequest>,
+            ): void;
+            videoListSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoListSuccessResponse>,
+            ): void;
+            videoListFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<RDXVideoModule.VideoListFailureResponse>,
+            ): void;
+            videoUpload(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoUploadRequest>,
+            ): void;
+            videoUploadSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoUploadSuccessResponse>,
+            ): void;
+            videoUploadFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<RDXVideoModule.VideoUploadFailureResponse>,
+            ): void;
+            videoUserUploaded(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.UserVideoRequest>,
+            ): void;
+            videoUserUploadedSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.UserVideoSuccessResponse>,
+            ): void;
+            videoUserUploadedFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<RDXVideoModule.UserVideoFailureResponse>,
+            ): void;
+            videoModify(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoModifyRequest>,
+            ): void;
+            videoModifySuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoModifySuccessResponse>,
+            ): void;
+            videoModifyFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoModifyFailureResponse>,
+            ): void;
+        }>;
     }
-
 }

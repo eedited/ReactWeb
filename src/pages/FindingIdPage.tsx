@@ -3,11 +3,9 @@ import FindingIdContainer from '../containers/auth/FindingIdContainer';
 import BaseTemplate from './BaseTemplate';
 
 const FindingIdPage: React.FC = () => (
-    <div>
-        <BaseTemplate>
-            <FindingIdContainer />
-        </BaseTemplate>
-    </div>
+    <BaseTemplate>
+        <FindingIdContainer />
+    </BaseTemplate>
 );
 
 export default FindingIdPage;

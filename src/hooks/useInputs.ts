@@ -1,17 +1,21 @@
 import React, { useReducer } from 'react';
 
-export interface inputType{
+export interface inputType {
     [key: string]: string
 }
-interface changeType{
+interface changeType {
     type: 'CHANGE'
     payload: HTMLInputElement
 }
-interface clearType{
-    type: 'CLEAR'
-    payload: string
+interface setType {
+    type: 'SET'
+    payload: {
+        name: string,
+        value: string
+    }
 }
-type reducerType = changeType | clearType
+type reducerType = changeType | setType;
+
 function reducer(state: inputType, action: reducerType): inputType {
     if (action.type === 'CHANGE') {
         return {
@@ -19,16 +23,16 @@ function reducer(state: inputType, action: reducerType): inputType {
             [action.payload.name]: action.payload.value,
         };
     }
-    if (action.type === 'CLEAR') {
+    if (action.type === 'SET') {
         return {
             ...state,
-            [action.payload]: '',
+            [action.payload.name]: action.payload.value,
         };
     }
     return state;
 }
 
-export default function useInputs(initialForm: inputType): [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string) => void] {
+export default function useInputs(initialForm: inputType): [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] {
     const [state, dispatch]: [inputType, React.Dispatch<reducerType>] = useReducer(reducer, initialForm);
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch({
@@ -36,11 +40,14 @@ export default function useInputs(initialForm: inputType): [inputType, (e: React
             payload: e.target,
         });
     };
-    const onClear: (name: string) => void = (name: string) => {
+    const setInput: (name: string, value: string) => void = (name: string, value: string = '') => {
         dispatch({
-            type: 'CLEAR' as const,
-            payload: name,
+            type: 'SET' as const,
+            payload: {
+                name,
+                value,
+            },
         });
     };
-    return [state, onChange, onClear];
+    return [state, onChange, setInput];
 }

@@ -2,28 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AuthForm from '../../components/auth/AuthForm';
-
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
 
-interface fromReducerType{
-    form: LOGIN
-    User: USER|null
-    Auth?: authRouter.authSuccessResponse|null
-    AuthError?: authModule.authFailureResponse|null
+interface FromReducerType {
+    form: Login
+    User: User | null
+    Auth?: AuthRouter.AuthSuccessResponse | null
+    AuthError?: RDXAuthModule.AuthFailureResponse | null
 }
-interface props{
+interface Props {
     history: RouteComponentProps['history'],
 }
 
-const LoginForm: React.FC<props> = ({ history }: props) => {
-    const { changeField, intializeForm, login }: authModule.ActionType = authAction;
-    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+const LoginForm: React.FC<Props> = ({ history }: Props) => {
+    const { changeField, intializeForm, login }: RDXAuthModule.ActionType = authAction;
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
+
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         form: state.authReducer.login,
         User: state.userReducer.user,
         Auth: state.authReducer.auth,
@@ -40,6 +40,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             }),
         );
     };
+
     const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { userId, password }: {userId: string, password: string} = form;
@@ -48,9 +49,11 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             password,
         }));
     };
+
     useEffect(() => () => {
         dispatch(intializeForm());
     }, [dispatch, intializeForm]);
+
     useEffect(() => {
         if (AuthError) {
             if (AuthError.info) setError(AuthError.info);
@@ -60,6 +63,7 @@ const LoginForm: React.FC<props> = ({ history }: props) => {
             dispatch(userAction.check());
         }
     }, [Auth, AuthError, dispatch]);
+
     useEffect(() => {
         if (User) {
             history.push('/');

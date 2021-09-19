@@ -1,160 +1,216 @@
-.upload{
-    position:relative;
-    width : 61%;
-    left : 19.5%;
-    .upload__haeder{
+@import '/src/App.scss';
+
+.upload {
+    position: relative;
+    width: rem(1100);
+    margin: 0 auto;
+
+    .upload__haeder {
         display: flex;
-        height: 250px;
+        height: rem(250);
         flex-direction: row;
         justify-content: space-between;
-        line-height: 250px;
-        font-size: 40px;
-        font-family : NotoSansKRBold;
-        border-bottom: 1px solid rgba(32, 32, 32,0.102);
+        line-height: rem(250);
+        font-size: rem(40);
+        font-family: NotoSansKRBold;
+        border-bottom: 1px solid rgba(32, 32, 32, 0.102);
     }
-    .upload__body{
-        display : flex;
-        margin-bottom: 60px;
-        border-bottom: 1px solid rgba(32, 32, 32,0.102);
-        .upload__form{
-            width : 65%;
-            padding-right: 30px;
-            border-right: 1px solid rgba(32, 32, 32,0.102);
+
+    .upload__body {
+        display: flex;
+        margin-bottom: rem(60);
+        border-bottom: 1px solid rgba(32, 32, 32, 0.102);
+
+        .upload__form {
+            width: 65%;
+            padding-right: rem(30);
+            border-right: 1px solid rgba(32, 32, 32, 0.102);
         }
-        .upload__info{
-            .upload__info__item{
-                margin-top : 30px;
-                .upload__info__title{
-                    font-size : 13px;
-                    font-family : NotoSansKRBold;
+
+        .upload__info {
+            .upload__info__error {
+                color: red;
+                font-size: rem(16);
+            }
+
+            .upload__tag__error {
+                color: red;
+                font-size: rem(16);
+            }
+
+            .upload__info__item {
+                margin-top: rem(30);
+
+                .upload__info__title {
+                    font-size: rem(13);
+                    font-family: NotoSansKRBold;
                 }
-                .upload__info__title__input{
-                    width : 100%;
-                    height: 45px;
-                    margin-top : 16px;
-                    border-radius: 10px;
+
+                .upload__info__title__input {
+                    width: 100%;
+                    height: rem(45);
+                    margin-top: rem(16);
+                    border-radius: rem(10);
                     background-color: rgb(247, 247, 247);
-                    border:none;
-                    font-size:13px;
+                    border: none;
+                    font-size: rem(13);
                 }
-                .upload__info__title__input:focus{
-                    background-color: rgb(255,255,255);
+
+                .upload__info__title__input:focus {
+                    background-color: rgb(255, 255, 255);
                 }
-                .upload__info__tag{
-                    width : 100%;
-                    margin-top: 16px;
-                    border-radius: 10px;
-                    background-color: rgb(247,247,247);
-                    display : flex;
+
+                .upload__info__tag {
+                    width: 100%;
+                    margin-top: rem(16);
+                    border-radius: rem(10);
+                    background-color: rgb(247, 247, 247);
+                    display: flex;
                     justify-content: flex-start;
                     flex-direction: row;
-                    flex-flow : row wrap;
+                    flex-flow: row wrap;
                     align-items: center;
-                    font-size: 13px;
+                    font-size: rem(13);
                     font-family: NotoSansKRMedium;
-                    .upload__info__tag__element{
+
+                    .upload__info__tag__element {
                         display: inline-block;
-                        background-color : rgb(255,255,255);
-                        padding : 4px 16px 4px 12px;
-                        margin : 10px 4px;
+                        background-color: rgb(255, 255, 255);
+                        padding: rem(4) rem(16) rem(4) rem(12);
+                        margin: rem(10) rem(4);
                         position: relative;
-                        .upload__info__tag__element__delete{
+
+                        .upload__info__tag__element__delete {
+                            cursor: pointer;
                             position: absolute;
-                            margin-top: -11px;
-                            width : 14px;
-                            height: 14px;
-                            cursor : pointer
+                            margin-top: rem(-11);
+                            width: rem(14);
+                            height: rem(14);
                         }
-                        button{
-                            border : none;
+
+                        button {
+                            border: none;
                             background-color: transparent;
                         }
                     }
-                    .upload__info__tag__input{
+
+                    .upload__info__tag__input {
                         position: relative;
-                        border:none;
+                        border: none;
                         background-color: transparent;
-                        height: 45px;
-                        flex : 1;
-                        margin-left : 8px;
+                        height: rem(45);
+                        flex: 1;
+                        margin-left: rem(8);
                     }
-                    .upload__info__tag__input:focus{
+
+                    .upload__info__tag__input:focus {
                         outline: none;
                     }
                 }
-                .upload__info__description__input{
-                    width : 100%;
-                    height: 200px;
-                    margin-top : 16px;
-                    border-radius: 10px;
+
+                .upload__info__description__input {
+                    width: 100%;
+                    height: rem(200);
+                    margin-top: rem(16);
+                    border-radius: rem(10);
                     background-color: rgb(247, 247, 247);
-                    border:none;
-                    font-size:13px;
+                    border: none;
+                    font-size: rem(13);
                 }
-                .upload__info__description__input:focus{
-                    background-color: rgb(255,255,255);
+
+                .upload__info__description__input:focus {
+                    background-color: rgb(255, 255, 255);
                 }
             }
-            .upload__submit{
-                margin-top : 30px;
-                margin-bottom: 30px;
+
+            .upload__submit {
+                margin-top: rem(30);
+                margin-bottom: rem(30);
             }
         }
-        .upload__preview{
-            width : 35%;
-            margin-top : 60px;
-            padding-left : 30px;
-            .upload__preview__wrapper{
+
+        .upload__preview {
+            width: 35%;
+            margin-top: rem(60);
+            padding-left: rem(30);
+
+            .upload__preview__wrapper {
                 position: relative;
                 padding-top: 56.25%;
-                .upload__preview__video{
+
+                .upload__preview__video {
                     position: absolute;
-                    margin:0;
-                    top:0;
-                    left:0;
+                    margin: 0;
+                    top: 0;
+                    left: 0;
                 }
-                
             }
-            .upload__preview__img__wrapper{
+
+            .upload__preview__img__wrapper {
                 position: relative;
                 padding-top: 56.25%;
-                border-radius: 10px;
+                border-radius: rem(10);
                 background-color: rgb(247, 247, 247);
-                .upload__preview__img{
-                    border-radius: 10px;
-                        position: absolute;
-                        width : 20%;
-                        height: 40%;
-                        margin:0;
-                        top:30%;
-                        left:40%;
-                        background-color: rgb(247, 247, 247);
-                }    
+
+                .upload__preview__img {
+                    border-radius: rem(10);
+                    position: absolute;
+                    width: 20%;
+                    height: 40%;
+                    margin: 0;
+                    top: 30%;
+                    left: 40%;
+                    background-color: rgb(247, 247, 247);
+                }
             }
-            .upload__preview__title{
-                margin-top : 30px;
-                font-size: 13px;
+
+            .upload__preview__title {
+                margin-top: rem(30);
+                font-size: rem(13);
                 font-family: NotoSansKRBold;
             }
-            .upload__preview__img__title{
-                margin-top : 30px;
-                font-size: 13px;
+
+            .upload__preview__img__title {
+                margin-top: rem(30);
+                font-size: rem(13);
                 font-family: NotoSansKRBold;
-                color : rgb(188, 188, 188);
+                color: rgb(188, 188, 188);
             }
-            
         }
     }
 }
 
+@media screen and (max-width: 1100px) {
+    .upload {
+        width: 80%;
 
-.tag_background {
-  border-radius: 10px;
-  background-color: rgb(255, 255, 255);
-  position: absolute;
-  left: 1083px;
-  top: 1207px;
-  width: 162px;
-  height: 60px;
-  z-index: 93;
+        .upload__haeder {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-family: NotoSansKRBold;
+            border-bottom: 1px solid rgba(32, 32, 32, 0.102);
+
+            .upload__header__title {
+                font-size: rem(25);
+            }
+
+            .upload__haeder__img {
+                height: rem(150);
+            }
+        }
+
+        .upload__body {
+            .upload__form {
+                width: 100%;
+                border-right: none;
+            }
+        }
+    }
+
+    .upload__preview {
+        display: none;
+        width: 0;
+    }
 }

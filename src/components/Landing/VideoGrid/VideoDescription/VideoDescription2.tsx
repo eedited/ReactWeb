@@ -2,11 +2,11 @@ import React from 'react';
 import LikeButtonCountContainer from '../../../../containers/landing/LikeButtonCountContainer';
 import './VideoDescription2.scss';
 
-interface props{
-    videoInfo: VIDEO
+interface Props {
+    videoInfo: Video
 }
 
-const VideoDescription2: React.FC<props> = ({ videoInfo }: props) => (
+const VideoDescription2: React.FC<Props> = ({ videoInfo }: Props) => (
     <div className="video__description2">
         <div className="video__description__title">{videoInfo.title}</div>
         <div className="video__description__detail">

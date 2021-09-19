@@ -1,19 +1,19 @@
 import React from 'react';
-import { selectorStateType, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppSelector } from '../../hooks';
 
-import LargeVideoDescription from '../../components/Video/LargeVideoDescription';
+import LargeVideoDescription from '../../components/video/LargeVideoDescription';
 
-interface fromReducerType{
-    Video: videoRouter.videoSuccessResponse|null
+interface FromReducerType {
+    Video: VideoRouter.VideoSuccessResponse | null
 }
 
 const LargeVideoDescriptionContainer: React.FC = () => {
-    const {
-        Video,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+    const { Video }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         Video: state.videoReducer.video,
     }));
-    return Video !== null ? (<LargeVideoDescription description={Video.discription} tags={Video.WhatVideoUploadTag} />) : (<div />);
+    return Video === null
+        ? <div />
+        : <LargeVideoDescription description={Video.discription} tags={Video.WhatVideoUploadTag} />;
 };
 
 export default LargeVideoDescriptionContainer;

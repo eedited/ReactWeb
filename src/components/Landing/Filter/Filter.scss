@@ -8,6 +8,7 @@
     padding-left: 72px;
     padding-right: 72px;
     gap: 10px;
+
     .filter__item {
         margin-top: 38px;
         border-radius: 0.625rem;
@@ -21,8 +22,10 @@
         text-align: start;
         display: flex;
         justify-content: space-between;
+
         .filter__item__first {
             margin-left: 16px;
+
             .filter__item__first__platformIcon {
                 margin-top: 12px;
                 margin-right: 8px;
@@ -30,8 +33,10 @@
                 height: 20px;
             }
         }
+
         .filter__item__second {
             margin-right: 16px;
+            
             .filter__item__second__toggleArrow {
                 border-color: rgb(128, 128, 128);
                 width: 13px;

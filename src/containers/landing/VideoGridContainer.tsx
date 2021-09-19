@@ -1,33 +1,37 @@
-// TODO : 당장은 페이지를 내렸을 때 추가되는 코드가 없으나, 추가해야할 필요가 있음. 아마 스크롤이 충분히 내려왔을 때
-// page의 값을 setPage로 1 증가시키면 될 것을 보임.
-
-import React, {
-    useEffect, useRef, useCallback,
-} from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { AnyAction } from 'redux';
-import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
-import { videoAction } from '../../redux/Video/video';
+import VideoGrid from '../../components/landing/videoGrid/VideoGrid';
+import { videoAction } from '../../redux/video/video';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
-import { selectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-
-interface fromReducerType{
-    videos: videoRouter.videoListSuccessResponse|null
+interface FromReducerType {
+    videos: VideoRouter.VideoListSuccessResponse | null
+    videoLoading: boolean
+    endVideoList: boolean
 }
-interface props{
+interface Props {
     criteria: string
 }
-const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
-    const { videoClear, videoList }: videoModule.ActionType = videoAction;
-    const page: React.MutableRefObject<number> = useRef(1);
+
+const VideoGridContainer: React.FC<Props> = ({ criteria }: Props) => {
+    const { videoClear, videoList }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
+    const page: React.MutableRefObject<number> = useRef(1);
+    const targetRef: React.RefObject<HTMLDivElement> = useRef(null);
     const {
         videos,
-    }: fromReducerType = useAppSelector((state: selectorStateType) => ({
+        videoLoading,
+        endVideoList,
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         videos: state.videoReducer.videoList,
+        endVideoList: state.videoReducer.endVideoList,
+        videoLoading: state.loadingReducer['VIDEO/videoList'],
     }));
+
     useEffect(() => {
         dispatch(videoClear());
     }, [dispatch, videoClear]);
+
     useEffect(() => {
         dispatch((videoList({
             criteria,
@@ -37,22 +41,47 @@ const VideoGridContainer: React.FC<props> = ({ criteria }: props) => {
     }, [criteria, dispatch, videoList]);
 
     const f: () => void = useCallback(() => {
+        if (!videos) return;
+        if (endVideoList) return;
         dispatch((videoList({
             criteria,
             page: page.current,
         })));
         page.current += 1;
-    }, [dispatch, videoList, criteria]);
+    }, [videos, endVideoList, dispatch, videoList, criteria]);
 
-    if (videos !== null) {
-        return (
+    useEffect(() => {
+        if (!videos) return () => {};
+        const onIntersect: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+            // eslint-disable-next-line @typescript-eslint/typedef
+            const [{ isIntersecting }]: IntersectionObserverEntry[] = entries;
+            if (!videos) return;
+            if (!isIntersecting) return;
+            if (videoLoading) return;
+            f();
+        };
+        const observer: IntersectionObserver = new IntersectionObserver(onIntersect, {
+            root: null, // target의 부모요소를 참조.
+            rootMargin: '0px',
+            threshold: 1.0, // 부모요소의 끝에 도달했을 때 data fetch
+        });
+        if (!targetRef.current) return () => {};
+        const target: HTMLDivElement = targetRef.current;
+        observer.observe(target);
+        if (endVideoList) observer.unobserve(target);
+        return () => {
+            observer.unobserve(target);
+        };
+    }, [f, videoLoading, videos, targetRef, endVideoList]);
+
+    return videos === null
+        ? <div />
+        : (
             <div>
                 <VideoGrid videoInfos={videos.videos} />
-                <button onClick={f} type="button">클릭</button>
+                <div ref={targetRef} />
             </div>
         );
-    }
-    return <div />;
 };
 
 export default VideoGridContainer;

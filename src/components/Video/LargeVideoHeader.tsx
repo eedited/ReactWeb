@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
-import FollowButtonContainer from '../../containers/Video/FollowButtonContainer';
+import LikeButtonContainer from '../../containers/video/LikeButtonContainer';
+import FollowButtonContainer from '../../containers/video/FollowButtonContainer';
 import './LargeVideoHeader.scss';
 
-interface props {
-    video: videoRouter.videoSuccessResponse
+interface Props {
+    video: VideoRouter.VideoSuccessResponse
+    user: AuthRouter.CheckSuccessResponse | null
 }
 
-const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
+const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
             <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
@@ -19,8 +20,19 @@ const LargeVideoDescription: React.FC<props> = ({ video }: props) => (
         </div>
         <div className="LargeVideoHeader__iconlist">
             <FollowButtonContainer video={video} />
-            <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-button.png" alt="" />
+            <div className="LargeVideoHeader_iconlist__icon__wrapper">
+                <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" alt="" />
+            </div>
             <LikeButtonContainer video={video} />
+            {
+                user && user.userId === video.uploader && (
+                    <Link to={`/change/?videoId=${video.id}`}>
+                        <div className="LargeVideoHeader_iconlist__icon__wrapper">
+                            <img className="LargeVideoHeader_iconlist__icon" src="/icons/setting-icon.png" alt="" />
+                        </div>
+                    </Link>
+                )
+            }
         </div>
     </div>
 );

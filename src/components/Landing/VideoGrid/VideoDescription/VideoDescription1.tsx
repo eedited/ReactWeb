@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import LikeButtonCountContainer from '../../../../containers/landing/LikeButtonCountContainer';
 import './VideoDescription1.scss';
 
-interface props{
-    videoInfo: VIDEO
+interface Props {
+    videoInfo: Video
 }
 
-const VideoDescription1: React.FC<props> = ({ videoInfo }: props) => (
+const VideoDescription1: React.FC<Props> = ({ videoInfo }: Props) => (
     <div className="video__description1">
         <div className="video__description__title">{videoInfo.title}</div>
         <div className="video__description__detail">

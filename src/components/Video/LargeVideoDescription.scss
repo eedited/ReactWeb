@@ -1,27 +1,30 @@
+@import '/src/App.scss';
+
 .LargeVideoDescription {
     position: relative;
     width: 50%;
     left: 25%;
-    font-size: 1em;
-    top : 20px;
-    .LargeVideoDescription__txt{
-        font-family: "NotoSansKRMedium";
+    font-size: rem(15);
+    top: rem(20);
+    .LargeVideoDescription__txt {
+        font-family: 'NotoSansKRMedium';
         color: rgb(32, 32, 32);
-        line-height: 1.8;
+        line-height: rem(27);
     }
 
-    .LargeVideoDescription__tags{
+    .LargeVideoDescription__tags {
         display: flex;
         flex-direction: row;
-        gap : 8px;
-        margin-top : 30px;
-        .LargeVideoDescription__tag{
+        flex-flow: row wrap;
+        gap: rem(8);
+        margin-top: rem(30);
+        .LargeVideoDescription__tag {
             color: rgb(112, 112, 112);
             background-color: rgb(247, 247, 247);
             font-family: Pretendard-Medium;
-            font-size: 0.9em;
-            line-height: 1.2em;
-            padding : 4px
+            font-size: rem(13);
+            line-height: rem(27);
+            padding: 0 rem(12);
         }
     }
 }

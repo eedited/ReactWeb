@@ -1,10 +1,11 @@
 import React from 'react';
 import { withRouter, RouterProps } from 'react-router';
-import BlueButton from '../components/common/Button/BlueButton';
+import BlueButton from '../components/common/button/BlueButton';
 import BaseTemplate from './BaseTemplate';
 
-type props = RouterProps;
-const NotFound: React.FC<props> = ({ history }: props) => (
+type Props = RouterProps;
+
+const NotFound: React.FC<Props> = ({ history }: Props) => (
     <BaseTemplate>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '83px', marginBottom: '110px' }}>
             <div style={{ fontSize: '45px', fontFamily: 'Pretendard-Medium' }}>Oops!</div>

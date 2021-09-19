@@ -1,34 +1,36 @@
-import React, { cloneElement, forwardRef, useRef } from 'react';
+import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
-import BlueButton from '../common/Button/BlueButton';
-import VideoContainer from '../../containers/landing/VideoContainer';
-import { inputType } from '../../library/hooks/useInputs';
+import BlueButton from '../common/button/BlueButton';
+import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
 
-export interface tagType{
+export interface TagType {
     id: number,
     tag: string
 }
-interface props{
+interface Props {
+    type: 'upload' | 'change';
     uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onDescriptionChange: React.Dispatch<React.SetStateAction<string>>
     inputState: inputType
-    error: string|null
+    error: string | null
+    tagError: string | null
     description: string
     onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void
     onBlurTag: React.FocusEventHandler<HTMLInputElement>
     onTagRemove: (id: number) => void
-    tags: tagType[]
+    tags: TagType[]
 }
-const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, props>(({
-    uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag,
-}: props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
+
+const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
+    type, uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
+}: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
         <div className="upload__haeder">
-            <div className="upload__header__title">업로드</div>
-            <img alt="upload__haeder__img" src="/upload_temp.png" className="upload__haeder__img" />
+            <div className="upload__header__title">{type === 'change' ? '수정' : '업로드'}</div>
+            <img alt="upload__haeder__img" src="/images/uploadImg.png" className="upload__haeder__img" />
         </div>
         <div className="upload__body">
             <form onSubmit={uploadSubmit} className="upload__form">
@@ -49,14 +51,14 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             className="upload__info__title__input"
                             onChange={onInputChange}
                             name="videoLink"
-                            value={inputState.value}
+                            value={inputState.videoLink}
                             placeholder="youtube 또는 Viemo링크를 입력하세요"
                         />
                     </div>
                     <div className="upload__info__item">
                         <div className="upload__info__title">태그</div>
                         <div className="upload__info__tag">
-                            {tags.map((tag: tagType) => (
+                            {tags.map((tag: TagType) => (
                                 <div className="upload__info__tag__element" key={tag.id}>
                                     {tag.tag}
                                     <button
@@ -84,6 +86,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             />
                         </div>
                     </div>
+                    <div className="upload__tag__error">{tagError}</div>
                     <div className="upload__info__item">
                         <div className="upload__info__title">설명</div>
                         <textarea
@@ -94,8 +97,10 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                             value={description}
                         />
                     </div>
-                    <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">업로드하기</BlueButton>
-                    {error && <div>{error}</div>}
+
+                    <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : '업로드하기'}</BlueButton>
+                    {error && <div className="upload__info__error">{error}</div>}
+
                 </div>
             </form>
             <div className="upload__preview">
@@ -119,7 +124,7 @@ const Upload: React.ForwardRefExoticComponent<props & React.RefAttributes<ReactP
                     : (
                         <>
                             <div className="upload__preview__img__wrapper">
-                                <img className="upload__preview__img" src="/play-button.png" alt="play-button" />
+                                <img className="upload__preview__img" src="/images/buttons/play-button.png" alt="play-button" />
                             </div>
                             <div className="upload__preview__img__title">이곳에 미리보기가 표시됩니다.</div>
                         </>

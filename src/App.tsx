@@ -1,12 +1,9 @@
 import React from 'react';
-
 import './App.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
-// import Landing from './pages/Landing';
-// import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SingupPage';
+import SignupPage from './pages/SignupPage';
 import FindingIdPage from './pages/FindingIdPage';
 import FindingPwPage from './pages/FindingPwPage';
 import VideoPage from './pages/VideoPage';
@@ -17,6 +14,7 @@ import FindingJobPage from './pages/FindingJobPage';
 import HiringJobPage from './pages/HiringJobPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
+import VideoChangePage from './pages/VideoChangePage';
 
 type AppType = () => JSX.Element;
 
@@ -38,6 +36,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/hiring" component={HiringJobPage} />
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/chat" component={ChatPage} />
+                <Route path="/change" component={VideoChangePage} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>

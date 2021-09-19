@@ -1,4 +1,4 @@
-@import '/src/public/scss/public.scss';
+@import '/src/App.scss';
 
 .whiteButton {
     background-color: $gray;
@@ -8,8 +8,5 @@
     border-radius: rem(10);
     font-family: Pretendard-Medium;
     font-size: rem(16);
-}
-
-.whiteButton{
     cursor: pointer;
 }

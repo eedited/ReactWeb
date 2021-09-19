@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './redux';
 
 const sagaMiddleware = createSagaMiddleware();
+
 const createStore = () => {
     const env = process.env.NODE_ENV;
     let store;
@@ -26,4 +27,5 @@ const createStore = () => {
     sagaMiddleware.run(rootSaga);
     return store;
 };
+
 export default createStore;

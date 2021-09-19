@@ -1,7 +1,8 @@
-@import '/src/public/scss/public.scss';
-.more-by-user{
-    width : 61%;
-    margin : 0 auto;
+@import '/src/App.scss';
+
+.more-by-user {
+    width: 61%;
+    margin: 0 auto;
     .more-by-user__video {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

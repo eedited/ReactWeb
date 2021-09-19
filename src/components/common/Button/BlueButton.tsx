@@ -1,25 +1,24 @@
 import React from 'react';
 import './BlueButton.scss';
 
-interface props{
+interface Props {
     onClick: () => void,
     children?: React.ReactNode
     className?: string
     type?: string
 }
 
-const BlueButton: React.FC<props> = ({
+const BlueButton: React.FC<Props> = ({
     onClick, children, className, type,
-}: props) => {
-    if (type === 'submit') {
-        return (
-            <button className={`blueButton ${className}`} onClick={onClick} type="submit">{children}</button>
-        );
-    }
-    return (
-        <button className={`blueButton ${className}`} onClick={onClick} type="button">{children}</button>
-    );
-};
+}: Props) => (
+    <button
+        className={`blueButton ${className}`}
+        onClick={onClick}
+        type={type === 'submit' ? 'submit' : 'button'}
+    >
+        {children}
+    </button>
+);
 
 BlueButton.defaultProps = {
     children: '',

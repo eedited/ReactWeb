@@ -1,21 +1,20 @@
-import {
-    ForkEffect, takeLatest,
-} from 'redux-saga/effects';
-import createRequestSaga, { createRequestSagaReturnType } from '../../library/createRequestSaga';
+import { ForkEffect, takeLatest } from 'redux-saga/effects';
+import createRequestSaga, { CreateRequestSagaReturnType } from '../createRequestSaga';
 import { videoAction } from './video';
-import * as videoAPI from '../../library/api/video';
+import * as videoAPI from '../../api/video';
 
-const videoSaga: createRequestSagaReturnType<videoRouter.videoRequest, videoRouter.videoSuccessResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
-const videoListSaga: createRequestSagaReturnType<videoRouter.videoListRequest, videoRouter.videoListSuccessResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
-const videoUploadSaga: createRequestSagaReturnType<videoRouter.videoUploadRequest, videoRouter.videoUploadSuccessResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
-const videoMoreByUserSaga: createRequestSagaReturnType<videoRouter.userVideoRequest, videoRouter.userVideoSuccessResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
-
+const videoSaga: CreateRequestSagaReturnType<VideoRouter.VideoRequest, VideoRouter.VideoSuccessResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
+const videoListSaga: CreateRequestSagaReturnType<VideoRouter.VideoListRequest, VideoRouter.VideoListSuccessResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);
+const videoUploadSaga: CreateRequestSagaReturnType<VideoRouter.VideoUploadRequest, VideoRouter.VideoUploadSuccessResponse> = createRequestSaga('VIDEO/videoUpload', videoAPI.videoUpload);
+const videoMoreByUserSaga: CreateRequestSagaReturnType<VideoRouter.UserVideoRequest, VideoRouter.UserVideoSuccessResponse> = createRequestSaga('VIDEO/videoUserUploaded', videoAPI.videoUser);
+const videoModifySaga: CreateRequestSagaReturnType<VideoRouter.VideoModifyRequest, VideoRouter.VideoModifySuccessResponse> = createRequestSaga('VIDEO/videoModify', videoAPI.videoModify);
 export default function* getVideoSaga(): Generator<ForkEffect<never>, void, unknown> {
     const {
-        video, videoList, videoUpload, videoUserUploaded,
-    }: videoModule.ActionType = videoAction;
+        video, videoList, videoUpload, videoUserUploaded, videoModify,
+    }: RDXVideoModule.ActionType = videoAction;
     yield takeLatest(video, videoSaga);
     yield takeLatest(videoList, videoListSaga);
     yield takeLatest(videoUpload, videoUploadSaga);
     yield takeLatest(videoUserUploaded, videoMoreByUserSaga);
+    yield takeLatest(videoModify, videoModifySaga);
 }

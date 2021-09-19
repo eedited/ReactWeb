@@ -1,25 +1,27 @@
 import React, { useState, useCallback } from 'react';
-import client from '../../library/api/client';
-import useInputs, { inputType } from '../../library/hooks/useInputs';
+import client from '../../api/client';
+import useInputs, { inputType } from '../../hooks/useInputs';
 import FindingId from '../../components/auth/FindingId';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface findIdSuccessType {}
-interface findIdFailureType{
+interface FindIdSuccessType {}
+interface FindIdFailureType {
     info: string
     error: Error
 }
-type findIdResponseType = findIdFailureType | findIdSuccessType
-type loadingState = string
+type FindIdResponseType = FindIdFailureType | FindIdSuccessType
+type LoadingState = string
+
 const FindingIdContainer: React.FC = () => {
     const [isSubmit, setIsSubmit]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-    const [loading, setLoading]: [loadingState, React.Dispatch<React.SetStateAction<loadingState>>] = useState<loadingState>('');
-    const [findIdResponse, setFindIdResponse]: [findIdResponseType, React.Dispatch<React.SetStateAction<findIdResponseType>>] = useState<findIdResponseType>({});
-    const [inputState, onInputChange, onInputClear]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string) => void] = useInputs({
+    const [loading, setLoading]: [LoadingState, React.Dispatch<React.SetStateAction<LoadingState>>] = useState<LoadingState>('');
+    const [findIdResponse, setFindIdResponse]: [FindIdResponseType, React.Dispatch<React.SetStateAction<FindIdResponseType>>] = useState<FindIdResponseType>({});
+    const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         email: '',
         validationString: ' ',
     });
     const { email, validationString }: inputType = inputState;
+
     const responseFunction: () => Promise<void> = useCallback(
         async () => {
             setLoading('start');
@@ -35,9 +37,12 @@ const FindingIdContainer: React.FC = () => {
             }
         }, [inputState.email],
     );
+
     const onEmailSubmit: () => void = () => {
-        setIsSubmit(true); responseFunction();
+        setIsSubmit(true);
+        responseFunction();
     };
+
     return (
         <FindingId
             onInputChange={onInputChange}
