@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
-import Navbar from '../../components/common/navbar/Navbar';
+import Navbar from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 

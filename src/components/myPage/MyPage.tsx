@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import VideoContainer from '../../containers/landing/VideoContainer';
-import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
+import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 

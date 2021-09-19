@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectorStateType, useAppSelector } from '../../hooks';
-import LargeVideoHeader from '../../components/video/LargeVideoHeader';
+import LargeVideoHeader from '../../components/Video/LargeVideoHeader';
 
 interface FromReducerType {
     Video: VideoRouter.VideoSuccessResponse | null

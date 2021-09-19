@@ -1,5 +1,5 @@
 import React from 'react';
-import Filter from '../../components/landing/filter/Filter';
+import Filter from '../../components/Landing/Filter/Filter';
 
 interface DropDownProp {
     id: number,

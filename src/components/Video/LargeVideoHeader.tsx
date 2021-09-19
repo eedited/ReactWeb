@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LikeButtonContainer from '../../containers/video/LikeButtonContainer';
-import FollowButtonContainer from '../../containers/video/FollowButtonContainer';
+import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
+import FollowButtonContainer from '../../containers/Video/FollowButtonContainer';
 import './LargeVideoHeader.scss';
 
 interface Props {

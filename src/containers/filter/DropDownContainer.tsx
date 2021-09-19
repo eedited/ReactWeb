@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DropDown from '../../components/common/dropDown/DropDown';
+import DropDown from '../../components/common/DropDown/DropDown';
 
 interface DropDownProp {
     id: number,

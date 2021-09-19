@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoContainer from '../../containers/landing/VideoContainer';
-import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
+import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './UserMaybeLike.scss';
 
 interface Props {

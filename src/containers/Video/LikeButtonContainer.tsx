@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
-import LikeButton from '../../components/video/LikeButton';
+import LikeButton from '../../components/Video/LikeButton';
 import { videoLike } from '../../api/video';
 
 interface LikeResponse {

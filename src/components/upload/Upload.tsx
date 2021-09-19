@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
-import BlueButton from '../common/button/BlueButton';
+import BlueButton from '../common/Button/BlueButton';
 import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
 

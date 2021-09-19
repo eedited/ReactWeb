@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
-import './LargeVideo.scss';
+import './Largevideo.scss';
 
 interface Props {
     onLoad: (player: ReactPlayer) => void

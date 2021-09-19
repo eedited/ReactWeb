@@ -1,13 +1,13 @@
 import React from 'react';
 import qs from 'qs';
 import { Redirect, RouteComponentProps } from 'react-router';
-import VideoInfoContainer from '../containers/video/LargeVideoContainer';
+import VideoInfoContainer from '../containers/Video/LargeVideoContainer';
 import BaseTemplate from './BaseTemplate';
-import LargeVideoDescription from '../containers/video/LargeVideoDescriptionContainer';
-import MoreByUser from '../containers/video/MoreByUserContainer';
-import UserMabyLike from '../containers/video/UserMaybeLike';
-import VideoHeader from '../containers/video/VideoHeader';
-import HorizonLine from '../components/common/horizonLine/HorizonLine';
+import LargeVideoDescription from '../containers/Video/LargeVideoDescriptionContainer';
+import MoreByUser from '../containers/Video/MoreByUserContainer';
+import UserMabyLike from '../containers/Video/UserMaybeLike';
+import VideoHeader from '../containers/Video/VideoHeader';
+import HorizonLine from '../components/common/HorizonLine/HorizonLine';
 
 type Props = RouteComponentProps;
 
