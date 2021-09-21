@@ -20,7 +20,7 @@ const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
         if (video.User.followTo && video.User.followTo.length > 0) {
             setToggle(true);
         }
-    }, [toggle, video]);
+    }, [video]);
 
     const onButtonClick: (USERID: string) => Promise<void> = useCallback(async (USERID: string) => {
         setfollowResponse({ success: null, failure: null });
