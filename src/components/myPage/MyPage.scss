@@ -64,4 +64,17 @@
         row-gap: rem(60);
         margin: rem(60) 0;
     }
+    .mypage__videoGrid__firstUpload{
+        display : flex;
+        flex-direction: column;
+        margin : rem(180) 0 rem(150) 0;
+        align-items: center;
+        .mypage__videoGrid__firstUpload__text{
+            text-align: center;
+            margin-bottom: rem(30);
+            h2{
+                font-size : rem(30);
+            }
+        }
+    }
 }

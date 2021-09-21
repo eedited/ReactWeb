@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import VideoContainer from '../../containers/landing/VideoContainer';
+import BlueButton from '../common/Button/BlueButton';
 import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
@@ -9,11 +10,14 @@ export interface MyPageResponseType {
     success: UserRouter.MyPageSuccessResponse | null
     failure: UserRouter.MyPageFailureResponse | null
 }
-interface Props {
+interface Props{
     myPageResponse: MyPageResponseType
+    canModify: boolean
+    toUploadPage: () => void
+    toMainPage: () => void
 }
 
-const MyPage: React.FC<Props> = ({ myPageResponse }: Props) => (
+const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -41,17 +45,44 @@ const MyPage: React.FC<Props> = ({ myPageResponse }: Props) => (
 
                 </div>
                 <hr className="mypage__horizenline" />
-                <div className="mypage__videoGrid">
-                    {
-                        myPageResponse.success && myPageResponse.success.Video.map((videoInfo: Video) => (
-                            <div key={videoInfo.id}>
-                                <VideoContainer videoInfo={videoInfo} />
-                                <VideoDescription2 videoInfo={videoInfo} />
+                {myPageResponse.success && myPageResponse.success.Video.length > 0
+                && (
+                    <div className="mypage__videoGrid">
+                        {
+                            myPageResponse.success.Video.map((videoInfo: Video) => (
+                                <div key={videoInfo.id}>
+                                    <VideoContainer videoInfo={videoInfo} />
+                                    <VideoDescription2 videoInfo={videoInfo} />
+                                </div>
+                            ))
+                        }
+                    </div>
+                )}
+                {
+                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0
+                        && (
+                            <div className="mypage__videoGrid__firstUpload">
+                                <div className="mypage__videoGrid__firstUpload__text">
+                                    <h2>동영상을 업로드하여 시작하기</h2>
+                                    <br />
+                                    <h3>본인이 편집한 동영상을 eedited에서 자랑해보세요!</h3>
+                                </div>
+                                <BlueButton onClick={toUploadPage}>업로드하기</BlueButton>
                             </div>
-                        ))
-                    }
-
-                </div>
+                        )
+                }
+                {
+                    !canModify && myPageResponse.success && myPageResponse.success.Video.length === 0
+                        && (
+                            <div className="mypage__videoGrid__firstUpload">
+                                <div className="mypage__videoGrid__firstUpload__text">
+                                    <h2>아직 준비중입니다!</h2>
+                                    <br />
+                                </div>
+                                <BlueButton onClick={toMainPage}>메인으로</BlueButton>
+                            </div>
+                        )
+                }
             </div>
         )
 );
