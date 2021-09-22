@@ -17,18 +17,20 @@ export declare global {
     }
 
     interface User {
-        userId: string;
-        password: string;
-        birthday: Date | null;
-        nickname: string;
-        email: string;
-        profilePicture: string;
-        followerCnt: number;
-        uploadVideoCnt: number;
-        proTag: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        userId: string
+        password: string
+        birthday: Date | null
+        nickname: string
+        email: string
+        emailToken: string
+        profilePicture: string
+        followerCnt: number
+        description: string
+        uploadVideoCnt: number
+        proTag: boolean
+        createdAt: Date
+        updatedAt: Date
+        deletedAt: Date | null
     }
 
     namespace AuthRouter {
