@@ -29,7 +29,7 @@ const Navbar: React.FC<props> = ({
     user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger,
 }: props) => (
     <>
-        <div className="navbar">
+        <nav className="navbar">
             <div className="navbar__menu">
                 <Link to="/">
                     <img className="navbar__menu__logo" src="/icons/orange-logo.png" alt="eedited_logo" />
@@ -144,7 +144,7 @@ const Navbar: React.FC<props> = ({
                         )
                 }
             </div>
-        </div>
+        </ㅜav>
         <hr className="navbar__bottom__line" />
     </>
 );

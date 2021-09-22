@@ -15,6 +15,8 @@ import HiringJobPage from './pages/HiringJobPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';
 import VideoChangePage from './pages/VideoChangePage';
+import SignupSuccess from './pages/SignupSuccess';
+import HelloPage from './pages/HelloPage';
 
 type AppType = () => JSX.Element;
 
@@ -37,6 +39,8 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/chat" component={ChatPage} />
                 <Route path="/change" component={VideoChangePage} />
+                <Route path="/signupSuccess" component={SignupSuccess} />
+                <Route path="/hello" component={HelloPage} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>
