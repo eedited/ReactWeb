@@ -86,9 +86,10 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
             setError(`회원가입 실패 ${AuthError.info}`);
         }
         if (Auth) {
-            history.push('/login');
+            backgroundClicked();
+            history.push('/signupSuccess');
         }
-    }, [Auth, AuthError, history]);
+    }, [Auth, AuthError, backgroundClicked, history]);
     const setType: () => void = () => {
         if (authType === 'login') {
             setAuthType('signup');
