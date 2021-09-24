@@ -14,7 +14,7 @@ export declare global {
         id: string;
         uploader: string;
         title: string;
-        discription: string;
+        description: string;
         url: string;
         thumbnail: string;
         likeCnt: number;
@@ -35,7 +35,7 @@ export declare global {
 
     interface VideoUpload {
         title: string;
-        discription: string;
+        description: string;
         url: string;
         thumbnail: string;
         tags: string[];
@@ -105,7 +105,7 @@ export declare global {
         interface VideoModifyRequest {
             id: string;
             title: string;
-            discription: string;
+            description: string;
             url: string;
             thumbnail: string;
             tags: string[];

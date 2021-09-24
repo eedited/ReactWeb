@@ -8,21 +8,21 @@ type videoListAPIFunctionType = ({ category, platform, program, sorting, page }:
 export const videoList: videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => client.get(`/video/sort/${sorting}/?page=${page}`);
 
 type VideoAPIUploadFunctionType = ({
-    title, discription, url, thumbnail, tags,
+    title, description, url, thumbnail, tags,
 }: VideoRouter.VideoUploadRequest) => Promise<AxiosResponse<VideoRouter.VideoUploadSuccessResponse>>
 export const videoUpload: VideoAPIUploadFunctionType = ({
-    title, discription, url, thumbnail, tags,
+    title, description, url, thumbnail, tags,
 }: VideoRouter.VideoUploadRequest) => client.post('/video/upload', {
-    title, discription, url, thumbnail, tags,
+    title, description, url, thumbnail, tags,
 });
 
 type VideoAPIModifyFunctionType = ({
-    id, title, discription, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags,
 }: VideoRouter.VideoModifyRequest) => Promise<AxiosResponse<VideoRouter.VideoModifySuccessResponse>>
 export const videoModify: VideoAPIModifyFunctionType = ({
-    id, title, discription, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags,
 }: VideoRouter.VideoModifyRequest) => client.patch('/video/upload', {
-    id, title, discription, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags,
 });
 
 type VideoAPIUserFunctionType = ({ uploader }: VideoRouter.UserVideoRequest) => Promise<AxiosResponse<VideoRouter.UserVideoSuccessResponse>>
