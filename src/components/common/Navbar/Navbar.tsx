@@ -144,7 +144,7 @@ const Navbar: React.FC<props> = ({
                         )
                 }
             </div>
-        </ㅜav>
+        </nav>
         <hr className="navbar__bottom__line" />
     </>
 );

@@ -5,11 +5,13 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import AuthOverlay from '../../components/auth/AuthOverlay';
+import { LoadingStateType } from '../../redux/loading/loading';
 
 interface formReduceType{
     form: RDXAuthModule.SignupForm
     Auth?: AuthRouter.AuthSuccessResponse|null
     AuthError?: RDXAuthModule.AuthFailureResponse|null
+    loading: LoadingStateType
 }
 interface props extends RouteComponentProps{
     backgroundClicked: () => void
@@ -21,11 +23,12 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
-        form, Auth, AuthError,
+        form, Auth, AuthError, loading,
     }: formReduceType = useAppSelector(((state: SelectorStateType) => ({
         form: state.authReducer.signup,
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
+        loading: state.loadingReducer,
     })));
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value, name }: {value: string, name: string} = e.target;
@@ -106,6 +109,7 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
+            loading={loading['AUTH/signup']}
         />
     );
 };

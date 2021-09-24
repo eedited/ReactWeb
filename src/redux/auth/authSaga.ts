@@ -1,4 +1,4 @@
-import { ForkEffect, takeLatest } from 'redux-saga/effects';
+import { ForkEffect, takeLatest, takeEvery } from 'redux-saga/effects';
 import createRequestSaga, { CreateRequestSagaReturnType } from '../createRequestSaga';
 import { authAction } from './auth';
 import * as authAPI from '../../api/auth';
@@ -8,6 +8,6 @@ const loginSaga: CreateRequestSagaReturnType<AuthRouter.LoginRequest, AuthRouter
 
 export default function* authSaga(): Generator<ForkEffect<never>, void, unknown> {
     const { signup, login }: RDXAuthModule.ActionType = authAction;
-    yield takeLatest(signup, signupSaga);
+    yield takeEvery(signup, signupSaga);
     yield takeLatest(login, loginSaga);
 }

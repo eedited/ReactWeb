@@ -36,6 +36,10 @@ export declare global {
     namespace AuthRouter {
         type SignupRequest = Signup;
         type LoginRequest = Login;
+        interface SignupValidationRequest {
+            token: string;
+        }
+
         type CheckSuccessResponse = User;
         interface CheckFailureResponse {
             info: string;
@@ -46,6 +50,16 @@ export declare global {
         interface AuthFailureResponse {
             success: boolean;
             info: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface SignupValidationSuccessResponse{}
+        interface SignupValidationFailureResponse{
+            info: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface SignupEmailSuccessResponse{}
+        interface SignupEmailFailureResponse{
+            info: string
         }
     }
 

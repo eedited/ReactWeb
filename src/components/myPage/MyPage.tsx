@@ -13,11 +13,14 @@ export interface MyPageResponseType {
 interface Props{
     myPageResponse: MyPageResponseType
     canModify: boolean
+    user: User|null
+    message: string
     toUploadPage: () => void
     toMainPage: () => void
+    sendEmail: () => void
 }
 
-const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage }: Props) => (
+const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -59,7 +62,7 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                     </div>
                 )}
                 {
-                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0
+                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && !(user && user.emailToken !== '')
                         && (
                             <div className="mypage__videoGrid__firstUpload">
                                 <div className="mypage__videoGrid__firstUpload__text">
@@ -68,6 +71,22 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                                     <h3>본인이 편집한 동영상을 eedited에서 자랑해보세요!</h3>
                                 </div>
                                 <BlueButton onClick={toUploadPage}>업로드하기</BlueButton>
+                            </div>
+                        )
+                }
+                {
+                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && user && user.emailToken !== ''
+                        && (
+                            <div className="mypage__videoGrid__firstUpload">
+                                <div className="mypage__videoGrid__firstUpload__text">
+                                    <h2>아직 이메일 확인이 완료되지 않았어요!</h2>
+                                    <br />
+                                    <h3>이메일을 확인하시고 eedited를 이용해 보세요!</h3>
+                                    <br />
+                                    <h3>이메일을 받지 못하셨나요?</h3>
+                                </div>
+                                <BlueButton onClick={sendEmail}>확인하기</BlueButton>
+                                {message !== '' && <div>{message}</div>}
                             </div>
                         )
                 }

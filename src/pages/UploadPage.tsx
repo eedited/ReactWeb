@@ -18,8 +18,12 @@ const UploadPage: React.FC<props> = ({ history }: props) => {
 
     if (!user) {
         history.push('/404NotFound');
+        return <></>;
     }
-
+    if (user.emailToken) {
+        alert('이메일 확인을 마쳐야 이용하실 수 있습니다!');
+        history.push(`/profile?userId=${user.userId}`);
+    }
     return (
         <BaseTemplate>
             <UploadContainer />

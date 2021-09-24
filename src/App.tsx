@@ -17,6 +17,7 @@ import ChatPage from './pages/ChatPage';
 import VideoChangePage from './pages/VideoChangePage';
 import SignupSuccess from './pages/SignupSuccess';
 import HelloPage from './pages/HelloPage';
+import EmailValidate from './pages/EmailValidate';
 
 type AppType = () => JSX.Element;
 
@@ -41,6 +42,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/change" component={VideoChangePage} />
                 <Route path="/signupSuccess" component={SignupSuccess} />
                 <Route path="/hello" component={HelloPage} />
+                <Route path="/emailValidation" component={EmailValidate} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>
