@@ -109,7 +109,6 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
-            loading={loading['AUTH/signup']}
         />
     );
 };

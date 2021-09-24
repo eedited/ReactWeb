@@ -93,7 +93,6 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
             onSubmit={onSubmit}
             error={error}
             backgroundClicked={backgroundClicked}
-            loading={loading['AUTH/login']}
         />
     );
 };
