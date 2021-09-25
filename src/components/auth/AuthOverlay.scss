@@ -5,6 +5,7 @@
     left : 0;
     right : 0;
     bottom : 0;
+    overflow: scroll;
     background: rgba(30,30,30,0.9);
     z-index: 1000;
     display: flex;
@@ -12,8 +13,9 @@
     justify-content: center;
     .AuthOverlay{
         position: absolute;
-        width : rem(600);
         background: white;
+        width : #{"min(520px, 80%)"};
+        top : 5vh;
         .AuthOverlay__header{
             display: flex;
             flex-direction: column;
@@ -25,8 +27,7 @@
                 margin-bottom: rem(32); 
                 height: rem(44);
                 line-height: rem(44);
-                border-radius: rem(10);
-                border : 1px solid white;
+                border-bottom : 1px solid white;
                 color : white;
                 width : 50%;
             }
@@ -56,9 +57,8 @@
             }
         }
         .authForm__main{
-            margin-bottom: rem(30);
-            padding : 0 rem(100);
-            margin-top : rem(50);
+            margin : rem(50) 0 rem(30) 0;
+            padding : 0 10%;
             .authForm__inputs{
                 display: flex;
                 flex-direction: column;
@@ -112,6 +112,17 @@
                 font-size: rem(12);
                 width: 100%;
             }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .AuthOverlayBox{
+        width : 100vw;
+        height: 100vh;
+        .AuthOverlay{
+            width : 100vw;
+            height: 100vh;
         }
     }
 }

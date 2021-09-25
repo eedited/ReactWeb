@@ -20,7 +20,7 @@ const MoreByUser: React.FC<Props> = ({ videos }: Props) => (
                                 <VideoDescription2 videoInfo={video} />
                             </div>
                         )
-                        : <div key={`uniquekey${idx * 2}`} />
+                        : <></>
                 ))
             }
         </div>

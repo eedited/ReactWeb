@@ -52,13 +52,13 @@
             }
         }
         
-        .mypage__hader__graph {
+        .mypage__header__graph {
             margin-top: rem(40);
         }
     }
     .mypage__videoGrid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         justify-content: center;
         column-gap: rem(25);
         row-gap: rem(60);
@@ -74,6 +74,16 @@
             margin-bottom: rem(30);
             h2{
                 font-size : rem(30);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .mypage{
+        .mypage__header{
+            .mypage__header__graph{
+                display : none;
             }
         }
     }

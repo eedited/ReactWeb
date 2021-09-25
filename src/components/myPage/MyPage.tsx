@@ -43,7 +43,7 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                         </div>
                     </div>
                     {
-                        myPageResponse.success && <MyPageGraph tags={myPageResponse.success.tags} />
+                        myPageResponse.success && <MyPageGraph className="mypage__header__graph" tags={myPageResponse.success.tags} />
                     }
 
                 </div>

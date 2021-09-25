@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar, { ModalTriggerType } from '../../components/common/Navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import useWindowSize, { windowSizeType } from '../../hooks/useWindowSize';
 
 interface Props {
     history: RouteComponentProps['history']
@@ -18,7 +19,9 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
         User: state.userReducer.user,
         logoutError: state.userReducer.logoutError,
     }));
+    const windowSize: windowSizeType = useWindowSize();
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
+    const [isHambergerClick, setIsHambergerClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const [ModalTrigger, setModalTrigger]: [ModalTriggerType, React.Dispatch<React.SetStateAction<ModalTriggerType>>] = useState<ModalTriggerType>({
         isModalOn: false,
         type: 'login',
@@ -46,7 +49,9 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
     const onUpload: () => void = () => {
         history.push('/upload');
     };
-
+    const onHambergerClick: () => void = () => {
+        setIsHambergerClick((prev: boolean) => !prev);
+    };
     return (
         <Navbar
             ModalTrigger={ModalTrigger}
@@ -55,10 +60,16 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
             onLogin={onLogin}
             onSignup={onSignup}
             onUpload={onUpload}
-            isSearchClick={isSearchClick}
+            isSearchClick={isSearchClick && ((windowSize.width !== undefined && windowSize.width > 1400) || windowSize.width === undefined)}
             onSearchClick={() => {
-                setIsSeacrhClick(!isSearchClick);
+                if (windowSize.width && windowSize.width <= 1400) {
+                    setIsSeacrhClick(false);
+                    history.push('/404NotFound');
+                }
+                else setIsSeacrhClick(!isSearchClick);
             }}
+            isHambergerClick={isHambergerClick}
+            onHambergerClick={onHambergerClick}
         />
     );
 };

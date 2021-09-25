@@ -22,6 +22,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
     const [canModify, setCanModify]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [validateResponse, setValidateResponse]: [ValidateResponse, React.Dispatch<React.SetStateAction<ValidateResponse>>] = useState<ValidateResponse>({ success: null, failure: null });
     const [message, setMessage]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
+
     const {
         user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
