@@ -1,12 +1,10 @@
 import React from 'react';
-import { S3Image } from 'aws-amplify-react';
 import { Link } from 'react-router-dom';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
-import AuthOverlay from '../../auth/AuthOverlay';
 import LoginOverlayContainer from '../../../containers/auth/LoginOverlayContainer';
 import SignupOverlayContainer from '../../../containers/auth/SignupOverlayContainer';
 
@@ -17,23 +15,25 @@ export interface ModalTriggerType{
 interface props{
     user: User|null
     isSearchClick: boolean
+    isHambergerClick: boolean
     ModalTrigger: ModalTriggerType
     onLogout: () => void
     onLogin: () => void
     onSignup: () => void
     onSearchClick: () => void
     onUpload: () => void
+    onHambergerClick: () => void
 }
 
 const Navbar: React.FC<props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger,
+    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger, isHambergerClick, onHambergerClick,
 }: props) => (
     <>
-        <div className="navbar">
-            <div className="navbar__menu">
-                <Link to="/">
-                    <img className="navbar__menu__logo" src="/icons/orange-logo.png" alt="eedited_logo" />
-                </Link>
+        <nav className="navbar">
+            <Link to="/">
+                <img className="navbar__menu__logo" src="/icons/orange-logo.png" alt="eedited_logo" />
+            </Link>
+            <div className={isHambergerClick ? 'navbar__menu navbar__show' : 'navbar__menu'}>
                 <div className="navbar__menu__links">
                     <Link className="navbar__menu__link" to="/">포트폴리오</Link>
                     <Link className="navbar__menu__link" to="/finding">인재찾기</Link>
@@ -41,8 +41,6 @@ const Navbar: React.FC<props> = ({
                     <Link className="navbar__menu__link preparing" to="/">배워보기</Link>
                     <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
                 </div>
-            </div>
-            <div className="navbar__utility">
                 {!isSearchClick ? (
                     <div className="navbar__utility__find">
                         <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
@@ -54,22 +52,8 @@ const Navbar: React.FC<props> = ({
                             <input className="navbar__utility__find__input" onSubmit={() => { /* submit 될때 해야할일 */ }} />
                         </div>
                     )}
-                <div>
-                    {
-                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'login'))
-                                && (
-                                    <LoginOverlayContainer backgroundClicked={onLogin} />
-                                )
-                    }
-                </div>
-                <div>
-                    {
-                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'signup'))
-                                && (
-                                    <SignupOverlayContainer backgroundClicked={onSignup} />
-                                )
-                    }
-                </div>
+            </div>
+            <div className={isHambergerClick ? 'navbar__show navbar__utility' : 'navbar__utility'}>
                 {
                     user === null
                         ? (
@@ -81,9 +65,10 @@ const Navbar: React.FC<props> = ({
                         : (
                             <>
                                 <div className="navbar__utility__dropdown">
-                                    <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
-                                    <div className="navbar__utility__nickname">{user.nickname}</div>
-
+                                    <div className="navbar__utility__main">
+                                        <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
+                                        <div className="navbar__utility__nickname">{user.nickname}</div>
+                                    </div>
                                     <ul className="navbar__utility__dropdown__list">
                                         <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__top">
                                             <button onClick={() => { /**/ }} type="button">
@@ -140,11 +125,29 @@ const Navbar: React.FC<props> = ({
                                     <WhiteButton className="navbar__utility__button" onClick={onUpload}>Apply</WhiteButton>
                                     <BlueButton className="navbar__utility__button" onClick={onUpload}>Upload</BlueButton>
                                 </div>
+
                             </>
                         )
                 }
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'login'))
+                                && (
+                                    <LoginOverlayContainer backgroundClicked={onLogin} />
+                                )
+                    }
+                </div>
+                <div>
+                    {
+                        (ModalTrigger.isModalOn && (ModalTrigger.type === 'signup'))
+                                && (
+                                    <SignupOverlayContainer backgroundClicked={onSignup} />
+                                )
+                    }
+                </div>
             </div>
-        </div>
+            <FontAwesomeIcon className="navbar__hamberger__icon" icon={faBars} onClick={onHambergerClick} />
+        </nav>
         <hr className="navbar__bottom__line" />
     </>
 );

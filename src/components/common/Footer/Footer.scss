@@ -3,17 +3,15 @@
 .footer {
     position: relative;
     background-color: $gray;
-    height: rem(370);
-
     .footer__wrapper {
         display: flex;
+        flex-wrap: nowrap;
         gap: rem(188);
         width: 100%;
         height: 100%;
         flex-direction: row;
         justify-content: flex-start;
-        padding-left : rem(50);
-        padding-top : rem(50);
+        padding : rem(50) rem(50) rem(100) rem(50);
     }
 
     .footer__description {
@@ -30,6 +28,7 @@
         display: flex;
         justify-content: space-around;
         gap: rem(131);
+        flex-wrap: wrap;
         .footer__sitemap__column {
             display: flex;
             flex-direction: column;
@@ -52,5 +51,21 @@
         font-size: rem(12);
         font-family: Pretendard-Medium;
         color: rgb(70, 70, 70);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .footer{
+        .footer__wrapper{
+            flex-direction: column;
+            gap : rem(50);
+            .footer__sitemap{
+                justify-content: flex-start;
+                gap: rem(50);
+                .footer__sitemap__column{
+                    width : 40%;
+                }
+            }
+        }
     }
 }

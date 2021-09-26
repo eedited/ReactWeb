@@ -18,8 +18,9 @@ function toRad(deg: number) {
 }
 interface props{
     tags: {[key: string]: number}
+    className?: string
 }
-const MyPageGraph: React.FC<props> = ({ tags }: props) => {
+const MyPageGraph: React.FC<props> = ({ className, tags }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
         let tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
@@ -161,8 +162,10 @@ const MyPageGraph: React.FC<props> = ({ tags }: props) => {
         img.src = '/images/heros/problem.png';
     }, [tags]);
     return (
-        <canvas ref={canvasRef} />
+        <canvas className={className} ref={canvasRef} />
     );
 };
-
+MyPageGraph.defaultProps = {
+    className: '',
+};
 export default React.memo(MyPageGraph);

@@ -14,7 +14,7 @@ export declare global {
         id: string;
         uploader: string;
         title: string;
-        discription: string;
+        description: string;
         url: string;
         thumbnail: string;
         likeCnt: number;
@@ -35,7 +35,7 @@ export declare global {
 
     interface VideoUpload {
         title: string;
-        discription: string;
+        description: string;
         url: string;
         thumbnail: string;
         tags: string[];
@@ -105,7 +105,7 @@ export declare global {
         interface VideoModifyRequest {
             id: string;
             title: string;
-            discription: string;
+            description: string;
             url: string;
             thumbnail: string;
             tags: string[];
@@ -152,6 +152,8 @@ export declare global {
             videoUploadError: VideoUploadFailureResponse | null;
             videoUserUploadError: UserVideoFailureResponse | null;
             videoModifyError: VideoModifyFailureResponse | null;
+            videoUserMayBeLikeSuccess: VideoRouter.VideoListSuccessResponse | null;
+            videoUserMayBeLikeError: VideoListFailureResponse | null;
         }
 
         export type ActionType = CaseReducerActions<{
@@ -216,6 +218,18 @@ export declare global {
                 state: WritableDraft<StateType>,
                 action: PayloadAction<VideoModifyFailureResponse>,
             ): void;
+            videoUserMayBeLike(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoListRequest>,
+            )
+            videoUserMayBeLikeSuccess(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoListSuccessResponse>,
+            )
+            videoUserMayBeLikeFailure(
+                state: WritableDraft<StateType>,
+                action: PayloadAction<VideoRouter.VideoListFailureResponse>,
+            )
         }>;
     }
 }

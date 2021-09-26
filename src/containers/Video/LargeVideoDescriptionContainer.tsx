@@ -13,7 +13,7 @@ const LargeVideoDescriptionContainer: React.FC = () => {
     }));
     return Video === null
         ? <div />
-        : <LargeVideoDescription description={Video.discription} tags={Video.WhatVideoUploadTag} />;
+        : <LargeVideoDescription description={Video.description} tags={Video.WhatVideoUploadTag} />;
 };
 
 export default LargeVideoDescriptionContainer;

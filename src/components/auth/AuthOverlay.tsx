@@ -38,6 +38,9 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
             onKeyDown={() => { /**/ }}
             role="banner"
         >
+            <button className="AuthOverlay__close" onClick={backgroundClicked} type="button">
+                <img src="/icons/remove-icon.png" alt="" />
+            </button>
             <div className="AuthOverlay__header">
                 <div className="AuthOverlay__header__title">
                     {title && title(type)}

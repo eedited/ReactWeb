@@ -70,7 +70,7 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
             videoAction.videoUpload(
                 {
                     title: inputState.title,
-                    discription: description,
+                    description,
                     url: inputState.videoLink,
                     thumbnail: thumbnailURL(id),
                     tags: tags.map((tag: TagType) => tag.tag),

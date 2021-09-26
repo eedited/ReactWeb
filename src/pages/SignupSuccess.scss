@@ -1,0 +1,20 @@
+@import '/src/App.scss';
+.SignupSuccess{
+    margin: 30vh auto;
+    width : rem(700);
+    .SignupSuccess__title{
+        font-size: rem(30);
+        line-height: rem(40);
+        margin-bottom: rem(40);
+    }
+    .SignupSuccess__body{
+        font-size: rem(15);
+        line-height: rem(20);
+        color : gray;
+        margin-bottom: rem(20);
+        .SignupSuccess__body__eedited{
+            color:$orange;
+            position: relative;
+        }
+    }
+}

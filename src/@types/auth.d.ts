@@ -17,23 +17,29 @@ export declare global {
     }
 
     interface User {
-        userId: string;
-        password: string;
-        birthday: Date | null;
-        nickname: string;
-        email: string;
-        profilePicture: string;
-        followerCnt: number;
-        uploadVideoCnt: number;
-        proTag: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-        deletedAt: Date | null;
+        userId: string
+        password: string
+        birthday: Date | null
+        nickname: string
+        email: string
+        emailToken: string
+        profilePicture: string
+        followerCnt: number
+        description: string
+        uploadVideoCnt: number
+        proTag: boolean
+        createdAt: Date
+        updatedAt: Date
+        deletedAt: Date | null
     }
 
     namespace AuthRouter {
         type SignupRequest = Signup;
         type LoginRequest = Login;
+        interface SignupValidationRequest {
+            token: string;
+        }
+
         type CheckSuccessResponse = User;
         interface CheckFailureResponse {
             info: string;
@@ -44,6 +50,16 @@ export declare global {
         interface AuthFailureResponse {
             success: boolean;
             info: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface SignupValidationSuccessResponse{}
+        interface SignupValidationFailureResponse{
+            info: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface SignupEmailSuccessResponse{}
+        interface SignupEmailFailureResponse{
+            info: string
         }
     }
 

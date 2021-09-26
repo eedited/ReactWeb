@@ -19,3 +19,10 @@ type LogoutFunctionType = () => Promise<AxiosResponse<void>>;
 export const logout: LogoutFunctionType = () => client.get('/auth/logout');
 
 export const check: () => Promise<AxiosResponse<AuthRouter.CheckSuccessResponse>> = () => client.get('/auth/check');
+
+type SignupValidationFunctionType = ({ token }: AuthRouter.SignupValidationRequest) => Promise<AxiosResponse<AuthRouter.SignupValidationSuccessResponse>>
+export const signupValidation: SignupValidationFunctionType = ({ token }: AuthRouter.SignupValidationRequest) => client.post('/auth/signup/emailValidation', {
+    token,
+});
+
+export const signupEmail: () => Promise<AxiosResponse<AuthRouter.CheckSuccessResponse>> = () => client.get('/auth/signup/email');

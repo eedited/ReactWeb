@@ -1,103 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { AnyAction } from 'redux';
 import UserMaybeLike from '../../components/Video/UserMaybeLike';
+import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { videoAction } from '../../redux/video/video';
+
+interface FromReducerType {
+    userMayBeLiekVideo: VideoRouter.UserVideoSuccessResponse | null
+}
 
 const UserMaybeLikeContainer: React.FC = () => {
-    const videos: VideoRouter.VideoListSuccessResponse = {
-        videos: [
-            {
-                id: '1',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-            {
-                id: '2',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-            {
-                id: '3',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-            {
-                id: '4',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-            {
-                id: '5',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-            {
-                id: '6',
-                url: 'https://www.youtube.com/watch?v=Nh27WsNdymo',
-                uploader: 'minsu',
-                title: 'IU',
-                discription: 'IU 3시간',
-                thumbnail: 'https://img.youtube.com/vi/Nh27WsNdymo/0.jpg',
-                likeCnt: 1000,
-                viewCnt: 1000,
-                createdAt: (new Date()),
-                updatedAt: (new Date()),
-                deleted: null,
-                User: { nickname: '아이유 편집자' },
-
-            },
-        ],
-    };
-
-    return <UserMaybeLike videos={videos.videos} />;
+    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
+    const {
+        userMayBeLiekVideo,
+    }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
+        userMayBeLiekVideo: state.videoReducer.videoUserMayBeLikeSuccess,
+    }));
+    useEffect(() => {
+        dispatch(videoAction.videoUserMayBeLike({
+            category: 'all',
+            platform: 'all',
+            program: 'all',
+            sorting: 'thumbup',
+            page: 1,
+        }));
+    }, [dispatch]);
+    return userMayBeLiekVideo
+        ? <UserMaybeLike videos={userMayBeLiekVideo.videos} />
+        : <></>;
 };
 
 export default UserMaybeLikeContainer;

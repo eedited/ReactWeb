@@ -13,12 +13,10 @@
 
         .mypage__header__title {
             margin-top: rem(105);
-            width: 50%;
-
             .mypage__header__title__name {
-                width: rem(300);
                 font-size: rem(45);
                 line-height: rem(80);
+                gap : rem(30);
                 font-family: NotoSansKRBold;
                 display: flex;
                 justify-content: space-between;
@@ -52,16 +50,39 @@
             }
         }
         
-        .mypage__hader__graph {
+        .mypage__header__graph {
             margin-top: rem(40);
         }
     }
     .mypage__videoGrid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         justify-content: center;
         column-gap: rem(25);
         row-gap: rem(60);
         margin: rem(60) 0;
+    }
+    .mypage__videoGrid__firstUpload{
+        display : flex;
+        flex-direction: column;
+        margin : rem(180) 0 rem(150) 0;
+        align-items: center;
+        .mypage__videoGrid__firstUpload__text{
+            text-align: center;
+            margin-bottom: rem(30);
+            h2{
+                font-size : rem(30);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .mypage{
+        .mypage__header{
+            .mypage__header__graph{
+                display : none;
+            }
+        }
     }
 }

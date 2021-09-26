@@ -60,7 +60,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
 
     useEffect(() => {
         if (Video) {
-            onDescriptionChange((prevState: string) => (Video.discription));
+            onDescriptionChange((prevState: string) => (Video.description));
             onTagsChange((prevState: TagType[]) => (Video.WhatVideoUploadTag.map((tag: {tagName: string}, idx: number) => ({ id: idx, tag: tag.tagName }))));
             setInput('title', Video.title);
             setInput('videoLink', Video.url);
@@ -101,7 +101,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
                 {
                     id: videoId,
                     title: inputState.title,
-                    discription: description,
+                    description,
                     url: inputState.videoLink,
                     thumbnail: thumbnailURL(id),
                     tags: tags.map((tag: TagType) => tag.tag),

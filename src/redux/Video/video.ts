@@ -14,6 +14,8 @@ const initialState: RDXVideoModule.StateType = {
     videoModifySuccess: null,
     videoModifyError: null,
     endVideoList: false,
+    videoUserMayBeLikeSuccess: null,
+    videoUserMayBeLikeError: null,
 };
 type VideoSliceType = Slice<RDXVideoModule.StateType, {
     videoClear(state: WritableDraft<RDXVideoModule.StateType>): void;
@@ -32,6 +34,9 @@ type VideoSliceType = Slice<RDXVideoModule.StateType, {
     videoModify(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifyRequest>): void;
     videoModifySuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoModifySuccessResponse>): void;
     videoModifyFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoModifyFailureResponse>): void;
+    videoUserMayBeLike(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListRequest>): void;
+    videoUserMayBeLikeSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListSuccessResponse>): void;
+    videoUserMayBeLikeFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoListFailureResponse>): void;
 }, 'VIDEO'>
 
 const videoSlice: VideoSliceType = createSlice({
@@ -96,6 +101,13 @@ const videoSlice: VideoSliceType = createSlice({
         },
         videoModifyFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoModifyFailureResponse>) {
             state.videoModifyError = action.payload;
+        },
+        videoUserMayBeLike(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListRequest>) {},
+        videoUserMayBeLikeSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoListSuccessResponse>) {
+            state.videoUserMayBeLikeSuccess = { videos: action.payload.videos };
+        },
+        videoUserMayBeLikeFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoListFailureResponse>) {
+            state.videoUserMayBeLikeError = action.payload;
         },
     },
 });

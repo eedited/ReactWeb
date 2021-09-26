@@ -6,12 +6,14 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
 import AuthOverlay from '../../components/auth/AuthOverlay';
+import { LoadingStateType } from '../../redux/loading/loading';
 
 interface fromReducerType{
     form: Login
     User: User|null
     Auth?: AuthRouter.AuthSuccessResponse|null
     AuthError?: RDXAuthModule.AuthFailureResponse|null
+    loading: LoadingStateType
 }
 interface props extends RouteComponentProps{
     backgroundClicked: () => void
@@ -24,12 +26,13 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
     const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('login');
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
-        form, Auth, AuthError, User,
+        form, Auth, AuthError, User, loading,
     }: fromReducerType = useAppSelector((state: SelectorStateType) => ({
         form: state.authReducer.login,
         User: state.userReducer.user,
         Auth: state.authReducer.auth,
         AuthError: state.authReducer.authError,
+        loading: state.loadingReducer,
     }));
 
     const onChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {

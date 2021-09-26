@@ -1,0 +1,16 @@
+@import '/src/App.scss';
+.hello{
+    width : rem(500);
+    margin: rem(100) auto;
+    .hello__title{
+        font-size: rem(30);
+        line-height: rem(40);
+        margin-bottom: rem(40);
+    }
+    .hello__body{
+        font-size: rem(15);
+        line-height: rem(20);
+        color : gray;
+        margin-bottom: rem(20);
+    }
+}
