@@ -1,11 +1,11 @@
 @import '/src/App.scss';
 
 .LargeVideoDescription {
-    position: relative;
     width: 50%;
-    left: 25%;
+    margin : 0 auto;
     font-size: rem(15);
     top: rem(20);
+    margin-top : rem(32);
     .LargeVideoDescription__txt {
         font-family: 'NotoSansKRMedium';
         color: rgb(32, 32, 32);
@@ -26,5 +26,11 @@
             line-height: rem(27);
             padding: 0 rem(12);
         }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .LargeVideoDescription{
+        width: 90%;
     }
 }

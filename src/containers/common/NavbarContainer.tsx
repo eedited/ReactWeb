@@ -19,6 +19,7 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
         User: state.userReducer.user,
         logoutError: state.userReducer.logoutError,
     }));
+    const forceUpdate: () => void = React.useReducer(() => ({}), {})[1] as () => void;
     const windowSize: windowSizeType = useWindowSize();
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const [isHambergerClick, setIsHambergerClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
@@ -27,9 +28,9 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
         type: 'login',
     });
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
-
     const onLogout: () => void = () => {
         dispatch(userAction.logout());
+        window.location.reload();
     };
 
     const onLogin: () => void = () => {

@@ -1,47 +1,13 @@
 .filter {
     max-width: 1800px;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
-    height: 120px;
-    justify-content: space-around;
-    padding-left: 72px;
-    padding-right: 72px;
+    justify-content: space-between;
+    margin : 24px 72px;
     gap: 10px;
+}
 
-    .filter__item {
-        margin-top: 38px;
-        border-radius: 0.625rem;
-        background-color: rgb(247, 247, 247);
-        width: 402px;
-        height: 44px;
-        line-height: 44px;
-        border: 0rem;
-        color: rgb(70, 70, 70);
-        font-family: Pretendard-Medium;
-        text-align: start;
-        display: flex;
-        justify-content: space-between;
-
-        .filter__item__first {
-            margin-left: 16px;
-
-            .filter__item__first__platformIcon {
-                margin-top: 12px;
-                margin-right: 8px;
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        .filter__item__second {
-            margin-right: 16px;
-            
-            .filter__item__second__toggleArrow {
-                border-color: rgb(128, 128, 128);
-                width: 13px;
-                height: 8px;
-            }
-        }
+@media screen and (max-width: 760px) {
+    .filter{
+        flex-wrap: wrap;
     }
 }

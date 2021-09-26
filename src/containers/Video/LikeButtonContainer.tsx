@@ -14,7 +14,7 @@ interface Props {
 const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
     const [likeResponse, setLikeResponse]: [LikeResponse, React.Dispatch<React.SetStateAction<LikeResponse>>] = useState<LikeResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-
+    const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     useEffect(() => {
         setToggle(false);
         if (video) {
@@ -34,11 +34,21 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
             setToggle((prevState: boolean) => !prevState);
         }
         catch (err) {
+            setModalTrigger(true);
             setLikeResponse({ ...likeResponse, failure: err.response.data });
         }
     }, [likeResponse]);
-
-    return <LikeButton onButtonClick={() => onButtonClick(video.id)} toggle={toggle} />;
+    const onBackgroundClick: () => void = () => {
+        setModalTrigger(false);
+    };
+    return (
+        <LikeButton
+            onButtonClick={() => onButtonClick(video.id)}
+            toggle={toggle}
+            onBackgroundClick={onBackgroundClick}
+            ModalTrigger={ModalTrigger}
+        />
+    );
 };
 
 export default LikeButtonContainer;

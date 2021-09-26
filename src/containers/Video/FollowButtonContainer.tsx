@@ -14,7 +14,7 @@ interface Props {
 const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
     const [followResponse, setfollowResponse]: [FollowResponse, React.Dispatch<React.SetStateAction<FollowResponse>>] = useState<FollowResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-
+    const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     useEffect(() => {
         setToggle(false);
         if (video.User.followTo && video.User.followTo.length > 0) {
@@ -30,11 +30,21 @@ const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
             setToggle((prevState: boolean) => !prevState);
         }
         catch (err) {
+            setModalTrigger(true);
             setfollowResponse({ ...followResponse, failure: err.response.data });
         }
     }, [followResponse]);
-
-    return <FollowButton onButtonClick={() => onButtonClick(video.uploader)} toggle={toggle} />;
+    const onBackgroundClick: () => void = () => {
+        setModalTrigger(false);
+    };
+    return (
+        <FollowButton
+            onButtonClick={() => onButtonClick(video.uploader)}
+            toggle={toggle}
+            onBackgroundClick={onBackgroundClick}
+            ModalTrigger={ModalTrigger}
+        />
+    );
 };
 
 export default FollowButtonContainer;

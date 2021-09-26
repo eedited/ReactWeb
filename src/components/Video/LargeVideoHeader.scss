@@ -1,14 +1,12 @@
 @import '/src/App.scss';
 
 .LargeVideoHeader {
-    position: relative;
     display: flex;
     justify-content: space-between;
     width: 61%;
-    height: rem(80);
-    left: 19.5%;
+    margin : 0 auto;
     font-size: rem(16);
-    padding-top: 2vh;
+    margin-top : rem(32);
 
     .LargeVideoHeader__main {
         display: flex;
@@ -25,7 +23,7 @@
 
     .LargeVideoHeader__iconlist {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: center;
         gap: rem(8);
         .LargeVideoHeader_iconlist__icon__wrapper {
@@ -44,5 +42,11 @@
 @media screen and (max-width: 1000px) {
     .LargeVideoHeader{
         flex-direction: column;
+        gap : rem(16);
+        width : 90%;
+        margin-bottom: rem(12);
+        .LargeVideoHeader__iconlist{
+            justify-content: flex-start;
+        }
     }
 }
