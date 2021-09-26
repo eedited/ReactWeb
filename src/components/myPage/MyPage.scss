@@ -13,12 +13,10 @@
 
         .mypage__header__title {
             margin-top: rem(105);
-            width: 50%;
-
             .mypage__header__title__name {
-                width: rem(300);
                 font-size: rem(45);
                 line-height: rem(80);
+                gap : rem(30);
                 font-family: NotoSansKRBold;
                 display: flex;
                 justify-content: space-between;

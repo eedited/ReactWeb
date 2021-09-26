@@ -4,9 +4,8 @@
     display: flex;
     justify-content: space-between;
     width: 61%;
-    margin : 0 auto;
     font-size: rem(16);
-    margin-top : rem(32);
+    margin : rem(32) auto rem(16) auto;
 
     .LargeVideoHeader__main {
         display: flex;
