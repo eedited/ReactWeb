@@ -3,12 +3,14 @@ import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
+import { AxiosResponse } from 'axios';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/video/video';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
 import { thumbnailURL } from '../../services/youtube';
+import { videoDelete } from '../../api/video';
 
 interface FromReducerType {
     modifyError: RDXVideoModule.VideoModifyFailureResponse | null
@@ -19,7 +21,10 @@ interface Props extends RouteComponentProps {
     videoId: string
     user: User | null
 }
-
+interface VideoDeleteResponse {
+    success: VideoRouter.VideoDeleteSuccessResponse | null
+    failure: VideoRouter.VideoDeleteFailureResponse | null
+}
 const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props) => {
     const { video, videoClear }: RDXVideoModule.ActionType = videoAction;
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -32,6 +37,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
         modifySuccess: state.videoReducer.videoModifySuccess,
         Video: state.videoReducer.video,
     }));
+    const [videoDeleteResponse, setVideoDeleteResponse]: [VideoDeleteResponse, React.Dispatch<React.SetStateAction<VideoDeleteResponse>>] = useState<VideoDeleteResponse>({ success: null, failure: null });
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         title: '',
         videoLink: '',
@@ -109,7 +115,6 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
             ),
         );
     };
-
     useEffect(() => {
         if (modifyError) {
             setError(`업로드 실패 ${modifyError.info}`);
@@ -174,7 +179,19 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
         seTagError('');
         setError('');
     };
-
+    const onVideoDeleteClick: () => void = useCallback(() => {
+        (async function f() {
+            try {
+                setVideoDeleteResponse({ success: null, failure: null });
+                const response: AxiosResponse<VideoRouter.VideoDeleteSuccessResponse> = await videoDelete({ videoId });
+                setVideoDeleteResponse({ success: response, failure: null });
+                history.push('/');
+            }
+            catch (err) {
+                setVideoDeleteResponse({ success: null, failure: { error: err as Error } });
+            }
+        }());
+    }, [history, videoId]);
     return (
         <Upload
             type="change"
@@ -190,6 +207,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
             tags={tags}
             onBlurTag={onBlurTag}
             tagError={tagError}
+            onVideoDeleteClick={onVideoDeleteClick}
         />
     );
 };
