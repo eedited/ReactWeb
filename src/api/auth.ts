@@ -26,3 +26,9 @@ export const signupValidation: SignupValidationFunctionType = ({ token }: AuthRo
 });
 
 export const signupEmail: () => Promise<AxiosResponse<AuthRouter.CheckSuccessResponse>> = () => client.get('/auth/signup/email');
+
+type ChangePasswordFunctionType=({ currentPassword, newPassword }: AuthRouter.ChangePasswordRequest) => Promise<AxiosResponse<AuthRouter.ChangePasswordSuccessResponse>>
+export const changePassword: ChangePasswordFunctionType = ({ currentPassword, newPassword }: AuthRouter.ChangePasswordRequest) => client.post('/auth/change/password', {
+    newPassword,
+    password: currentPassword,
+});

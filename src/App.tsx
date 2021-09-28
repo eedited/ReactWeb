@@ -18,6 +18,7 @@ import VideoChangePage from './pages/VideoChangePage';
 import SignupSuccess from './pages/SignupSuccess';
 import HelloPage from './pages/HelloPage';
 import EmailValidate from './pages/EmailValidate';
+import AccountSettingPage from './pages/AccountSettingPage';
 
 type AppType = () => JSX.Element;
 
@@ -42,6 +43,8 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/change" component={VideoChangePage} />
                 <Route path="/signupSuccess" component={SignupSuccess} />
                 <Route path="/hello" component={HelloPage} />
+                <Route path="/AccountSetting" component={AccountSettingPage} exact />
+                <Route path="/AccountSetting/:param" component={AccountSettingPage} />
                 <Route path="/emailValidation" component={EmailValidate} />
                 <Route component={Page404} />
             </Switch>

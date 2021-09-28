@@ -54,6 +54,12 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
     const toMainPage: () => void = useCallback(() => {
         history.push('/');
     }, [history]);
+    const toModifyPage: () => void = useCallback(() => {
+        if (!user) {
+            alert('잘못된 접근입니다.');
+        }
+        else history.push('/AccountSetting');
+    }, [history, user]);
     const sendEmail: () => void = useCallback(async () => {
         setValidateResponse({ success: null, failure: null });
         setMessage('');
@@ -67,7 +73,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             setMessage('이메일 발송 중 오류가 발생했습니다.');
         }
     }, []);
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} />;
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} />;
 };
 
 export default withRouter(MyPageContainer);

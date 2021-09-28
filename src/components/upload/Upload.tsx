@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player';
 import BlueButton from '../common/Button/BlueButton';
 import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
+import WhiteButton from '../common/Button/WhiteButton';
 
 export interface TagType {
     id: number,
@@ -21,10 +22,11 @@ interface Props {
     onBlurTag: React.FocusEventHandler<HTMLInputElement>
     onTagRemove: (id: number) => void
     tags: TagType[]
+    onVideoDeleteClick?: () => void
 }
 
 const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactPlayer>> = forwardRef<ReactPlayer, Props>(({
-    type, uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError,
+    type, uploadSubmit, onInputChange, inputState, error, description, onDescriptionChange, onKeyPressTag, tags, onTagRemove, onBlurTag, tagError, onVideoDeleteClick,
 }: Props, youtubeRef: React.ForwardedRef<ReactPlayer>) => (
     // const [tags, onTagsChange]: [string[], React.Dispatch<React.SetStateAction<string[]>>] = useState([] as string[]);
     <div className="upload">
@@ -97,10 +99,22 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
                             value={description}
                         />
                     </div>
-
-                    <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : '업로드하기'}</BlueButton>
+                    <div className="upload__buttons">
+                        <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : '업로드하기'}</BlueButton>
+                        {type === 'change' && (
+                            <WhiteButton
+                                onClick={() => {
+                                    if (onVideoDeleteClick) {
+                                        onVideoDeleteClick();
+                                    }
+                                }}
+                                className="upload__submit"
+                            >
+                                삭제하기
+                            </WhiteButton>
+                        )}
+                    </div>
                     {error && <div className="upload__info__error">{error}</div>}
-
                 </div>
             </form>
             <div className="upload__preview">
@@ -133,5 +147,7 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
         </div>
     </div>
 ));
-
+Upload.defaultProps = {
+    onVideoDeleteClick: () => {},
+};
 export default React.memo(Upload);

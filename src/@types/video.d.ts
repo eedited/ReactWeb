@@ -113,9 +113,16 @@ export declare global {
 
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface VideoModifySuccessResponse {}
-
         interface VideoModifyFailureResponse {
             info: string;
+        }
+        interface VideoDeleteRequest{
+            videoId: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface VideoDeleteSuccessResponse{}
+        interface VideoDeleteFailureResponse {
+            error: Error
         }
     }
 

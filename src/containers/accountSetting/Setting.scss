@@ -1,0 +1,36 @@
+@import '/src/App.scss';
+.accountSetting__body__wrapper{
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+    .accountSetting__body__userInfo{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap : rem(8);
+        margin-bottom: rem(32);
+        .accountSetting__body__userInfo__tag{
+            font-family: NotoSansKrBold;
+            font-size : rem(18);
+        }
+        .accountSetting__body__userInfo__input{
+            background-color: $gray;
+            width : 100%;
+            height: rem(44);
+            font-size: rem(14);
+            padding: 0 rem(14);
+            border-radius: rem(10);
+        }
+        .accountSetting__body__userInfo__text{
+            background-color: $gray;
+            width : 100%;
+            height: rem(300);
+            padding: rem(14) rem(14);
+            border-radius: rem(10);
+            font-size: rem(14);
+        }
+        .accountSetting__body__userInfo__detail{
+            font-size : rem(14);
+        }
+    }
+}

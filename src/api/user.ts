@@ -14,3 +14,10 @@ type MyPageFunctionType = ({
 export const myPage: MyPageFunctionType = ({
     userId,
 }: UserRouter.MyPageRequest) => client.get(`/user/${userId}`);
+
+type MyPageModifyFunctionType = ({ description }: UserRouter.MypageModifyRequest) => Promise<AxiosResponse<UserRouter.MypageModifySuccessResponse>>;
+export const myPageModify: MyPageModifyFunctionType = ({
+    description, nickname,
+}: UserRouter.MypageModifyRequest) => client.patch('/user/change', {
+    description, nickname,
+});
