@@ -20,7 +20,8 @@
         justify-content: space-between;
         align-items: center;
         flex-grow: 1;
-        margin : rem(0) rem(24);
+        margin-left: rem(50);
+        margin-right: rem(24);
         .navbar__menu__links {
             display: flex;
             justify-content: space-between;
@@ -176,13 +177,11 @@
         .navbar__menu{
             width : rem(450);
             .navbar__menu__links {
-                margin-left : rem(50);
                 justify-content: flex-start;
                 gap : rem(30);
                 .preparing{
                     display: none;
                 }
-                
             }   
         }
     }
