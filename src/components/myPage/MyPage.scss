@@ -13,40 +13,46 @@
 
         .mypage__header__title {
             margin-top: rem(105);
+            display: flex;
+            flex-direction: column;
+            flex-grow : 1;
             .mypage__header__title__name {
                 font-size: rem(45);
                 line-height: rem(80);
                 gap : rem(30);
                 font-family: NotoSansKRBold;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 align-items: center;
 
                 .mypage__header__title__name__icons {
                     display: flex;
-
+                    gap : rem(8);
                     .mypage__header__title__name__iconBackGround {
                         position: relative;
                         width: rem(44);
                         height: rem(44);
-                        gap: rem(3);
                         background-color: $gray;
                         border-radius: 50%;
 
                         .mypage__header__title__name__icon {
                             position: absolute;
-                            width: rem(20);
-                            height: rem(20);
-                            margin-top: rem(12);
-                            margin-left: rem(12);
+                            width: rem(18);
+                            height: rem(18);
+                            top : rem(13);
+                            left : rem(13);
                         }
                     }
                 }
             }
 
-            .mypage__header__title__description {
+            .mypage__header__title__email {
                 font-size: rem(17);
                 line-height: rem(28);
+                margin-bottom: rem(32);
+            }
+            .mypage__header__title__description{
+                flex-grow: 1;
             }
         }
         

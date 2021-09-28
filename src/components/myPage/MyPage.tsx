@@ -18,9 +18,10 @@ interface Props{
     toUploadPage: () => void
     toMainPage: () => void
     sendEmail: () => void
+    toModifyPage: () => void
 }
 
-const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail }: Props) => (
+const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -30,16 +31,26 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                         <div className="mypage__header__title__name">
                             {myPageResponse.success && myPageResponse.success.nickname}
                             <div className="mypage__header__title__name__icons">
-                                <div className="mypage__header__title__name__iconBackGround">
+                                <button className="mypage__header__title__name__iconBackGround" onClick={() => { /**/ }} type="button">
                                     <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
-                                </div>
-                                <div className="mypage__header__title__name__iconBackGround">
-                                    <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
-                                </div>
+                                </button>
+                                {canModify && (
+                                    <button className="mypage__header__title__name__iconBackGround" onClick={toModifyPage} type="button">
+                                        <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="chat-icon" />
+                                    </button>
+                                )}
                             </div>
                         </div>
-                        <div className="mypage__header__title__description">
+                        <div className="mypage__header__title__email">
                             {myPageResponse.success && myPageResponse.success.email}
+                        </div>
+                        <div className="mypage__header__title__description">
+                            {myPageResponse.success && myPageResponse.success.description.split('\n').map((line: string, idx: number) => (
+                                <div key={`uniquekey${idx * 2}`}>
+                                    {line}
+                                    <br />
+                                </div>
+                            ))}
                         </div>
                     </div>
                     {

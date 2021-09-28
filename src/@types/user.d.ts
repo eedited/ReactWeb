@@ -29,6 +29,16 @@ export declare global {
         type UserFollowResponse =
             | UserFollowSuccessResponse
             | UserFollowFailureResponse;
+
+        interface MypageModifyRequest {
+            description: string;
+            nickname: string;
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface MypageModifySuccessResponse {}
+        interface MypageModifyFailureResponse {
+            error: Error;
+        }
     }
 
     namespace RDXUserModule {

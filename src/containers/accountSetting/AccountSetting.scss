@@ -1,0 +1,62 @@
+@import '/src/App.scss';
+.accountSetting{
+    max-width: 878px;
+    margin : rem(50) auto;
+    .accountSetting__header{
+        display : flex;
+        align-items: center;
+        gap : rem(32);
+        .accountSetting__header__profileImg{
+            width : rem(60);
+            height: rem(60);
+        }
+        .accountSetting__header__title{
+            font-size : rem(24);
+        }
+    }
+    .accountSetting__body{
+        margin-top : rem(32);
+        display: flex;
+        flex-direction: row;
+        .accountSetting__body__left{
+            display: flex;
+            flex-direction: column;
+            font-family: NotoSansKRMedium;
+            font-size : rem(16);
+            line-height: rem(24);
+            width : 20%;
+        }
+        .accountSetting__body__left.selected{
+            font-family: NotoSansKRBold;
+        }
+        .accountSetting__body__right{
+            flex-grow: 1;
+        }
+    }
+    .accountSetting__Mypage__error{
+        margin-bottom : rem(16);
+        color : red;
+    }
+}
+@media screen and  (max-width:1000px){
+    .accountSetting{
+        width : 90%;
+        .accountSetting__header{
+            gap : rem(16);
+            .accountSetting__header__profileImg{
+                width : rem(45);
+                height: rem(45);
+            }
+            .accountSetting__header__title{
+                font-size: rem(18);
+            }
+        }
+        .accountSetting__body{
+            .accountSetting__body__left{
+                width : rem(100);
+                font-size: rem(14);
+            }
+        }
+    }
+    
+}

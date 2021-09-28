@@ -61,6 +61,15 @@ export declare global {
         interface SignupEmailFailureResponse{
             info: string
         }
+        interface ChangePasswordRequest{
+            currentPassword: string,
+            newPassword: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface ChangePasswordSuccessResponse{}
+        interface ChangePasswordFailureResponse{
+            error: Error
+        }
     }
 
     namespace RDXAuthModule {
