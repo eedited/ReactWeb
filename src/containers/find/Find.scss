@@ -1,0 +1,68 @@
+@import '/src/App.scss';
+
+.find{
+    margin-bottom : rem(50);
+    position: relative;
+    .find__background{
+        background-color: $gray;
+        width : 100%;
+        height: rem(150);
+        text-align: center;
+        font-size : rem(30);
+        line-height: rem(100);
+    }
+    .find__body{
+        position : relative;
+        top : rem(-50);
+        padding : rem(15);
+        background-color: white;
+        margin: 0 auto;
+        max-width: rem(600);
+        display: flex;
+        gap : rem(14);
+        border : 1px solid black;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: rem(10);
+        .find__body__icon{
+            padding: 0 rem(16);
+            border-right : 1px solid black;
+        }
+        .find__body__input{
+            height: rem(50);
+            flex-grow : 1;
+        }
+        .find__body__input:focus{
+            outline: none; 
+        }
+    }
+    .find__result{
+        position : relative;
+        top : rem(-25);
+        margin : 0 auto;
+        max-width: rem(600);    
+        .find__result__query{
+            text-align: center;
+            font-size : rem(25);
+            line-height: rem(60);
+        }
+        .find__result__text{
+            text-align: center;
+            font-size : rem(16);
+            line-height: rem(24);
+        }
+    }
+    .find__videoGrid{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        justify-content: space-around;
+        column-gap: 20px;
+        row-gap: 40px;
+        padding-left: 72px;
+        padding-right: 72px;
+        padding-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -6,6 +6,7 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface FromReducerType {
     videos: VideoRouter.VideoListSuccessResponse | null
+    user: User|null
     videoLoading: boolean
     endVideoList: boolean
 }
@@ -21,16 +22,18 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
         videos,
         videoLoading,
         endVideoList,
+        user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         videos: state.videoReducer.videoList,
         endVideoList: state.videoReducer.endVideoList,
         videoLoading: state.loadingReducer['VIDEO/videoList'],
+        user: state.userReducer.user,
     }));
 
     useEffect(() => {
         dispatch(videoClear());
         page.current = 1;
-    }, [videoClear, params, dispatch]);
+    }, [videoClear, params, dispatch, user]);
     useEffect(() => {
         dispatch((videoList({
             category: params[0],
@@ -40,7 +43,7 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
             page: page.current,
         })));
         page.current += 1;
-    }, [dispatch, videoList, page, params]);
+    }, [dispatch, videoList, page, params, user]);
 
     const f: () => void = useCallback(() => {
         if (!videos) return;

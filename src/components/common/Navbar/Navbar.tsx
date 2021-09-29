@@ -20,13 +20,16 @@ interface props{
     onLogout: () => void
     onLogin: () => void
     onSignup: () => void
-    onSearchClick: () => void
     onUpload: () => void
     onHambergerClick: () => void
+    onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onKeyPressSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    onClickSearch: () => void
+    searchInput: string
 }
 
 const Navbar: React.FC<props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onSearchClick, onUpload, ModalTrigger, isHambergerClick, onHambergerClick,
+    user, onLogout, onLogin, onSignup, isSearchClick, onUpload, ModalTrigger, isHambergerClick, onHambergerClick, onSearchChange, searchInput, onKeyPressSearch, onClickSearch,
 }: props) => (
     <>
         <nav className="navbar">
@@ -43,13 +46,13 @@ const Navbar: React.FC<props> = ({
                 </div>
                 {!isSearchClick ? (
                     <div className="navbar__utility__find">
-                        <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
+                        <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onClickSearch} />
                     </div>
                 )
                     : (
                         <div className="navbar__utility__find find__activated">
-                            <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onSearchClick} />
-                            <input className="navbar__utility__find__input" onSubmit={() => { /* submit 될때 해야할일 */ }} />
+                            <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
+                            <input className="navbar__utility__find__input" value={searchInput} onChange={onSearchChange} onKeyPress={onKeyPressSearch} />
                         </div>
                     )}
             </div>

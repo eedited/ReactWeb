@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import Navbar, { ModalTriggerType } from '../../components/common/Navbar/Navbar';
@@ -23,6 +23,7 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
     const windowSize: windowSizeType = useWindowSize();
     const [isSearchClick, setIsSeacrhClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const [isHambergerClick, setIsHambergerClick]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
+    const [searchInput, setSearchInput]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
     const [ModalTrigger, setModalTrigger]: [ModalTriggerType, React.Dispatch<React.SetStateAction<ModalTriggerType>>] = useState<ModalTriggerType>({
         isModalOn: false,
         type: 'login',
@@ -53,6 +54,23 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
     const onHambergerClick: () => void = () => {
         setIsHambergerClick((prev: boolean) => !prev);
     };
+    const onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value);
+    };
+    const onKeyPressSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            history.push(`/search?q=${searchInput}`);
+            setIsSeacrhClick(false);
+        }
+    }, [history, searchInput]);
+    const onClickSearch: () => void = () => {
+        if (windowSize.width && windowSize.width <= 1400) {
+            setIsSeacrhClick(false);
+            history.push('/search');
+        }
+        else setIsSeacrhClick(!isSearchClick);
+    };
     return (
         <Navbar
             ModalTrigger={ModalTrigger}
@@ -62,15 +80,12 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
             onSignup={onSignup}
             onUpload={onUpload}
             isSearchClick={isSearchClick && ((windowSize.width !== undefined && windowSize.width > 1400) || windowSize.width === undefined)}
-            onSearchClick={() => {
-                if (windowSize.width && windowSize.width <= 1400) {
-                    setIsSeacrhClick(false);
-                    history.push('/404NotFound');
-                }
-                else setIsSeacrhClick(!isSearchClick);
-            }}
             isHambergerClick={isHambergerClick}
             onHambergerClick={onHambergerClick}
+            onSearchChange={onSearchChange}
+            searchInput={searchInput}
+            onKeyPressSearch={onKeyPressSearch}
+            onClickSearch={onClickSearch}
         />
     );
 };

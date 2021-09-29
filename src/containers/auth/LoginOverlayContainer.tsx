@@ -22,6 +22,7 @@ interface props extends RouteComponentProps{
 
 const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title }: props) => {
     const { changeField, intializeForm, login }: RDXAuthModule.ActionType = authAction;
+    const { check }: RDXUserModule.ActionType = userAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('login');
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();

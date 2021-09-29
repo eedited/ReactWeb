@@ -19,6 +19,7 @@ import SignupSuccess from './pages/SignupSuccess';
 import HelloPage from './pages/HelloPage';
 import EmailValidate from './pages/EmailValidate';
 import AccountSettingPage from './pages/AccountSettingPage';
+import FindingPage from './pages/FindingPage';
 
 type AppType = () => JSX.Element;
 
@@ -29,6 +30,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/" component={Landing} exact />
                 <Route path="/video" component={Landing} />
                 <Route path="/videos" component={Landing} />
+                <Route path="/search" component={FindingPage} />
                 <Route path="/videoInfo" component={VideoPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
