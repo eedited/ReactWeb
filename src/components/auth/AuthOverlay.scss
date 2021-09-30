@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size : rem(16);
     .AuthOverlay__close{
         position: absolute;
         right: rem(32);
@@ -30,11 +31,12 @@
                 text-align: center;
                 margin-top : rem(16);
                 margin-bottom: rem(32); 
+                font-size : rem(16);
                 height: rem(44);
                 line-height: rem(44);
                 border-bottom : 1px solid white;
                 color : white;
-                width : 50%;
+                width : 65%;
             }
             .AuthOverlay__header__hero{
                 display: flex;
