@@ -3,22 +3,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AuthOverlay.scss';
 
-interface Props{
+interface Props {
     type: 'login' | 'signup'
     backgroundClicked: () => void
     form: RDXAuthModule.SignupForm | Login
-    error: string|null
+    error: string | null
     title?: (type: string) => string
     setType: () => void
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
 }
-interface textMapType{
+interface textMapType {
     [type: string]: string
 }
 const textMap: textMapType = {
     login: '로그인',
     signup: '회원가입',
+};
+const googleLogin: () => void = () => {
+    window.open('http://localhost:3000/auth/google');
 };
 const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType }: Props) => (
     <div
@@ -131,16 +134,25 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                     {error && <div className="authForm__input__error" style={{ color: 'red' }}>{error}</div>}
                     <button className="authForm__input__button" type="submit">{textMap[type]}</button>
                     {type === 'login' && (
-                        <div
-                            className="authForm__toSignup"
-                            onClick={setType}
-                            onKeyDown={() => {
-                                /**/
-                            }}
-                            role="directory"
-                        >
-                            이미 회원이신가요?
-                        </div>
+                        <>
+                            <div
+                                className="authForm__toSignup"
+                                onClick={setType}
+                                onKeyDown={() => {
+                                    /**/
+                                }}
+                                role="directory"
+                            >
+                                이미 회원이신가요?
+                            </div>
+                            <button onClick={googleLogin} type="button">
+                                <img
+                                    className="authForm__googleLogin"
+                                    src="/icons/googleImage.png"
+                                    alt=""
+                                />
+                            </button>
+                        </>
                     )}
                     {type === 'signup' && (
                         <div className="authForm__agreement">
