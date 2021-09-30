@@ -7,23 +7,34 @@
     outline: 0;
     border-radius: 50%;
     height: rem(48);
+    width : rem(48);
     padding: rem(16);
+    position: relative;
     background-color: $gray;
     .FollowButton__default {
+        position: absolute;
+        top : rem(16);
+        left: rem(16);
         width: rem(16);
         height: rem(16);
     }
 }
 .FollowingButton {
     cursor: pointer;
+    position: relative;
     background-color: transparent;
     border: 0;
     outline: 0;
     border-radius: 50%;
     height: rem(48);
+    width : rem(48);
     padding: rem(16);
-    background-color: rgb(88, 126, 252);
-    .FollowingButton__default {
+    background-color: $blue;
+    .FollowingButton__default {        
+        position: absolute;
+        z-index: 2;
+        top : rem(16);
+        left: rem(16);
         width: rem(16);
         height: rem(16);
     }

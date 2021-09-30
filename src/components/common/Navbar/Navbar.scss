@@ -26,8 +26,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: rem(474);
             font-size: rem(16);
+            gap : rem(16);
             font-family: NotoSansKRBold;
         }
         .navbar__utility__find {
@@ -67,7 +67,7 @@
         justify-content: flex-end;
         .navbar__utility__buttons {
             display: flex;
-            width: rem(227);
+            gap : rem(16);
             justify-content: space-between;
         }
 
@@ -175,7 +175,6 @@
 @media screen and (max-width: 1200px) {
     .navbar{
         .navbar__menu{
-            width : rem(450);
             .navbar__menu__links {
                 justify-content: flex-start;
                 gap : rem(30);

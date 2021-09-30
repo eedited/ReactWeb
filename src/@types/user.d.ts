@@ -10,6 +10,7 @@ export declare global {
         interface MyPageSuccessResponse extends User {
             Video: (Video & { WhoVideoUploadTag?: { tagName: string }[] })[];
             followFrom: { followingId: string }[];
+            followTo?: {follerId: string}[];
             tags: { [key: string]: number };
         }
 
