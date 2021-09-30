@@ -4,7 +4,7 @@ import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../redux/video/video';
+import { videoAction } from '../../redux/video/Video';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
@@ -36,8 +36,8 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
     const [tags, onTagsChange]: [TagType[], React.Dispatch<React.SetStateAction<TagType[]>>] = useState([] as TagType[]);
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
-    const [error, setError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
-    const [tagError, seTagError]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
+    const [tagError, seTagError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if ([inputState.title, inputState.videoLink, description].includes('')) {

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { AnyAction } from 'redux';
 import VideoGrid from '../../components/Landing/VideoGrid/VideoGrid';
-import { videoAction } from '../../redux/video/video';
+import { videoAction } from '../../redux/video/Video';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface FromReducerType {
     videos: VideoRouter.VideoListSuccessResponse | null
-    user: User|null
+    user: User | null
     videoLoading: boolean
     endVideoList: boolean
 }
-interface Props{
+interface Props {
     params: string[]
 }
 const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
@@ -59,7 +59,7 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
     }, [videos, endVideoList, dispatch, videoList, params]);
 
     useEffect(() => {
-        if (!videos) return () => {};
+        if (!videos) return () => { };
         const onIntersect: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
             // eslint-disable-next-line @typescript-eslint/typedef
             const [{ isIntersecting }]: IntersectionObserverEntry[] = entries;
@@ -73,7 +73,7 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
             rootMargin: '0px',
             threshold: 1.0, // 부모요소의 끝에 도달했을 때 data fetch
         });
-        if (!targetRef.current) return () => {}; // 참조할 target이 없다면, return;
+        if (!targetRef.current) return () => { }; // 참조할 target이 없다면, return;
         const target: HTMLDivElement = targetRef.current;
         observer.observe(target); // target과 root를 계속 보며 체크
         if (endVideoList) observer.unobserve(target); // 더 이상 불러올 비디오가 없다면 unobserve.
