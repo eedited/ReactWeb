@@ -10,6 +10,9 @@ function* logoutSaga() {
     try {
         yield call(api.logout);
         yield put(intializeForm());
+        yield put({
+            type: 'USER/logoutSuccess',
+        });
         localStorage.removeItem('user');
     }
     catch (e) {

@@ -22,10 +22,10 @@ const userSlice: userSliceType = createSlice({
     name: 'USER',
     initialState,
     reducers: {
-        logout(state: WritableDraft<RDXUserModule.StateType>) {
+        logout(state: WritableDraft<RDXUserModule.StateType>) {},
+        logoutSuccess(state: WritableDraft<RDXUserModule.StateType>) {
             state.user = null;
         },
-        logoutSuccess(state: WritableDraft<RDXUserModule.StateType>) {},
         logoutFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.LogoutFailureResonse>) {
             state.logoutError = action.payload;
         },

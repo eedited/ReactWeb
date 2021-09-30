@@ -13,6 +13,11 @@ const Landing: React.FC<Props> = ({ location, history }: Props) => {
         const query: qs.ParsedQs = qs.parse(location.search, {
             ignoreQueryPrefix: true,
         });
+        Object.entries(query).forEach((x: [string, string | string[] | qs.ParsedQs | qs.ParsedQs[] | undefined]) => {
+            if (!(['category', 'platform', 'program', 'sorting'].includes(x[0]))) {
+                history.push('/404NotFound');
+            }
+        });
         const { category, platform, program, sorting }: qs.ParsedQs = query;
         const paramArray: (string | qs.ParsedQs | string[] | qs.ParsedQs[] | undefined)[] = [category, platform, program, sorting];
         const params: string[] = paramArray.map((param: (string | qs.ParsedQs | string[] | qs.ParsedQs[] | undefined), idx: number) => {
