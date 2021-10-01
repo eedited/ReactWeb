@@ -5,7 +5,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
 import { AxiosResponse } from 'axios';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../redux/video/video';
+import { videoAction } from '../../redux/video/Video';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
@@ -47,8 +47,8 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
     const [tags, onTagsChange]: [TagType[], React.Dispatch<React.SetStateAction<TagType[]>>] = useState([] as TagType[]);
     const tagId: React.MutableRefObject<number> = useRef(0);
     const youtubeRef: React.RefObject<ReactPlayer> = useRef<ReactPlayer>(null);
-    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
-    const [tagError, seTagError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+    const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
+    const [tagError, seTagError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
 
     useEffect(() => {
         dispatch(videoClear());
@@ -67,11 +67,11 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
     useEffect(() => {
         if (Video) {
             onDescriptionChange((prevState: string) => (Video.description));
-            onTagsChange((prevState: TagType[]) => (Video.WhatVideoUploadTag.map((tag: {tagName: string}, idx: number) => ({ id: idx, tag: tag.tagName }))));
+            onTagsChange((prevState: TagType[]) => (Video.WhatVideoUploadTag.map((tag: { tagName: string }, idx: number) => ({ id: idx, tag: tag.tagName }))));
             setInput('title', Video.title);
             setInput('videoLink', Video.url);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Video]);
 
     const uploadSubmit: (e: React.FormEvent<HTMLFormElement>) => void = (e: React.FormEvent<HTMLFormElement>) => {

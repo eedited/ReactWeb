@@ -20,6 +20,7 @@ import HelloPage from './pages/HelloPage';
 import EmailValidate from './pages/EmailValidate';
 import AccountSettingPage from './pages/AccountSettingPage';
 import FindingPage from './pages/FindingPage';
+import SnsAuthPage from './pages/SnsAuthPage';
 
 type AppType = () => JSX.Element;
 
@@ -48,6 +49,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/AccountSetting" component={AccountSettingPage} exact />
                 <Route path="/AccountSetting/:param" component={AccountSettingPage} />
                 <Route path="/emailValidation" component={EmailValidate} />
+                <Route path="/snsAuth" component={SnsAuthPage} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>

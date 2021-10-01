@@ -6,7 +6,7 @@ import getVideoSaga from './video/videoSaga';
 import authReducer from './auth/auth';
 import loadingReducer, { LoadingStateType } from './loading/loading';
 import userReducer from './user/user';
-import videoReducer from './video/video';
+import videoReducer from './video/Video';
 
 export function* rootSaga(): Generator<AllEffect<Generator<ForkEffect<never>, void, unknown>>, void, unknown> {
     yield all([authSaga(), userSaga(), getVideoSaga()]);
