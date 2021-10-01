@@ -34,7 +34,7 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                             {myPageResponse.success && myPageResponse.success.nickname}
 
                             <div className="mypage__header__title__name__icons">
-                                {myPageResponse.success && <MyPageFollowContainer mypage={myPageResponse.success} />}
+                                {myPageResponse.success && <MyPageFollowContainer mypage={myPageResponse.success} userId={user ? user.userId : null} />}
                                 <button className="mypage__header__title__name__iconBackGround" onClick={() => { /**/ }} type="button">
                                     <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
                                 </button>

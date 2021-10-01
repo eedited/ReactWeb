@@ -5,13 +5,14 @@ import { userFollow } from '../../api/user';
 
 interface Props {
     mypage: UserRouter.MyPageSuccessResponse
+    userId: string | null
 }
 interface FollowResponse {
     success: UserRouter.UserFollowSuccessResponse | null
     failure: UserRouter.UserFollowFailureResponse | null
 }
 const MyPageFollowContainer: React.FC<Props> = ({
-    mypage,
+    mypage, userId,
 }: Props) => {
     const [followResponse, setfollowResponse]: [FollowResponse, React.Dispatch<React.SetStateAction<FollowResponse>>] = React.useState<FollowResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = React.useState<boolean>(false);
@@ -38,12 +39,16 @@ const MyPageFollowContainer: React.FC<Props> = ({
         setModalTrigger(false);
     };
     return (
-        <FollowButton
-            onButtonClick={() => onButtonClick(mypage.userId)}
-            toggle={toggle}
-            onBackgroundClick={onBackgroundClick}
-            ModalTrigger={ModalTrigger}
-        />
+        userId === mypage.userId
+            ? <></>
+            : (
+                <FollowButton
+                    onButtonClick={() => onButtonClick(mypage.userId)}
+                    toggle={toggle}
+                    onBackgroundClick={onBackgroundClick}
+                    ModalTrigger={ModalTrigger}
+                />
+            )
     );
 };
 
