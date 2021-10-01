@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
 import UserMaybeLike from '../../components/Video/UserMaybeLike';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
-import { videoAction } from '../../redux/video/Video';
+import { videoAction } from '../../redux/video/video';
 
 interface FromReducerType {
     userMayBeLiekVideo: VideoRouter.UserVideoSuccessResponse | null

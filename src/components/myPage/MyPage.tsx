@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import VideoContainer from '../../containers/landing/VideoContainer';
+import MyPageFollowContainer from '../../containers/myPage/MyPageFollowContainer';
 import BlueButton from '../common/Button/BlueButton';
 import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './MyPage.scss';
@@ -19,9 +20,10 @@ interface Props{
     toMainPage: () => void
     sendEmail: () => void
     toModifyPage: () => void
+    followToggle: boolean
 }
 
-const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage }: Props) => (
+const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -30,7 +32,9 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                     <div className="mypage__header__title">
                         <div className="mypage__header__title__name">
                             {myPageResponse.success && myPageResponse.success.nickname}
+
                             <div className="mypage__header__title__name__icons">
+                                {myPageResponse.success && <MyPageFollowContainer mypage={myPageResponse.success} />}
                                 <button className="mypage__header__title__name__iconBackGround" onClick={() => { /**/ }} type="button">
                                     <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
                                 </button>

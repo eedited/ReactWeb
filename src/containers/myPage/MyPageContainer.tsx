@@ -20,6 +20,7 @@ interface ValidateResponse {
 const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
     const [myPageResponse, setMyPageResponse]: [MyPageResponseType, React.Dispatch<React.SetStateAction<MyPageResponseType>>] = useState<MyPageResponseType>({ success: null, failure: null });
     const [canModify, setCanModify]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [followToggle, setFollowToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [validateResponse, setValidateResponse]: [ValidateResponse, React.Dispatch<React.SetStateAction<ValidateResponse>>] = useState<ValidateResponse>({ success: null, failure: null });
     const [message, setMessage]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
 
@@ -34,6 +35,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             try {
                 const response: AxiosResponse<UserRouter.MyPageSuccessResponse> = await myPage({ userId });
                 setMyPageResponse({ success: response.data, failure: null });
+                console.log(response.data);
             }
             catch (err) {
                 setMyPageResponse({ success: null, failure: err.response.data });
@@ -48,6 +50,13 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             setCanModify(true);
         }
     }, [myPageResponse.success, user]);
+    useEffect(() => {
+        if (myPageResponse.success
+            && myPageResponse.success.followTo
+            && myPageResponse.success.followTo.length > 0) {
+            setFollowToggle(true);
+        }
+    }, [myPageResponse.success]);
     const toUploadPage: () => void = useCallback(() => {
         history.push('/upload');
     }, [history]);
@@ -73,7 +82,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             setMessage('이메일 발송 중 오류가 발생했습니다.');
         }
     }, []);
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} />;
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} />;
 };
 
 export default withRouter(MyPageContainer);

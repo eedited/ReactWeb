@@ -31,7 +31,6 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const onLogout: () => void = () => {
         dispatch(userAction.logout());
-        window.location.reload();
     };
 
     const onLogin: () => void = () => {

@@ -1,7 +1,7 @@
 import { ForkEffect, takeLatest } from 'redux-saga/effects';
 import createRequestSaga, { CreateRequestSagaReturnType } from '../createRequestSaga';
 import * as videoAPI from '../../api/video';
-import { videoAction } from './Video';
+import { videoAction } from './video';
 
 const videoSaga: CreateRequestSagaReturnType<VideoRouter.VideoRequest, VideoRouter.VideoSuccessResponse> = createRequestSaga('VIDEO/video', videoAPI.video);
 const videoListSaga: CreateRequestSagaReturnType<VideoRouter.VideoListRequest, VideoRouter.VideoListSuccessResponse> = createRequestSaga('VIDEO/videoList', videoAPI.videoList);

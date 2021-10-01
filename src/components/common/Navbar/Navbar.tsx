@@ -110,6 +110,18 @@ const Navbar: React.FC<props> = ({
                                                 </div>
                                             </button>
                                         </li>
+                                        <li className="navbar__utility__dropdown__item">
+                                            <button onClick={() => { /**/ }} type="button">
+                                                <div className="navbar__utility__dropdown__item__flex">
+                                                    <img
+                                                        className="navbar__utility__dropdown__item__flex__img"
+                                                        src="/icons/setting-icon.png"
+                                                        alt="setting-icon"
+                                                    />
+                                                    <Link to="/AccountSetting">설정</Link>
+                                                </div>
+                                            </button>
+                                        </li>
                                         <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__bottom">
                                             <button onClick={onLogout} type="button">
                                                 <div className="navbar__utility__dropdown__item__flex">
