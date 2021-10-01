@@ -6,14 +6,17 @@ import { videoAction } from '../../redux/video/video';
 
 interface FromReducerType {
     userMayBeLiekVideo: VideoRouter.UserVideoSuccessResponse | null
+    user: User|null
 }
 
 const UserMaybeLikeContainer: React.FC = () => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         userMayBeLiekVideo,
+        user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         userMayBeLiekVideo: state.videoReducer.videoUserMayBeLikeSuccess,
+        user: state.userReducer.user,
     }));
     useEffect(() => {
         dispatch(videoAction.videoUserMayBeLike({
@@ -23,7 +26,7 @@ const UserMaybeLikeContainer: React.FC = () => {
             sorting: 'thumbup',
             page: 1,
         }));
-    }, [dispatch]);
+    }, [dispatch, user]);
     return userMayBeLiekVideo
         ? <UserMaybeLike videos={userMayBeLiekVideo.videos} />
         : <></>;

@@ -42,7 +42,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             }
         }
         fetchMyPage();
-    }, [userId]);
+    }, [userId, user]);
     useEffect(() => {
         if (myPageResponse.success
              && user
