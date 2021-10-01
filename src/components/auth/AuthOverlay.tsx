@@ -9,6 +9,7 @@ interface Props {
     backgroundClicked: () => void
     form: RDXAuthModule.SignupForm | Login
     error: string | null
+    loading: boolean
     title?: (type: string) => string
     setType: () => void
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -24,7 +25,7 @@ const textMap: textMapType = {
 const googleLogin: () => void = () => {
     window.open('http://localhost:3000/auth/google');
 };
-const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType }: Props) => (
+const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType, loading }: Props) => (
     <Protal elementId="modal-root">
         <div
             className="AuthOverlayBox"
@@ -36,7 +37,8 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
             }}
             role="banner"
         >
-
+            {loading
+                    && <div className="authOverlay__spinner"><div className="spinner" /></div>}
             <div
                 className="AuthOverlay"
                 onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}

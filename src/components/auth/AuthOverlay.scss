@@ -1,4 +1,6 @@
 @import '/src/App.scss';
+
+
 .AuthOverlayBox{
     position: fixed;
     top : 0;
@@ -12,12 +14,57 @@
     align-items: center;
     justify-content: center;
     font-size : rem(16);
+    .authOverlay__spinner{
+        position: relative;
+        width : 100%;
+        height: 100%;
+        background: rgba(30,30,30,0.9);
+        z-index: 1001;
+        .spinner{
+            width : rem(80);
+            height: rem(80);
+            border-radius: 50%;
+            margin: 40vh auto;
+            font-size: 10px;
+            position: relative;
+            text-indent: -9999em;
+            border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+            border-left: 1.1em solid #ffffff;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-animation: spinner 1.1s infinite linear;
+            animation: spinner 1.1s infinite linear;
+        }
+        @-webkit-keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes spinner {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    }
     .AuthOverlay__close{
         position: absolute;
         right: rem(32);
         top : rem(24);
     }
-    .AuthOverlay{
+    .AuthOverlay{   
         position: absolute;
         background: white;
         width : #{"min(520px, 80%)"};
