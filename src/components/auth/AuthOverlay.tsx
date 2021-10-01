@@ -145,10 +145,13 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                             >
                                 이미 회원이신가요?
                             </div>
-                            <button onClick={googleLogin} type="button">
+                            <div className="authform__hrLine">
+                                <div className="authForm__hrLine__title">SNS LOGIN</div>
+                            </div>
+                            <button onClick={googleLogin} className="authForm__googleLogin" type="button">
                                 <img
-                                    className="authForm__googleLogin"
-                                    src="/icons/googleImage.png"
+                                    className="authForm__googleLogin__img"
+                                    src="/icons/google-icon.png"
                                     alt=""
                                 />
                             </button>
