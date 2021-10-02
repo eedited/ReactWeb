@@ -20,14 +20,14 @@
         justify-content: space-between;
         align-items: center;
         flex-grow: 1;
-        margin-left: rem(50);
+        margin-left: rem(60);
         margin-right: rem(24);
         .navbar__menu__links {
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: rem(16);
-            gap : rem(16);
+            gap : rem(32);
             font-family: NotoSansKRBold;
         }
         .navbar__utility__find {
