@@ -5,24 +5,30 @@ type VideoAPIFunctionType = ({ videoId }: VideoRouter.VideoRequest) => Promise<A
 export const video: VideoAPIFunctionType = ({ videoId }: VideoRouter.VideoRequest) => client.get(`/video/${videoId}`);
 
 type videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => Promise<AxiosResponse<VideoRouter.VideoListSuccessResponse>>
-export const videoList: videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => client.get(`/video/sort/${sorting}/?page=${page}`);
+export const videoList: videoListAPIFunctionType = ({ category, platform, program, sorting, page }: VideoRouter.VideoListRequest) => {
+    let query: string = `sort=${sorting}&&page=${page}`;
+    if (category !== 'all') {
+        query += `&&category=${category}`;
+    }
+    return client.get(`/video?${query}`);
+};
 
 type VideoAPIUploadFunctionType = ({
-    title, description, url, thumbnail, tags,
+    title, description, url, thumbnail, tags, category,
 }: VideoRouter.VideoUploadRequest) => Promise<AxiosResponse<VideoRouter.VideoUploadSuccessResponse>>
 export const videoUpload: VideoAPIUploadFunctionType = ({
-    title, description, url, thumbnail, tags,
+    title, description, url, thumbnail, tags, category,
 }: VideoRouter.VideoUploadRequest) => client.post('/video/upload', {
-    title, description, url, thumbnail, tags,
+    title, description, url, thumbnail, tags, category,
 });
 
 type VideoAPIModifyFunctionType = ({
-    id, title, description, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags, category,
 }: VideoRouter.VideoModifyRequest) => Promise<AxiosResponse<VideoRouter.VideoModifySuccessResponse>>
 export const videoModify: VideoAPIModifyFunctionType = ({
-    id, title, description, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags, category,
 }: VideoRouter.VideoModifyRequest) => client.patch('/video/upload', {
-    id, title, description, url, thumbnail, tags,
+    id, title, description, url, thumbnail, tags, category,
 });
 
 type VideoAPIUserFunctionType = ({ uploader }: VideoRouter.UserVideoRequest) => Promise<AxiosResponse<VideoRouter.UserVideoSuccessResponse>>

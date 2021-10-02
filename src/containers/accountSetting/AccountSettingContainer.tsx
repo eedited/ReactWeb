@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AnyAction } from 'redux';
-import BlueButton from '../../components/common/Button/BlueButton';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import './AccountSetting.scss';
 import SettingMyPage from './SettingMyPage';
@@ -13,6 +12,15 @@ interface FromReducerType{
 interface Props{
     param: string; // mypage, password, request
 }
+interface TextMapType {
+    [type: string]: string
+}
+
+const textMap: TextMapType = {
+    mypage: '프로필 변경',
+    password: '비밀번호 변경',
+    request: '건의사항',
+};
 
 const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -25,7 +33,10 @@ const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
                 <img className="accountSetting__header__profileImg" alt="" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" />
                 <div className="accountSetting__header__title">
                     {user.nickname}
-                    /Account Settings
+                    {' '}
+                    /
+                    {' '}
+                    {textMap[param]}
                 </div>
             </div>
             <div className="accountSetting__body">

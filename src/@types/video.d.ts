@@ -21,6 +21,7 @@ export declare global {
         viewCnt: number;
         createdAt: Date;
         updatedAt: Date;
+        category: string|null;
         deleted: Date | null;
         User: {
             nickname: string;
@@ -39,6 +40,7 @@ export declare global {
         url: string;
         thumbnail: string;
         tags: string[];
+        category: string|null;
     }
 
     namespace VideoRouter {
@@ -109,6 +111,7 @@ export declare global {
             url: string;
             thumbnail: string;
             tags: string[];
+            category: string|null;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-empty-interface

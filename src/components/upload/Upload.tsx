@@ -4,10 +4,18 @@ import BlueButton from '../common/Button/BlueButton';
 import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
 import WhiteButton from '../common/Button/WhiteButton';
+import UploadDropDown from '../../containers/upload/UploadDropDown';
 
 export interface TagType {
     id: number,
     tag: string
+}
+export interface DropDownProp {
+    id: number,
+    title: string,
+    selected: boolean,
+    key: string
+    set: string|null
 }
 interface Props {
     type: 'upload' | 'change';
@@ -56,6 +64,10 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
                             value={inputState.videoLink}
                             placeholder="youtube 링크를 입력하세요"
                         />
+                    </div>
+                    <div className="upload__info__item">
+                        <div className="upload__info__title">카테고리</div>
+                        <UploadDropDown />
                     </div>
                     <div className="upload__info__item">
                         <div className="upload__info__title">태그</div>

@@ -9,23 +9,26 @@ import useInputs, { inputType } from '../../hooks/useInputs';
 import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
 import { thumbnailURL } from '../../services/youtube';
+import { filterAction } from '../../redux/filter/filter';
 
 interface FromReducerType {
     uploadError: RDXVideoModule.VideoUploadFailureResponse | null
     uploadSuccess: VideoRouter.VideoUploadSuccessResponse | null
+    uploadDDState: DropDownProp[]
 }
 interface Props {
     history: RouteComponentProps['history']
 }
-
 const UploadContainer: React.FC<Props> = ({ history }: Props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         uploadError,
         uploadSuccess,
+        uploadDDState,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         uploadError: state.videoReducer.videoUploadError,
         uploadSuccess: state.videoReducer.videoUploadSuccess,
+        uploadDDState: state.filterReducer.upload,
     }));
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         title: '',
@@ -66,19 +69,25 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
             setError('올바르지 못한 video Url 입니다');
             return;
         }
-        dispatch(
-            videoAction.videoUpload(
-                {
-                    title: inputState.title,
-                    description,
-                    url: inputState.videoLink,
-                    thumbnail: thumbnailURL(id),
-                    tags: tags.map((tag: TagType) => tag.tag),
-                },
-            ),
-        );
+        const currentCategory: DropDownProp|undefined = uploadDDState.find((cur: DropDownProp) => cur.selected === true);
+        if (currentCategory) {
+            dispatch(
+                videoAction.videoUpload(
+                    {
+                        title: inputState.title,
+                        description,
+                        url: inputState.videoLink,
+                        thumbnail: thumbnailURL(id),
+                        tags: tags.map((tag: TagType) => tag.tag),
+                        category: currentCategory.set,
+                    },
+                ),
+            );
+        }
     };
-
+    useEffect(() => {
+        dispatch(filterAction.setUpload({ set: null }));
+    }, [dispatch]);
     useEffect(() => {
         if (uploadError) {
             setError(`업로드 실패 ${uploadError.info}`);
