@@ -86,7 +86,7 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
         ? <div />
         : (
             <div>
-                <VideoGrid videoInfos={videos.videos} />
+                <VideoGrid videoList={videos.videos} />
                 <div ref={targetRef} />
             </div>
         );
