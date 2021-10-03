@@ -1,5 +1,5 @@
 import React from 'react';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import FollowButton from '../../components/Video/FollowButton';
 import { userFollow } from '../../api/user';
 
@@ -32,7 +32,11 @@ const MyPageFollowContainer: React.FC<Props> = ({
         }
         catch (err) {
             setModalTrigger(true);
-            setfollowResponse({ ...followResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setfollowResponse({ ...followResponse, failure: err.response.data });
+                }
+            }
         }
     }, [followResponse]);
     const onBackgroundClick: () => void = () => {

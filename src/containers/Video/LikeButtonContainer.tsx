@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import LikeButton from '../../components/Video/LikeButton';
 import { videoLike } from '../../api/video';
@@ -36,7 +36,11 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
         }
         catch (err) {
             setModalTrigger(true);
-            setLikeResponse({ ...likeResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setLikeResponse({ ...likeResponse, failure: err.response.data });
+                }
+            }
         }
     }, [likeResponse]);
     const onBackgroundClick: () => void = () => {

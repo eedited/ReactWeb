@@ -1,5 +1,5 @@
 import { call, put, CallEffect, PutEffect } from 'redux-saga/effects';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { loadingAction } from './loading/loading';
 
 interface GenericAction<T, P> {
@@ -35,13 +35,25 @@ export default function createRequestSaga<P, R>(type: string, request: GenericRe
             });
         }
         catch (err) {
-            yield put({
-                type: FAILURE,
-                payload: {
-                    ...err.response.data,
-                    error: err,
-                },
-            });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    yield put({
+                        type: FAILURE,
+                        payload: {
+                            ...err.response.data,
+                            error: err,
+                        },
+                    });
+                }
+                else {
+                    yield put({
+                        type: FAILURE,
+                        payload: {
+                            error: err,
+                        },
+                    });
+                }
+            }
         }
         yield put(loadingAction.finishLoading({ status: type }));
     }

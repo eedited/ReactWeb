@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import axios from 'axios';
 import client from '../../api/client';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import FindingId from '../../components/auth/FindingId';
@@ -30,10 +31,14 @@ const FindingIdContainer: React.FC = () => {
                 setLoading('success');
             }
             catch (err) {
-                setFindIdResponse({
-                    info: err.response.data,
-                    error: err,
-                });
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        setFindIdResponse({
+                            info: err.response.data,
+                            error: err,
+                        });
+                    }
+                }
             }
         }, [inputState.email],
     );

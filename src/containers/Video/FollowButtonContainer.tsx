@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import FollowButton from '../../components/Video/FollowButton';
 import { userFollow } from '../../api/user';
@@ -32,7 +32,11 @@ const FollowButtonContainer: React.FC<Props> = ({ video, userId }: Props) => {
         }
         catch (err) {
             setModalTrigger(true);
-            setfollowResponse({ ...followResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setfollowResponse({ ...followResponse, failure: err.response.data });
+                }
+            }
         }
     }, [followResponse]);
     const onBackgroundClick: () => void = () => {

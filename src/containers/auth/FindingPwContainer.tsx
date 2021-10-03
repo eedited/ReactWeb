@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import client from '../../api/client';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import FindingPw, { FindPwResponseType } from '../../components/auth/FindigPw';
@@ -29,10 +29,14 @@ const FindingPwContainer: React.FC = () => {
                 setFindPwResponse(response.data);
             }
             catch (err) {
-                setFindPwResponse({
-                    info: err.response.data,
-                    error: err,
-                });
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        setFindPwResponse({
+                            info: err.response.data,
+                            error: err,
+                        });
+                    }
+                }
                 setLoading('failure');
             }
         }, [id, inputState.email],
