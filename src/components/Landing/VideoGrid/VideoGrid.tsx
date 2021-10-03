@@ -10,7 +10,7 @@ interface Props {
 
 const VideoGrid: React.FC<Props> = ({ videoList }: Props) => (
     <div className="videoGrid">
-        {videoList.map((video: VideoInfo, idx: number) => (
+        {videoList && videoList.map((video: VideoInfo, idx: number) => (
             <div key={video.id}>
                 <VideoContainer videoInfo={video} />
                 <VideoDescription1 videoInfo={video} />

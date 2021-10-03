@@ -1,5 +1,9 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
-const client: AxiosInstance = axios.create();
+axios.defaults.withCredentials = true;
+const axiosConfig: AxiosRequestConfig = {
+    baseURL: 'http://localhost:3000',
+};
+const client: AxiosInstance = axios.create(axiosConfig);
 
 export default client;

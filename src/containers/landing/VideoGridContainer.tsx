@@ -6,6 +6,7 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 
 interface FromReducerType {
     videos: VideoRouter.VideoListSuccessResponse | null
+    videoListFailure: VideoRouter.VideoFailureResponse | null
     user: User | null
     videoLoading: boolean
     endVideoList: boolean
@@ -23,11 +24,13 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
         videoLoading,
         endVideoList,
         user,
+        videoListFailure,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         videos: state.videoReducer.videoList,
         endVideoList: state.videoReducer.endVideoList,
         videoLoading: state.loadingReducer['VIDEO/videoList'],
         user: state.userReducer.user,
+        videoListFailure: state.videoReducer.getVideoError,
     }));
 
     useEffect(() => {
@@ -77,16 +80,18 @@ const VideoGridContainer: React.FC<Props> = ({ params }: Props) => {
         const target: HTMLDivElement = targetRef.current;
         observer.observe(target); // target과 root를 계속 보며 체크
         if (endVideoList) observer.unobserve(target); // 더 이상 불러올 비디오가 없다면 unobserve.
+        if (videoListFailure) observer.unobserve(target); // 더 이상 불러올 비디오가 없다면 unobserve.
         return () => {
             observer.unobserve(target); // cleanup할 때 unobserve
         };
-    }, [f, videoLoading, videos, targetRef, endVideoList]);
+    }, [f, videoLoading, videos, targetRef, endVideoList, videoListFailure]);
 
     return videos === null
         ? <div />
         : (
             <div>
-                <VideoGrid videoList={videos.videos} />
+                {videos.videos
+                        && <VideoGrid videoList={videos.videos} />}
                 <div ref={targetRef} />
             </div>
         );
