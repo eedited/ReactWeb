@@ -14,28 +14,17 @@ const HelloPage: React.FC<Props> = ({ history }: Props) => (
                 eedited에 오신걸 환영합니다!
             </div>
             <div className="hello__body">
-                서비스 소개글
+                서비스에 가입해주셔서 감사합니다!
                 <br />
-                서비스 소개글
+                저희는 편집자 포트폴리오 관리서비스, eedited입니다.
                 <br />
-                서비스 소개글
-                <br />
-                서비스 소개글
-                <br />
-                서비스 소개글
-                <br />
-                서비스 소개글
-                <br />
-                서비스 소개글
-                <br />
-                서비스 소개글
-                <br />
+
             </div>
             <BlueButton onClick={() => {
-                history.push('/Profile/minsu');
+                history.push('/');
             }}
             >
-                마이페이지
+                시작하기
             </BlueButton>
         </div>
     </BaseTemplate>
