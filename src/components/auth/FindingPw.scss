@@ -1,0 +1,39 @@
+
+@import '/src/App.scss';
+.findingPw{
+    display: flex;
+    flex-direction: column;
+    margin : rem(200) auto;
+    width  : rem(500);
+    h2{
+        text-align : center;
+        font-size:rem(24);
+        line-height: rem(44);
+    }
+    h3{
+        font-size : rem(15);
+        line-height: rem(20);
+        margin-left : rem(50)
+    }
+    p{
+        font-size: rem(15);
+        line-height: rem(25);
+        text-align: center;
+    }
+    input{
+        text-align: center;
+        border : 1px solid $gray;
+        background-color: $gray;
+        width : rem(400);
+        height: rem(44);
+        margin : rem(8) auto rem(16) auto;
+        padding : 0  rem(16);
+        text-align: center;
+    }
+    button{
+        margin : 0 auto rem(16) auto;
+    }
+    .findingPw__text{
+        margin-bottom: rem(32);
+    }
+}

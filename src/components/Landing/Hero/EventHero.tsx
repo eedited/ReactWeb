@@ -5,15 +5,16 @@ const EventHero: React.FC = () => (
     <div className="hero">
         <div className="hero__description">
             <p className="hero__description__title">
-                이벤트
+                개발자들과
                 <br />
-                진행중!!
+                이야기를 나눠보세요!!
             </p>
             <p className="hero__description__body">
-                에디티드에서 능력자들의 포트폴리오를
+                discord 시작하기
                 <br />
                 {' '}
-                한눈에 살펴보고 바로 소통해보세요!
+                디스코드 url
+                {' '}
             </p>
         </div>
         <img className="hero__img" alt="hero__img" src="/images/heros/heroImg.png" />

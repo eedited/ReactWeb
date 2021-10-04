@@ -2,13 +2,13 @@ import React, { useState, useCallback } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import client from '../../api/client';
 import useInputs, { inputType } from '../../hooks/useInputs';
-import FindingPw, { FindPwResponseType } from '../../components/auth/FindigPw';
+import FindingPw, { FindPwResponseType } from '../../components/auth/FindingPw';
 
 type loadingState = 'start' | 'success' | 'failure';
 
 const FindingPwContainer: React.FC = () => {
     const [isSubmit, setIsSubmit]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-    const [loading, setLoading]: [loadingState, React.Dispatch<React.SetStateAction<loadingState>>] = useState<loadingState>('start');
+    const [loading, setLoading]: [loadingState, React.Dispatch<React.SetStateAction<loadingState>>] = useState<loadingState>('failure');
     const [findPwResponse, setFindPwResponse]: [FindPwResponseType, React.Dispatch<React.SetStateAction<FindPwResponseType>>] = useState<FindPwResponseType>({ password: '' });
     const [inputState, onInputChange, onInputClear]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         email: '',
@@ -31,8 +31,9 @@ const FindingPwContainer: React.FC = () => {
             catch (err) {
                 if (axios.isAxiosError(err)) {
                     if (err.response) {
+                        console.log(err.response.status);
                         setFindPwResponse({
-                            info: err.response.data,
+                            info: err.response.status,
                             error: err,
                         });
                     }
