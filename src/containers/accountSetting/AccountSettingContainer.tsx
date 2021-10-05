@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import './AccountSetting.scss';
+import RecieveDiscomfort from './RecieveDiscomfort';
 import SettingMyPage from './SettingMyPage';
 import SettingPassword from './SettingPassword';
 
@@ -43,12 +44,12 @@ const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
                 <div className="accountSetting__body__left">
                     <Link to="/AccountSetting/mypage">프로필 변경</Link>
                     <Link to="/AccountSetting/password">비밀번호 변경</Link>
-
+                    <Link to="/AccountSetting/request">요청</Link>
                 </div>
                 <div className="accountSetting__body__right">
                     {(param === 'mypage') && <SettingMyPage user={user} />}
                     {(param === 'password') && <SettingPassword user={user} />}
-                    {(param === 'request') && <SettingMyPage user={user} />}
+                    {(param === 'request') && <RecieveDiscomfort user={user} />}
                 </div>
             </div>
         </div>

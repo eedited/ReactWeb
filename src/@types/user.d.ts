@@ -40,6 +40,16 @@ export declare global {
         interface MypageModifyFailureResponse {
             error: Error;
         }
+
+        interface DiscomfortRequest {
+            title: string,
+            description: string,
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface DiscomfortSuccessResponse{}
+        interface DiscomfortFailureResponse{
+            info: string;
+        }
     }
 
     namespace RDXUserModule {
