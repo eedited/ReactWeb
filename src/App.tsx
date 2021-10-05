@@ -21,6 +21,8 @@ import EmailValidate from './pages/EmailValidate';
 import AccountSettingPage from './pages/AccountSettingPage';
 import FindingPage from './pages/FindingPage';
 import SnsAuthPage from './pages/SnsAuthPage';
+import ServicePolicy from './pages/ServicePolicy';
+import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
 
 type AppType = () => JSX.Element;
 
@@ -50,6 +52,8 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/AccountSetting/:param" component={AccountSettingPage} />
                 <Route path="/emailValidation" component={EmailValidate} />
                 <Route path="/snsAuth" component={SnsAuthPage} />
+                <Route path="/servicePolicy" component={ServicePolicy} />
+                <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>

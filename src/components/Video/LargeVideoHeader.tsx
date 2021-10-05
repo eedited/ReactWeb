@@ -19,7 +19,7 @@ const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
             </div>
         </div>
         <div className="LargeVideoHeader__iconlist">
-            <FollowButtonContainer video={video} />
+            <FollowButtonContainer video={video} userId={user ? user.userId : null} />
             <div className="LargeVideoHeader_iconlist__icon__wrapper">
                 <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" alt="" />
             </div>

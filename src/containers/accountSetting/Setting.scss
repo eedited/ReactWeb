@@ -1,4 +1,9 @@
 @import '/src/App.scss';
+.accountSetting__pageDescription{
+    font-size : rem(14);
+    line-height: rem(24);
+    margin-bottom: rem(32);
+}
 .accountSetting__body__wrapper{
     display: flex;
     flex-direction: column;

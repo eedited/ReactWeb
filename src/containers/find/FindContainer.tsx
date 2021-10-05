@@ -82,10 +82,11 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
         const target: HTMLDivElement = targetRef.current;
         observer.observe(target); // target과 root를 계속 보며 체크
         if (endPage.current) observer.unobserve(target); // 더 이상 불러올 비디오가 없다면 unobserve.
+        if (searchResponse.failure) observer.unobserve(target); // 더 이상 불러올 비디오가 없다면 unobserve.
         return () => {
             observer.unobserve(target); // cleanup할 때 unobserve
         };
-    }, [f, videos, targetRef, loading]);
+    }, [f, videos, targetRef, loading, searchResponse.failure]);
     const onKeyPressSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();

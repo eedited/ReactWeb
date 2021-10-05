@@ -5,9 +5,10 @@ import BaseTemplate from './BaseTemplate';
 import HeroDescription from '../containers/landing/HeroDescription';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
+import HeroSlider from '../components/Landing/heroSlider/HeroSlider';
 
 type Props = RouteComponentProps
-const paramValidmatch: string[][] = [['vlog', 'game', 'beauty'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];
+const paramValidmatch: string[][] = [['vlog', 'game', 'beauty', 'review', 'study', 'etc'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];
 const Landing: React.FC<Props> = ({ location, history }: Props) => {
     const parameters: string[] = useMemo(() => {
         const query: qs.ParsedQs = qs.parse(location.search, {
@@ -44,7 +45,7 @@ const Landing: React.FC<Props> = ({ location, history }: Props) => {
     }, [history, location.search]);
     return (
         <BaseTemplate>
-            <HeroDescription />
+            <HeroSlider />
             <FilterContainer
                 params={parameters}
             />

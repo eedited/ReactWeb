@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Protal from '../../hooks/Protal';
+import Spinner from '../common/Spinner/Spinner';
 import './AuthOverlay.scss';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
     backgroundClicked: () => void
     form: RDXAuthModule.SignupForm | Login
     error: string | null
+    loading: boolean
     title?: (type: string) => string
     setType: () => void
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -24,7 +26,7 @@ const textMap: textMapType = {
 const googleLogin: () => void = () => {
     window.open('http://localhost:3000/auth/google');
 };
-const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType }: Props) => (
+const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType, loading }: Props) => (
     <Protal elementId="modal-root">
         <div
             className="AuthOverlayBox"
@@ -36,7 +38,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
             }}
             role="banner"
         >
-
+            <Spinner loading={loading} />
             <div
                 className="AuthOverlay"
                 onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
@@ -145,7 +147,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                                     }}
                                     role="directory"
                                 >
-                                    이미 회원이신가요?
+                                    아직 회원이 아니신가요?
                                 </div>
                                 <div className="authform__hrLine">
                                     <div className="authForm__hrLine__title">SNS LOGIN</div>
@@ -163,10 +165,10 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                             <div className="authForm__agreement">
                                 가입 시, eedited의
                                 {' '}
-                                <Link to="/" style={{ color: '#4B89DC' }}>이용약관</Link>
+                                <Link to="/servicePolicy" style={{ color: '#4B89DC' }}>이용약관</Link>
                                 ,
                                 {' '}
-                                <Link to="/" style={{ color: '#4B89DC' }}>개인정보 취급방침</Link>
+                                <Link to="/PrivateInformationPolicy" style={{ color: '#4B89DC' }}>개인정보 취급방침</Link>
                                 에 동의합니다.
                             </div>
                         )}

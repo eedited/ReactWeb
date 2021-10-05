@@ -1,17 +1,18 @@
 import React from 'react';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import FollowButton from '../../components/Video/FollowButton';
 import { userFollow } from '../../api/user';
 
 interface Props {
     mypage: UserRouter.MyPageSuccessResponse
+    userId: string | null
 }
 interface FollowResponse {
     success: UserRouter.UserFollowSuccessResponse | null
     failure: UserRouter.UserFollowFailureResponse | null
 }
 const MyPageFollowContainer: React.FC<Props> = ({
-    mypage,
+    mypage, userId,
 }: Props) => {
     const [followResponse, setfollowResponse]: [FollowResponse, React.Dispatch<React.SetStateAction<FollowResponse>>] = React.useState<FollowResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = React.useState<boolean>(false);
@@ -31,19 +32,27 @@ const MyPageFollowContainer: React.FC<Props> = ({
         }
         catch (err) {
             setModalTrigger(true);
-            setfollowResponse({ ...followResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setfollowResponse({ ...followResponse, failure: err.response.data });
+                }
+            }
         }
     }, [followResponse]);
     const onBackgroundClick: () => void = () => {
         setModalTrigger(false);
     };
     return (
-        <FollowButton
-            onButtonClick={() => onButtonClick(mypage.userId)}
-            toggle={toggle}
-            onBackgroundClick={onBackgroundClick}
-            ModalTrigger={ModalTrigger}
-        />
+        userId === mypage.userId
+            ? <></>
+            : (
+                <FollowButton
+                    onButtonClick={() => onButtonClick(mypage.userId)}
+                    toggle={toggle}
+                    onBackgroundClick={onBackgroundClick}
+                    ModalTrigger={ModalTrigger}
+                />
+            )
     );
 };
 

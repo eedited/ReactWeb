@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { signupEmail } from '../../api/auth';
@@ -38,11 +38,15 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
                 console.log(response.data);
             }
             catch (err) {
-                setMyPageResponse({ success: null, failure: err.response.data });
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        setMyPageResponse({ success: null, failure: err.response.data });
+                    }
+                }
             }
         }
         fetchMyPage();
-    }, [userId]);
+    }, [userId, user]);
     useEffect(() => {
         if (myPageResponse.success
              && user

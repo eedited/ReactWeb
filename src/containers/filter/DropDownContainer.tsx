@@ -2,13 +2,6 @@ import React, { useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import DropDown from '../../components/common/DropDown/DropDown';
 
-interface DropDownProp {
-    id: number,
-    title: string,
-    selected: boolean,
-    key: string
-    set: string
-}
 interface props extends RouteComponentProps{
     imgSrc: string
     DDidx: number
@@ -24,6 +17,7 @@ const DropDownContainer: React.FC<props> = ({ DDidx, initialStateFilter, imgSrc,
         for (let i: number = 0; i < 4; i += 1) {
             let concat: string = '&';
             if (i !== DDidx) {
+                // eslint-disable-next-line no-loop-func
                 const tempStr: DropDownProp|undefined = initialStateFilter[i].find((x: DropDownProp) => x.selected === true);
                 if (tempStr && tempStr.set !== 'all') {
                     if (ch === false) {

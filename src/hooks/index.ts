@@ -12,4 +12,5 @@ export type SelectorStateType = CombinedState<{
     loadingReducer: LoadingStateType;
     userReducer: RDXUserModule.StateType;
     videoReducer: RDXVideoModule.StateType;
+    filterReducer: RDXFilterModule.StateType;
 }>;

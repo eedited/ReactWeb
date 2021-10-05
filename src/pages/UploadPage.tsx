@@ -17,7 +17,7 @@ const UploadPage: React.FC<props> = ({ history }: props) => {
     })));
 
     if (!user) {
-        history.push('/404NotFound');
+        history.push('/');
         return <></>;
     }
     if (user.emailToken) {

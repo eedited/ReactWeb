@@ -1,23 +1,20 @@
 import React from 'react';
 import './Hero.scss';
 
-const Hero: React.FC = () => (
+const EventHero: React.FC = () => (
     <div className="hero">
         <div className="hero__description">
             <p className="hero__description__title">
-                내 영상을 위한
+                개발자들과
                 <br />
-                {' '}
-                최고의 편집자들이
-                <br />
-                {' '}
-                모두 여기에
+                이야기를 나눠보세요!!
             </p>
             <p className="hero__description__body">
-                에디티드에서 능력자들의 포트폴리오를
+                discord 시작하기
                 <br />
                 {' '}
-                한눈에 살펴보고 바로 소통해보세요!
+                디스코드 url
+                {' '}
             </p>
         </div>
         <img className="hero__img" alt="hero__img" src="/images/heros/heroImg.png" />
@@ -25,4 +22,4 @@ const Hero: React.FC = () => (
 
 );
 
-export default Hero;
+export default EventHero;

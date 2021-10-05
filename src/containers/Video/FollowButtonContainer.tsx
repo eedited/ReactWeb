@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
 import FollowButton from '../../components/Video/FollowButton';
 import { userFollow } from '../../api/user';
@@ -9,9 +9,10 @@ interface FollowResponse {
 }
 interface Props {
     video: VideoRouter.VideoSuccessResponse
+    userId: string|null
 }
 
-const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
+const FollowButtonContainer: React.FC<Props> = ({ video, userId }: Props) => {
     const [followResponse, setfollowResponse]: [FollowResponse, React.Dispatch<React.SetStateAction<FollowResponse>>] = useState<FollowResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
@@ -31,19 +32,27 @@ const FollowButtonContainer: React.FC<Props> = ({ video }: Props) => {
         }
         catch (err) {
             setModalTrigger(true);
-            setfollowResponse({ ...followResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setfollowResponse({ ...followResponse, failure: err.response.data });
+                }
+            }
         }
     }, [followResponse]);
     const onBackgroundClick: () => void = () => {
         setModalTrigger(false);
     };
     return (
-        <FollowButton
-            onButtonClick={() => onButtonClick(video.uploader)}
-            toggle={toggle}
-            onBackgroundClick={onBackgroundClick}
-            ModalTrigger={ModalTrigger}
-        />
+        userId === video.uploader
+            ? <></>
+            : (
+                <FollowButton
+                    onButtonClick={() => onButtonClick(video.uploader)}
+                    toggle={toggle}
+                    onBackgroundClick={onBackgroundClick}
+                    ModalTrigger={ModalTrigger}
+                />
+            )
     );
 };
 

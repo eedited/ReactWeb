@@ -17,12 +17,12 @@ const Footer: React.FC = () => (
                 <div className="footer__sitemap">
                     <div className="footer__sitemap__column">
                         <div className="footer__sitemap__column__heading">포트폴리오</div>
-                        <Link to="/" className="footer__sitemap__column__link">브이로그</Link>
-                        <Link to="/" className="footer__sitemap__column__link">게임</Link>
-                        <Link to="/" className="footer__sitemap__column__link">뷰티</Link>
-                        <Link to="/" className="footer__sitemap__column__link">IT/리뷰</Link>
-                        <Link to="/" className="footer__sitemap__column__link">스터디</Link>
-                        <Link to="/" className="footer__sitemap__column__link">기타</Link>
+                        <Link to="/videos?category=vlog&sorting=latest" className="footer__sitemap__column__link">브이로그</Link>
+                        <Link to="/videos?category=game&sorting=latest" className="footer__sitemap__column__link">게임</Link>
+                        <Link to="/videos?category=beauty&sorting=latest" className="footer__sitemap__column__link">뷰티</Link>
+                        <Link to="/videos?category=review&sorting=latest" className="footer__sitemap__column__link">IT/리뷰</Link>
+                        <Link to="/videos?category=study&sorting=latest" className="footer__sitemap__column__link">스터디</Link>
+                        <Link to="/videos?category=etc&sorting=latest" className="footer__sitemap__column__link">기타</Link>
                     </div>
                     <div className="footer__sitemap__column">
                         <div className="footer__sitemap__column__heading">인재찾기</div>

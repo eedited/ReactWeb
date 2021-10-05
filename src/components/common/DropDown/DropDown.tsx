@@ -1,13 +1,6 @@
 import React from 'react';
 import './DropDown.scss';
 
-interface DropDownProp {
-    id: number,
-    title: string,
-    selected: boolean,
-    key: string
-    set: string
-}
 interface Props {
     className?: string
     ddItem: DropDownProp[]
@@ -20,7 +13,7 @@ interface Props {
 const DropDown: React.FC<Props> = ({
     className, ddItem, imgSrc, clickTitle, selectItem, isListOpen,
 }: Props) => (
-    <div className="dropDown">
+    <div className={`dropDown ${className}`}>
         <button className="dropDown__header dropDown__item" onClick={clickTitle} type="button">
             <div className="dropDown__header__title">
                 <div className="dropDown__header__title__flexFirst">

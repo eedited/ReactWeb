@@ -11,11 +11,13 @@ import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
 import { thumbnailURL } from '../../services/youtube';
 import { videoDelete } from '../../api/video';
+import { filterAction } from '../../redux/filter/filter';
 
 interface FromReducerType {
     modifyError: RDXVideoModule.VideoModifyFailureResponse | null
     modifySuccess: VideoRouter.VideoModifySuccessResponse | null
     Video: VideoRouter.VideoSuccessResponse | null
+    uploadDDState: DropDownProp[]
 }
 interface Props extends RouteComponentProps {
     videoId: string
@@ -32,10 +34,12 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
         modifyError,
         modifySuccess,
         Video,
+        uploadDDState,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         modifyError: state.videoReducer.videoModifyError,
         modifySuccess: state.videoReducer.videoModifySuccess,
         Video: state.videoReducer.video,
+        uploadDDState: state.filterReducer.upload,
     }));
     const [videoDeleteResponse, setVideoDeleteResponse]: [VideoDeleteResponse, React.Dispatch<React.SetStateAction<VideoDeleteResponse>>] = useState<VideoDeleteResponse>({ success: null, failure: null });
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
@@ -70,6 +74,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
             onTagsChange((prevState: TagType[]) => (Video.WhatVideoUploadTag.map((tag: { tagName: string }, idx: number) => ({ id: idx, tag: tag.tagName }))));
             setInput('title', Video.title);
             setInput('videoLink', Video.url);
+            dispatch(filterAction.setUpload({ set: Video.category }));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Video]);
@@ -101,19 +106,22 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
             setError('올바르지 못한 video Url 입니다');
             return;
         }
-
-        dispatch(
-            videoAction.videoModify(
-                {
-                    id: videoId,
-                    title: inputState.title,
-                    description,
-                    url: inputState.videoLink,
-                    thumbnail: thumbnailURL(id),
-                    tags: tags.map((tag: TagType) => tag.tag),
-                },
-            ),
-        );
+        const currentCategory: DropDownProp|undefined = uploadDDState.find((cur: DropDownProp) => cur.selected === true);
+        if (currentCategory) {
+            dispatch(
+                videoAction.videoModify(
+                    {
+                        id: videoId,
+                        title: inputState.title,
+                        description,
+                        url: inputState.videoLink,
+                        thumbnail: thumbnailURL(id),
+                        tags: tags.map((tag: TagType) => tag.tag),
+                        category: currentCategory.set,
+                    },
+                ),
+            );
+        }
     };
     useEffect(() => {
         if (modifyError) {

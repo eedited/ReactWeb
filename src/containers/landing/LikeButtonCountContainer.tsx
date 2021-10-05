@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import { videoLike } from '../../api/video';
 import LikeButtonCount from '../../components/Landing/VideoGrid/Buttons/LikeButtonCount';
@@ -43,7 +43,11 @@ const LikeButtonCountContainer: React.FC<Props> = ({ Video }: Props) => {
         }
         catch (err) {
             setModalTrigger(true);
-            setLikeResponse({ ...likeResponse, failure: err.response.data });
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    setLikeResponse({ ...likeResponse, failure: err.response.data });
+                }
+            }
         }
     }, [likeButtonState.likeCnt, likeButtonState.toggle, likeResponse]);
     const onBackgroundClick: () => void = () => {

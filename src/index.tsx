@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import createStore from './store';
 import App from './App';
 import { userAction } from './redux/user/user';
-
+import './index.css';
 // eslint-disable-next-line @typescript-eslint/typedef
 const store = createStore();
 export type AppDispatch = typeof store.dispatch;

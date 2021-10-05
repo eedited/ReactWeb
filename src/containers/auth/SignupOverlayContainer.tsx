@@ -102,13 +102,18 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
     return (
         <AuthOverlay
             title={title}
-            backgroundClicked={backgroundClicked}
+            backgroundClicked={() => {
+                if (!loading['AUTH/signup']) {
+                    backgroundClicked();
+                }
+            }}
             type={authType}
             setType={setType}
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
             error={error}
+            loading={loading['AUTH/signup']}
         />
     );
 };
