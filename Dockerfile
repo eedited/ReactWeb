@@ -15,7 +15,7 @@ FROM nginx
 RUN mkdir /app
 WORKDIR /app
 RUN mkdir ./build
-COPY --from=Builder /eedited/build ./build
+COPY --from=Builder /eedited/build ./build/
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d
 
