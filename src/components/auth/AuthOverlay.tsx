@@ -168,7 +168,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                                 <Link to="/servicePolicy" style={{ color: '#4B89DC' }}>이용약관</Link>
                                 ,
                                 {' '}
-                                <Link to="/" style={{ color: '#4B89DC' }}>개인정보 취급방침</Link>
+                                <Link to="/PrivateInformationPolicy" style={{ color: '#4B89DC' }}>개인정보 취급방침</Link>
                                 에 동의합니다.
                             </div>
                         )}
