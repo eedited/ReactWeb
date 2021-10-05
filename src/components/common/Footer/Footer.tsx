@@ -24,7 +24,7 @@ const Footer: React.FC = () => (
                         <Link to="/videos?category=study&sorting=latest" className="footer__sitemap__column__link">스터디</Link>
                         <Link to="/videos?category=etc&sorting=latest" className="footer__sitemap__column__link">기타</Link>
                     </div>
-                    <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column preparing">
                         <div className="footer__sitemap__column__heading">인재찾기</div>
                         <Link to="/" className="footer__sitemap__column__link">파트타임</Link>
                         <Link to="/" className="footer__sitemap__column__link">풀타임</Link>
@@ -33,14 +33,14 @@ const Footer: React.FC = () => (
                         <Link to="/" className="footer__sitemap__column__link">파트타임</Link>
                         <Link to="/" className="footer__sitemap__column__link">풀타임</Link>
                     </div>
-                    <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column preparing">
                         <div className="footer__sitemap__column__heading">배워보기</div>
                         <Link to="/" className="footer__sitemap__column__link">Premier Pro</Link>
                         <Link to="/" className="footer__sitemap__column__link">Final Cut Pro</Link>
                         <Link to="/" className="footer__sitemap__column__link">디자인</Link>
                         <Link to="/" className="footer__sitemap__column__link">사운드 에디팅</Link>
                     </div>
-                    <div className="footer__sitemap__column">
+                    <div className="footer__sitemap__column preparing">
                         <div className="footer__sitemap__column__heading">커뮤니티</div>
                         <Link to="/" className="footer__sitemap__column__link">자유게시판</Link>
                         <Link to="/" className="footer__sitemap__column__link">익명게시판</Link>

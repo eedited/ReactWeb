@@ -418,3 +418,7 @@ th {
     text-align: left;
     font-weight: bold;
 }
+
+.preparing {
+    color: rgb(210, 210, 210);
+}

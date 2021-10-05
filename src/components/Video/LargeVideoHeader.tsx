@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router';
 import LikeButtonContainer from '../../containers/Video/LikeButtonContainer';
 import FollowButtonContainer from '../../containers/Video/FollowButtonContainer';
 import './LargeVideoHeader.scss';
 
-interface Props {
+interface Props extends RouteComponentProps{
     video: VideoRouter.VideoSuccessResponse
     user: AuthRouter.CheckSuccessResponse | null
 }
 
-const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
+const LargeVideoDescription: React.FC<Props> = ({ video, user, history }: Props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
             <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
@@ -20,9 +21,15 @@ const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
         </div>
         <div className="LargeVideoHeader__iconlist">
             <FollowButtonContainer video={video} userId={user ? user.userId : null} />
-            <div className="LargeVideoHeader_iconlist__icon__wrapper">
+            <button
+                className="LargeVideoHeader_iconlist__icon__wrapper"
+                onClick={() => {
+                    history.push('/chat');
+                }}
+                type="button"
+            >
                 <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" alt="" />
-            </div>
+            </button>
             <LikeButtonContainer video={video} />
             {
                 user && user.userId === video.uploader && (
@@ -37,4 +44,4 @@ const LargeVideoDescription: React.FC<Props> = ({ video, user }: Props) => (
     </div>
 );
 
-export default LargeVideoDescription;
+export default withRouter(LargeVideoDescription);

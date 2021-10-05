@@ -1,8 +1,10 @@
 import React from 'react';
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+
 import VideoContainer from '../../containers/landing/VideoContainer';
 import MyPageFollowContainer from '../../containers/myPage/MyPageFollowContainer';
 import BlueButton from '../common/Button/BlueButton';
+import Spinner from '../common/Spinner/Spinner';
 import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
@@ -11,7 +13,7 @@ export interface MyPageResponseType {
     success: UserRouter.MyPageSuccessResponse | null
     failure: UserRouter.MyPageFailureResponse | null
 }
-interface Props{
+interface Props extends RouteComponentProps{
     myPageResponse: MyPageResponseType
     canModify: boolean
     user: User|null
@@ -21,49 +23,58 @@ interface Props{
     sendEmail: () => void
     toModifyPage: () => void
     followToggle: boolean
+    loadingEmail: boolean
 }
 
-const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle }: Props) => (
+const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
-            <div className="mypage">
-                <div className="mypage__header">
-                    <div className="mypage__header__title">
-                        <div className="mypage__header__title__name">
-                            {myPageResponse.success && myPageResponse.success.nickname}
+            <>
+                <Spinner loading={loadingEmail} />
+                <div className="mypage">
+                    <div className="mypage__header">
+                        <div className="mypage__header__title">
+                            <div className="mypage__header__title__name">
+                                {myPageResponse.success && myPageResponse.success.nickname}
 
-                            <div className="mypage__header__title__name__icons">
-                                {myPageResponse.success && <MyPageFollowContainer mypage={myPageResponse.success} userId={user ? user.userId : null} />}
-                                <button className="mypage__header__title__name__iconBackGround" onClick={() => { /**/ }} type="button">
-                                    <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
-                                </button>
-                                {canModify && (
-                                    <button className="mypage__header__title__name__iconBackGround" onClick={toModifyPage} type="button">
-                                        <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="chat-icon" />
+                                <div className="mypage__header__title__name__icons">
+                                    {myPageResponse.success && <MyPageFollowContainer mypage={myPageResponse.success} userId={user ? user.userId : null} />}
+                                    <button
+                                        className="mypage__header__title__name__iconBackGround"
+                                        onClick={() => {
+                                            history.push('/chat');
+                                        }}
+                                        type="button"
+                                    >
+                                        <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
                                     </button>
-                                )}
+                                    {canModify && (
+                                        <button className="mypage__header__title__name__iconBackGround" onClick={toModifyPage} type="button">
+                                            <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="chat-icon" />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="mypage__header__title__email">
+                                {myPageResponse.success && myPageResponse.success.email}
+                            </div>
+                            <div className="mypage__header__title__description">
+                                {myPageResponse.success && myPageResponse.success.description.split('\n').map((line: string, idx: number) => (
+                                    <div key={`uniquekey${idx * 2}`}>
+                                        {line}
+                                        <br />
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <div className="mypage__header__title__email">
-                            {myPageResponse.success && myPageResponse.success.email}
-                        </div>
-                        <div className="mypage__header__title__description">
-                            {myPageResponse.success && myPageResponse.success.description.split('\n').map((line: string, idx: number) => (
-                                <div key={`uniquekey${idx * 2}`}>
-                                    {line}
-                                    <br />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    {
-                        myPageResponse.success && <MyPageGraph className="mypage__header__graph" tags={myPageResponse.success.tags} />
-                    }
+                        {
+                            myPageResponse.success && <MyPageGraph className="mypage__header__graph" tags={myPageResponse.success.tags} />
+                        }
 
-                </div>
-                <hr className="mypage__horizenline" />
-                {myPageResponse.success && myPageResponse.success.Video.length > 0
+                    </div>
+                    <hr className="mypage__horizenline" />
+                    {myPageResponse.success && myPageResponse.success.Video.length > 0
                 && (
                     <div className="mypage__videoGrid">
                         {
@@ -76,8 +87,8 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                         }
                     </div>
                 )}
-                {
-                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && !(user && user.emailToken !== '')
+                    {
+                        canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && !(user && user.emailToken !== '')
                         && (
                             <div className="mypage__videoGrid__firstUpload">
                                 <div className="mypage__videoGrid__firstUpload__text">
@@ -88,9 +99,9 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                                 <BlueButton onClick={toUploadPage}>업로드하기</BlueButton>
                             </div>
                         )
-                }
-                {
-                    canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && user && user.emailToken !== ''
+                    }
+                    {
+                        canModify && myPageResponse.success && myPageResponse.success.Video.length === 0 && user && user.emailToken !== ''
                         && (
                             <div className="mypage__videoGrid__firstUpload">
                                 <div className="mypage__videoGrid__firstUpload__text">
@@ -104,9 +115,9 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                                 {message !== '' && <div>{message}</div>}
                             </div>
                         )
-                }
-                {
-                    !canModify && myPageResponse.success && myPageResponse.success.Video.length === 0
+                    }
+                    {
+                        !canModify && myPageResponse.success && myPageResponse.success.Video.length === 0
                         && (
                             <div className="mypage__videoGrid__firstUpload">
                                 <div className="mypage__videoGrid__firstUpload__text">
@@ -116,9 +127,10 @@ const MyPage: React.FC<Props> = ({ myPageResponse, canModify, toUploadPage, toMa
                                 <BlueButton onClick={toMainPage}>메인으로</BlueButton>
                             </div>
                         )
-                }
-            </div>
+                    }
+                </div>
+            </>
         )
 );
 
-export default MyPage;
+export default withRouter(MyPage);

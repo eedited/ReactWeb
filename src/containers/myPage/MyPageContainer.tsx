@@ -23,7 +23,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
     const [followToggle, setFollowToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [validateResponse, setValidateResponse]: [ValidateResponse, React.Dispatch<React.SetStateAction<ValidateResponse>>] = useState<ValidateResponse>({ success: null, failure: null });
     const [message, setMessage]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
-
+    const [loadingEmail, setLoadingEmail]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const {
         user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
@@ -75,6 +75,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
     }, [history, user]);
     const sendEmail: () => void = useCallback(async () => {
         setValidateResponse({ success: null, failure: null });
+        setLoadingEmail(true);
         setMessage('');
         try {
             const response: AxiosResponse<AuthRouter.SignupEmailSuccessResponse> = await signupEmail();
@@ -85,8 +86,9 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             setValidateResponse({ success: null, failure: e as Error });
             setMessage('이메일 발송 중 오류가 발생했습니다.');
         }
+        setLoadingEmail(false);
     }, []);
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} />;
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} />;
 };
 
 export default withRouter(MyPageContainer);

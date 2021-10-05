@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter, RouteComponentProps } from 'react-router';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
@@ -12,7 +13,7 @@ export interface ModalTriggerType{
     isModalOn: boolean,
     type: 'login'|'signup'
 }
-interface props{
+interface props extends RouteComponentProps{
     user: User|null
     isSearchClick: boolean
     isHambergerClick: boolean
@@ -29,7 +30,7 @@ interface props{
 }
 
 const Navbar: React.FC<props> = ({
-    user, onLogout, onLogin, onSignup, isSearchClick, onUpload, ModalTrigger, isHambergerClick, onHambergerClick, onSearchChange, searchInput, onKeyPressSearch, onClickSearch,
+    user, onLogout, onLogin, onSignup, isSearchClick, onUpload, ModalTrigger, isHambergerClick, onHambergerClick, onSearchChange, searchInput, onKeyPressSearch, onClickSearch, history,
 }: props) => (
     <>
         <nav className="navbar">
@@ -75,7 +76,12 @@ const Navbar: React.FC<props> = ({
                                     </div>
                                     <ul className="navbar__utility__dropdown__list">
                                         <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__top">
-                                            <button onClick={() => { /**/ }} type="button">
+                                            <button
+                                                onClick={() => {
+                                                    history.push(`/profile?userId=${user.userId}`);
+                                                }}
+                                                type="button"
+                                            >
                                                 <div className="navbar__utility__dropdown__item__flex">
                                                     <img
                                                         className="navbar__utility__dropdown__item__flex__img"
@@ -86,8 +92,13 @@ const Navbar: React.FC<props> = ({
                                                 </div>
                                             </button>
                                         </li>
-                                        <li className="navbar__utility__dropdown__item">
-                                            <button onClick={() => { /**/ }} type="button">
+                                        <li className="navbar__utility__dropdown__item preparing">
+                                            <button
+                                                onClick={() => {
+                                                    history.push('/chat');
+                                                }}
+                                                type="button"
+                                            >
                                                 <div className="navbar__utility__dropdown__item__flex">
                                                     <img
                                                         className="navbar__utility__dropdown__item__flex__img"
@@ -112,7 +123,12 @@ const Navbar: React.FC<props> = ({
                                             </button>
                                         </li>
                                         <li className="navbar__utility__dropdown__item">
-                                            <button onClick={() => { /**/ }} type="button">
+                                            <button
+                                                onClick={() => {
+                                                    history.push('/AccountSetting');
+                                                }}
+                                                type="button"
+                                            >
                                                 <div className="navbar__utility__dropdown__item__flex">
                                                     <img
                                                         className="navbar__utility__dropdown__item__flex__img"
@@ -168,4 +184,4 @@ const Navbar: React.FC<props> = ({
     </>
 );
 
-export default Navbar;
+export default withRouter(Navbar);
