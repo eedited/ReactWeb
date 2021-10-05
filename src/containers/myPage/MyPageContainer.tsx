@@ -48,6 +48,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
         fetchMyPage();
     }, [userId, user]);
     useEffect(() => {
+        setCanModify(false);
         if (myPageResponse.success
              && user
               && user.userId === myPageResponse.success.userId) {
