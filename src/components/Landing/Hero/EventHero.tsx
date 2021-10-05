@@ -13,8 +13,7 @@ const EventHero: React.FC = () => (
                 discord 시작하기
                 <br />
                 {' '}
-                디스코드 url
-                {' '}
+                <a href="https://discord.gg/sMWzGfaHQK">https://discord.gg/sMWzGfaHQK</a>
             </p>
         </div>
         <img className="hero__img" alt="hero__img" src="/images/heros/heroImg.png" />

@@ -52,10 +52,14 @@ const RecieveDiscomfort: React.FC<Props> = ({ user }: Props) => {
         <>
             <Spinner loading={loading} />
             <div className="accountSetting__pageDescription">
-                <div>eedited가 어떤 점이 아쉽다. 어떤 기능이 추가되었으면 좋겠다.가 있으면 이야기해주세요!</div>
+                <div>eedited가 어떤 점이 아쉽다. 어떤 기능이 추가되었으면 좋겠다.가 있으면 이야기해주세요! ☺️☺️</div>
                 <div>매주 새롭고, 빠르게 발전하는 eedited를 발견할 수 있을거에요!!</div>
-                <div>유저분들과 소통을 할 수 있도록 discord 채널도 운영하고 있어요!</div>
-                <div>초대 링크 : </div>
+                <div>유저분들과 소통을 할 수 있도록 discord 채널도 운영하고 있어요.</div>
+                <div>
+                    초대 링크 :
+                    {' '}
+                    <a href="https://discord.gg/sMWzGfaHQK">https://discord.gg/sMWzGfaHQK</a>
+                </div>
             </div>
             <form onSubmit={onSubmit}>
                 <div className="accountSetting__body__wrapper">
