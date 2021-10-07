@@ -8,6 +8,7 @@ import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
 import LoginOverlayContainer from '../../../containers/auth/LoginOverlayContainer';
 import SignupOverlayContainer from '../../../containers/auth/SignupOverlayContainer';
+import AuthProtal from '../../../containers/auth/AuthProtal';
 
 export interface ModalTriggerType{
     isModalOn: boolean,
@@ -165,7 +166,7 @@ const Navbar: React.FC<props> = ({
                     {
                         (ModalTrigger.isModalOn && (ModalTrigger.type === 'login'))
                                 && (
-                                    <LoginOverlayContainer backgroundClicked={onLogin} />
+                                    <AuthProtal backgroundClicked={onLogin} type="login" />
                                 )
                     }
                 </div>
@@ -173,7 +174,7 @@ const Navbar: React.FC<props> = ({
                     {
                         (ModalTrigger.isModalOn && (ModalTrigger.type === 'signup'))
                                 && (
-                                    <SignupOverlayContainer backgroundClicked={onSignup} />
+                                    <AuthProtal backgroundClicked={onSignup} type="signup" />
                                 )
                     }
                 </div>

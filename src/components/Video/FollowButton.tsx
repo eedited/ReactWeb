@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthProtal from '../../containers/auth/AuthProtal';
 import LoginOverlayContainer from '../../containers/auth/LoginOverlayContainer';
 import './FollowButton.scss';
 
@@ -26,7 +27,7 @@ const FollowButton: React.FC<Props> = ({ onButtonClick, toggle, onBackgroundClic
         }
         {
             ModalTrigger && (
-                <LoginOverlayContainer backgroundClicked={onBackgroundClick} title={(type: string) => (type === 'login' ? 'follow하기 위해서는 로그인이 필요합니다.' : 'SIGNUP')} />
+                <AuthProtal type="login" backgroundClicked={onBackgroundClick} title={(type: string) => (type === 'login' ? 'follow하기 위해서는 로그인이 필요합니다.' : 'SIGNUP')} />
             )
         }
     </>
