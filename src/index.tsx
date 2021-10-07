@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import dotenv from 'dotenv';
 import createStore from './store';
 import App from './App';
 import { userAction } from './redux/user/user';
@@ -12,6 +13,7 @@ import './index.css';
 const store = createStore();
 export type AppDispatch = typeof store.dispatch;
 export type rootState = ReturnType<typeof store.getState>;
+dotenv.config();
 
 (function loadUser() {
     try {

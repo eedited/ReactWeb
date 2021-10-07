@@ -86,7 +86,7 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
         }
     };
     useEffect(() => {
-        dispatch(filterAction.setUpload({ set: null }));
+        dispatch(filterAction.setUpload({ set: 'etc' }));
     }, [dispatch]);
     useEffect(() => {
         if (uploadError) {

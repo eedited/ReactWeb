@@ -13,7 +13,7 @@ interface Props extends RouteComponentProps{
 const LargeVideoDescription: React.FC<Props> = ({ video, user, history }: Props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
-            <img className="LargeVideoHeader__main__profileIcon" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
+            <img className="LargeVideoHeader__main__profileIcon" src={video.User.profilePicture} alt="profile" />
             <div className="LargeVideoHeader__main__rest">
                 <div className="LargeVideoHeader__main__rest__title">{ video.title }</div>
                 <Link className="LargeVideoHeader__main__rest__nickname" to={`/profile?userId=${video.uploader}`}>{ video.User.nickname }</Link>

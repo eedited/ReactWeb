@@ -31,7 +31,7 @@ const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
     return user ? (
         <div className="accountSetting">
             <div className="accountSetting__header">
-                <img className="accountSetting__header__profileImg" alt="" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" />
+                <img className="accountSetting__header__profileImg" alt="" src={user.profilePicture} />
                 <div className="accountSetting__header__title">
                     {user.nickname}
                     {' '}

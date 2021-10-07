@@ -71,7 +71,7 @@ const Navbar: React.FC<props> = ({
                             <>
                                 <div className="navbar__utility__dropdown">
                                     <div className="navbar__utility__main">
-                                        <img className="navbar__utility__profile" src="https://bambam-bucket-for-service.s3.ap-northeast-2.amazonaws.com/img/profile-image.png" alt="profile" />
+                                        <img className="navbar__utility__profile" src={user.profilePicture} alt="profile" />
                                         <div className="navbar__utility__nickname">{user.nickname}</div>
                                     </div>
                                     <ul className="navbar__utility__dropdown__list">
@@ -154,7 +154,7 @@ const Navbar: React.FC<props> = ({
                                     </ul>
                                 </div>
                                 <div className="navbar__utility__buttons">
-                                    <WhiteButton className="navbar__utility__button" onClick={onUpload}>Apply</WhiteButton>
+                                    {/* <WhiteButton className="navbar__utility__button" onClick={onUpload}>Apply</WhiteButton> */}
                                     <BlueButton className="navbar__utility__button" onClick={onUpload}>Upload</BlueButton>
                                 </div>
 

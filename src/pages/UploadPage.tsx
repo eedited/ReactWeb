@@ -16,14 +16,15 @@ const UploadPage: React.FC<props> = ({ history }: props) => {
         user: state.userReducer.user,
     })));
 
-    if (!user) {
-        history.push('/');
-        return <></>;
-    }
-    if (user.emailToken) {
-        alert('이메일 확인을 마쳐야 이용하실 수 있습니다!');
-        history.push(`/profile?userId=${user.userId}`);
-    }
+    React.useEffect(() => {
+        if (!user) {
+            history.push('/');
+        }
+        else if (user.emailToken !== '') {
+            alert('이메일 확인을 마쳐야 이용하실 수 있습니다!');
+            history.push(`/profile?userId=${user.userId}`);
+        }
+    }, [history, user]);
     return (
         <BaseTemplate>
             <UploadContainer />

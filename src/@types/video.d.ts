@@ -25,6 +25,7 @@ export declare global {
         deleted: Date | null;
         User: {
             nickname: string;
+            profilePicture: string;
             followTo?: {
                 followerId: string;
             }[];

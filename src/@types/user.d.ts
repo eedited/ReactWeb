@@ -11,7 +11,7 @@ export declare global {
             Video: (Video & { WhoVideoUploadTag?: { tagName: string }[] })[];
             followFrom: { followingId: string }[];
             followTo?: {follerId: string}[];
-            tags: { [key: string]: number };
+            categories: { [key: string]: number };
         }
 
         interface MyPageFailureResponse {
@@ -34,6 +34,7 @@ export declare global {
         interface MypageModifyRequest {
             description: string;
             nickname: string;
+            profilePicture: string;
         }
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface MypageModifySuccessResponse {}
