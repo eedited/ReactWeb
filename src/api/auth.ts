@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import client from './client';
+import FileUploadToS3 from '../services/upload';
 
 type LoginFunctionType = ({ userId, password }: AuthRouter.LoginRequest) => Promise<AxiosResponse<AuthRouter.AuthSuccessResponse>>;
 export const login: LoginFunctionType = ({ userId, password }: AuthRouter.LoginRequest) => client.post('/auth/login', {
@@ -13,6 +14,7 @@ export const signup: SignupFunctionType = ({ userId, password, email, nickname }
     password,
     email,
     nickname,
+    profilePicture: new FileUploadToS3('img', 'profile').getBaseUrl(),
 });
 
 type LogoutFunctionType = () => Promise<AxiosResponse<void>>;

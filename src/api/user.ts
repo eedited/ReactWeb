@@ -17,9 +17,9 @@ export const myPage: MyPageFunctionType = ({
 
 type MyPageModifyFunctionType = ({ description, nickname }: UserRouter.MypageModifyRequest) => Promise<AxiosResponse<UserRouter.MypageModifySuccessResponse>>;
 export const myPageModify: MyPageModifyFunctionType = ({
-    description, nickname,
+    description, nickname, profilePicture,
 }: UserRouter.MypageModifyRequest) => client.patch('/user/change', {
-    description, nickname,
+    description, nickname, profilePicture,
 });
 
 type DiscomfortFunctionType = ({ description, title }: UserRouter.DiscomfortRequest) => Promise<AxiosResponse<UserRouter.DiscomfortSuccessResponse>>;

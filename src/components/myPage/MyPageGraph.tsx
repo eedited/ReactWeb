@@ -17,32 +17,17 @@ function toRad(deg: number) {
     return (Math.PI * deg) / 180;
 }
 interface props{
-    tags: {[key: string]: number}
+    categories: {[key: string]: number}
     className?: string
+    profile: string
 }
-const MyPageGraph: React.FC<props> = ({ className, tags }: props) => {
+const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
-        let tagArray: [string, number][] = Object.entries(tags).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
+        const tagArray: [string, number][] = Object.entries(categories).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
 
         let tagNum: number = 0;
         for (let i: number = 0; i < tagArray.length; i += 1) tagNum += tagArray[i][1];
-        let tagIdx: number = 0;
-        if (tagArray.length >= 4) {
-            const etc: [string, number] = ['etc', 0];
-            for (let i: number = tagArray.length - 1; i >= 0; i -= 1) {
-                etc[1] += tagArray[i][1];
-                tagIdx = i;
-                if (etc[1] >= tagNum * 0.2) break;
-            }
-            const newTagArray: [string, number][] = [];
-            for (let i: number = 0; i < tagIdx; i += 1) {
-                newTagArray.push(tagArray[i]);
-            }
-            newTagArray.push(etc);
-            tagArray = [...newTagArray];
-        }
-        console.log(tagArray);
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
@@ -68,7 +53,7 @@ const MyPageGraph: React.FC<props> = ({ className, tags }: props) => {
             ctx.fillStyle = '#f7cec0';
             ctx.fill();
             ctx.clip();
-            ctx.drawImage(img, x - radius + 10 / dpr, y - radius + 10 / dpr, x + radius - 10 / dpr, y + radius - 10 / dpr);
+            ctx.drawImage(img, x - radius, y - radius, 2 * radius, 2 * radius);
             ctx.restore();
             if (tagArray.length === 0) return;
             const step: number = (360 - (tagArray.length) * gap) / tagNum;
@@ -81,7 +66,6 @@ const MyPageGraph: React.FC<props> = ({ className, tags }: props) => {
                 if (!ctx) return;
                 prevAngle = 0;
                 tagArray.forEach(([key, value]: [string, number]) => {
-                    console.log(key, value);
                     const currentAngle: number = prevAngle + (Math.PI * (step * value)) / 180;
                     const centerAngle: number = (currentAngle + prevAngle - Math.PI) / 2;
                     ctx.save();
@@ -159,8 +143,8 @@ const MyPageGraph: React.FC<props> = ({ className, tags }: props) => {
             ctx.lineWidth = lineWidth;
             setTimeout(forSetInterval, 2);
         };
-        img.src = '/images/heros/problem.png';
-    }, [tags]);
+        img.src = profile;
+    }, [categories, profile]);
     return (
         <canvas className={className} ref={canvasRef} />
     );

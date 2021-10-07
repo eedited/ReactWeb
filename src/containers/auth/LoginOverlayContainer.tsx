@@ -18,13 +18,13 @@ interface fromReducerType{
 interface props extends RouteComponentProps{
     backgroundClicked: () => void
     title?: (type: string) => string
+    setType: (type: 'login'|'signup') => void
 }
 
-const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title }: props) => {
+const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title, setType }: props) => {
     const { changeField, intializeForm, login }: RDXAuthModule.ActionType = authAction;
     const { check }: RDXUserModule.ActionType = userAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
-    const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('login');
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User, loading,
@@ -78,16 +78,10 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
             }
         }
     }, [history, User, backgroundClicked]);
-    const setType: () => void = () => {
-        if (authType === 'login') {
-            setAuthType('signup');
-        }
-        else setAuthType('login');
-    };
     return (
         <AuthOverlay
             title={title}
-            type={authType}
+            type="login"
             setType={setType}
             form={form}
             onChange={onChange}

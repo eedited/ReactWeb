@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthProtal from '../../../../containers/auth/AuthProtal';
 import LoginOverlayContainer from '../../../../containers/auth/LoginOverlayContainer';
 import './LikebuttonCount.scss';
 
@@ -23,7 +24,7 @@ const LikeButtonCount: React.FC<Props> = ({ likeButtonState, onButtonClick, onBa
         </button>
         {
             ModalTrigger && (
-                <LoginOverlayContainer backgroundClicked={onBackgroundClick} title={(type: string) => (type === 'login' ? '좋아요를 누르기위해서는 로그인이 필요합니다.' : 'SIGNUP')} />
+                <AuthProtal backgroundClicked={onBackgroundClick} type="login" title={(type: string) => (type === 'login' ? '좋아요를 누르기위해서는 로그인이 필요합니다.' : 'SIGNUP')} />
             )
         }
     </>

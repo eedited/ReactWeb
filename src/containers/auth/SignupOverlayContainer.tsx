@@ -16,9 +16,9 @@ interface formReduceType{
 interface props extends RouteComponentProps{
     backgroundClicked: () => void
     title?: (type: string) => string
+    setType: (type: 'login'|'signup') => void
 }
-const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title }: props) => {
-    const [authType, setAuthType]: ['login'|'signup', React.Dispatch<React.SetStateAction<'login'|'signup'>>] = useState<'login'|'signup'>('signup');
+const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title, setType }: props) => {
     const { changeField, signup, intializeForm }: RDXAuthModule.ActionType = authAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
@@ -93,12 +93,6 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
             history.push('/signupSuccess');
         }
     }, [Auth, AuthError, backgroundClicked, history]);
-    const setType: () => void = () => {
-        if (authType === 'login') {
-            setAuthType('signup');
-        }
-        else setAuthType('login');
-    };
     return (
         <AuthOverlay
             title={title}
@@ -107,7 +101,7 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
                     backgroundClicked();
                 }
             }}
-            type={authType}
+            type="signup"
             setType={setType}
             form={form}
             onChange={onChange}

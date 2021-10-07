@@ -32,6 +32,7 @@ const userSlice: userSliceType = createSlice({
         check(state: WritableDraft<RDXUserModule.StateType>) {},
         checkSuccess(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {
             state.user = action.payload;
+            localStorage.setItem('user', JSON.stringify(state.user));
         },
         checkFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.CheckFailureResponse>) {
             state.checkError = action.payload;
