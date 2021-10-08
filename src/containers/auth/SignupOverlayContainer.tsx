@@ -6,6 +6,7 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import AuthOverlay from '../../components/auth/AuthOverlay';
 import { LoadingStateType } from '../../redux/loading/loading';
+import { validatePassword } from '../../services/regex';
 
 interface formReduceType{
     form: RDXAuthModule.SignupForm
@@ -72,6 +73,20 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
         }
         if (!ValidateEmail(email)) {
             setError('올바른 형식의 이메일이 아닙니다');
+            return;
+        }
+        if (!validatePassword(password)) {
+            setError('비밀번호는 최소8자, 문자, 숫자, 특수문자를 각각 하나씩 포함해야합니다.');
+            dispatch(changeField({
+                form: 'signup',
+                key: 'password',
+                value: '',
+            }));
+            dispatch(changeField({
+                form: 'signup',
+                key: 'passwordConfirm',
+                value: '',
+            }));
             return;
         }
         dispatch(signup({
