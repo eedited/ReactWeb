@@ -9,7 +9,8 @@
   },
   "engineStrict": true,
   "scripts": {
-    "start": "cross-env PORT=4000Z react-scripts start",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "start": "cross-env PORT=4000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -17,11 +18,6 @@
     "invalidate": "aws cloudfront create-invalidation --profile=soma1214 --distribution-id ECMKDIFKHHL9V --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "1.2.36",
-    "@fortawesome/free-brands-svg-icons": "5.15.4",
-    "@fortawesome/free-regular-svg-icons": "5.15.4",
-    "@fortawesome/free-solid-svg-icons": "5.15.4",
-    "@fortawesome/react-fontawesome": "0.1.15",
     "@reduxjs/toolkit": "1.6.1",
     "aws-amplify": "4.2.3",
     "aws-amplify-react": "5.0.9",
@@ -47,6 +43,7 @@
     "redux-actions": "2.6.5",
     "redux-logger": "3.0.6",
     "redux-saga": "1.1.3",
+    "source-map-explorer": "^2.5.2",
     "universal-cookie": "4.0.4",
     "web-vitals": "1.0.1",
     "youtube-api-search": "0.0.5"
@@ -56,7 +53,7 @@
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
     "@types/jest": "26.0.15",
-    "@types/node": "12.0.0",  
+    "@types/node": "12.0.0",
     "@types/qs": "6.9.7",
     "@types/react": "17.0.14",
     "@types/react-dom": "17.0.9",
