@@ -1,7 +1,5 @@
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { search } from '../../api/search';
 import VideoDescription1 from '../../components/Landing/VideoGrid/VideoDescription/VideoDescription1';
@@ -103,7 +101,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
             </div>
             <div className="find__body">
                 <div className="find__body__icon">
-                    <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
+                    <img className="navbar__utility__findIcon" src="/icons/search-icon.png" alt="" />
                 </div>
                 <input
                     className="find__body__input"

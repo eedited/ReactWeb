@@ -28,6 +28,10 @@
         .find__body__icon{
             padding: 0 rem(16);
             border-right : 1px solid black;
+            .navbar__utility__findIcon{
+                width : rem(18);
+                height: rem(18);
+            }
         }
         .find__body__input{
             height: rem(50);

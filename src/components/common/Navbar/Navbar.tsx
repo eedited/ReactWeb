@@ -1,13 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withRouter, RouteComponentProps } from 'react-router';
 import BlueButton from '../Button/BlueButton';
 import WhiteButton from '../Button/WhiteButton';
 import './Navbar.scss';
-import LoginOverlayContainer from '../../../containers/auth/LoginOverlayContainer';
-import SignupOverlayContainer from '../../../containers/auth/SignupOverlayContainer';
 import AuthProtal from '../../../containers/auth/AuthProtal';
 
 export interface ModalTriggerType{
@@ -48,13 +44,15 @@ const Navbar: React.FC<props> = ({
                     <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
                 </div>
                 {!isSearchClick ? (
-                    <div className="navbar__utility__find">
-                        <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} onClick={onClickSearch} />
-                    </div>
+                    <button className="navbar__utility__find" onClick={onClickSearch} type="button">
+                        <img className="navbar__utility__findIcon" src="/icons/search-icon.png" alt="search" />
+                    </button>
                 )
                     : (
                         <div className="navbar__utility__find find__activated">
-                            <FontAwesomeIcon className="navbar__utility__findIcon" icon={faSearch} />
+                            <button type="button" onClick={onClickSearch}>
+                                <img className="navbar__utility__findIcon" src="/icons/search-icon.png" alt="search" />
+                            </button>
                             <input className="navbar__utility__find__input" value={searchInput} onChange={onSearchChange} onKeyPress={onKeyPressSearch} />
                         </div>
                     )}
@@ -179,7 +177,9 @@ const Navbar: React.FC<props> = ({
                     }
                 </div>
             </div>
-            <FontAwesomeIcon className="navbar__hamberger__icon" icon={faBars} onClick={onHambergerClick} />
+            <button className="navbar__hamberger__icon" type="button" onClick={onHambergerClick}>
+                <img src="/icons/bar-icon.png" alt="bar" />
+            </button>
         </nav>
         <hr className="navbar__bottom__line" />
     </>
