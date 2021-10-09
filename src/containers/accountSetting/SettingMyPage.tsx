@@ -64,7 +64,7 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
         }
     }, [dispatch, submitResponse.success, uploadFile, user, user.userId]);
     const onFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
+        if (event.target.files && event.target.files.length !== 0) {
             setUploadFile(event.target.files[0]);
             setFileDirString(URL.createObjectURL(event.target.files[0]));
         }

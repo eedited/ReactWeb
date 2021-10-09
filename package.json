@@ -9,7 +9,7 @@
   },
   "engineStrict": true,
   "scripts": {
-    "start": "cross-env PORT=4000 react-scripts start",
+    "start": "cross-env PORT=4000Z react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -56,7 +56,7 @@
     "@testing-library/react": "11.1.0",
     "@testing-library/user-event": "12.1.10",
     "@types/jest": "26.0.15",
-    "@types/node": "12.0.0",
+    "@types/node": "12.0.0",  
     "@types/qs": "6.9.7",
     "@types/react": "17.0.14",
     "@types/react-dom": "17.0.9",
