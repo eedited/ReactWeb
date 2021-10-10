@@ -6,8 +6,9 @@ interface props extends RouteComponentProps{
     imgSrc: string
     DDidx: number
     initialStateFilter: DropDownProp[][]
+    isReady: boolean
 }
-const DropDownContainer: React.FC<props> = ({ DDidx, initialStateFilter, imgSrc, history }: props) => {
+const DropDownContainer: React.FC<props> = ({ DDidx, initialStateFilter, imgSrc, history, isReady }: props) => {
     const [isListOpen, setIsListOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(false as boolean);
     const selectItem: (item: DropDownProp) => void = (item: DropDownProp) => {
         setIsListOpen(false);
@@ -41,8 +42,9 @@ const DropDownContainer: React.FC<props> = ({ DDidx, initialStateFilter, imgSrc,
             ddItem={initialStateFilter[DDidx]}
             isListOpen={isListOpen}
             imgSrc={imgSrc}
-            selectItem={selectItem}
-            clickTitle={() => setIsListOpen(!isListOpen)}
+            selectItem={isReady ? selectItem : (item: DropDownProp) => {}}
+            clickTitle={isReady ? () => setIsListOpen(!isListOpen) : () => {}}
+            isReady={isReady}
         />
     );
 };

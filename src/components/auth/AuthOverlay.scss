@@ -63,6 +63,7 @@
         position: absolute;
         right: rem(32);
         top : rem(24);
+        opacity: 1;
     }
     .AuthOverlay{   
         position: absolute;
@@ -77,7 +78,7 @@
             .AuthOverlay__header__title{
                 text-align: center;
                 margin-top : rem(16);
-                margin-bottom: rem(32); 
+                margin-bottom: rem(32);
                 font-size : rem(16);
                 height: rem(44);
                 line-height: rem(44);
@@ -111,7 +112,7 @@
             }
         }
         .authForm__main{
-            margin : rem(50) 0 rem(30) 0;
+            margin : rem(50) 0 rem(15) 0;
             padding : 0 10%;
             .authForm__inputs{
                 display: flex;

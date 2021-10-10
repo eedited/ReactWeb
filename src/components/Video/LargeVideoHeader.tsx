@@ -28,7 +28,7 @@ const LargeVideoDescription: React.FC<Props> = ({ video, user, history }: Props)
                 }}
                 type="button"
             >
-                <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" alt="" />
+                <img className="LargeVideoHeader_iconlist__icon" src="/icons/chat-icon.png" style={{ opacity: 0.3 }} alt="" />
             </button>
             <LikeButtonContainer video={video} />
             {

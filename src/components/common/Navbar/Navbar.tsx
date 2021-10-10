@@ -70,8 +70,10 @@ const Navbar: React.FC<props> = ({
                             <>
                                 <div className="navbar__utility__dropdown">
                                     <div className="navbar__utility__main">
-                                        <img className="navbar__utility__profile" src={user.profilePicture} alt="profile" />
-                                        <div className="navbar__utility__nickname">{user.nickname}</div>
+                                        <div className="navbar__utility__profile__wrapper">
+                                            <img className="navbar__utility__profile" src={user.profilePicture} alt="profile" />
+                                        </div>
+                                        {/* <div className="navbar__utility__nickname">{user.nickname}</div> */}
                                     </div>
                                     <ul className="navbar__utility__dropdown__list">
                                         <li className="navbar__utility__dropdown__item navbar__utility__dropdown__item__top">
@@ -102,6 +104,7 @@ const Navbar: React.FC<props> = ({
                                                     <img
                                                         className="navbar__utility__dropdown__item__flex__img"
                                                         src="/icons/chat-icon.png"
+                                                        style={{ opacity: 0.3 }}
                                                         alt="chat-icon"
                                                     />
                                                     <Link to="/chat">대화</Link>
@@ -177,8 +180,8 @@ const Navbar: React.FC<props> = ({
                     }
                 </div>
             </div>
-            <button className="navbar__hamberger__icon" type="button" onClick={onHambergerClick}>
-                <img src="/icons/bar-icon.png" alt="bar" />
+            <button className="navbar__hamberger__icon__button" type="button" onClick={onHambergerClick}>
+                <img className="navbar__hamberger__icon" src="/icons/bar-icon.png" alt="bar" />
             </button>
         </nav>
         <hr className="navbar__bottom__line" />

@@ -112,7 +112,7 @@ const Upload: React.ForwardRefExoticComponent<Props & React.RefAttributes<ReactP
                         />
                     </div>
                     <div className="upload__buttons">
-                        <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : '업로드하기'}</BlueButton>
+                        <BlueButton type="submit" onClick={() => uploadSubmit} className="upload__submit">{type === 'change' ? '수정하기' : 'Upload'}</BlueButton>
                         {type === 'change' && (
                             <WhiteButton
                                 onClick={() => {

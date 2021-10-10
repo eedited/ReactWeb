@@ -8,14 +8,15 @@ interface Props {
     imgSrc: string
     clickTitle: () => void
     selectItem: (item: DropDownProp) => void
+    isReady?: boolean
 }
 
 const DropDown: React.FC<Props> = ({
-    className, ddItem, imgSrc, clickTitle, selectItem, isListOpen,
+    className, ddItem, imgSrc, clickTitle, selectItem, isListOpen, isReady,
 }: Props) => (
     <div className={`dropDown ${className}`}>
         <button className="dropDown__header dropDown__item" onClick={clickTitle} type="button">
-            <div className="dropDown__header__title">
+            <div className={isReady ? 'dropDown__header__title' : 'dropDown__header__title notReady'}>
                 <div className="dropDown__header__title__flexFirst">
                     <img className="dropDown__header__title__icon" src={imgSrc} alt="img" />
                     <div>{ddItem.find((item: DropDownProp) => item.selected === true)?.title}</div>
@@ -44,6 +45,7 @@ const DropDown: React.FC<Props> = ({
 
 DropDown.defaultProps = {
     className: '',
+    isReady: true,
 };
 
 export default DropDown;

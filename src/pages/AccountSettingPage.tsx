@@ -26,9 +26,8 @@ const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
         return param;
     }, [match.params]);
     if (!user) {
-        alert('로그인이 필요한 서비스입니다!');
+        if (ret === 'request') alert('로그인한 유저만 이용가능합니다.');
         history.push('/');
-        return <></>;
     }
     if (ret === 'error') history.push('/404NotFound');
     return (

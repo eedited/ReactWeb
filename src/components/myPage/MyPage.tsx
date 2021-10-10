@@ -47,11 +47,11 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                         }}
                                         type="button"
                                     >
-                                        <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" alt="chat-icon" />
+                                        <img className="mypage__header__title__name__icon" src="/icons/chat-icon.png" style={{ opacity: 0.3 }} alt="chat-icon" />
                                     </button>
                                     {canModify && (
                                         <button className="mypage__header__title__name__iconBackGround" onClick={toModifyPage} type="button">
-                                            <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="chat-icon" />
+                                            <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="setting-icon" />
                                         </button>
                                     )}
                                 </div>
