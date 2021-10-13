@@ -71,9 +71,9 @@ const videoSlice: VideoSliceType = createSlice({
             }
             else {
                 state.videoList.videos = state.videoList.videos.concat(action.payload.videos);
-                if (action.payload.videos.length < 20) {
-                    state.endVideoList = true;
-                }
+            }
+            if (action.payload.videos.length < 20) {
+                state.endVideoList = true;
             }
         },
         videoListFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>) {
