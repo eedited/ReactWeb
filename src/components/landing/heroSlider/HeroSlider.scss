@@ -1,0 +1,30 @@
+@import '/src/App.scss';
+
+.HeroSlider{
+    .HeroSlider__element{
+        display : none;
+    }
+    .HeroSlider__element.active{
+        display : block;
+    }
+    .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 6s;
+        animation-name: fade;
+        animation-duration: 6s;
+        animation-delay: 0;
+    }
+
+    @-webkit-keyframes fade {
+        from {opacity: .4} 
+        20% {
+            opacity: 1
+        }
+    }
+    @keyframes fade {
+        from {opacity: .4} 
+        30% {
+            opacity: 1
+        }
+    }
+}

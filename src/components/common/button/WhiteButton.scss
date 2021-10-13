@@ -1,0 +1,13 @@
+@import '/src/App.scss';
+
+.whiteButton {
+    background-color: $gray;
+    width: rem(107);
+    height: rem(44);
+    border: 0rem;
+    border-radius: rem(10);
+    font-family: Pretendard-Medium;
+    font-size: rem(16);
+    cursor: pointer;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+@import '/src/App.scss';
+
+.LargeVideoDescription {
+    width: 50%;
+    margin : 0 auto;
+    font-size: rem(15);
+    top: rem(20);
+    margin-top : rem(32);
+    .LargeVideoDescription__txt {
+        font-family: 'NotoSansKRMedium';
+        color: rgb(32, 32, 32);
+        line-height: rem(27);
+    }
+
+    .LargeVideoDescription__tags {
+        display: flex;
+        flex-direction: row;
+        flex-flow: row wrap;
+        gap: rem(8);
+        margin-top: rem(30);
+        .LargeVideoDescription__tag {
+            color: rgb(112, 112, 112);
+            background-color: rgb(247, 247, 247);
+            font-family: Pretendard-Medium;
+            font-size: rem(13);
+            line-height: rem(27);
+            padding: 0 rem(12);
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .LargeVideoDescription{
+        width: 90%;
+    }
+}

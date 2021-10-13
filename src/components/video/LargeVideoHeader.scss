@@ -1,0 +1,51 @@
+@import '/src/App.scss';
+
+.LargeVideoHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 61%;
+    font-size: rem(16);
+    margin : rem(32) auto rem(16) auto;
+
+    .LargeVideoHeader__main {
+        display: flex;
+        align-items: center;
+
+        .LargeVideoHeader__main__profileIcon {
+            width: rem(50);
+            height: rem(50);
+        }
+        .LargeVideoHeader__main__rest__title {
+            font-weight: bold;
+        }
+    }
+
+    .LargeVideoHeader__iconlist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: rem(8);
+        .LargeVideoHeader_iconlist__icon__wrapper {
+            background-color: $gray;
+            height: rem(48);
+            border-radius: 50%;
+        }
+        .LargeVideoHeader_iconlist__icon {
+            padding: rem(16);
+            width: rem(48);
+            height: rem(48);
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .LargeVideoHeader{
+        flex-direction: column;
+        gap : rem(16);
+        width : 90%;
+        margin-bottom: rem(12);
+        .LargeVideoHeader__iconlist{
+            justify-content: flex-start;
+        }
+    }
+}
