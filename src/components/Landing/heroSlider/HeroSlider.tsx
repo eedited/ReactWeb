@@ -1,6 +1,6 @@
 import React from 'react';
-import EventHero from '../Hero/EventHero';
-import Hero from '../Hero/Hero';
+import EventHero from '../hero/EventHero';
+import Hero from '../hero/Hero';
 import './HeroSlider.scss';
 
 const numHero: number = 2;

@@ -1,6 +1,6 @@
 import React from 'react';
-import BlueButton from '../common/Button/BlueButton';
-import Spinner from '../common/Spinner/Spinner';
+import BlueButton from '../common/button/BlueButton';
+import Spinner from '../common/spinner/Spinner';
 import './FindingId.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

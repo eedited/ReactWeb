@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
-import Navbar, { ModalTriggerType } from '../../components/common/Navbar/Navbar';
+import Navbar, { ModalTriggerType } from '../../components/common/navbar/Navbar';
 import { userAction } from '../../redux/user/user';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import useWindowSize, { windowSizeType } from '../../hooks/useWindowSize';

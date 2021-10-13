@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import BlueButton from '../components/common/Button/BlueButton';
+import BlueButton from '../components/common/button/BlueButton';
 import './SignupSuccess.scss';
 
 type Props = RouteComponentProps

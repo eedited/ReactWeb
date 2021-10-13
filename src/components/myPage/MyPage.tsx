@@ -3,9 +3,9 @@ import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 
 import VideoContainer from '../../containers/landing/VideoContainer';
 import MyPageFollowContainer from '../../containers/myPage/MyPageFollowContainer';
-import BlueButton from '../common/Button/BlueButton';
-import Spinner from '../common/Spinner/Spinner';
-import VideoDescription2 from '../Landing/VideoGrid/VideoDescription/VideoDescription2';
+import BlueButton from '../common/button/BlueButton';
+import Spinner from '../common/spinner/Spinner';
+import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
 

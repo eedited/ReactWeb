@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import React, { useCallback, useState } from 'react';
 import { changePassword } from '../../api/auth';
-import BlueButton from '../../components/common/Button/BlueButton';
+import BlueButton from '../../components/common/button/BlueButton';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import './Setting.scss';
 

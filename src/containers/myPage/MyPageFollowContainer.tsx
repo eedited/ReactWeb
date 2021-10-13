@@ -1,6 +1,6 @@
 import React from 'react';
 import axios, { AxiosResponse } from 'axios';
-import FollowButton from '../../components/Video/FollowButton';
+import FollowButton from '../../components/video/FollowButton';
 import { userFollow } from '../../api/user';
 
 interface Props {

@@ -2,13 +2,13 @@ import { AxiosResponse } from 'axios';
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnyAction } from 'redux';
 import { myPageModify } from '../../api/user';
-import BlueButton from '../../components/common/Button/BlueButton';
+import BlueButton from '../../components/common/button/BlueButton';
 import { useAppDispatch } from '../../hooks';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import { userAction } from '../../redux/user/user';
 import './Setting.scss';
 import FileUploadToS3 from '../../services/upload';
-import WhiteButton from '../../components/common/Button/WhiteButton';
+import WhiteButton from '../../components/common/button/WhiteButton';
 
 interface Props{
     user: User

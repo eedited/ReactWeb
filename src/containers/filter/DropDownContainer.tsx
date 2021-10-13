@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
-import DropDown from '../../components/common/DropDown/DropDown';
+import DropDown from '../../components/common/dropDown/DropDown';
 
 interface props extends RouteComponentProps{
     imgSrc: string

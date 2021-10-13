@@ -5,7 +5,7 @@ import BaseTemplate from './BaseTemplate';
 import HeroDescription from '../containers/landing/HeroDescription';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
-import HeroSlider from '../components/Landing/heroSlider/HeroSlider';
+import HeroSlider from '../components/landing/heroSlider/HeroSlider';
 
 type Props = RouteComponentProps
 const paramValidmatch: string[][] = [['vlog', 'game', 'beauty', 'review', 'study', 'etc'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter, RouteComponentProps } from 'react-router';
-import BlueButton from '../Button/BlueButton';
-import WhiteButton from '../Button/WhiteButton';
+import BlueButton from '../button/BlueButton';
+import WhiteButton from '../button/WhiteButton';
 import './Navbar.scss';
 import AuthProtal from '../../../containers/auth/AuthProtal';
 

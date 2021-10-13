@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Protal from '../../hooks/Protal';
-import Spinner from '../common/Spinner/Spinner';
+import Spinner from '../common/spinner/Spinner';
 import './AuthOverlay.scss';
 
 interface Props {

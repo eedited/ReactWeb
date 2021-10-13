@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import ReactPlayer from 'react-player';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AnyAction } from 'redux';
-import LargeVideo from '../../components/Video/Largevideo';
+import LargeVideo from '../../components/video/Largevideo';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/video/video';
 

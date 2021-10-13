@@ -2,8 +2,8 @@ import axios, { AxiosResponse } from 'axios';
 import React, { useState, useCallback, useEffect } from 'react';
 import { AnyAction } from 'redux';
 import { discomfort, myPageModify } from '../../api/user';
-import BlueButton from '../../components/common/Button/BlueButton';
-import Spinner from '../../components/common/Spinner/Spinner';
+import BlueButton from '../../components/common/button/BlueButton';
+import Spinner from '../../components/common/spinner/Spinner';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import './Setting.scss';
 

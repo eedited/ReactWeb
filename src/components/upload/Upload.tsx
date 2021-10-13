@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import ReactPlayer from 'react-player';
-import BlueButton from '../common/Button/BlueButton';
+import BlueButton from '../common/button/BlueButton';
 import { inputType } from '../../hooks/useInputs';
 import './Upload.scss';
-import WhiteButton from '../common/Button/WhiteButton';
+import WhiteButton from '../common/button/WhiteButton';
 import UploadDropDown from '../../containers/upload/UploadDropDown';
 
 export interface TagType {

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { search } from '../../api/search';
-import VideoDescription1 from '../../components/Landing/VideoGrid/VideoDescription/VideoDescription1';
+import VideoDescription1 from '../../components/landing/videoGrid/videoDescription/VideoDescription1';
 import VideoContainer from '../landing/VideoContainer';
 import './Find.scss';
 

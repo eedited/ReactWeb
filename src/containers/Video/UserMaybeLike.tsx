@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { AnyAction } from 'redux';
-import UserMaybeLike from '../../components/Video/UserMaybeLike';
+import UserMaybeLike from '../../components/video/UserMaybeLike';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/video/video';
 

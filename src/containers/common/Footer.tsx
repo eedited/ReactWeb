@@ -1,5 +1,5 @@
 import React from 'react';
-import FooterComponent from '../../components/common/Footer/Footer';
+import FooterComponent from '../../components/common/footer/Footer';
 
 const Footer: React.FC = () => <FooterComponent />;
 

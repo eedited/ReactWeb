@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { AnyAction } from 'redux';
-import DropDown from '../../components/common/DropDown/DropDown';
+import DropDown from '../../components/common/dropDown/DropDown';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { filterAction } from '../../redux/filter/filter';
 
