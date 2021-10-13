@@ -78,6 +78,7 @@ const videoSlice: VideoSliceType = createSlice({
         },
         videoListFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>) {
             state.getVideoError = action.payload;
+            state.endVideoList = true;
         },
 
         videoUpload(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoUploadRequest>) {},
