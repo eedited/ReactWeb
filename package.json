@@ -10,7 +10,7 @@
     "engineStrict": true,
     "scripts": {
         "analyze": "source-map-explorer 'build/static/js/*.js'",
-        "start": "cross-env PORT=7891 react-scripts start",
+        "start": "cross-env PORT=8080 react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
