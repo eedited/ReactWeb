@@ -3,6 +3,7 @@ FROM node:14.16.1 as Builder
 ENV GENERATE_SOURCEMAP=false
 ENV NODE_OPTIONS=--max_old_space_size=8192
 
+# ARG does not go in the build image.
 ARG REACT_APP_PROD_API_URL
 ARG REACT_APP_S3_ACCESS_KEY_ID
 ARG REACT_APP_S3_SECRET_ACCESS_KEY
