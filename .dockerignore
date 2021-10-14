@@ -4,3 +4,4 @@ node_modules
 .prettier*
 README.md
 package-lock.json
+.env
