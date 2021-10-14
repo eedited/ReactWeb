@@ -21,13 +21,7 @@ publish:
     script:
         - echo "build docker image"
         - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_REGISTRY
-        - docker build --build-arg REACT_APP_PROD_API_URL=$REACT_APP_PROD_API_URL \
-                        --build-arg REACT_APP_S3_ACCESS_KEY_ID=$REACT_APP_S3_ACCESS_KEY_ID \
-                        --build-arg REACT_APP_S3_SECRET_ACCESS_KEY=$REACT_APP_S3_SECRET_ACCESS_KEY \
-                        --build-arg REACT_APP_S3_REGION=$REACT_APP_S3_REGION \
-                        --build-arg REACT_APP_S3_BUCKET_NAME=$REACT_APP_S3_BUCKET_NAME \
-                        --build-arg REACT_APP_S3_BASE_URL=$REACT_APP_S3_BASE_URL \
-                        --tag $APP_NAME:$APP_TAG .
+        - docker build --build-arg REACT_APP_PROD_API_URL=$REACT_APP_PROD_API_URL --build-arg REACT_APP_S3_ACCESS_KEY_ID=$REACT_APP_S3_ACCESS_KEY_ID --build-arg REACT_APP_S3_SECRET_ACCESS_KEY=$REACT_APP_S3_SECRET_ACCESS_KEY --build-arg REACT_APP_S3_REGION=$REACT_APP_S3_REGION --build-arg REACT_APP_S3_BUCKET_NAME=$REACT_APP_S3_BUCKET_NAME --build-arg REACT_APP_S3_BASE_URL=$REACT_APP_S3_BASE_URL --tag $APP_NAME:$APP_TAG .
         - docker tag $APP_NAME:$APP_TAG $DOCKER_REGISTRY/$APP_NAME:$APP_TAG
         - docker push $DOCKER_REGISTRY/$APP_NAME:$APP_TAG
         - aws deploy create-deployment --application-name CD-front-react --deployment-group-name DG-front-react --s3-location bucket=s3-eedited-prod-rest-api-code-deploy,key=appspec.yml.zip,bundleType=zip
