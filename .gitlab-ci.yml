@@ -27,7 +27,7 @@ publish:
                         --build-arg REACT_APP_S3_REGION=$REACT_APP_S3_REGION \
                         --build-arg REACT_APP_S3_BUCKET_NAME=$REACT_APP_S3_BUCKET_NAME \
                         --build-arg REACT_APP_S3_BASE_URL=$REACT_APP_S3_BASE_URL \
-                        -t $APP_NAME:$APP_TAG .
+                        --tag $APP_NAME:$APP_TAG .
         - docker tag $APP_NAME:$APP_TAG $DOCKER_REGISTRY/$APP_NAME:$APP_TAG
         - docker push $DOCKER_REGISTRY/$APP_NAME:$APP_TAG
         - aws deploy create-deployment --application-name CD-front-react --deployment-group-name DG-front-react --s3-location bucket=s3-eedited-prod-rest-api-code-deploy,key=appspec.yml.zip,bundleType=zip
