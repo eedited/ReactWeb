@@ -34,7 +34,7 @@
             }
         }
         .find__body__input{
-            height: rem(50);
+            height: rem(44);
             flex-grow : 1;
         }
         .find__body__input:focus{
@@ -68,5 +68,13 @@
         padding-bottom: 40px;
         margin-left: auto;
         margin-right: auto;
+    }
+}
+@media screen and (max-width: 700px) {
+    .find{
+        .find__body{
+            margin-left : 5%;
+            margin-right: 5%;
+        }
     }
 }

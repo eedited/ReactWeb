@@ -9,6 +9,7 @@
 
     .LargeVideoHeader__main {
         display: flex;
+        gap: rem(8);
         align-items: center;
 
         .LargeVideoHeader__main__profileIcon {
@@ -17,6 +18,7 @@
         }
         .LargeVideoHeader__main__rest__title {
             font-weight: bold;
+            margin-bottom: rem(5);
         }
     }
 
@@ -41,9 +43,9 @@
 @media screen and (max-width: 1000px) {
     .LargeVideoHeader{
         flex-direction: column;
-        gap : rem(16);
+        gap : rem(8);
         width : 90%;
-        margin-bottom: rem(12);
+        margin-bottom: rem(16);
         .LargeVideoHeader__iconlist{
             justify-content: flex-start;
         }
