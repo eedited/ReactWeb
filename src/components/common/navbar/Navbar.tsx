@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter, RouteComponentProps } from 'react-router';
+import { ReactComponent as Logo } from '../../../images/logo.svg';
 import BlueButton from '../button/BlueButton';
 import WhiteButton from '../button/WhiteButton';
 import './Navbar.scss';
@@ -32,7 +33,7 @@ const Navbar: React.FC<props> = ({
     <>
         <nav className="navbar">
             <Link to="/">
-                <img className="navbar__menu__logo" src="/icons/orange-logo.png" alt="eedited_logo" />
+                <Logo className="navbar__menu__logo" />
             </Link>
             <div className={isHambergerClick ? 'navbar__menu navbar__show' : 'navbar__menu'}>
                 <div className="navbar__menu__links">

@@ -1,13 +1,14 @@
 import React from 'react';
 import './Footer.scss';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../../../images/logo.svg';
 
 const Footer: React.FC = () => (
     <>
         <div className="footer">
             <div className="footer__wrapper">
                 <div className="footer__description">
-                    <Link to="/"><img className="footer__description__logo" src="/icons/orange-logo.png" alt="eedited_logo" /></Link>
+                    <Link to="/"><Logo className="footer__description__logo" /></Link>
                     <p>
                         실력있는 영상 에디터들의 포트폴리오를
                         <br />
