@@ -422,3 +422,6 @@ th {
 .preparing {
     color: rgb(210, 210, 210);
 }
+iframe{
+    border-radius: 10px;
+}
