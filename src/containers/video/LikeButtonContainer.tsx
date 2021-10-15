@@ -17,7 +17,6 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
     const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     useEffect(() => {
         setToggle(false);
-        console.log(video);
         if (video) {
             if (video.WhatVideoUpload) {
                 if (video.WhatVideoUpload.length > 0) {

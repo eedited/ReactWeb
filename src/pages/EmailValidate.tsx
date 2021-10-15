@@ -28,7 +28,6 @@ const EmailValidate: React.FC<Props> = ({ history, location }: Props) => {
             }
             catch (e) {
                 setValidateResponse({ success: null, failure: e as Error });
-                console.log(e);
             }
         })();
     }, [token]);

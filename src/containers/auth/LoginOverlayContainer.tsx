@@ -68,14 +68,7 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
     }, [Auth, AuthError, dispatch]);
     useEffect(() => {
         if (User) {
-            console.log(User);
-            try {
-                localStorage.setItem('user', JSON.stringify(User));
-                backgroundClicked();
-            }
-            catch (err) {
-                console.log('local storage not working');
-            }
+            backgroundClicked();
         }
     }, [history, User, backgroundClicked]);
     return (

@@ -2,8 +2,6 @@ import React, { useMemo } from 'react';
 import qs from 'qs';
 import { RouteComponentProps, withRouter } from 'react-router';
 import BaseTemplate from './BaseTemplate';
-import VideoGridContainer from '../containers/landing/VideoGridContainer';
-import FilterContainer from '../containers/filter/FilterContainer';
 import FindContainer from '../containers/find/FindContainer';
 
 type Props = RouteComponentProps

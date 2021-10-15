@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import qs from 'qs';
 import { RouteComponentProps, withRouter } from 'react-router';
 import BaseTemplate from './BaseTemplate';
-import HeroDescription from '../containers/landing/HeroDescription';
 import VideoGridContainer from '../containers/landing/VideoGridContainer';
 import FilterContainer from '../containers/filter/FilterContainer';
 import HeroSlider from '../components/landing/heroSlider/HeroSlider';

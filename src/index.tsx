@@ -16,16 +16,8 @@ export type rootState = ReturnType<typeof store.getState>;
 dotenv.config();
 
 (function loadUser() {
-    try {
-        const { setUser, check }: RDXUserModule.ActionType = userAction;
-        const user: string|null = localStorage.getItem('user');
-        if (!user) return;
-        store.dispatch(setUser(JSON.parse(user)));
-        store.dispatch(check());
-    }
-    catch (err) {
-        console.log('local storage doesn\'t work');
-    }
+    const { setUser, check }: RDXUserModule.ActionType = userAction;
+    store.dispatch(check());
 }());
 
 ReactDOM.render(

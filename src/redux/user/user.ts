@@ -28,17 +28,16 @@ const userSlice: userSliceType = createSlice({
         },
         logoutFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.LogoutFailureResonse>) {
             state.logoutError = action.payload;
+            state.user = null;
         },
         check(state: WritableDraft<RDXUserModule.StateType>) {},
         checkSuccess(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {
             state.user = action.payload;
-            localStorage.setItem('user', JSON.stringify(state.user));
         },
         checkFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.CheckFailureResponse>) {
             state.checkError = action.payload;
             if (state.user) {
                 state.user = null;
-                localStorage.removeItem('user');
             }
         },
         setUser(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {
