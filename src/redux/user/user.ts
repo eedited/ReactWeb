@@ -28,6 +28,7 @@ const userSlice: userSliceType = createSlice({
         },
         logoutFailure(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<RDXUserModule.LogoutFailureResonse>) {
             state.logoutError = action.payload;
+            state.user = null;
         },
         check(state: WritableDraft<RDXUserModule.StateType>) {},
         checkSuccess(state: WritableDraft<RDXUserModule.StateType>, action: PayloadAction<AuthRouter.CheckSuccessResponse>) {

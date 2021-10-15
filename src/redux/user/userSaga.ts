@@ -13,7 +13,6 @@ function* logoutSaga() {
         yield put({
             type: 'USER/logoutSuccess',
         });
-        localStorage.removeItem('user');
     }
     catch (e) {
         yield put({
@@ -23,6 +22,7 @@ function* logoutSaga() {
             },
         });
     }
+    localStorage.removeItem('user');
     yield put(loadingAction.finishLoading({ status: 'USER/logout' }));
 }
 function* checkSaga() {
