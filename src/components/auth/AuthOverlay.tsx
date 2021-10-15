@@ -24,7 +24,7 @@ const textMap: textMapType = {
     signup: '회원가입',
 };
 const googleLogin: () => void = () => {
-    window.open('http://localhost:3000/auth/google');
+    window.open(process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_PROD_API_URL}/auth/google` : `${process.env.REACT_APP_DEV_API_URL}/auth/google`);
 };
 const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType, loading }: Props) => (
     <div
