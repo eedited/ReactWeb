@@ -63,18 +63,6 @@ const LoginForm: React.FC<Props> = ({ history }: Props) => {
             dispatch(userAction.check());
         }
     }, [Auth, AuthError, dispatch]);
-
-    useEffect(() => {
-        if (User) {
-            try {
-                localStorage.setItem('user', JSON.stringify(User));
-            }
-            catch (err) {
-                console.log('local storage not working');
-            }
-        }
-    }, [history, User]);
-
     return (
         <AuthForm
             type="login"

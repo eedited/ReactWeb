@@ -22,7 +22,6 @@ function* logoutSaga() {
             },
         });
     }
-    localStorage.removeItem('user');
     yield put(loadingAction.finishLoading({ status: 'USER/logout' }));
 }
 function* checkSaga() {
