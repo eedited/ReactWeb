@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router';
 import AccountSettingContainer from '../containers/accountSetting/AccountSettingContainer';
 import BaseTemplate from './BaseTemplate';
@@ -25,11 +25,13 @@ const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
         if (param === undefined) return 'mypage';
         return param;
     }, [match.params]);
-    if (!user) {
-        if (ret === 'request') alert('로그인한 유저만 이용가능합니다.');
-        history.push('/');
-    }
-    if (ret === 'error') history.push('/404NotFound');
+    useEffect(() => {
+        if (!user) {
+            if (ret === 'request') alert('로그인한 유저만 이용가능합니다.');
+            history.push('/');
+        }
+        if (ret === 'error') history.push('/404NotFound');
+    }, [history, ret, user]);
     return (
         ret === 'error'
             ? <></>

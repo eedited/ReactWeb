@@ -35,8 +35,8 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
     };
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const onSubmit: (e: React.FormEvent<HTMLFormElement>) => void = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         (async function f() {
-            e.preventDefault();
             setSubmitResponse({ success: null, failure: null });
             setErrMsg(null);
             try {
@@ -60,9 +60,8 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
     useEffect(() => {
         if (submitResponse.success) {
             dispatch(userAction.check());
-            window.location.replace('/AccountSetting');
         }
-    }, [dispatch, submitResponse.success, uploadFile, user, user.userId]);
+    }, [dispatch, submitResponse.success]);
     const onFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length !== 0) {
             setUploadFile(event.target.files[0]);
