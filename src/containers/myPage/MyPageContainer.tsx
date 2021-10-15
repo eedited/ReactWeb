@@ -35,7 +35,6 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             try {
                 const response: AxiosResponse<UserRouter.MyPageSuccessResponse> = await myPage({ userId });
                 setMyPageResponse({ success: response.data, failure: null });
-                console.log(response.data);
             }
             catch (err) {
                 if (axios.isAxiosError(err)) {
