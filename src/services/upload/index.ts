@@ -32,7 +32,6 @@ export default class FileUploadToS3 {
 
     upload(uploadUser: string, fileStream: File): string {
         const upload: AWS.Request<AWS.S3.PutObjectOutput, AWS.AWSError> = this.bucket.putObject({
-            ACL: 'public-read',
             Body: fileStream,
             Bucket: S3_BUCKET,
             Key: `${this.fileType}/${uploadUser}/${this.aimType}`,
