@@ -17,6 +17,9 @@ dotenv.config();
 
 (function loadUser() {
     const { setUser, check }: RDXUserModule.ActionType = userAction;
+    const user: string|null = localStorage.getItem('user');
+    if (!user) return;
+    store.dispatch(setUser(JSON.parse(user)));
     store.dispatch(check());
 }());
 
