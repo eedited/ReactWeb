@@ -38,7 +38,7 @@ const Navbar: React.FC<props> = ({
             <div className={isHambergerClick ? 'navbar__menu navbar__show' : 'navbar__menu'}>
                 <div className="navbar__menu__links">
                     <Link className="navbar__menu__link" to="/">포트폴리오</Link>
-                    <a target="_blank" className="navbar__menu__link" href="https://stone-suede-b8c.notion.site/Edited-com-8e4418290c4143b0b982a5f1382eacc6" rel="noreferrer">About Us</a>
+                    <a target="_blank" className="navbar__menu__link" href="https://www.notion.so/eedited-com-6f1296ee629d48bcbbfc8ecf7fc9fcf3" rel="noreferrer">About Us</a>
                     <Link className="navbar__menu__link" to="/AccountSetting/request">건의하기</Link>
                     <Link className="navbar__menu__link preparing" to="/finding">인재찾기</Link>
                     <Link className="navbar__menu__link preparing" to="/hiring">채용하기</Link>
