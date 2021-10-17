@@ -14,7 +14,7 @@ export const signup: SignupFunctionType = ({ userId, password, email, nickname }
     password,
     email,
     nickname,
-    profilePicture: new FileUploadToS3('img', 'profile').getBaseUrl(),
+    profilePicture: new FileUploadToS3('img', 'profile').getBaseProfileImgUrl(),
 });
 
 type LogoutFunctionType = () => Promise<AxiosResponse<void>>;

@@ -26,8 +26,9 @@ export default class FileUploadToS3 {
         });
     }
 
-    getBaseUrl(): string {
-        return `${baseURL}/${this.fileType}/${this.aimType}`;
+    getBaseProfileImgUrl(): string {
+        const imgIdx: number = Math.floor(47 * Math.random());
+        return `${baseURL}/${this.fileType}/_default/profile${imgIdx}.jpeg`;
     }
 
     upload(uploadUser: string, fileStream: File): string {
