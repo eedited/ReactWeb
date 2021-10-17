@@ -6,8 +6,11 @@
 
     .video__description__title {
         font-family: Pretendard-Bold;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
         font-size: rem(15);
-        line-height: rem(23);
+        line-height: rem(25);
     }
 
     .video__description__detail {
@@ -15,7 +18,8 @@
         display: flex;
         justify-content: space-between;
         flex-direction: row;
-        line-height: rem(23);
+        align-items: center;
+        line-height: rem(25);
         font-size: rem(13);
 
         .video__description__uploader {
@@ -46,7 +50,7 @@
             display: flex;
             flex-direction: row;
             gap: rem(10);
-
+            align-items: center;
             .video__description__tag {
                 color: rgb(112, 112, 112);
                 background-color: rgb(247, 247, 247);
