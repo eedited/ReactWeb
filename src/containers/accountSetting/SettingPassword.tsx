@@ -33,7 +33,7 @@ const SettingPassword: React.FC<Props> = ({ user }: Props) => {
                 setInput('passwordConfirm', '');
                 return;
             }
-            if (!validatePassword) {
+            if (!validatePassword(inputState.newPassword)) {
                 setErrMsg('비밀번호는 최소8자, 문자, 숫자, 특수문자를 각각 하나씩 포함해야합니다.');
                 setInput('currentPassword', '');
                 setInput('newPassword', '');
