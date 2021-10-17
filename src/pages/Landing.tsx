@@ -7,7 +7,7 @@ import FilterContainer from '../containers/filter/FilterContainer';
 import HeroSlider from '../components/landing/heroSlider/HeroSlider';
 
 type Props = RouteComponentProps
-const paramValidmatch: string[][] = [['vlog', 'game', 'beauty', 'review', 'study', 'etc'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];
+const paramValidmatch: string[][] = [['vlog', 'vRadio', 'sports', 'game', 'it', 'review', 'beauty', 'etc'], ['youtube'], ['finalCutPro'], ['thumbup', 'latest']];
 const Landing: React.FC<Props> = ({ location, history }: Props) => {
     const parameters: string[] = useMemo(() => {
         const query: qs.ParsedQs = qs.parse(location.search, {
