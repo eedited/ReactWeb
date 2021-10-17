@@ -11,7 +11,7 @@
         height: 100%;
         flex-direction: row;
         justify-content: flex-start;
-        padding : rem(50) rem(50) rem(100) rem(50);
+        padding: rem(50) rem(50) rem(100) rem(50);
     }
 
     .footer__description {
@@ -20,7 +20,11 @@
         .footer__description__logo {
             width: rem(114);
             height: rem(44);
-            margin-bottom: rem(40);
+            margin-bottom: rem(32);
+        }
+        .footer__description__icons {
+            margin-top: rem(10);
+            margin-left: rem(-4);
         }
     }
 
@@ -44,7 +48,7 @@
             }
         }
     }
-    
+
     .right_reserved {
         position: absolute;
         bottom: rem(35);
@@ -55,15 +59,15 @@
 }
 
 @media screen and (max-width: 1200px) {
-    .footer{
-        .footer__wrapper{
+    .footer {
+        .footer__wrapper {
             flex-direction: column;
-            gap : rem(50);
-            .footer__sitemap{
+            gap: rem(50);
+            .footer__sitemap {
                 justify-content: flex-start;
                 gap: rem(50);
-                .footer__sitemap__column{
-                    width : 40%;
+                .footer__sitemap__column {
+                    width: 40%;
                 }
             }
         }
