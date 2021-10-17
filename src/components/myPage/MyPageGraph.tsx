@@ -33,7 +33,7 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
         if (!ctx) return;
         const dpr: number = window.devicePixelRatio || 1;
-        const width: number = 280 / dpr;
+        const width: number = 400 / dpr;
         const height: number = 400 / dpr;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
@@ -43,7 +43,7 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
             const radius: number = height / 3;
             const gap: number = 8;
             const lineWidth: number = 5 / dpr;
-            const x: number = width - radius - lineWidth;
+            const x: number = width / 2;
             const y: number = height / 2;
             let rgb: number[] = [8, 44, 172];
             const fontSize: number = Math.ceil(12 / dpr);

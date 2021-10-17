@@ -68,8 +68,8 @@ const Navbar: React.FC<props> = ({
                     user === null
                         ? (
                             <div className="navbar__utility__buttons">
-                                <WhiteButton className="navbar__utility__button" onClick={onLogin}>Sign in</WhiteButton>
-                                <BlueButton className="navbar__utility__button" onClick={onSignup}>Sign up</BlueButton>
+                                <WhiteButton className="navbar__utility__button" onClick={onLogin}>로그인</WhiteButton>
+                                <BlueButton className="navbar__utility__button" onClick={onSignup}>회원가입</BlueButton>
                             </div>
                         )
                         : (

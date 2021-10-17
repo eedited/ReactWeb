@@ -9,7 +9,7 @@
         justify-content: space-between;
         width: 100%;
         min-height: rem(300);
-        padding: 0 rem(40) rem(50) rem(40);
+        padding: 0 0 rem(50) rem(40);
         .mypage__header__title {
             margin-top: rem(105);
             display: flex;
@@ -61,10 +61,10 @@
                 display: flex;
                 flex-direction: row;
                 margin-top: rem(32);
-                margin-left : rem(-8);
+                gap : rem(8);
                 .mypage__header__title__sns__icon{
-                    width : rem(44);
-                    height: rem(44);
+                    width : rem(34);
+                    height: rem(34);
                 }
             }
             .mypage__header__title__email {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
-
+import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
+import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
+import { ReactComponent as LinkedIn } from '../../images/linkedin-brands.svg';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import MyPageFollowContainer from '../../containers/myPage/MyPageFollowContainer';
 import BlueButton from '../common/button/BlueButton';
@@ -68,9 +70,9 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                 ))}
                             </div>
                             <div className="mypage__header__title__sns">
-                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="facebook" />
-                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="instagram" />
-                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="linkedin" />
+                                <Facebook className="mypage__header__title__sns__icon" />
+                                <Instagram className="mypage__header__title__sns__icon" />
+                                <LinkedIn className="mypage__header__title__sns__icon" />
                             </div>
                         </div>
                         {
