@@ -34,11 +34,27 @@
                 align-items: center;
                 gap: rem(3);
                 color: #6080f4;
-                
+
                 .video__description__uploader__follow__icon {
                     width: rem(13);
                     height: rem(13);
                 }
+            }
+        }
+
+        .video__description__right {
+            display: flex;
+            flex-direction: row;
+            gap: rem(10);
+
+            .video__description__tag {
+                color: rgb(112, 112, 112);
+                background-color: rgb(247, 247, 247);
+                font-family: Pretendard-Medium;
+                font-size: rem(11);
+                line-height: rem(20);
+                padding: 0 rem(9);
+                margin: auto;
             }
         }
     }

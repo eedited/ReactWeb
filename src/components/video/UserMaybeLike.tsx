@@ -1,6 +1,6 @@
 import React from 'react';
 import VideoContainer from '../../containers/landing/VideoContainer';
-import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
+import VideoDescription1 from '../landing/videoGrid/videoDescription/VideoDescription1';
 import './UserMaybeLike.scss';
 
 interface Props {
@@ -17,7 +17,7 @@ const MoreByUser: React.FC<Props> = ({ videos }: Props) => (
                         ? (
                             <div key={video.id}>
                                 <VideoContainer videoInfo={video} />
-                                <VideoDescription2 videoInfo={video} />
+                                <VideoDescription1 videoInfo={video} />
                             </div>
                         )
                         : <></>

@@ -1,20 +1,21 @@
 @import '/src/App.scss';
 
-.likebutton{
-    cursor : pointer;
+.likebutton {
+    cursor: pointer;
     background-color: transparent;
-    border : 0;
-    outline : 0;
+    border: 0;
+    outline: 0;
     font-family: NotoSansKRMedium;
     display: flex;
     flex-direction: row;
-    gap : 4px;
+    gap: 4px;
     align-items: center;
-    .likebutton__img{
-        width : rem(13);
+    .likebutton__img {
+        width: rem(13);
         height: rem(12);
     }
-    .likebutton__txt{
+    .likebutton__txt {
         font-size: rem(13);
+        padding-bottom: rem(2);
     }
 }
