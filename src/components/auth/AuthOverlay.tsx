@@ -148,7 +148,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                             >
                                 아직 회원이 아니신가요?
                             </div>
-                            <div className="authform__hrLine">
+                            {/* <div className="authform__hrLine">
                                 <div className="authForm__hrLine__title">SNS LOGIN</div>
                             </div>
                             <button onClick={googleLogin} className="authForm__googleLogin" type="button">
@@ -157,7 +157,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                                     src="/icons/google-icon.png"
                                     alt=""
                                 />
-                            </button>
+                            </button> */}
                         </>
                     )}
                     {type === 'signup' && (
