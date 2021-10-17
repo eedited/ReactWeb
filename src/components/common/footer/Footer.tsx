@@ -14,6 +14,9 @@ const Footer: React.FC = () => (
                         <br />
                         한 눈에 보고 바로 소통하는 비즈니스 커뮤니티
                     </p>
+                    <a href={process.env.REACT_APP_DISCORD_LINK}>
+                        <img className="footer__description__icons" src="/icons/sns/discord-icon.png" alt="discord" width="40" />
+                    </a>
                 </div>
                 <div className="footer__sitemap">
                     <div className="footer__sitemap__column">
