@@ -37,9 +37,14 @@ const Navbar: React.FC<props> = ({
             </Link>
             <div className={isHambergerClick ? 'navbar__menu navbar__show' : 'navbar__menu'}>
                 <div className="navbar__menu__links">
-                    <Link className="navbar__menu__link" to="/">포트폴리오</Link>
-                    <a target="_blank" className="navbar__menu__link" href="https://www.notion.so/eedited-com-6f1296ee629d48bcbbfc8ecf7fc9fcf3" rel="noreferrer">About Us</a>
-                    <Link className="navbar__menu__link" to="/AccountSetting/request">건의하기</Link>
+                    {!user
+                        ? <button className="navbar__menu__link" onClick={onLogin} type="button">포트폴리오</button>
+                        : <Link className="navbar__menu__link" to={`/profile?userId=${user.userId}`}>포트폴리오</Link>}
+                    {/* <Link className="navbar__menu__link" to={user ? `/profile?userId=${user.userId}` : '/profile?userId=eedited'}>포트폴리오</Link> */}
+                    <a target="_blank" className="navbar__menu__link" href="https://necessary-icon-db1.notion.site/eedited-6f1296ee629d48bcbbfc8ecf7fc9fcf3" rel="noreferrer">About Us</a>
+                    {!user
+                        ? <button className="navbar__menu__link" onClick={onLogin} type="button">건의하기</button>
+                        : <Link className="navbar__menu__link" to="/AccountSetting/request">건의하기</Link>}
                     <Link className="navbar__menu__link preparing" to="/finding">인재찾기</Link>
                     <Link className="navbar__menu__link preparing" to="/hiring">채용하기</Link>
                     <Link className="navbar__menu__link preparing" to="/">커뮤니티</Link>
@@ -90,7 +95,7 @@ const Navbar: React.FC<props> = ({
                                                         src="/icons/mypage-icon.png"
                                                         alt="mypage-icon"
                                                     />
-                                                    <Link to={`/profile?userId=${user.userId}`}>마이페이지</Link>
+                                                    <Link to={`/profile?userId=${user.userId}`}>포트폴리오</Link>
                                                 </div>
                                             </button>
                                         </li>

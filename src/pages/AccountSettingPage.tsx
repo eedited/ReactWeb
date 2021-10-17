@@ -27,7 +27,6 @@ const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
     }, [match.params]);
     useEffect(() => {
         if (!user) {
-            if (ret === 'request') alert('로그인한 유저만 이용가능합니다.');
             history.push('/');
         }
         if (ret === 'error') history.push('/404NotFound');
