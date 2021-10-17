@@ -1,9 +1,10 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState } from 'react';
 import { changePassword } from '../../api/auth';
 import BlueButton from '../../components/common/button/BlueButton';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import './Setting.scss';
+import { validatePassword } from '../../services/regex';
 
 interface Props{
     user: User
@@ -32,13 +33,25 @@ const SettingPassword: React.FC<Props> = ({ user }: Props) => {
                 setInput('passwordConfirm', '');
                 return;
             }
+            if (!validatePassword) {
+                setErrMsg('비밀번호는 최소8자, 문자, 숫자, 특수문자를 각각 하나씩 포함해야합니다.');
+                setInput('currentPassword', '');
+                setInput('newPassword', '');
+                setInput('passwordConfirm', '');
+                return;
+            }
             try {
                 const response: AxiosResponse<UserRouter.MypageModifySuccessResponse> = await changePassword({ currentPassword: inputState.currentPassword, newPassword: inputState.newPassword });
                 setSubmitResponse({ success: response, failure: null });
             }
             catch (err) {
+                if (axios.isAxiosError(err)) {
+                    setErrMsg('패스워드가 틀렸습니다!');
+                }
+                else {
+                    setErrMsg('네트워크 에러');
+                }
                 setSubmitResponse({ success: null, failure: { error: err as Error } });
-                setErrMsg('패스워드가 틀렸습니다!');
                 setInput('currentPassword', '');
                 setInput('newPassword', '');
                 setInput('passwordConfirm', '');
