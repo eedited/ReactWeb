@@ -33,20 +33,21 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
         if (!ctx) return;
         const dpr: number = window.devicePixelRatio || 1;
-        const width: number = 500 / dpr;
+        const width: number = 280 / dpr;
         const height: number = 400 / dpr;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const img: HTMLImageElement = new Image();
         img.onload = () => {
-            const radius: number = Math.min(height, width) / 3;
-            const x: number = width / 2;
-            const y: number = height / 2;
+            const radius: number = height / 3;
             const gap: number = 8;
-            let rgb: number[] = [8, 44, 172];
             const lineWidth: number = 5 / dpr;
+            const x: number = width - radius - lineWidth;
+            const y: number = height / 2;
+            let rgb: number[] = [8, 44, 172];
             const fontSize: number = Math.ceil(12 / dpr);
+
             ctx.save();
             ctx.beginPath();
             ctx.arc(x, y, radius - 10 / dpr, 0, Math.PI * 2);

@@ -67,6 +67,11 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                     </div>
                                 ))}
                             </div>
+                            <div className="mypage__header__title__sns">
+                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="facebook" />
+                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="instagram" />
+                                <img className="mypage__header__title__sns__icon" src="/icons/sns/discord-icon.png" alt="linkedin" />
+                            </div>
                         </div>
                         {
                             myPageResponse.success && <MyPageGraph className="mypage__header__graph" categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} />
