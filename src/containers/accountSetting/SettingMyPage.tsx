@@ -104,7 +104,7 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
                 </div>
                 {errMsg && <div className="accountSetting__Mypage__error">{errMsg}</div>}
                 {submitResponse.success && <div>회원정보 변경이 완료되었습니다.</div> }
-                <BlueButton type="submit" onClick={() => { /**/ }}>SaveProfile</BlueButton>
+                <BlueButton type="submit" onClick={() => { /**/ }}>저장</BlueButton>
             </div>
         </form>
     );

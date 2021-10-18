@@ -36,6 +36,8 @@ const RecieveDiscomfort: React.FC<Props> = ({ user }: Props) => {
             try {
                 const response: AxiosResponse<UserRouter.MypageModifySuccessResponse> = await discomfort({ description: descriptionText, title: inputState.title });
                 setSubmitResponse({ success: response, failure: null });
+                setInput('title', '');
+                setDescriptionTextChange('');
             }
             catch (err) {
                 if (axios.isAxiosError(err)) {
@@ -47,7 +49,7 @@ const RecieveDiscomfort: React.FC<Props> = ({ user }: Props) => {
             }
             setLoading(false);
         }());
-    }, [descriptionText, inputState.title]);
+    }, [descriptionText, inputState.title, setInput]);
     return (
         <>
             <Spinner loading={loading} />
