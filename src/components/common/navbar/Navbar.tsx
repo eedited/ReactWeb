@@ -190,7 +190,6 @@ const Navbar: React.FC<props> = ({
                 <img className="navbar__hamberger__icon" src="/icons/bar-icon.png" alt="bar" />
             </button>
         </nav>
-        <hr className="navbar__bottom__line" />
     </>
 );
 

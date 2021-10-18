@@ -4,9 +4,13 @@
 .navbar {
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    z-index: 2001;
+    top : 0;
     align-items: center;
     background-color: $white;
-    margin : rem(15) rem(50); 
+    padding : rem(15) rem(50); 
+    border-bottom: 0.5px solid rgb(32, 32, 32);
     .navbar__menu__logo {
         text-align: center;
         width: rem(114);
