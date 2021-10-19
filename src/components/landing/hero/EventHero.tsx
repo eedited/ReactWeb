@@ -5,7 +5,7 @@ const EventHero: React.FC = () => (
     <div className="hero">
         <div className="hero__description">
             <p className="hero__description__title">
-                개발자들과
+                개발자와
                 <br />
                 이야기를 나눠보세요!!
             </p>
