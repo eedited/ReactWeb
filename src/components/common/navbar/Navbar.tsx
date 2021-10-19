@@ -42,6 +42,7 @@ const Navbar: React.FC<props> = ({
                         : <Link className="navbar__menu__link" to={`/profile?userId=${user.userId}`}>포트폴리오</Link>}
                     {/* <Link className="navbar__menu__link" to={user ? `/profile?userId=${user.userId}` : '/profile?userId=eedited'}>포트폴리오</Link> */}
                     <a target="_blank" className="navbar__menu__link" href="https://necessary-icon-db1.notion.site/eedited-6f1296ee629d48bcbbfc8ecf7fc9fcf3" rel="noreferrer">About Us</a>
+                    <a target="_blank" className="navbar__menu__link" href="https://necessary-icon-db1.notion.site/0d75bc34ecd54d6c9d2fc8567006b9c3" rel="noreferrer">공지사항</a>
                     {!user
                         ? <button className="navbar__menu__link" onClick={onLogin} type="button">건의하기</button>
                         : <Link className="navbar__menu__link" to="/AccountSetting/request">건의하기</Link>}
