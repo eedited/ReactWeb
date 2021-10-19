@@ -76,7 +76,7 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
             return;
         }
         if (!validatePassword(password)) {
-            setError('비밀번호는 최소8자, 문자, 숫자, 특수문자를 각각 하나씩 포함해야합니다.');
+            setError('비밀번호는 최소8자, 문자, 숫자를 각각 하나씩 포함해야합니다.');
             dispatch(changeField({
                 form: 'signup',
                 key: 'password',
