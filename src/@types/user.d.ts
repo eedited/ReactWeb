@@ -51,6 +51,13 @@ export declare global {
         interface DiscomfortFailureResponse{
             info: string;
         }
+        interface SetSnsRequest {
+            facebook: string
+            instagram: string
+            linkedin: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface SetSnsSuccessResponse{}
     }
 
     namespace RDXUserModule {
