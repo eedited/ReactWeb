@@ -34,3 +34,6 @@ export const changePassword: ChangePasswordFunctionType = ({ currentPassword, ne
     newPassword,
     password: currentPassword,
 });
+
+type DeleteUserFunctionType=({ userId }: AuthRouter.DeleteuserRequest) => Promise<AxiosResponse<AuthRouter.DeleteuserSuccessResponse>>
+export const deleteUser: DeleteUserFunctionType = ({ userId }: AuthRouter.DeleteuserRequest) => client.delete(`/auth/${userId}`);

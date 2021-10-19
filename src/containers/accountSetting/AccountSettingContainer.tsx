@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnyAction } from 'redux';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import './AccountSetting.scss';
+import DeleteUser from './DeleteUser';
 import RecieveDiscomfort from './RecieveDiscomfort';
 import SettingMyPage from './SettingMyPage';
 import SettingPassword from './SettingPassword';
@@ -21,10 +22,10 @@ const textMap: TextMapType = {
     mypage: '프로필 변경',
     password: '비밀번호 변경',
     request: '건의사항',
+    delete: '탈퇴하기',
 };
 
 const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
-    const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const { user }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
         user: state.userReducer.user,
     }));
@@ -45,11 +46,13 @@ const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
                     <Link to="/AccountSetting/mypage">프로필 변경</Link>
                     <Link to="/AccountSetting/password">비밀번호 변경</Link>
                     <Link to="/AccountSetting/request">요청</Link>
+                    <Link to="/AccountSetting/delete">탈퇴하기</Link>
                 </div>
                 <div className="accountSetting__body__right">
                     {(param === 'mypage') && <SettingMyPage user={user} />}
                     {(param === 'password') && <SettingPassword user={user} />}
                     {(param === 'request') && <RecieveDiscomfort user={user} />}
+                    {(param === 'delete') && <DeleteUser user={user} />}
                 </div>
             </div>
         </div>

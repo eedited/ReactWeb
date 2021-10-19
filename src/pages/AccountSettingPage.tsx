@@ -9,7 +9,7 @@ interface FromReducerType {
 }
 
 type Props = RouteComponentProps;
-const validationParam: string[] = ['mypage', 'password', 'request'];
+const validationParam: string[] = ['mypage', 'password', 'request', 'delete'];
 
 const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
     const {
