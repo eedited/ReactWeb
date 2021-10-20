@@ -29,3 +29,12 @@ export const discomfort: DiscomfortFunctionType = ({
     title,
     description,
 });
+
+type SetSNSFunctionType = ({ facebook, instagram, linkedin }: UserRouter.SetSnsRequest) => Promise<AxiosResponse<UserRouter.SetSnsSuccessResponse>>
+export const setSns: SetSNSFunctionType = ({
+    facebook, instagram, linkedin,
+}: UserRouter.SetSnsRequest) => client.patch('/user/change/sns', {
+    facebook,
+    instagram,
+    linkedin,
+});

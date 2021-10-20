@@ -11,7 +11,7 @@ import { userAction } from '../../redux/user/user';
 import './Setting.scss';
 
 interface Props extends RouteComponentProps{
-    user: User
+    user: AuthRouter.CheckSuccessResponse
 }
 interface StateType{
     confirm: boolean

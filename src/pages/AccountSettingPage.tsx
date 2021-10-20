@@ -5,11 +5,11 @@ import BaseTemplate from './BaseTemplate';
 import { SelectorStateType, useAppSelector } from '../hooks';
 
 interface FromReducerType {
-    user: User | null
+    user: AuthRouter.CheckSuccessResponse | null
 }
 
 type Props = RouteComponentProps;
-const validationParam: string[] = ['mypage', 'password', 'request', 'delete'];
+const validationParam: string[] = ['mypage', 'password', 'request', 'delete', 'sns'];
 
 const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
     const {

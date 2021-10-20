@@ -11,7 +11,7 @@ import FileUploadToS3 from '../../services/upload';
 import WhiteButton from '../../components/common/button/WhiteButton';
 
 interface Props{
-    user: User
+    user: AuthRouter.CheckSuccessResponse
 }
 
 interface SubmitResponse {

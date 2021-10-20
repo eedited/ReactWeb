@@ -12,7 +12,7 @@ export interface ModalTriggerType{
     type: 'login'|'signup'
 }
 interface props extends RouteComponentProps{
-    user: User|null
+    user: AuthRouter.CheckSuccessResponse|null
     isSearchClick: boolean
     isHambergerClick: boolean
     ModalTrigger: ModalTriggerType
@@ -194,4 +194,4 @@ const Navbar: React.FC<props> = ({
     </>
 );
 
-export default withRouter(Navbar);
+export default React.memo(withRouter(Navbar));

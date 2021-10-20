@@ -6,7 +6,7 @@ import { videoAction } from '../../redux/video/video';
 
 interface FromReducerType {
     userMayBeLiekVideo: VideoRouter.UserVideoSuccessResponse | null
-    user: User|null
+    user: AuthRouter.CheckSuccessResponse|null
 }
 
 const UserMaybeLikeContainer: React.FC = () => {

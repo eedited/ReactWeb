@@ -10,7 +10,7 @@ interface Props extends RouteComponentProps {
     userId: string
 }
 interface FromReducerType {
-    user: User|null
+    user: AuthRouter.CheckSuccessResponse|null
 }
 interface ValidateResponse {
     success: AuthRouter.SignupValidationSuccessResponse | null

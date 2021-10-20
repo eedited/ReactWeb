@@ -16,4 +16,4 @@ WhiteButton.defaultProps = {
     className: 'whiteButton',
 };
 
-export default WhiteButton;
+export default React.memo(WhiteButton);

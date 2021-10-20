@@ -10,7 +10,7 @@ interface Props {
     history: RouteComponentProps['history']
 }
 interface UserContainerType {
-    User: User | null
+    User: AuthRouter.CheckSuccessResponse | null
     logoutError: RDXUserModule.LogoutFailureResonse | null
 }
 
@@ -33,23 +33,23 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
         dispatch(userAction.logout());
     };
 
-    const onLogin: () => void = () => {
+    const onLogin: () => void = useCallback(() => {
         setModalTrigger((prevState: ModalTriggerType) => ({
             isModalOn: !prevState.isModalOn,
             type: 'login',
         }));
-    };
+    }, []);
 
-    const onSignup: () => void = () => {
+    const onSignup: () => void = useCallback(() => {
         setModalTrigger((prevState: ModalTriggerType) => ({
             isModalOn: !prevState.isModalOn,
             type: 'signup',
         }));
-    };
+    }, []);
 
-    const onUpload: () => void = () => {
+    const onUpload: () => void = useCallback(() => {
         history.push('/upload');
-    };
+    }, [history]);
     const onHambergerClick: () => void = () => {
         setIsHambergerClick((prev: boolean) => !prev);
     };
@@ -63,13 +63,13 @@ const NavbarContainer: React.FC<Props> = ({ history }: Props) => {
             setIsSeacrhClick(false);
         }
     }, [history, searchInput]);
-    const onClickSearch: () => void = () => {
+    const onClickSearch: () => void = useCallback(() => {
         if (windowSize.width && windowSize.width <= 1400) {
             setIsSeacrhClick(false);
             history.push('/search');
         }
         else setIsSeacrhClick(!isSearchClick);
-    };
+    }, [history, isSearchClick, windowSize.width]);
     return (
         <Navbar
             ModalTrigger={ModalTrigger}
