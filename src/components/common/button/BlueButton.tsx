@@ -26,4 +26,4 @@ BlueButton.defaultProps = {
     type: 'button',
 };
 
-export default BlueButton;
+export default (BlueButton);

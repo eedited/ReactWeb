@@ -5,7 +5,7 @@ import UploadContainer from '../containers/upload/UploadContainer';
 import { SelectorStateType, useAppSelector } from '../hooks';
 
 interface FromReducerType {
-    user: User | null
+    user: AuthRouter.CheckSuccessResponse | null
 }
 type props = RouteComponentProps;
 

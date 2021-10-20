@@ -5,7 +5,7 @@ import BaseTemplate from './BaseTemplate';
 import { SelectorStateType, useAppSelector } from '../hooks';
 
 interface FromReducerType {
-    user: User | null
+    user: AuthRouter.CheckSuccessResponse | null
 }
 
 type Props = RouteComponentProps;

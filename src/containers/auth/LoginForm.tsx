@@ -8,7 +8,7 @@ import { userAction } from '../../redux/user/user';
 
 interface FromReducerType {
     form: Login
-    User: User | null
+    User: AuthRouter.CheckSuccessResponse | null
     Auth?: AuthRouter.AuthSuccessResponse | null
     AuthError?: RDXAuthModule.AuthFailureResponse | null
 }

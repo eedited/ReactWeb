@@ -10,7 +10,7 @@ import { LoadingStateType } from '../../redux/loading/loading';
 
 interface fromReducerType{
     form: Login
-    User: User|null
+    User: AuthRouter.CheckSuccessResponse|null
     Auth?: AuthRouter.AuthSuccessResponse|null
     AuthError?: RDXAuthModule.AuthFailureResponse|null
     loading: LoadingStateType

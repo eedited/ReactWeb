@@ -5,7 +5,7 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../hooks';
 import { userAction } from '../redux/user/user';
 
 interface FromReducerType {
-    User: User | null
+    User: AuthRouter.CheckSuccessResponse | null
     UserFailure: AuthRouter.CheckFailureResponse | null
 }
 type Props = RouteComponentProps;

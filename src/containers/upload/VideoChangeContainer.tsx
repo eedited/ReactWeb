@@ -21,7 +21,7 @@ interface FromReducerType {
 }
 interface Props extends RouteComponentProps {
     videoId: string
-    user: User | null
+    user: AuthRouter.CheckSuccessResponse | null
 }
 interface VideoDeleteResponse {
     success: VideoRouter.VideoDeleteSuccessResponse | null

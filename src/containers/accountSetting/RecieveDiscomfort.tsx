@@ -8,7 +8,7 @@ import useInputs, { inputType } from '../../hooks/useInputs';
 import './Setting.scss';
 
 interface Props{
-    user: User
+    user: AuthRouter.CheckSuccessResponse
 }
 
 interface SubmitResponse {

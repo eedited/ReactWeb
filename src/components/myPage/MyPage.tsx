@@ -18,7 +18,7 @@ export interface MyPageResponseType {
 interface Props extends RouteComponentProps{
     myPageResponse: MyPageResponseType
     canModify: boolean
-    user: User|null
+    user: AuthRouter.CheckSuccessResponse|null
     message: string
     toUploadPage: () => void
     toMainPage: () => void
@@ -70,9 +70,15 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                 ))}
                             </div>
                             <div className="mypage__header__title__sns">
-                                <Facebook className="mypage__header__title__sns__icon" />
-                                <Instagram className="mypage__header__title__sns__icon" />
-                                <LinkedIn className="mypage__header__title__sns__icon" />
+                                <a target="_blank" className="navbar__menu__link" href={(!myPageResponse.success || (!myPageResponse.success.facebook) || (myPageResponse.success.facebook.length === 0)) ? 'https://facebook.com' : myPageResponse.success.facebook} rel="noreferrer">
+                                    <Facebook className="mypage__header__title__sns__icon" />
+                                </a>
+                                <a target="_blank" className="navbar__menu__link" href={(!myPageResponse.success || (!myPageResponse.success.instagram) || (myPageResponse.success.instagram.length === 0)) ? 'http://instgram.com' : myPageResponse.success.instagram} rel="noreferrer">
+                                    <Instagram className="mypage__header__title__sns__icon" />
+                                </a>
+                                <a target="_blank" className="navbar__menu__link" href={(!myPageResponse.success || (!myPageResponse.success.linkedin) || (myPageResponse.success.linkedin.length === 0)) ? 'https://linkedin.com' : myPageResponse.success.linkedin} rel="noreferrer">
+                                    <LinkedIn className="mypage__header__title__sns__icon" />
+                                </a>
                             </div>
                         </div>
                         {

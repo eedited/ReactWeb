@@ -18,13 +18,25 @@ export declare global {
 
     interface User {
         userId: string
+        password: string
         birthday: Date | null
         nickname: string
         email: string
         emailToken: string
+        logInType: string | null
         profilePicture: string
+        followerCnt: number
         description: string
+        uploadVideoCnt: number
+        block: boolean
+        facebook: string | null
+        instagram: string | null
+        linkedin: string | null
+        admin: boolean
         proTag: boolean
+        createdAt: Date
+        updatedAt: Date
+        deletedAt: Date | null
     }
 
     namespace AuthRouter {
@@ -34,7 +46,19 @@ export declare global {
             token: string;
         }
 
-        type CheckSuccessResponse = User;
+        interface CheckSuccessResponse {
+            userId: string
+            birthday: Date | null
+            nickname: string
+            email: string
+            emailToken: string
+            profilePicture: string
+            description: string
+            facebook: string
+            instagram: string
+            linkedin: string
+            proTag: boolean
+        }
         interface CheckFailureResponse {
             info: string;
         }

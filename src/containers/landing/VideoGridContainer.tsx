@@ -7,7 +7,7 @@ import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 interface FromReducerType {
     videos: VideoRouter.VideoListSuccessResponse | null
     videoListFailure: VideoRouter.VideoFailureResponse | null
-    user: User | null
+    user: AuthRouter.CheckSuccessResponse | null
     videoLoading: boolean
     endVideoList: boolean
 }

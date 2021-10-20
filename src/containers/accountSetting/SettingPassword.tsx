@@ -7,7 +7,7 @@ import './Setting.scss';
 import { validatePassword } from '../../services/regex';
 
 interface Props{
-    user: User
+    user: AuthRouter.CheckSuccessResponse
 }
 
 interface SubmitResponse {

@@ -70,7 +70,7 @@ export declare global {
         }
 
         interface StateType {
-            user: User | null;
+            user: AuthRouter.CheckSuccessResponse | null;
             logoutError: LogoutFailureResonse | null;
             checkError: CheckFailureResponse | null;
         }

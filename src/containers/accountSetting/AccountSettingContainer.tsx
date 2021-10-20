@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AnyAction } from 'redux';
-import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
+import { SelectorStateType, useAppSelector } from '../../hooks';
 import './AccountSetting.scss';
 import DeleteUser from './DeleteUser';
 import RecieveDiscomfort from './RecieveDiscomfort';
@@ -10,7 +9,7 @@ import SettingPassword from './SettingPassword';
 import SettingSns from './SettingSns';
 
 interface FromReducerType{
-    user: User|null
+    user: AuthRouter.CheckSuccessResponse|null
 }
 interface Props{
     param: string; // mypage, password, request
@@ -64,4 +63,4 @@ const AccountSettingContainer: React.FC<Props> = ({ param }: Props) => {
         : <></>;
 };
 
-export default AccountSettingContainer;
+export default React.memo(AccountSettingContainer);
