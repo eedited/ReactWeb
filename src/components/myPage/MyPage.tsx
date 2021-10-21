@@ -98,7 +98,13 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                             <LinkedIn className="mypage__header__title__sns__link__icon" />
                                         </a>
                                     )}
-                                <Twitter className="mypage__header__title__sns__link__icon twitter no_link" />
+                                {(!myPageResponse.success || (!myPageResponse.success.twitter) || (myPageResponse.success.twitter.length === 0))
+                                    ? <Twitter className="mypage__header__title__sns__link__icon twitter no_link" />
+                                    : (
+                                        <a target="_blank" className="mypage__header__title__sns__link" href={myPageResponse.success.twitter} rel="noreferrer">
+                                            <Twitter className="mypage__header__title__sns__link__icon twitter" />
+                                        </a>
+                                    )}
                             </div>
                         </div>
                         {
