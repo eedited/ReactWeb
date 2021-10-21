@@ -12,7 +12,7 @@ const User: React.FC<Props> = ({ userInfo, key }: Props) => (
         <div
             className="user"
         >
-            <Link to={`/profile?userId=${userInfo.nickname}`}>
+            <Link to={`/profile?userId=${userInfo.userId}`}>
                 <img
                     className="user__img"
                     src={userInfo.profilePicture}
