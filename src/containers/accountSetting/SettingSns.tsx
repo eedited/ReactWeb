@@ -18,9 +18,10 @@ interface SubmitResponse {
 const SettingSns: React.FC<Props> = ({ user }: Props) => {
     const [submitResponse, setSubmitResponse]: [SubmitResponse, React.Dispatch<React.SetStateAction<SubmitResponse>>] = useState<SubmitResponse>({ success: null, failure: null, loading: false });
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
-        Facebook: user.facebook,
-        Instagram: user.instagram,
-        LinkedIn: user.linkedin,
+        Facebook: user.facebook ? user.facebook : '',
+        Instagram: user.instagram ? user.instagram : '',
+        LinkedIn: user.linkedin ? user.linkedin : '',
+        Twitter: user.twitter ? user.twitter : '',
     });
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const [errMsg, setErrMsg]: [string|null, React.Dispatch<React.SetStateAction<string|null>>] = useState<string|null>(null);
@@ -40,9 +41,13 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
             setErrMsg('링크드인 url이 올바르지 않습니다!');
             return;
         }
+        if (inputState.Twitter && inputState.Twitter.indexOf('twitter') === -1) {
+            setErrMsg('트위터 url이 올바르지 않습니다!');
+            return;
+        }
         (async () => {
             try {
-                const response: AxiosResponse<UserRouter.SetSnsSuccessResponse> = await setSns({ facebook: inputState.Facebook, instagram: inputState.Instagram, linkedin: inputState.LinkedIn });
+                const response: AxiosResponse<UserRouter.SetSnsSuccessResponse> = await setSns({ facebook: inputState.Facebook, instagram: inputState.Instagram, linkedin: inputState.LinkedIn, twitter: inputState.Twitter });
                 setSubmitResponse({ ...submitResponse, success: response });
             }
             catch (err) {
@@ -53,7 +58,7 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
             }
         })();
         setSubmitResponse({ ...submitResponse, loading: false });
-    }, [inputState.Facebook, inputState.Instagram, inputState.LinkedIn, submitResponse]);
+    }, [inputState.Facebook, inputState.Instagram, inputState.LinkedIn, inputState.Twitter, submitResponse]);
     useEffect(() => {
         if (submitResponse.success) {
             dispatch(userAction.check());
@@ -79,6 +84,12 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
                         LinkedIn
                     </div>
                     <input className="accountSetting__body__userInfo__input" name="LinkedIn" onChange={onInputChange} value={inputState.LinkedIn} placeholder="https://www.linkedin.com/in/{user고유번호}/" />
+                </div>
+                <div className="accountSetting__body__userInfo">
+                    <div className="accountSetting__body__userInfo__tag">
+                        Twitter
+                    </div>
+                    <input className="accountSetting__body__userInfo__input" name="Twitter" onChange={onInputChange} value={inputState.Twitter} placeholder="https://twitter.com/{userId}" />
                 </div>
                 {errMsg && <div className="accountSetting__Mypage__error">{errMsg}</div>}
                 {submitResponse.success && <div>회원정보 변경이 완료되었습니다.</div> }

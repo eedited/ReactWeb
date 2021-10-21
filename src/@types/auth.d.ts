@@ -32,6 +32,7 @@ export declare global {
         facebook: string | null
         instagram: string | null
         linkedin: string | null
+        twitter: string | null
         admin: boolean
         proTag: boolean
         createdAt: Date
@@ -54,9 +55,10 @@ export declare global {
             emailToken: string
             profilePicture: string
             description: string
-            facebook: string
-            instagram: string
-            linkedin: string
+            facebook: string|null
+            instagram: string|null
+            linkedin: string|null
+            twitter: string|null
             proTag: boolean
         }
         interface CheckFailureResponse {

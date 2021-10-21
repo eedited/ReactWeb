@@ -55,6 +55,7 @@ export declare global {
             facebook: string
             instagram: string
             linkedin: string
+            twitter: string
         }
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface SetSnsSuccessResponse{}
