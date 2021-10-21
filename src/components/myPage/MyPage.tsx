@@ -3,6 +3,7 @@ import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
 import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
 import { ReactComponent as LinkedIn } from '../../images/linkedin-brands.svg';
+import { ReactComponent as Twitter } from '../../images/twitter-brands.svg';
 import VideoContainer from '../../containers/landing/VideoContainer';
 import MyPageFollowContainer from '../../containers/myPage/MyPageFollowContainer';
 import BlueButton from '../common/button/BlueButton';
@@ -97,6 +98,7 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                             <LinkedIn className="mypage__header__title__sns__link__icon" />
                                         </a>
                                     )}
+                                <Twitter className="mypage__header__title__sns__link__icon twitter no_link" />
                             </div>
                         </div>
                         {
