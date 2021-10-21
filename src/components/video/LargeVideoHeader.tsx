@@ -13,7 +13,9 @@ interface Props extends RouteComponentProps{
 const LargeVideoDescription: React.FC<Props> = ({ video, user, history }: Props) => (
     <div className="LargeVideoHeader">
         <div className="LargeVideoHeader__main">
-            <img className="LargeVideoHeader__main__profileIcon" src={video.User.profilePicture} alt="profile" />
+            <Link className="LargeVideoHeader__main__rest__nickname" to={`/profile?userId=${video.uploader}`}>
+                <img className="LargeVideoHeader__main__profileIcon" src={video.User.profilePicture} alt="profile" />
+            </Link>
             <div className="LargeVideoHeader__main__rest">
                 <div className="LargeVideoHeader__main__rest__title">{ video.title }</div>
                 <Link className="LargeVideoHeader__main__rest__nickname" to={`/profile?userId=${video.uploader}`}>{ video.User.nickname }</Link>
