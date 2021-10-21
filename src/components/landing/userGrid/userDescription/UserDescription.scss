@@ -1,0 +1,49 @@
+@import '/src/App.scss';
+
+.user__description {
+    width: 96%;
+    margin-left: 2%;
+
+    .user__description__title {
+        .user__description__title__link {
+            font-family: Pretendard-Bold;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            font-size: rem(15);
+            line-height: rem(25);
+        }
+    }
+
+    .user__description__second {
+        font-family: NotoSansKRMedium;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        line-height: rem(25);
+        font-size: rem(13);
+
+        .user__description__detail {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+
+            .user__description__detail__link {
+                color: #707070;
+                margin-right: rem(9);
+            }
+        }
+
+        .video__description__right {
+            display: flex;
+            flex-direction: row;
+            gap: rem(10);
+            align-items: center;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+@import '/src/App.scss';
+
+.user {
+    position: relative;
+    padding-top: 56.25%;
+    margin-bottom: rem(10);
+
+    .user__img {
+        position: absolute;
+        border-radius: 10px;
+        margin: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
