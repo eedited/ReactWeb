@@ -28,15 +28,15 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
         e.preventDefault();
         setSubmitResponse({ success: null, failure: null, loading: true });
         setErrMsg('');
-        if (inputState.Facebook.length > 0 && inputState.Facebook.indexOf('facebook') === -1) {
+        if (inputState.Facebook && inputState.Facebook.indexOf('facebook') === -1) {
             setErrMsg('페이스북 url이 올바르지 않습니다!');
             return;
         }
-        if (inputState.Instagram.length > 0 && inputState.Instagram.indexOf('instagram') === -1) {
+        if (inputState.Instagram && inputState.Instagram.indexOf('instagram') === -1) {
             setErrMsg('인스타그램 url이 올바르지 않습니다!');
             return;
         }
-        if (inputState.LinkedIn.length > 0 && inputState.LinkedIn.indexOf('linkedin') === -1) {
+        if (inputState.LinkedIn && inputState.LinkedIn.indexOf('linkedin') === -1) {
             setErrMsg('링크드인 url이 올바르지 않습니다!');
             return;
         }
