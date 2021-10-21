@@ -105,9 +105,9 @@ const SignupOverlayContainer: React.FC<props> = ({ history, backgroundClicked, t
         }
         if (Auth) {
             backgroundClicked();
-            history.push('/signupSuccess');
+            history.push(`/signupSuccess?email=${form.email}`);
         }
-    }, [Auth, AuthError, backgroundClicked, history]);
+    }, [Auth, AuthError, backgroundClicked, form.email, history]);
     return (
         <AuthOverlay
             title={title}
