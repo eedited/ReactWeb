@@ -62,9 +62,14 @@
                 flex-direction: row;
                 margin-top: rem(32);
                 gap : rem(8);
-                .mypage__header__title__sns__icon{
+                .mypage__header__title__sns__link__icon{
                     width : rem(34);
                     height: rem(34);
+                }
+                .mypage__header__title__sns__link__icon.no_link{
+                    width : rem(34);
+                    height: rem(34);
+                    filter: grayscale(100%)
                 }
             }
             .mypage__header__title__email {

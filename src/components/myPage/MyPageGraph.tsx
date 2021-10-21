@@ -21,6 +21,34 @@ interface props{
     className?: string
     profile: string
 }
+
+function setupCanvas(canvas: HTMLCanvasElement): CanvasRenderingContext2D | null {
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+    if (!ctx) return null;
+    if (window.devicePixelRatio) {
+        const {
+            width: hidefCanvasWidth,
+            height: hidefCanvasHeigth,
+        }: DOMRect = canvas.getBoundingClientRect();
+        const hidefCanvasCssWidth: number = hidefCanvasWidth;
+        const hidefCanvasCssHeight: number = hidefCanvasHeigth;
+        canvas.setAttribute(
+            'width',
+            String(hidefCanvasWidth * window.devicePixelRatio),
+        );
+        canvas.setAttribute(
+            'height',
+            String(hidefCanvasHeigth * window.devicePixelRatio),
+        );
+        // eslint-disable-next-line no-param-reassign
+        canvas.style.width = `${hidefCanvasCssWidth}px`;
+        // eslint-disable-next-line no-param-reassign
+        canvas.style.height = `${hidefCanvasCssHeight}px`;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    return ctx;
+}
+
 const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props) => {
     const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
     useEffect(() => {
@@ -30,27 +58,23 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         for (let i: number = 0; i < tagArray.length; i += 1) tagNum += tagArray[i][1];
         const canvas: HTMLCanvasElement|null = canvasRef.current;
         if (!canvas) return;
-        const ctx: CanvasRenderingContext2D | null = canvas.getContext('2d');
+        const ctx: CanvasRenderingContext2D | null = setupCanvas(canvas);
         if (!ctx) return;
-        const dpr: number = window.devicePixelRatio || 1;
-        const width: number = 400 / dpr;
-        const height: number = 400 / dpr;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         const img: HTMLImageElement = new Image();
+        const { width }: HTMLCanvasElement = canvas;
+        const { height }: HTMLCanvasElement = canvas;
         img.onload = () => {
-            const radius: number = height / 3;
+            const radius: number = height / 3 / (window.devicePixelRatio || 1);
             const gap: number = 8;
-            const lineWidth: number = 5 / dpr;
-            const x: number = width / 2;
-            const y: number = height / 2;
+            const lineWidth: number = 5;
+            const x: number = width / 2 / (window.devicePixelRatio || 1);
+            const y: number = height / 2 / (window.devicePixelRatio || 1);
             let rgb: number[] = [8, 44, 172];
-            const fontSize: number = Math.ceil(12 / dpr);
+            const fontSize: number = Math.ceil(12);
 
             ctx.save();
             ctx.beginPath();
-            ctx.arc(x, y, radius - 10 / dpr, 0, Math.PI * 2);
+            ctx.arc(x, y, radius - 10, 0, Math.PI * 2);
             ctx.fillStyle = '#f7cec0';
             ctx.fill();
             ctx.clip();
@@ -147,7 +171,7 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         img.src = profile;
     }, [categories, profile]);
     return (
-        <canvas className={className} ref={canvasRef} />
+        <canvas className={className} ref={canvasRef} width="400" height="400" />
     );
 };
 MyPageGraph.defaultProps = {
