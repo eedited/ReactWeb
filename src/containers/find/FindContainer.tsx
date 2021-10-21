@@ -62,6 +62,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     useEffect(() => {
         setVideos([]);
         setUsers([]);
+        setCombines([]);
         endPage.current = false;
         page.current = 1;
     }, [param]);
