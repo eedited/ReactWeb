@@ -1,0 +1,20 @@
+@import '/src/App.scss';
+
+.followerbutton {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    font-family: NotoSansKRMedium;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    .followerbutton__img {
+        width: rem(15);
+        height: rem(14);
+    }
+    .followerbutton__txt {
+        font-size: rem(13);
+        padding-bottom: rem(2);
+    }
+}

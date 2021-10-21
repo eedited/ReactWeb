@@ -1,0 +1,19 @@
+@import '/src/App.scss';
+.userGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(rem(350), 1fr));
+    justify-content: space-around;
+    column-gap: rem(20);
+    row-gap: rem(40);
+    padding-left: rem(72);
+    padding-right: rem(72);
+    padding-bottom: rem(40);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (max-width: 863px) {
+    .userGrid{
+        padding: 0 10% rem(40) 10%;
+    }
+}

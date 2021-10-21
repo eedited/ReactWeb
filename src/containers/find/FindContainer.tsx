@@ -2,9 +2,23 @@ import { AxiosResponse } from 'axios';
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { search } from '../../api/search';
+import UserDescription from '../../components/landing/userGrid/userDescription/UserDescription';
 import VideoDescription1 from '../../components/landing/videoGrid/videoDescription/VideoDescription1';
+import UserContainer from '../landing/UserContainer';
 import VideoContainer from '../landing/VideoContainer';
 import './Find.scss';
+
+interface myVideo {
+    video: Video
+    type: 'Video'
+}
+
+interface myUser {
+    user: User
+    type: 'User'
+}
+
+type Combine = myVideo | myUser
 
 interface Props extends RouteComponentProps{
     param: string
@@ -13,6 +27,11 @@ interface SearchResponse {
     success: SearchRouter.SearchSuccessResponse | null
     failure: SearchRouter.SearchFailureResponse | null
 }
+
+function isVideo(x: Combine): x is myVideo {
+    return x.type === 'Video';
+}
+
 const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     const page: React.MutableRefObject<number> = useRef(1);
     const endPage: React.MutableRefObject<boolean> = useRef(false);
@@ -20,6 +39,8 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     const [loading, setLoading]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [searchResponse, setSearchResponse]: [SearchResponse, React.Dispatch<React.SetStateAction<SearchResponse>>] = useState<SearchResponse>({ success: null, failure: null });
     const [videos, setVideos]: [Video[], React.Dispatch<React.SetStateAction<Video[]>>] = useState<Video[]>([]);
+    const [users, setUsers]: [User[], React.Dispatch<React.SetStateAction<User[]>> ] = useState<User[]>([]);
+    const [combines, setCombines]: [Combine[], React.Dispatch<React.SetStateAction<Combine[]>> ] = useState<Combine[]>([]);
     const [searchInput, setSearchInput]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
     const fetchFind: () => void = useCallback(() => {
         (async function f() {
@@ -40,6 +61,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     }, [param]);
     useEffect(() => {
         setVideos([]);
+        setUsers([]);
         endPage.current = false;
         page.current = 1;
     }, [param]);
@@ -50,11 +72,28 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     useEffect(() => {
         setVideos((prevState: Video[]) => {
             if (searchResponse.success) {
-                return [...prevState, ...(searchResponse.success.videos)];
+                return [...(searchResponse.success.videos)];
+            }
+            return prevState;
+        });
+        setUsers((prevState: User[]) => {
+            if (searchResponse.success) {
+                return [...(searchResponse.success.users)];
             }
             return prevState;
         });
     }, [searchResponse.success]);
+    useEffect(() => {
+        setCombines((prevState: Combine[]) => {
+            const myVideos: myVideo[] = videos.map((video: Video) => (
+                { video, type: 'Video' }
+            ));
+            const myUsers: myUser[] = users.map((user: User) => (
+                { user, type: 'User' }
+            ));
+            return [...prevState, ...myVideos, ...myUsers];
+        });
+    }, [videos, users]);
     const f: () => void = useCallback(() => {
         if (!endPage.current) {
             fetchFind();
@@ -62,11 +101,11 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
         }
     }, [fetchFind]);
     useEffect(() => {
-        if (!videos) return () => {};
+        if (!videos && !users) return () => {};
         const onIntersect: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
             // eslint-disable-next-line @typescript-eslint/typedef
             const [{ isIntersecting }]: IntersectionObserverEntry[] = entries;
-            if (!videos) return; // 비디오가 없다면, 한번도 비디오를 불러오지 않은 것이므로, end와 start가 붙어있음
+            if (!videos && !users) return; // 비디오가 없다면, 한번도 비디오를 불러오지 않은 것이므로, end와 start가 붙어있음
             if (!isIntersecting) return; // 아직 intersect하지 않았다면 불러올 필요가 없음.
             if (loading) return; // 비디오가 로딩중이라면, 다른 비디오를 불러와서는 안된다.
             f(); // 비디오 불러오기
@@ -84,7 +123,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
         return () => {
             observer.unobserve(target); // cleanup할 때 unobserve
         };
-    }, [f, videos, targetRef, loading, searchResponse.failure]);
+    }, [f, videos, targetRef, loading, searchResponse.failure, users]);
     const onKeyPressSearch: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -115,13 +154,14 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
                     {`'${param}'`}
                 </div>
                 <div className="find__result__text">
-                    {`${videos.length} 개의 동영상이 검색되었습니다.`}
+                    {`${videos.length} 개의 동영상과 ${users.length}명의 유저가 검색되었습니다.`}
                     <br />
                     스크롤을 내리면 좀 더 많은 동영상들을 찾아볼 수 있습니다.
                 </div>
             </div>
             <div className="find__videoGrid">
-                {
+
+                {/* {
                     videos.map((video: Video, idx: number) => (
                         <div key={video.id}>
                             <VideoContainer videoInfo={video} />
@@ -129,9 +169,35 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
                         </div>
                     ))
                 }
+                {
+                    users.map((user: User, idx: number) => (
+                        <div key={user.userId}>
+                            <UserContainer userInfo={user} />
+                            <UserDescription userInfo={user} />
+                        </div>
+                    ))
+                }
+                 */}
+                {
+                    combines.map((combine: Combine, idx: number) => {
+                        if (isVideo(combine)) {
+                            return (
+                                <div key={combine.video.id}>
+                                    <VideoContainer videoInfo={combine.video} />
+                                    <VideoDescription1 videoInfo={combine.video} />
+                                </div>
+                            );
+                        }
+                        return (
+                            <div key={combine.user.userId}>
+                                <UserContainer userInfo={combine.user} />
+                                <UserDescription userInfo={combine.user} />
+                            </div>
+                        );
+                    })
+                }
                 <div ref={targetRef} />
             </div>
-
         </div>
     );
 };
