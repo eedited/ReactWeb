@@ -14,7 +14,7 @@ const UserDescription: React.FC<Props> = ({ userInfo }: Props) => (
         </div>
         <div className="user__description__second">
             <div className="user__description__detail">
-                <Link to={`/profile?userId=${userInfo.userId}`} className="user__description__detail__link">{userInfo.description}</Link>
+                <Link to={`/profile?userId=${userInfo.userId}`} className="user__description__detail__link">{userInfo.description.length > 0 ? userInfo.description : '<아직 유저에 대한 설명이 없습니다.>'}</Link>
             </div>
             <div className="user__description__right">
                 <FollowerButtonCountContainer User={userInfo} />

@@ -20,6 +20,11 @@ interface myUser {
 
 type Combine = myVideo | myUser
 
+interface NumElement{
+    video: number
+    user: number
+}
+
 interface Props extends RouteComponentProps{
     param: string
 }
@@ -41,6 +46,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
     const [videos, setVideos]: [Video[], React.Dispatch<React.SetStateAction<Video[]>>] = useState<Video[]>([]);
     const [users, setUsers]: [User[], React.Dispatch<React.SetStateAction<User[]>> ] = useState<User[]>([]);
     const [combines, setCombines]: [Combine[], React.Dispatch<React.SetStateAction<Combine[]>> ] = useState<Combine[]>([]);
+    const [numElements, setNumElements]: [NumElement, React.Dispatch<React.SetStateAction<NumElement>> ] = useState<NumElement>({ video: 0, user: 0 });
     const [searchInput, setSearchInput]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('');
     const fetchFind: () => void = useCallback(() => {
         (async function f() {
@@ -63,6 +69,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
         setVideos([]);
         setUsers([]);
         setCombines([]);
+        setNumElements({ user: 0, video: 0 });
         endPage.current = false;
         page.current = 1;
     }, [param]);
@@ -83,6 +90,10 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
             }
             return prevState;
         });
+        if (searchResponse.success) {
+            setNumElements(({ user: numElements.user + searchResponse.success.users.length, video: numElements.video + searchResponse.success.videos.length }));
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchResponse.success]);
     useEffect(() => {
         setCombines((prevState: Combine[]) => {
@@ -155,7 +166,7 @@ const FindContainer: React.FC<Props> = ({ param, history }: Props) => {
                     {`'${param}'`}
                 </div>
                 <div className="find__result__text">
-                    {`${videos.length} 개의 동영상과 ${users.length}명의 유저가 검색되었습니다.`}
+                    {`${numElements.video} 개의 동영상과 ${numElements.user}명의 유저가 검색되었습니다.`}
                     <br />
                     스크롤을 내리면 좀 더 많은 동영상들을 찾아볼 수 있습니다.
                 </div>

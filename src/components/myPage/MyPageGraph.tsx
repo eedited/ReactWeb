@@ -50,7 +50,7 @@ function setupCanvas(canvas: HTMLCanvasElement): CanvasRenderingContext2D | null
 }
 
 const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props) => {
-    const canvasRef: React.RefObject<HTMLCanvasElement > = useRef(null);
+    const canvasRef: React.RefObject<HTMLCanvasElement> = useRef(null);
     useEffect(() => {
         const tagArray: [string, number][] = Object.entries(categories).sort((a: [string, number], b: [string, number]) => (b[1] - a[1]));
 
@@ -61,14 +61,15 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         const ctx: CanvasRenderingContext2D | null = setupCanvas(canvas);
         if (!ctx) return;
         const img: HTMLImageElement = new Image();
-        const { width }: HTMLCanvasElement = canvas;
-        const { height }: HTMLCanvasElement = canvas;
+        const width: number = 400;
+        const height: number = 400;
         img.onload = () => {
-            const radius: number = height / 3 / (window.devicePixelRatio || 1);
+            const radius: number = height / 3;
+            console.log(radius, (window.devicePixelRatio || 1), height);
             const gap: number = 8;
             const lineWidth: number = 5;
-            const x: number = width / 2 / (window.devicePixelRatio || 1);
-            const y: number = height / 2 / (window.devicePixelRatio || 1);
+            const x: number = width / 2;
+            const y: number = height / 2;
             let rgb: number[] = [8, 44, 172];
             const fontSize: number = Math.ceil(12);
 
