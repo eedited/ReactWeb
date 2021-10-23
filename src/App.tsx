@@ -23,6 +23,7 @@ import FindingPage from './pages/FindingPage';
 import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
+import RouteChangeTracker from './hooks/RouteChangeTracker';
 
 type AppType = () => JSX.Element;
 
@@ -55,6 +56,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/servicePolicy" component={ServicePolicy} />
                 <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                 <Route component={Page404} />
+                <RouteChangeTracker />
             </Switch>
         </ScrollTop>
     </div>
