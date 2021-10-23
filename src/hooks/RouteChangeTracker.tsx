@@ -1,18 +1,29 @@
 import React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router';
 import ReactGA from 'react-ga';
+import { BrowserHistory, State } from 'history';
 
-type Props = RouteComponentProps
+interface Props{
+    centerHistory: BrowserHistory<State>
+    childern?: React.ReactNode
+}
 
-const RouteChangeTracker: React.FC<Props> = ({ history }: Props) => {
-    // eslint-disable-next-line @typescript-eslint/typedef
-    history.listen(({ location, action }) => {
-        ReactGA.set({ page: location.pathname });
-        ReactGA.pageview(location.pathname);
-    });
+const RouteChangeTracker: React.FC<Props> = ({ centerHistory, childern }: Props) => {
+    React.useEffect(() => {
+        console.log(centerHistory);
+        // eslint-disable-next-line @typescript-eslint/typedef
+        const unlisten = centerHistory.listen(({ location }) => {
+            ReactGA.pageview(location.pathname + location.search);
+            console.log(location);
+        });
+        return () => {
+            unlisten();
+        };
+    }, [centerHistory]);
     return (
-        <div />
+        <div>{childern}</div>
     );
 };
-
-export default withRouter(RouteChangeTracker);
+RouteChangeTracker.defaultProps = {
+    childern: '',
+};
+export default (RouteChangeTracker);

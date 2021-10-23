@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import ReactGA from 'react-ga';
 import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
 import LoginPage from './pages/LoginPage';
@@ -23,43 +24,57 @@ import FindingPage from './pages/FindingPage';
 import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
-import RouteChangeTracker from './hooks/RouteChangeTracker';
 
 type AppType = () => JSX.Element;
 
-const App: AppType = (): JSX.Element => (
-    <div className="App">
-        <ScrollTop>
-            <Route path="/" component={RouteChangeTracker} />
-            <Switch>
-                <Route path="/" component={Landing} exact />
-                <Route path="/video" component={Landing} />
-                <Route path="/videos" component={Landing} />
-                <Route path="/search" component={FindingPage} />
-                <Route path="/videoInfo" component={VideoPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/signup" component={SignupPage} />
-                <Route path="/findId" component={FindingIdPage} />
-                <Route path="/findPw" component={FindingPwPage} />
-                <Route path="/upload" component={UploadPage} exact />
-                <Route path="/404NotFound" component={Page404} />
-                <Route path="/finding" component={FindingJobPage} />
-                <Route path="/hiring" component={HiringJobPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/chat" component={ChatPage} />
-                <Route path="/change" component={VideoChangePage} />
-                <Route path="/signupSuccess" component={SignupSuccess} />
-                <Route path="/hello" component={HelloPage} />
-                <Route path="/AccountSetting" component={AccountSettingPage} exact />
-                <Route path="/AccountSetting/:param" component={AccountSettingPage} />
-                <Route path="/emailValidation" component={EmailValidate} />
-                <Route path="/snsAuth" component={SnsAuthPage} />
-                <Route path="/servicePolicy" component={ServicePolicy} />
-                <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
-                <Route component={Page404} />
-            </Switch>
-        </ScrollTop>
-    </div>
+const App: AppType = (): JSX.Element => {
+    React.useEffect(() => {
+        console.log(window.location.pathname, window.location.search);
+        ReactGA.set({ page: window.location.pathname + window.location.search });
+        ReactGA.pageview(window.location.pathname + window.location.search);
+        // eslint-disable-next-line @typescript-eslint/typedef
+        // const unlisten = centerHistory.listen((location) => {
+        //     // ReactGA.pageview(location.pathname + location.search);
+        //     console.log(location);
+        // });
+        // return () => {
+        //     unlisten();
+        // };
+    }, []);
+    return (
+        <div className="App">
+            <ScrollTop>
+                <Switch>
+                    <Route path="/" component={Landing} exact />
+                    <Route path="/video" component={Landing} />
+                    <Route path="/videos" component={Landing} />
+                    <Route path="/search" component={FindingPage} />
+                    <Route path="/videoInfo" component={VideoPage} />
+                    <Route path="/login" component={LoginPage} />
+                    <Route path="/signup" component={SignupPage} />
+                    <Route path="/findId" component={FindingIdPage} />
+                    <Route path="/findPw" component={FindingPwPage} />
+                    <Route path="/upload" component={UploadPage} exact />
+                    <Route path="/404NotFound" component={Page404} />
+                    <Route path="/finding" component={FindingJobPage} />
+                    <Route path="/hiring" component={HiringJobPage} />
+                    <Route path="/profile" component={ProfilePage} />
+                    <Route path="/chat" component={ChatPage} />
+                    <Route path="/change" component={VideoChangePage} />
+                    <Route path="/signupSuccess" component={SignupSuccess} />
+                    <Route path="/hello" component={HelloPage} />
+                    <Route path="/AccountSetting" component={AccountSettingPage} exact />
+                    <Route path="/AccountSetting/:param" component={AccountSettingPage} />
+                    <Route path="/emailValidation" component={EmailValidate} />
+                    <Route path="/snsAuth" component={SnsAuthPage} />
+                    <Route path="/servicePolicy" component={ServicePolicy} />
+                    <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
+                    <Route component={Page404} />
+                </Switch>
 
-);
+            </ScrollTop>
+        </div>
+
+    );
+};
 export default App;
