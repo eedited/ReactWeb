@@ -56,8 +56,8 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/servicePolicy" component={ServicePolicy} />
                 <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                 <Route component={Page404} />
-                <RouteChangeTracker />
             </Switch>
+            <RouteChangeTracker />
         </ScrollTop>
     </div>
 
