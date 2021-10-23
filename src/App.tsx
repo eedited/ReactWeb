@@ -30,6 +30,7 @@ type AppType = () => JSX.Element;
 const App: AppType = (): JSX.Element => (
     <div className="App">
         <ScrollTop>
+            <Route path="/" component={RouteChangeTracker} />
             <Switch>
                 <Route path="/" component={Landing} exact />
                 <Route path="/video" component={Landing} />
@@ -57,7 +58,6 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                 <Route component={Page404} />
             </Switch>
-            <RouteChangeTracker />
         </ScrollTop>
     </div>
 
