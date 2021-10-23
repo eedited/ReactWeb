@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { RouteComponentProps, withRouter } from 'react-router';
 import ReactGA from 'react-ga';
 import { Route, Switch } from 'react-router-dom';
 import Landing from './pages/Landing';
@@ -25,22 +26,13 @@ import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
 
-type AppType = () => JSX.Element;
-
-const App: AppType = (): JSX.Element => {
+type Props = RouteComponentProps;
+const App: React.FC<Props> = ({ location }: Props) => {
+    const path: string = location.pathname + location.search;
     React.useEffect(() => {
-        console.log(window.location.pathname, window.location.search);
-        ReactGA.set({ page: window.location.pathname + window.location.search });
-        ReactGA.pageview(window.location.pathname + window.location.search);
-        // eslint-disable-next-line @typescript-eslint/typedef
-        // const unlisten = centerHistory.listen((location) => {
-        //     // ReactGA.pageview(location.pathname + location.search);
-        //     console.log(location);
-        // });
-        // return () => {
-        //     unlisten();
-        // };
-    }, []);
+        ReactGA.set({ page: path });
+        ReactGA.pageview(path);
+    }, [path]);
     return (
         <div className="App">
             <ScrollTop>
@@ -77,4 +69,4 @@ const App: AppType = (): JSX.Element => {
 
     );
 };
-export default App;
+export default withRouter(App);

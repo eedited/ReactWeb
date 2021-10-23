@@ -13,7 +13,7 @@ const createStore = () => {
     if (env === 'development') {
         store = configureStore({
             reducer: rootReducer,
-            middleware: [sagaMiddleware, logger],
+            middleware: [sagaMiddleware],
             devTools: true,
         });
     }
