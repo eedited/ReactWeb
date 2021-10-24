@@ -1,6 +1,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import React from 'react';
+import ReactGA from 'react-ga';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -22,6 +23,7 @@ dotenv.config();
     store.dispatch(setUser(JSON.parse(user)));
     store.dispatch(check());
 }());
+ReactGA.initialize(process.env.REACT_APP_TRACKING_ID as string);
 
 ReactDOM.render(
     <Provider store={store}>
