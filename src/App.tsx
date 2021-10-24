@@ -64,41 +64,8 @@ const App: React.FC<Props> = ({ location }: Props) => {
                     <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                     <Route component={Page404} />
                 </Switch>
-
-const App: AppType = (): JSX.Element => (
-    <div className="App">
-        <ScrollTop>
-            <Switch>
-                <Route path="/" component={Landing} exact />
-                <Route path="/video" component={Landing} />
-                <Route path="/videos" component={Landing} />
-                <Route path="/search" component={FindingPage} />
-                <Route path="/videoInfo" component={VideoPage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/signup" component={SignupPage} />
-                <Route path="/findId" component={FindingIdPage} />
-                <Route path="/findPw" component={FindingPwPage} />
-                <Route path="/upload" component={UploadPage} exact />
-                <Route path="/404NotFound" component={Page404} />
-                <Route path="/finding" component={FindingJobPage} />
-                <Route path="/hiring" component={HiringJobPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/chat" component={ChatPage} />
-                <Route path="/change" component={VideoChangePage} />
-                <Route path="/signupSuccess" component={SignupSuccess} />
-                <Route path="/hello" component={HelloPage} />
-                <Route path="/AccountSetting" component={AccountSettingPage} exact />
-                <Route path="/AccountSetting/:param" component={AccountSettingPage} />
-                <Route path="/emailValidation" component={EmailValidate} />
-                <Route path="/snsAuth" component={SnsAuthPage} />
-                <Route path="/servicePolicy" component={ServicePolicy} />
-                <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
-                <Route path="/BlockedUser" component={BlockUserPage} />
-                <Route component={Page404} />
-            </Switch>
-        </ScrollTop>
-    </div>
-
+            </ScrollTop>
+        </div>
     );
 };
 export default withRouter(App);
