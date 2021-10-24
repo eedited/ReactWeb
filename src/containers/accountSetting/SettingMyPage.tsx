@@ -1,6 +1,7 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import { AnyAction } from 'redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { myPageModify } from '../../api/user';
 import BlueButton from '../../components/common/button/BlueButton';
 import { useAppDispatch } from '../../hooks';
@@ -10,7 +11,7 @@ import './Setting.scss';
 import FileUploadToS3 from '../../services/upload';
 import WhiteButton from '../../components/common/button/WhiteButton';
 
-interface Props{
+interface Props extends RouteComponentProps {
     user: AuthRouter.CheckSuccessResponse
 }
 
@@ -19,7 +20,7 @@ interface SubmitResponse {
     failure: UserRouter.MypageModifyFailureResponse | null
 }
 
-const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
+const SettingMyPage: React.FC<Props> = ({ user, history }: Props) => {
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         nickname: '',
     });
@@ -47,11 +48,18 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
                 setSubmitResponse({ success: response, failure: null });
             }
             catch (err) {
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        if (err.response.status === 456) {
+                            history.push('/BlockedUser');
+                        }
+                    }
+                }
                 setSubmitResponse({ success: null, failure: { error: err as Error } });
                 setErrMsg('이미 존재하는 닉네임입니다!');
             }
         }());
-    }, [S3, descriptionText, inputState.nickname, uploadFile, user.profilePicture, user.userId]);
+    }, [S3, descriptionText, history, inputState.nickname, uploadFile, user.profilePicture, user.userId]);
     useEffect(() => {
         setDescriptionTextChange((prevState: string) => user.description);
         setInput('nickname', user.nickname);
@@ -110,4 +118,4 @@ const SettingMyPage: React.FC<Props> = ({ user }: Props) => {
     );
 };
 
-export default SettingMyPage;
+export default withRouter(SettingMyPage);

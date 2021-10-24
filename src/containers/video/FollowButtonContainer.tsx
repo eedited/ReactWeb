@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import FollowButton from '../../components/video/FollowButton';
 import { userFollow } from '../../api/user';
 
@@ -7,12 +8,12 @@ interface FollowResponse {
     success: UserRouter.UserFollowSuccessResponse | null
     failure: UserRouter.UserFollowFailureResponse | null
 }
-interface Props {
+interface Props extends RouteComponentProps {
     video: VideoRouter.VideoSuccessResponse
     userId: string|null
 }
 
-const FollowButtonContainer: React.FC<Props> = ({ video, userId }: Props) => {
+const FollowButtonContainer: React.FC<Props> = ({ video, userId, history }: Props) => {
     const [followResponse, setfollowResponse]: [FollowResponse, React.Dispatch<React.SetStateAction<FollowResponse>>] = useState<FollowResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
@@ -34,11 +35,14 @@ const FollowButtonContainer: React.FC<Props> = ({ video, userId }: Props) => {
             setModalTrigger(true);
             if (axios.isAxiosError(err)) {
                 if (err.response) {
+                    if (err.response.status === 456) {
+                        history.push('/BlockedUser');
+                    }
                     setfollowResponse({ ...followResponse, failure: err.response.data });
                 }
             }
         }
-    }, [followResponse]);
+    }, [followResponse, history]);
     const onBackgroundClick: () => void = () => {
         setModalTrigger(false);
     };
@@ -56,4 +60,4 @@ const FollowButtonContainer: React.FC<Props> = ({ video, userId }: Props) => {
     );
 };
 
-export default FollowButtonContainer;
+export default withRouter(FollowButtonContainer);

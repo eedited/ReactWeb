@@ -25,6 +25,7 @@ import FindingPage from './pages/FindingPage';
 import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
+import BlockUserPage from './pages/BlockUserPage';
 
 type Props = RouteComponentProps;
 const App: React.FC<Props> = ({ location }: Props) => {
@@ -63,10 +64,8 @@ const App: React.FC<Props> = ({ location }: Props) => {
                     <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
                     <Route component={Page404} />
                 </Switch>
-
             </ScrollTop>
         </div>
-
     );
 };
 export default withRouter(App);

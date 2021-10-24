@@ -90,7 +90,12 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
     }, [dispatch]);
     useEffect(() => {
         if (uploadError) {
-            setError(`업로드 실패 ${uploadError.info}`);
+            if (uploadError.error.response?.status === 456) {
+                history.push('/BlockedUser');
+            }
+            else {
+                setError(`업로드 실패 ${uploadError.info}`);
+            }
         }
         if (uploadSuccess) {
             history.push('/');

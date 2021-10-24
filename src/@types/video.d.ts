@@ -1,5 +1,6 @@
 import { CaseReducerActions, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
+import { AxiosError } from 'axios';
 
 export declare global {
     interface Tag {
@@ -141,7 +142,7 @@ export declare global {
         }
         interface VideoUploadFailureResponse
             extends VideoRouter.VideoUploadFailureResponse {
-            error: Error;
+            error: AxiosError;
         }
         interface UserVideoFailureResponse
             extends VideoRouter.UserVideoFailureResponse {
@@ -149,7 +150,7 @@ export declare global {
         }
         interface VideoModifyFailureResponse
             extends VideoRouter.VideoModifyFailureResponse {
-            error: Error;
+            error: AxiosError;
         }
 
         export interface StateType {
