@@ -56,12 +56,15 @@ const DeleteUser: React.FC<Props> = ({ user, history }: Props) => {
         }
     };
     useEffect(() => {
+        if (submitResponse.failure) {
+            history.push('/BlockedUser');
+        }
         if (submitResponse.success) {
             localStorage.removeItem('user');
             dispatch(userAction.check());
             history.push('/');
         }
-    }, [dispatch, history, submitResponse.success]);
+    }, [dispatch, history, submitResponse.failure, submitResponse.success]);
     const onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, confirmText: e.target.value, isClickable: (!state.confirm || e.target.value === deleteString) });
     };

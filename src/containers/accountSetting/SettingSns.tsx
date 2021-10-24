@@ -1,13 +1,14 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import React, { useState, useEffect, useCallback } from 'react';
 import { AnyAction } from 'redux';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { setSns } from '../../api/user';
 import BlueButton from '../../components/common/button/BlueButton';
 import { useAppDispatch } from '../../hooks';
 import useInputs, { inputType } from '../../hooks/useInputs';
 import { userAction } from '../../redux/user/user';
 
-interface Props{
+interface Props extends RouteComponentProps{
     user: AuthRouter.CheckSuccessResponse
 }
 interface SubmitResponse {
@@ -15,7 +16,7 @@ interface SubmitResponse {
     failure: AxiosError | null
     loading: boolean
 }
-const SettingSns: React.FC<Props> = ({ user }: Props) => {
+const SettingSns: React.FC<Props> = ({ user, history }: Props) => {
     const [submitResponse, setSubmitResponse]: [SubmitResponse, React.Dispatch<React.SetStateAction<SubmitResponse>>] = useState<SubmitResponse>({ success: null, failure: null, loading: false });
     const [inputState, onInputChange, setInput]: [inputType, (e: React.ChangeEvent<HTMLInputElement>) => void, (name: string, value: string) => void] = useInputs({
         Facebook: user.facebook ? user.facebook : '',
@@ -60,10 +61,13 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
         setSubmitResponse({ ...submitResponse, loading: false });
     }, [inputState.Facebook, inputState.Instagram, inputState.LinkedIn, inputState.Twitter, submitResponse]);
     useEffect(() => {
+        if (submitResponse.failure) {
+            history.push('/BlockedUser');
+        }
         if (submitResponse.success) {
             dispatch(userAction.check());
         }
-    }, [dispatch, submitResponse.success]);
+    }, [dispatch, history, submitResponse.failure, submitResponse.success]);
     return (
         <form onSubmit={onSubmit}>
             <div className="accountSetting__body__wrapper">
@@ -99,4 +103,4 @@ const SettingSns: React.FC<Props> = ({ user }: Props) => {
     );
 };
 
-export default SettingSns;
+export default withRouter(SettingSns);

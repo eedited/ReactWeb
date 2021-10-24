@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState, useEffect } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import LikeButton from '../../components/video/LikeButton';
 import { videoLike } from '../../api/video';
 
@@ -7,11 +8,11 @@ interface LikeResponse {
     success: VideoRouter.VideoLikeSuccessResponse | null
     failure: VideoRouter.VideoLikeFailureResponse | null
 }
-interface Props {
+interface Props extends RouteComponentProps {
     video: VideoRouter.VideoSuccessResponse
 }
 
-const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
+const LikeButtonContainer: React.FC<Props> = ({ video, history }: Props) => {
     const [likeResponse, setLikeResponse]: [LikeResponse, React.Dispatch<React.SetStateAction<LikeResponse>>] = useState<LikeResponse>({ success: null, failure: null });
     const [toggle, setToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [ModalTrigger, setModalTrigger]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
@@ -37,11 +38,14 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
             setModalTrigger(true);
             if (axios.isAxiosError(err)) {
                 if (err.response) {
+                    if (err.response.status === 456) {
+                        history.push('/BlockedUser');
+                    }
                     setLikeResponse({ ...likeResponse, failure: err.response.data });
                 }
             }
         }
-    }, [likeResponse]);
+    }, [history, likeResponse]);
     const onBackgroundClick: () => void = () => {
         setModalTrigger(false);
     };
@@ -55,4 +59,4 @@ const LikeButtonContainer: React.FC<Props> = ({ video }: Props) => {
     );
 };
 
-export default LikeButtonContainer;
+export default withRouter(LikeButtonContainer);

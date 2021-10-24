@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import QueryString, { parse } from 'qs';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { videoAction } from '../../redux/video/video';
 import useInputs, { inputType } from '../../hooks/useInputs';
@@ -125,7 +125,12 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
     };
     useEffect(() => {
         if (modifyError) {
-            setError(`업로드 실패 ${modifyError.info}`);
+            if (modifyError.error.response?.status === 456) {
+                history.push('/BlockedUser');
+            }
+            else {
+                setError(`업로드 실패 ${modifyError.info}`);
+            }
         }
         if (modifySuccess) {
             history.push('/');
@@ -196,7 +201,14 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
                 history.push('/');
             }
             catch (err) {
-                setVideoDeleteResponse({ success: null, failure: { error: err as Error } });
+                if (axios.isAxiosError(err)) {
+                    if (err.response) {
+                        if (err.response.status === 456) {
+                            history.push('/BlockedUser');
+                        }
+                        setVideoDeleteResponse({ success: null, failure: { error: err as Error } });
+                    }
+                }
             }
         }());
     }, [history, videoId]);

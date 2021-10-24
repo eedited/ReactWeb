@@ -23,6 +23,7 @@ import FindingPage from './pages/FindingPage';
 import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
+import BlockUserPage from './pages/BlockUserPage';
 
 type AppType = () => JSX.Element;
 
@@ -54,6 +55,7 @@ const App: AppType = (): JSX.Element => (
                 <Route path="/snsAuth" component={SnsAuthPage} />
                 <Route path="/servicePolicy" component={ServicePolicy} />
                 <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
+                <Route path="/BlockedUser" component={BlockUserPage} />
                 <Route component={Page404} />
             </Switch>
         </ScrollTop>
