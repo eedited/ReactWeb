@@ -17,13 +17,14 @@ interface ValidateResponse {
     failure: Error | null
 }
 
-const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
+const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) => {
     const [myPageResponse, setMyPageResponse]: [MyPageResponseType, React.Dispatch<React.SetStateAction<MyPageResponseType>>] = useState<MyPageResponseType>({ success: null, failure: null });
     const [canModify, setCanModify]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [followToggle, setFollowToggle]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [validateResponse, setValidateResponse]: [ValidateResponse, React.Dispatch<React.SetStateAction<ValidateResponse>>] = useState<ValidateResponse>({ success: null, failure: null });
     const [message, setMessage]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
     const [loadingEmail, setLoadingEmail]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [toggleWindow, setToggleWindow]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const {
         user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
@@ -61,6 +62,19 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
             setFollowToggle(true);
         }
     }, [myPageResponse.success]);
+    useEffect(() => {
+        if (toggleWindow) {
+            const clear: NodeJS.Timeout = setTimeout(() => {
+                setToggleWindow(false);
+            }, 1000);
+            return () => {
+                clearInterval(clear);
+            };
+        }
+        return () => {
+            /**/
+        };
+    }, [toggleWindow]);
     const toUploadPage: () => void = useCallback(() => {
         history.push('/upload');
     }, [history]);
@@ -88,7 +102,15 @@ const MyPageContainer: React.FC<Props> = ({ userId, history }: Props) => {
         }
         setLoadingEmail(false);
     }, []);
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} />;
+    const doCopy: () => void = () => {
+    // 흐름 1.
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            setToggleWindow(true);
+        }).catch(() => {
+            alert('복사 실패!');
+        });
+    };
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} />;
 };
 
 export default withRouter(MyPageContainer);
