@@ -1,0 +1,28 @@
+@import '/src/App.scss';
+
+.portfolio__header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    position: sticky;
+    z-index: 2001;
+    top: 0;
+    align-items: center;
+    background-color: $white;
+    padding: rem(15) rem(50);
+    border-bottom: 0.5px solid rgba(32, 32, 32, 0.4);
+
+    .portfolio__header__logo {
+        text-align: center;
+        width: rem(86);
+        height: rem(33);
+    }
+
+    .portfolio__header__name {
+    }
+}
+
+@media screen and (max-width: 1300px) {
+}
+@media screen and (max-width: 1000px) {
+}

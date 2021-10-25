@@ -7,6 +7,15 @@ export declare global {
             userId: string;
         }
 
+        interface UserExistRequest {
+            userId: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface UserExistSuccessResponse{}
+        interface UserExistFailureResponse{
+            info: string
+        }
+
         interface MyPageSuccessResponse extends User {
             Video: (Video & { WhoVideoUploadTag?: { tagName: string }[] })[];
             followFrom: { followingId: string }[];

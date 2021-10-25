@@ -26,6 +26,7 @@ import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
 import BlockUserPage from './pages/BlockUserPage';
+import SharedPortfolio from './pages/SharedPortfolio';
 
 type Props = RouteComponentProps;
 const App: React.FC<Props> = ({ location }: Props) => {
@@ -62,6 +63,7 @@ const App: React.FC<Props> = ({ location }: Props) => {
                     <Route path="/snsAuth" component={SnsAuthPage} />
                     <Route path="/servicePolicy" component={ServicePolicy} />
                     <Route path="/PrivateInformationPolicy" component={PrivateInformationPolicy} />
+                    <Route path="/portfolio/:param" component={SharedPortfolio} />
                     <Route component={Page404} />
                 </Switch>
             </ScrollTop>
