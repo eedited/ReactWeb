@@ -44,6 +44,9 @@
                             top : rem(16);
                             left : rem(16);
                         }
+                        .mypage__header__title__name__icon.clipboard{
+                            filter: invert(30%)
+                        }
                         .mypage__header__title__name__icon.activated{
                             background-color: $blue;
                         }
