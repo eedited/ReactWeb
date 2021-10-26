@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { AnyAction } from 'redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-
+import axios, { AxiosResponse } from 'axios';
+import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { googleLogin } from '../../api/auth';
 import { SelectorStateType, useAppDispatch, useAppSelector } from '../../hooks';
 import { authAction } from '../../redux/auth/auth';
 import { userAction } from '../../redux/user/user';
@@ -20,11 +22,18 @@ interface props extends RouteComponentProps{
     title?: (type: string) => string
     setType: (type: 'login'|'signup') => void
 }
+interface GoogleLoginResponseInterface {
+    success: AuthRouter.GoogleLoginSuccessResponse | null
+    failure: AuthRouter.GoogleLoginFailureResponse | null
+}
+// eslint-disable-next-line @typescript-eslint/typedef
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, title, setType }: props) => {
     const { changeField, intializeForm, login }: RDXAuthModule.ActionType = authAction;
     const { check }: RDXUserModule.ActionType = userAction;
     const [error, setError]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string|null>(null);
+    const [googleLoginResponse, setGoogleLoginResponse]: [GoogleLoginResponseInterface, React.Dispatch<React.SetStateAction<GoogleLoginResponseInterface>>] = useState<GoogleLoginResponseInterface>({ success: null, failure: null });
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         form, Auth, AuthError, User, loading,
@@ -67,6 +76,16 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
         }
     }, [Auth, AuthError, dispatch]);
     useEffect(() => {
+        if (googleLoginResponse.success) {
+            dispatch(
+                userAction.check(),
+            );
+        }
+        if (googleLoginResponse.failure) {
+            setError(googleLoginResponse.failure.info);
+        }
+    }, [dispatch, googleLoginResponse.failure, googleLoginResponse.success]);
+    useEffect(() => {
         if (User) {
             try {
                 localStorage.setItem('user', JSON.stringify(User));
@@ -77,6 +96,25 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
             }
         }
     }, [history, User, backgroundClicked]);
+    const responseGoogle: (res: (GoogleLoginResponseOffline | GoogleLoginResponse)) => Promise<void> = useCallback(async (res: (GoogleLoginResponseOffline | GoogleLoginResponse)) => {
+        setGoogleLoginResponse({ success: null, failure: null });
+        try {
+            if ('tokenId' in res) {
+                const response: AxiosResponse<AuthRouter.GoogleLoginSuccessResponse> = await googleLogin({ tokenId: res.tokenId, googleId: res.googleId });
+                setGoogleLoginResponse({ success: response, failure: null });
+            }
+        }
+        catch (e) {
+            if (axios.isAxiosError(e)) {
+                if (e.response) {
+                    setGoogleLoginResponse({ success: null, failure: e.response.data });
+                }
+            }
+        }
+    }, []);
+    const responseGoogleFail: () => void = () => {
+        history.push('/');
+    };
     return (
         <AuthOverlay
             title={title}
@@ -92,6 +130,8 @@ const LoginOverlayContainer: React.FC<props> = ({ history, backgroundClicked, ti
                 }
             }}
             loading={loading['AUTH/login']}
+            responseGoogle={responseGoogle}
+            responseGoogleFail={responseGoogleFail}
         />
     );
 };

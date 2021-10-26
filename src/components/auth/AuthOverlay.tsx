@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Protal from '../../hooks/Protal';
+import ReactGoogleLogin, { GoogleLogin } from 'react-google-login';
 import Spinner from '../common/spinner/Spinner';
 import './AuthOverlay.scss';
 
@@ -15,6 +15,8 @@ interface Props {
     setType: (type: 'login'|'signup') => void
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+    responseGoogle?: (res: ReactGoogleLogin.GoogleLoginResponse | ReactGoogleLogin.GoogleLoginResponseOffline) => Promise<void>
+    responseGoogleFail?: () => void
 }
 interface textMapType {
     [type: string]: string
@@ -23,10 +25,13 @@ const textMap: textMapType = {
     login: '로그인',
     signup: '회원가입',
 };
-const googleLogin: () => void = () => {
-    window.open(process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_PROD_API_URL}/auth/google` : `${process.env.REACT_APP_DEV_API_URL}/auth/google`);
-};
-const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType, loading }: Props) => (
+// const googleLogin: () => void = () => {
+//     window.open(process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_PROD_API_URL}/auth/google` : `${process.env.REACT_APP_DEV_API_URL}/auth/google`);
+//     window.location.href = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_PROD_API_URL}/auth/google` : `${process.env.REACT_APP_DEV_API_URL}/auth/google`;
+// };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, onChange, onSubmit, title, setType, loading, responseGoogle, responseGoogleFail }: Props) => (
     <div
         className="AuthOverlayBox"
         onClick={backgroundClicked}
@@ -148,16 +153,16 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
                             >
                                 아직 회원이 아니신가요?
                             </div>
-                            {/* <div className="authform__hrLine">
+                            <div className="authform__hrLine">
                                 <div className="authForm__hrLine__title">SNS LOGIN</div>
                             </div>
-                            <button onClick={googleLogin} className="authForm__googleLogin" type="button">
-                                <img
-                                    className="authForm__googleLogin__img"
-                                    src="/icons/google-icon.png"
-                                    alt=""
-                                />
-                            </button> */}
+                            <GoogleLogin
+                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID as string}
+                                buttonText="Login"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogleFail}
+                                cookiePolicy="single_host_origin"
+                            />
                         </>
                     )}
                     {type === 'signup' && (
@@ -179,5 +184,7 @@ const AuthOverlay: React.FC<Props> = ({ backgroundClicked, type, form, error, on
 );
 AuthOverlay.defaultProps = {
     title: (type: string) => type.toUpperCase(),
+    responseGoogle: async (res: ReactGoogleLogin.GoogleLoginResponse | ReactGoogleLogin.GoogleLoginResponseOffline) => {},
+    responseGoogleFail: () => {},
 };
 export default AuthOverlay;

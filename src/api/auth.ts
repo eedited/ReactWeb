@@ -37,3 +37,6 @@ export const changePassword: ChangePasswordFunctionType = ({ currentPassword, ne
 
 type DeleteUserFunctionType=({ userId }: AuthRouter.DeleteuserRequest) => Promise<AxiosResponse<AuthRouter.DeleteuserSuccessResponse>>
 export const deleteUser: DeleteUserFunctionType = ({ userId }: AuthRouter.DeleteuserRequest) => client.delete(`/auth/${userId}`);
+
+type GoogleLogin=({ tokenId, googleId }: AuthRouter.GoogleLoginRequest) => Promise<AxiosResponse<AuthRouter.GoogleLoginSuccessResponse>>;
+export const googleLogin: GoogleLogin = ({ tokenId, googleId }: AuthRouter.GoogleLoginRequest) => client.post('/auth/login/google', { tokenId, googleId });
