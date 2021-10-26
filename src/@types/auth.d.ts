@@ -95,6 +95,16 @@ export declare global {
         }
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface DeleteuserSuccessResponse{}
+
+        interface GoogleLoginRequest{
+            tokenId: string
+            googleId: string
+        }
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
+        interface GoogleLoginSuccessResponse {}
+        interface GoogleLoginFailureResponse {
+            info: string
+        }
     }
 
     namespace RDXAuthModule {

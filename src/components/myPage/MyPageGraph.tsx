@@ -65,7 +65,6 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
         const height: number = 400;
         img.onload = () => {
             const radius: number = height / 3;
-            console.log(radius, (window.devicePixelRatio || 1), height);
             const gap: number = 8;
             const lineWidth: number = 5;
             const x: number = width / 2;
