@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
@@ -125,8 +126,23 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                             && (
                                 <>
                                     <div className="mypage__header__graph">
-                                        <RadarGraph className="mypage__header__graph" categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} />
+                                        <input type="radio" name="pos" id="pos2" />
+                                        <input type="radio" name="pos" id="pos1" checked />
+                                        <div className="bullet">
+                                            <label htmlFor="pos1">
+                                                1
+                                            </label>
+                                            <label htmlFor="pos2">
+                                                2
+                                            </label>
+                                        </div>
+                                        <ul>
+                                            <li><MyPageGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+                                            <li><RadarGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+
+                                        </ul>
                                     </div>
+
                                 </>
                             )
                         }

@@ -116,9 +116,53 @@
         
         .mypage__header__graph {
             display: block;
+            overflow:hidden;
+            position: relative;
             margin-top: rem(40);
-            width : rem(500);
-            height: rem(400);
+            width : rem(400);
+            height: rem(420);
+            ul{
+                width : calc(100%*2);
+                height: 400px;
+                display: flex;
+                transition: 1s;
+                li{
+                    width : calc(100%/2);
+                    height:400px;
+                }
+            }
+            input{
+                display: none;
+            }
+            .bullet{
+                position:absolute;
+                bottom:20px;
+                left:0;
+                right:0;
+                text-align:center;
+                z-index:10;
+                display: flex;
+                flex-direction: row;
+                gap : rem(15);
+                justify-content: center;
+                label{
+                    width:12px;
+                    height:12px;
+                    border-radius:12px;
+                    border:2px solid #666;
+                    display:inline-block;
+                    background:#fff;
+                    font-size:0;
+                    transition:0.5s;
+                    cursor:pointer;
+                }
+            }
+            #pos1:checked ~ ul{margin-left:0;}
+            #pos2:checked ~ ul{margin-left:-100%;}
+            /* bullet 조작 */
+            #pos1:checked ~ .bullet label:nth-child(1),
+            #pos2:checked ~ .bullet label:nth-child(2){background:#666;}
+
         }
     }
     .mypage__videoGrid {
