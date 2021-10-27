@@ -18,6 +18,9 @@
         "invalidate": "aws cloudfront create-invalidation --profile=soma1214 --distribution-id ECMKDIFKHHL9V --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
     },
     "dependencies": {
+        "@nivo/bar": "^0.74.0",
+        "@nivo/core": "^0.74.0",
+        "@nivo/radar": "^0.74.0",
         "@reduxjs/toolkit": "1.6.1",
         "aws-amplify": "4.2.3",
         "aws-amplify-react": "5.0.9",

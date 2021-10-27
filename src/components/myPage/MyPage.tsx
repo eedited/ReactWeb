@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { ResponsiveRadar } from '@nivo/radar';
 import { ReactComponent as Share } from '../../images/share-square-regular.svg';
 import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
 import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
@@ -13,6 +15,7 @@ import Spinner from '../common/spinner/Spinner';
 import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
+import RadarGraph from './RadarGraph';
 
 export interface MyPageResponseType {
     success: UserRouter.MyPageSuccessResponse | null
@@ -119,7 +122,29 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                             </div>
                         </div>
                         {
-                            myPageResponse.success && <MyPageGraph className="mypage__header__graph" categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} />
+                            myPageResponse.success
+                            && (
+                                <>
+                                    <div className="mypage__header__graph">
+                                        <input type="radio" name="pos" id="pos2" />
+                                        <input type="radio" name="pos" id="pos1" checked />
+                                        <div className="bullet">
+                                            <label htmlFor="pos1">
+                                                1
+                                            </label>
+                                            <label htmlFor="pos2">
+                                                2
+                                            </label>
+                                        </div>
+                                        <ul>
+                                            <li><MyPageGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+                                            <li><RadarGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+
+                                        </ul>
+                                    </div>
+
+                                </>
+                            )
                         }
 
                     </div>
