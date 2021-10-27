@@ -39,3 +39,10 @@ export const setSns: SetSNSFunctionType = ({
     linkedin,
     twitter,
 });
+
+type UserExistFunctionType = ({
+    userId,
+}: UserRouter.UserExistRequest) => Promise<AxiosResponse<UserRouter.UserExistSuccessResponse>>;
+export const UserExist: UserExistFunctionType = ({
+    userId,
+}: UserRouter.UserExistRequest) => client.post('/user/exist', { userId });

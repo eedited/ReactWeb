@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
+import { ResponsiveRadar } from '@nivo/radar';
 import { ReactComponent as Share } from '../../images/share-square-regular.svg';
 import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
 import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
@@ -13,6 +15,7 @@ import Spinner from '../common/spinner/Spinner';
 import VideoDescription2 from '../landing/videoGrid/videoDescription/VideoDescription2';
 import './MyPage.scss';
 import MyPageGraph from './MyPageGraph';
+import RadarGraph from './RadarGraph';
 
 export interface MyPageResponseType {
     success: UserRouter.MyPageSuccessResponse | null
@@ -29,35 +32,11 @@ interface Props extends RouteComponentProps{
     toModifyPage: () => void
     followToggle: boolean
     loadingEmail: boolean
+    doCopy: () => void
+    toggleWindow: boolean
 }
 
-function doCopy() {
-    // 흐름 1.
-    if (!document.queryCommandSupported('copy')) {
-        alert('복사하기가 지원되지 않는 브라우저입니다.');
-        return;
-    }
-    // 흐름 2.
-    const textarea: HTMLTextAreaElement = document.createElement('textarea');
-    textarea.value = window.location.href;
-    textarea.style.top = '0';
-    textarea.style.left = '0';
-    textarea.style.position = 'fixed';
-
-    // 흐름 3.
-    document.body.appendChild(textarea);
-    // focus() -> 사파리 브라우저 서포팅
-    textarea.focus();
-    // select() -> 사용자가 입력한 내용을 영역을 설정할 때 필요
-    textarea.select();
-    // 흐름 4.
-    document.execCommand('copy');
-    // 흐름 5.
-    document.body.removeChild(textarea);
-    alert('클립보드에 복사되었습니다.');
-}
-
-const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail }: Props) => (
+const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail, doCopy, toggleWindow }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -85,9 +64,12 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                             <img className="mypage__header__title__name__icon" src="/icons/setting-icon.png" alt="setting-icon" />
                                         </button>
                                     )}
-                                    <button className="mypage__header__title__name__iconBackGround" onClick={() => doCopy()} type="button">
-                                        <Share className="mypage__header__title__name__icon clipboard" />
-                                    </button>
+                                    <div className="mypage__header__title__name__iconBackGround">
+                                        <button onClick={() => doCopy()} type="button">
+                                            <Share className="mypage__header__title__name__icon clipboard" />
+                                        </button>
+                                        {toggleWindow && <div className="mypage__header__title__name__iconBackGround__clipboard">클립보드 복사됨</div>}
+                                    </div>
 
                                 </div>
                             </div>
@@ -140,7 +122,29 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                             </div>
                         </div>
                         {
-                            myPageResponse.success && <MyPageGraph className="mypage__header__graph" categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} />
+                            myPageResponse.success
+                            && (
+                                <>
+                                    <div className="mypage__header__graph">
+                                        <input type="radio" name="pos" id="pos2" />
+                                        <input type="radio" name="pos" id="pos1" checked />
+                                        <div className="bullet">
+                                            <label htmlFor="pos1">
+                                                1
+                                            </label>
+                                            <label htmlFor="pos2">
+                                                2
+                                            </label>
+                                        </div>
+                                        <ul>
+                                            <li><MyPageGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+                                            <li><RadarGraph categories={myPageResponse.success.categories} profile={myPageResponse.success.profilePicture} /></li>
+
+                                        </ul>
+                                    </div>
+
+                                </>
+                            )
                         }
 
                     </div>

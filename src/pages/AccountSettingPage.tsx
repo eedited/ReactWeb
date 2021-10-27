@@ -18,7 +18,7 @@ const AccountSettingPage: React.FC<Props> = ({ history, match }: Props) => {
         user: state.userReducer.user,
     })));
     const ret: string = useMemo(() => {
-        const { param }: {param: string|undefined} = match.params as {param: string|undefined};
+        const { param }: {param: string | undefined} = match.params as {param: string | undefined};
         if (param && !validationParam.includes(param)) {
             return 'error';
         }

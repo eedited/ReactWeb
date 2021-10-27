@@ -30,8 +30,34 @@
                     .mypage__header__title__name__iconBackGround.activated{
                         background-color: $blue;
                     }
+                    .mypage__header__title__name__iconBackGround__clipboard{
+                        position:absolute;
+                        display: flex;
+                        width:rem(150);
+                        height:rem(50);
+                        font-size : rem(15);    
+                        background:$gray;
+                        border-radius: rem(5);
+                        margin-top :rem(-20);
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                    }
+                    .mypage__header__title__name__iconBackGround__clipboard:after {
+                        position:absolute;
+                        border-top:rem(0) solid transparent;
+                        border-left: rem(10) solid transparent;
+                        border-right: rem(10) solid transparent;
+                        border-bottom: rem(10) solid $gray;
+                        content:"";
+                        top: rem(-10);
+                        left: rem(15);
+                    }
                     .mypage__header__title__name__iconBackGround {
                         position: relative;
+                        top: 0;
                         width: rem(48);
                         height: rem(48);
                         background-color: $gray;
@@ -90,7 +116,53 @@
         
         .mypage__header__graph {
             display: block;
+            overflow:hidden;
+            position: relative;
             margin-top: rem(40);
+            width : rem(400);
+            height: rem(420);
+            ul{
+                width : calc(100%*2);
+                height: 400px;
+                display: flex;
+                transition: 1s;
+                li{
+                    width : calc(100%/2);
+                    height:400px;
+                }
+            }
+            input{
+                display: none;
+            }
+            .bullet{
+                position:absolute;
+                bottom:20px;
+                left:0;
+                right:0;
+                text-align:center;
+                z-index:10;
+                display: flex;
+                flex-direction: row;
+                gap : rem(15);
+                justify-content: center;
+                label{
+                    width:12px;
+                    height:12px;
+                    border-radius:12px;
+                    border:2px solid #666;
+                    display:inline-block;
+                    background:#fff;
+                    font-size:0;
+                    transition:0.5s;
+                    cursor:pointer;
+                }
+            }
+            #pos1:checked ~ ul{margin-left:0;}
+            #pos2:checked ~ ul{margin-left:-100%;}
+            /* bullet 조작 */
+            #pos1:checked ~ .bullet label:nth-child(1),
+            #pos2:checked ~ .bullet label:nth-child(2){background:#666;}
+
         }
     }
     .mypage__videoGrid {
@@ -130,6 +202,13 @@
                     gap : rem(8);
                     line-height: rem(60);
                     margin-bottom: rem(16);
+                }
+                .mypage__header__title__name__icons{
+                    .mypage__header__title__name__iconBackGround{
+                        .mypage__header__title__name__iconBackGround__clipboard{
+                            margin-top : 0;
+                        }
+                    }
                 }
             }
         }
