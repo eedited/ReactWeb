@@ -44,7 +44,7 @@ const Navbar: React.FC<props> = ({
                     {!user
                         ? <button className="navbar__menu__link" onClick={onLogin} type="button">건의하기</button>
                         : <Link className="navbar__menu__link" to="/AccountSetting/request">건의하기</Link>}
-                    <Link className="navbar__menu__link" to="/">Videos</Link>
+                    <Link className="navbar__menu__link" to="/video">Videos</Link>
                 </div>
                 {!isSearchClick ? (
                     <button className="navbar__utility__find" onClick={onClickSearch} type="button">
