@@ -26,6 +26,7 @@ import SnsAuthPage from './pages/SnsAuthPage';
 import ServicePolicy from './pages/ServicePolicy';
 import PrivateInformationPolicy from './pages/PrivateInformationPolicy';
 import BlockUserPage from './pages/BlockUserPage';
+import IntroductionPage from './pages/IntroductionPage';
 
 type Props = RouteComponentProps;
 const App: React.FC<Props> = ({ location }: Props) => {
@@ -38,7 +39,7 @@ const App: React.FC<Props> = ({ location }: Props) => {
         <div className="App">
             <ScrollTop>
                 <Switch>
-                    <Route path="/" component={Landing} exact />
+                    <Route path="/" component={IntroductionPage} exact />
                     <Route path="/video" component={Landing} />
                     <Route path="/videos" component={Landing} />
                     <Route path="/search" component={FindingPage} />
