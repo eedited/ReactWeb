@@ -7,7 +7,7 @@ const IntroductionPage: React.FC = () => (
     <BaseTemplate>
         <ul className="introductionpage">
             <li>
-                <div>
+                <section>
                     <h2>
                         편집자만을 위한
                         <br />
@@ -23,14 +23,14 @@ const IntroductionPage: React.FC = () => (
                         <br />
                         하나의 링크가 완벽한 포트폴리오가 되는 날을 위해 노력합니다.
                     </p>
-                </div>
+                </section>
 
                 <img src="/images/introduction/landing.png" alt="landing" />
 
             </li>
             <div style={{ height: '64px' }} />
             <li>
-                <div>
+                <section>
                     <h2>
                         편집했던 여러 유튜버의 동영상을
                         <br />
@@ -47,12 +47,12 @@ const IntroductionPage: React.FC = () => (
                         한눈에 들어오는 포트폴리오가 완성할 수 있을거에요 :)
                         <br />
                     </p>
-                </div>
+                </section>
                 <img src="/images/introduction/portfolio.png" alt="portfolio" />
             </li>
             <div style={{ height: '64px' }} />
             <li>
-                <div>
+                <section>
                     <h2>
                         다양한 그래프를 통해
                         <br />
@@ -64,7 +64,7 @@ const IntroductionPage: React.FC = () => (
                         효율적으로 보여줄 수 있습니다.
                         <br />
                     </p>
-                </div>
+                </section>
                 <div className="landing__li__graphs">
                     <img className="landing__li__graph" src="/images/introduction/graph1.png" alt="graph1" />
                     <img className="landing__li__graph" src="/images/introduction/graph2.png" alt="graph2" />
@@ -72,27 +72,30 @@ const IntroductionPage: React.FC = () => (
             </li>
             <div style={{ height: '64px' }} />
             <li>
-                <div>
+                <section>
                     <h2>
                         앞으로 eedited가 가야할 길
                     </h2>
                     <p>
                         채팅, 구인구직
                     </p>
-                </div>
+                </section>
                 <img src="/images/introduction/landing.png" alt="landing" />
             </li>
             <div style={{ height: '64px' }} />
             <li>
-                <p>
-                    eedited에 관심이 생기셨나요? :)
-                    <br />
-                    관심이 생기셨다면, eedited에서 포트폴리오 관리를 시작해보세요
-                    <br />
-                    <BlueButton type="button" onClick={() => { /**/ }}>
-                        시작하기
-                    </BlueButton>
-                </p>
+                <section>
+                    <p>
+                        eedited에 관심이 생기셨나요? :)
+                        <br />
+                        관심이 생기셨다면, eedited에서 포트폴리오 관리를 시작해보세요
+                        <br />
+                        <br />
+                        <BlueButton type="button" onClick={() => { /**/ }}>
+                            시작하기
+                        </BlueButton>
+                    </p>
+                </section>
             </li>
         </ul>
     </BaseTemplate>
