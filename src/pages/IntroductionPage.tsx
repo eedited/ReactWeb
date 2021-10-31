@@ -27,7 +27,7 @@ const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
                     </p>
                 </section>
 
-                <img src="/images/introduction/landing.png" alt="landing" />
+                <img src="/images/Introduction/landing.png" alt="landing" />
 
             </li>
             <div style={{ height: '64px' }} />
@@ -68,8 +68,8 @@ const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
                     </p>
                 </section>
                 <div className="landing__li__graphs">
-                    <img className="landing__li__graph" src="/images/introduction/graph1.png" alt="graph1" />
-                    <img className="landing__li__graph" src="/images/introduction/graph2.png" alt="graph2" />
+                    <img className="landing__li__graph" src="/images/Introduction/graph1.png" alt="graph1" />
+                    <img className="landing__li__graph" src="/images/Introduction/graph2.png" alt="graph2" />
                 </div>
             </li>
             <div style={{ height: '64px' }} />
