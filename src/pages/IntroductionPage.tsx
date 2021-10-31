@@ -1,14 +1,13 @@
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouterProps, withRouter } from 'react-router';
 import BlueButton from '../components/common/button/BlueButton';
 import BaseTemplate from './BaseTemplate';
 import './IntroductionPage.scss';
 
-type Props = RouteComponentProps
+type Props = RouterProps
 const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
     <BaseTemplate>
         <ul className="introductionpage">
-
             <li>
                 <section>
                     <h2>
@@ -51,7 +50,7 @@ const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
                         <br />
                     </p>
                 </section>
-                <img src="/images/introduction/portfolio.png" alt="portfolio" />
+                <img src="/images/Introduction/portfolio.png" alt="portfolio" />
             </li>
             <div style={{ height: '64px' }} />
             <li>
