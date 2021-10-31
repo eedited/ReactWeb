@@ -1,11 +1,14 @@
 import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import BlueButton from '../components/common/button/BlueButton';
 import BaseTemplate from './BaseTemplate';
 import './IntroductionPage.scss';
 
-const IntroductionPage: React.FC = () => (
+type Props = RouteComponentProps
+const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
     <BaseTemplate>
         <ul className="introductionpage">
+
             <li>
                 <section>
                     <h2>
@@ -73,25 +76,18 @@ const IntroductionPage: React.FC = () => (
             <div style={{ height: '64px' }} />
             <li>
                 <section>
-                    <h2>
-                        앞으로 eedited가 가야할 길
-                    </h2>
-                    <p>
-                        채팅, 구인구직
-                    </p>
-                </section>
-                <img src="/images/introduction/landing.png" alt="landing" />
-            </li>
-            <div style={{ height: '64px' }} />
-            <li>
-                <section>
                     <p>
                         eedited에 관심이 생기셨나요? :)
                         <br />
                         관심이 생기셨다면, eedited에서 포트폴리오 관리를 시작해보세요
                         <br />
                         <br />
-                        <BlueButton type="button" onClick={() => { /**/ }}>
+                        <BlueButton
+                            type="button"
+                            onClick={() => {
+                                history.push('/video');
+                            }}
+                        >
                             시작하기
                         </BlueButton>
                     </p>
@@ -101,4 +97,4 @@ const IntroductionPage: React.FC = () => (
     </BaseTemplate>
 );
 
-export default IntroductionPage;
+export default withRouter(IntroductionPage);
