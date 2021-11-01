@@ -104,11 +104,13 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
     }, []);
     const doCopy: () => void = () => {
     // 흐름 1.
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            setToggleWindow(true);
-        }).catch(() => {
-            alert('복사 실패!');
-        });
+        if (myPageResponse.success) {
+            navigator.clipboard.writeText(`${window.location.origin}/portfolio/${myPageResponse.success.userId}`).then(() => {
+                setToggleWindow(true);
+            }).catch(() => {
+                alert('복사 실패!');
+            });
+        }
     };
     return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} />;
 };
