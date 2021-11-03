@@ -2,6 +2,7 @@ import React from 'react';
 import { RouterProps, withRouter } from 'react-router';
 import BlueButton from '../components/common/button/BlueButton';
 import BaseTemplate from './BaseTemplate';
+import { ReactComponent as Share } from '../images/share-square-regular.svg';
 import './IntroductionPage.scss';
 
 type Props = RouterProps
@@ -51,6 +52,30 @@ const IntroductionPage: React.FC<Props> = ({ history }: Props) => (
                     </p>
                 </section>
                 <img src="/images/Introduction/portfolio.png" alt="portfolio" />
+            </li>
+            <div style={{ height: '64px' }} />
+            <li>
+                <section>
+                    <h2>
+                        최소한의 노력으로
+                        <br />
+                        자신만의 포트폴리오를 완성해보세요
+                    </h2>
+                    <p>
+                        eedited에 자신이 편집한 동영상을 올린 후에,
+                        <br />
+                        마이페이지의 공유 버튼(
+                        {' '}
+                        <Share style={{ width: '1.3rem' }} />
+                        {' '}
+                        )을 누르면
+                        <br />
+                        자신만의 포트폴리오를 손쉽게 완성할 수 있습니다 :)
+                        <br />
+                    </p>
+                    <br />
+                </section>
+                <img src="/images/Introduction/userPortFolio.png" alt="graph1" />
             </li>
             <div style={{ height: '64px' }} />
             <li>

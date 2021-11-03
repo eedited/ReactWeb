@@ -23,7 +23,7 @@
             }
         }
     }
-    li:nth-of-type(2){
+    li:nth-of-type(2n){
         flex-direction: row-reverse;
         section{
             text-align: end;
@@ -48,7 +48,12 @@
 
 @media screen and (max-width:1250px) {
     .introductionpage{
-        
+        li:nth-of-type(2n){
+            flex-direction: column;
+            section{
+                text-align: start;
+            }
+        }
         li{
             flex-direction: column;
             section{
