@@ -1,0 +1,30 @@
+@import '/src/App.scss';
+
+.portfolio__footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: sticky;
+    z-index: 2001;
+    top: 0;
+    align-items: center;
+    background-color: $gray;
+    padding: rem(20) rem(50);
+
+    .portfolio__footer__logo {
+        text-align: center;
+        width: rem(86);
+        height: rem(33);
+    }
+
+    .portfolio__footer__description {
+        text-align: center;
+        font-size: rem(8);
+        opacity: 0.6;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+}
+@media screen and (max-width: 1000px) {
+}
