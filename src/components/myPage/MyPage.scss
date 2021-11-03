@@ -7,14 +7,15 @@
     .mypage__header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         min-height: rem(300);
         padding: 0 0 rem(50) rem(40);
         .mypage__header__title {
             margin-top: rem(105);
-            display: flex;
+            display: flex;  
             flex-direction: column;
-            flex-grow : 1;
+            max-width : 60%;
             .mypage__header__title__name {
                 font-size: rem(45);
                 line-height: rem(80);
@@ -192,10 +193,12 @@
     .mypage{
         width : 80%;
         .mypage__header{
+            padding-right: rem(40);
             .mypage__header__graph{
                 display : none;
             }
             .mypage__header__title{
+                max-width : 100%;
                 .mypage__header__title__name{
                     flex-direction: column;
                     align-items: flex-start;
