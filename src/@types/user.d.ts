@@ -21,6 +21,8 @@ export declare global {
             followFrom: { followingId: string }[];
             followTo?: {follerId: string}[];
             categories: { [key: string]: number };
+            followers: User[];
+            likeVideos: Video[];
         }
 
         interface MyPageFailureResponse {
