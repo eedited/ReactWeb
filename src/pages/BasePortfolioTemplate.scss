@@ -1,0 +1,10 @@
+@import '/src/App.scss';
+
+.base__portfolio {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .base__portfolio__content {
+        flex: 1;
+    }
+}

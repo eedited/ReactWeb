@@ -1,6 +1,7 @@
 import React from 'react';
-import Footer from '../containers/common/Footer';
 import PortfolioHeader from '../containers/common/PortfolioHeader';
+import PortfolioFooter from '../containers/common/PortfolioFooter';
+import './BasePortfolioTemplate.scss';
 
 interface Props {
     children?: React.ReactNode,
@@ -8,11 +9,11 @@ interface Props {
 }
 
 const BasePortfolioTemplate: React.FC<Props> = ({ children, userName }: Props) => (
-    <>
+    <div className="base__portfolio">
         <PortfolioHeader UserName={userName} />
-        {children}
-        <Footer />
-    </>
+        <div className="base__portfolio__content">{children}</div>
+        <PortfolioFooter />
+    </div>
 );
 
 BasePortfolioTemplate.defaultProps = {
