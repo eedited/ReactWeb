@@ -4,6 +4,7 @@ import React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import { ResponsiveRadar } from '@nivo/radar';
 import { ReactComponent as Share } from '../../images/share-square-regular.svg';
+import { ReactComponent as Download } from '../../images/download.svg';
 import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
 import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
 import { ReactComponent as LinkedIn } from '../../images/linkedin-brands.svg';
@@ -73,7 +74,7 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                     </div>
                                     <div className="mypage__header__title__name__iconBackGround">
                                         <button onClick={() => downloadPDF()} type="button">
-                                            <Share className="mypage__header__title__name__icon clipboard" />
+                                            <Download className="mypage__header__title__name__icon clipboard" />
                                         </button>
                                     </div>
                                 </div>

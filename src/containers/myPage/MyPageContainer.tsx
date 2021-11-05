@@ -92,9 +92,9 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
     const downloadPDF: () => void = useCallback(() => {
         const input: HTMLElement | null = document.getElementById('root');
         if (!input) return;
-        html2canvas(input, { logging: true, useCORS: true }).then((canvas: HTMLCanvasElement|null) => {
+        html2canvas(input, { useCORS: true, allowTaint: true }).then((canvas: HTMLCanvasElement|null) => {
             if (!canvas) return;
-            const imgData: string = canvas.toDataURL('image/png');
+            const imgData: string = canvas.toDataURL();
             const imgWidth: number = 210; // A4 width
             const pageHeight: number = imgWidth * 1.414;
             const imgHeight: number = (canvas.height * imgWidth) / canvas.width;
