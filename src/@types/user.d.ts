@@ -6,7 +6,6 @@ export declare global {
         interface MyPageRequest {
             userId: string;
         }
-
         interface UserExistRequest {
             userId: string
         }
@@ -15,12 +14,13 @@ export declare global {
         interface UserExistFailureResponse{
             info: string
         }
-
         interface MyPageSuccessResponse extends User {
             Video: (Video & { WhoVideoUploadTag?: { tagName: string }[] })[];
             followFrom: { followingId: string }[];
             followTo?: {follerId: string}[];
             categories: { [key: string]: number };
+            followers: User[];
+            likeVideos: Video[];
         }
 
         interface MyPageFailureResponse {

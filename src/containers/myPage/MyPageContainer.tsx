@@ -25,6 +25,10 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
     const [message, setMessage]: [string, React.Dispatch<React.SetStateAction<string>>] = useState('');
     const [loadingEmail, setLoadingEmail]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [toggleWindow, setToggleWindow]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [menuState, setMenuState]: [string, React.Dispatch<React.SetStateAction<string>>] = useState<string>('uploadVideos');
+    const menu: (event: React.MouseEvent<HTMLButtonElement>) => void = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setMenuState(event.currentTarget.name);
+    };
     const {
         user,
     }: FromReducerType = useAppSelector((state: SelectorStateType) => ({
@@ -46,7 +50,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
             }
         }
         fetchMyPage();
-    }, [userId, user]);
+    }, [userId, user, menuState]);
     useEffect(() => {
         setCanModify(false);
         if (myPageResponse.success
@@ -112,7 +116,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
             });
         }
     };
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} />;
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} menu={menu} menuState={menuState} />;
 };
 
 export default withRouter(MyPageContainer);
