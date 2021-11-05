@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState, useCallback } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { signupEmail } from '../../api/auth';
 import { myPage } from '../../api/user';
 import MyPage, { MyPageResponseType } from '../../components/myPage/MyPage';
@@ -87,6 +89,31 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
         }
         else history.push('/AccountSetting');
     }, [history, user]);
+    const downloadPDF: () => void = useCallback(() => {
+        const input: HTMLElement | null = document.getElementById('root');
+        if (!input) return;
+        html2canvas(input, { logging: true, useCORS: true }).then((canvas: HTMLCanvasElement|null) => {
+            if (!canvas) return;
+            const imgData: string = canvas.toDataURL('image/png');
+            const imgWidth: number = 210; // A4 width
+            const pageHeight: number = imgWidth * 1.414;
+            const imgHeight: number = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft: number = imgHeight;
+            let position: number = 0;
+            // eslint-disable-next-line new-cap
+            const pdf: jsPDF = new jsPDF('p', 'mm');
+
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            pdf.save('download.pdf');
+            heightLeft -= pageHeight;
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+        });
+    }, []);
     const sendEmail: () => void = useCallback(async () => {
         setValidateResponse({ success: null, failure: null });
         setLoadingEmail(true);
@@ -112,7 +139,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
             });
         }
     };
-    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} />;
+    return <MyPage myPageResponse={myPageResponse} canModify={canModify} toUploadPage={toUploadPage} toMainPage={toMainPage} user={user} message={message} sendEmail={sendEmail} toModifyPage={toModifyPage} followToggle={followToggle} loadingEmail={loadingEmail} doCopy={doCopy} toggleWindow={toggleWindow} downloadPDF={downloadPDF} />;
 };
 
 export default withRouter(MyPageContainer);

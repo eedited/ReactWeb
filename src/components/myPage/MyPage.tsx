@@ -34,9 +34,10 @@ interface Props extends RouteComponentProps{
     loadingEmail: boolean
     doCopy: () => void
     toggleWindow: boolean
+    downloadPDF: () => void
 }
 
-const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail, doCopy, toggleWindow }: Props) => (
+const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail, doCopy, toggleWindow, downloadPDF }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -70,7 +71,11 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                         </button>
                                         {toggleWindow && <div className="mypage__header__title__name__iconBackGround__clipboard">클립보드 복사됨</div>}
                                     </div>
-
+                                    <div className="mypage__header__title__name__iconBackGround">
+                                        <button onClick={() => downloadPDF()} type="button">
+                                            <Share className="mypage__header__title__name__icon clipboard" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div className="mypage__header__title__email">
