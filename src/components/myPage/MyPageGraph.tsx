@@ -169,6 +169,7 @@ const MyPageGraph: React.FC<props> = ({ className, categories, profile }: props)
             setTimeout(forSetInterval, 2);
         };
         img.src = profile;
+        img.crossOrigin = 'anonymous';
     }, [categories, profile]);
     return (
         <canvas className={className} ref={canvasRef} width="400" height="400" />

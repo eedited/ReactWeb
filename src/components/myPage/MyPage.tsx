@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import { ReactComponent as Share } from '../../images/share-square-regular.svg';
+import { ReactComponent as Download } from '../../images/download.svg';
 import { ReactComponent as Facebook } from '../../images/facebook-brands.svg';
 import { ReactComponent as Instagram } from '../../images/instagram-brands.svg';
 import { ReactComponent as LinkedIn } from '../../images/linkedin-brands.svg';
@@ -36,11 +37,13 @@ interface Props extends RouteComponentProps{
     loadingEmail: boolean
     doCopy: () => void
     toggleWindow: boolean
+
     menu: (event: React.MouseEvent<HTMLButtonElement>) => void
     menuState: string
+    downloadPDF: () => void
 }
 
-const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail, doCopy, toggleWindow, menu, menuState }: Props) => (
+const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadPage, toMainPage, user, message, sendEmail, toModifyPage, followToggle, loadingEmail, doCopy, toggleWindow, downloadPDF, menu, menuState }: Props) => (
     myPageResponse.failure
         ? <Redirect to="404NotFound" />
         : (
@@ -74,7 +77,11 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                         </button>
                                         {toggleWindow && <div className="mypage__header__title__name__iconBackGround__clipboard">클립보드 복사됨</div>}
                                     </div>
-
+                                    <div className="mypage__header__title__name__iconBackGround">
+                                        <button onClick={() => downloadPDF()} type="button">
+                                            <Download className="mypage__header__title__name__icon clipboard" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div className="mypage__header__title__email">
