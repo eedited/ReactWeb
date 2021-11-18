@@ -78,7 +78,7 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                                         {toggleWindow && <div className="mypage__header__title__name__iconBackGround__clipboard">클립보드 복사됨</div>}
                                     </div>
                                     <div className="mypage__header__title__name__iconBackGround">
-                                        <button onClick={() => downloadPDF()} type="button">
+                                        <button onClick={() => { /**/ }} type="button">
                                             <Download className="mypage__header__title__name__icon clipboard" />
                                         </button>
                                     </div>
@@ -159,14 +159,14 @@ const MyPage: React.FC<Props> = ({ history, myPageResponse, canModify, toUploadP
                         }
 
                     </div>
-                    {canModify
+                    {/* {canModify
                     && (
                         <div className="mypage__menu">
                             <button className="mypage__menu__button" name="uploadVideos" onClick={menu} type="button">업로드한 영상</button>
                             <button className="mypage__menu__button" name="followers" onClick={menu} type="button">팔로우</button>
                             <button className="mypage__menu__button" name="likeVideos" onClick={menu} type="button">좋아요</button>
                         </div>
-                    )}
+                    )} */}
 
                     <hr className="mypage__horizenline" />
                     {myPageResponse.success && menuState === 'uploadVideos' && myPageResponse.success.Video.length > 0

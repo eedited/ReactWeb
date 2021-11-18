@@ -96,7 +96,7 @@ const MyPageContainer: React.FC<Props> = ({ userId, history, location }: Props) 
     const downloadPDF: () => void = useCallback(() => {
         const input: HTMLElement | null = document.getElementById('root');
         if (!input) return;
-        html2canvas(input, { useCORS: true, allowTaint: true }).then((canvas: HTMLCanvasElement|null) => {
+        html2canvas(input, { useCORS: true }).then((canvas: HTMLCanvasElement|null) => {
             if (!canvas) return;
             const imgData: string = canvas.toDataURL();
             const imgWidth: number = 210; // A4 width

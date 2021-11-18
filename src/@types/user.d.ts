@@ -10,7 +10,9 @@ export declare global {
             userId: string
         }
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
-        interface UserExistSuccessResponse{}
+        interface UserExistSuccessResponse{
+            nickname: string
+        }
         interface UserExistFailureResponse{
             info: string
         }
