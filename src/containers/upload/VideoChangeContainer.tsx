@@ -133,9 +133,11 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
             }
         }
         if (modifySuccess) {
-            history.push('/');
+            if (user) {
+                history.push(`/profile?userId=${user.userId}`);
+            }
         }
-    }, [history, modifyError, modifySuccess]);
+    }, [history, modifyError, modifySuccess, user]);
 
     const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -198,7 +200,9 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
                 setVideoDeleteResponse({ success: null, failure: null });
                 const response: AxiosResponse<VideoRouter.VideoDeleteSuccessResponse> = await videoDelete({ videoId });
                 setVideoDeleteResponse({ success: response, failure: null });
-                history.push('/');
+                if (user) {
+                    history.push(`/profile?userId=${user.userId}`);
+                }
             }
             catch (err) {
                 if (axios.isAxiosError(err)) {
@@ -211,7 +215,7 @@ const VideoChangeContainer: React.FC<Props> = ({ history, videoId, user }: Props
                 }
             }
         }());
-    }, [history, videoId]);
+    }, [history, user, videoId]);
     return (
         <Upload
             type="change"

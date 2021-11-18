@@ -170,6 +170,7 @@ export declare global {
 
         export type ActionType = CaseReducerActions<{
             videoClear(state: WritableDraft<StateType>): void;
+            uploadClear(state: WritableDraft<RDXVideoModule.StateType>): void;
             video(
                 state: WritableDraft<StateType>,
                 action: PayloadAction<VideoRouter.VideoRequest>,

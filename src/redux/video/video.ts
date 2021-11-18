@@ -19,6 +19,7 @@ const initialState: RDXVideoModule.StateType = {
 };
 type VideoSliceType = Slice<RDXVideoModule.StateType, {
     videoClear(state: WritableDraft<RDXVideoModule.StateType>): void;
+    uploadClear(state: WritableDraft<RDXVideoModule.StateType>): void;
     video(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoRequest>): void;
     videoSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoSuccessResponse>): void;
     videoFailure(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<RDXVideoModule.VideoFailureResponse>): void;
@@ -55,7 +56,10 @@ const videoSlice: VideoSliceType = createSlice({
             state.videoModifySuccess = null;
             state.endVideoList = false;
         },
-
+        uploadClear(state: WritableDraft<RDXVideoModule.StateType>) {
+            state.videoUploadError = null;
+            state.videoUploadSuccess = null;
+        },
         video(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoRequest>) {},
         videoSuccess(state: WritableDraft<RDXVideoModule.StateType>, action: PayloadAction<VideoRouter.VideoSuccessResponse>) {
             state.video = action.payload;

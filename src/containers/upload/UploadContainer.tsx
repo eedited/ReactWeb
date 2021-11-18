@@ -10,16 +10,17 @@ import Upload, { TagType } from '../../components/upload/Upload';
 import { rgxId, rgxPath } from '../../services/regex';
 import { thumbnailURL } from '../../services/youtube';
 import { filterAction } from '../../redux/filter/filter';
+import { userAction } from '../../redux/user/user';
 
 interface FromReducerType {
     uploadError: RDXVideoModule.VideoUploadFailureResponse | null
     uploadSuccess: VideoRouter.VideoUploadSuccessResponse | null
     uploadDDState: DropDownProp[]
 }
-interface Props {
-    history: RouteComponentProps['history']
+interface Props extends RouteComponentProps {
+    user: AuthRouter.CheckSuccessResponse | null
 }
-const UploadContainer: React.FC<Props> = ({ history }: Props) => {
+const UploadContainer: React.FC<Props> = ({ history, user }: Props) => {
     const dispatch: React.Dispatch<AnyAction> = useAppDispatch();
     const {
         uploadError,
@@ -88,6 +89,7 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
     useEffect(() => {
         dispatch(filterAction.setUpload({ set: 'etc' }));
     }, [dispatch]);
+
     useEffect(() => {
         if (uploadError) {
             if (uploadError.error.response?.status === 456) {
@@ -98,9 +100,14 @@ const UploadContainer: React.FC<Props> = ({ history }: Props) => {
             }
         }
         if (uploadSuccess) {
-            history.push('/');
+            if (user) {
+                history.push(`/profile?userId=${user.userId}`);
+            }
         }
-    }, [history, uploadError, uploadSuccess]);
+        return () => {
+            dispatch(videoAction.uploadClear());
+        };
+    }, [dispatch, history, uploadError, uploadSuccess, user]);
 
     const onKeyPressTag: (e: React.KeyboardEvent<HTMLInputElement>) => void = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {

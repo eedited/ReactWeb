@@ -27,7 +27,7 @@ const UploadPage: React.FC<props> = ({ history }: props) => {
     }, [history, user]);
     return (
         <BaseTemplate>
-            <UploadContainer />
+            <UploadContainer user={user} />
         </BaseTemplate>
     );
 };
