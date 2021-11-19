@@ -19,8 +19,8 @@ dotenv.config();
 (function loadUser() {
     const { setUser, check }: RDXUserModule.ActionType = userAction;
     const user: string|null = localStorage.getItem('user');
-    if (!user) return;
-    store.dispatch(setUser(JSON.parse(user)));
+    // if (!user) return;
+    // store.dispatch(setUser(JSON.parse(user)));
     store.dispatch(check());
 }());
 ReactGA.initialize(process.env.REACT_APP_TRACKING_ID as string);
