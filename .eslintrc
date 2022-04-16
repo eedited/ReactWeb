@@ -12,10 +12,7 @@
         "es6": true,
         "jest": true
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
-    ],
+    "plugins": ["react", "@typescript-eslint"],
     "extends": [
         "airbnb",
         "airbnb/hooks",
@@ -28,14 +25,8 @@
     "rules": {
         "no-console": "warn",
         "indent": "off",
-        "@typescript-eslint/indent": [
-            "error",
-            4
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
+        "@typescript-eslint/indent": ["error", 4],
+        "quotes": ["error", "single"],
         "no-multiple-empty-lines": [
             "error",
             {
@@ -44,14 +35,8 @@
             }
         ],
         "@typescript-eslint/no-inferrable-types": "off",
-        "brace-style": [
-            2,
-            "stroustrup"
-        ],
-        "@typescript-eslint/brace-style": [
-            2,
-            "stroustrup"
-        ],
+        "brace-style": [2, "stroustrup"],
+        "@typescript-eslint/brace-style": [2, "stroustrup"],
         "@typescript-eslint/no-explicit-any": "error",
         "object-property-newline": [
             "error",
@@ -107,9 +92,7 @@
         "no-constant-condition": "off",
         "max-len": "off",
         "import/prefer-default-export": "off",
-        "import/extensions": [
-            "off"
-        ],
+        "import/extensions": ["off"],
         "import/first": "off",
         "object-curly-newline": "off",
         "no-empty-function": "off",

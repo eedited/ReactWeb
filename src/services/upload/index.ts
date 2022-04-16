@@ -1,10 +1,26 @@
 import AWS from 'aws-sdk';
 
-const baseURL: string = process.env.REACT_APP_S3_BASE_URL as string;
-const S3_BUCKET: string = process.env.REACT_APP_S3_BUCKET_NAME as string;
-const REGION: string = process.env.REACT_APP_S3_REGION as string;
-const ACCESS_KEY: string = process.env.REACT_APP_S3_ACCESS_KEY_ID as string;
-const S3_SECRET_ACCESS_KEY: string = process.env.REACT_APP_S3_SECRET_ACCESS_KEY as string;
+let baseURL: string;
+let S3_BUCKET: string;
+let REGION: string;
+let ACCESS_KEY: string;
+let S3_SECRET_ACCESS_KEY: string;
+
+if (process.env.NODE_ENV === 'production') {
+    baseURL = process.env.REACT_APP_PROD_S3_BASE_URL as string;
+    S3_BUCKET = process.env.REACT_APP_PROD_S3_BUCKET_NAME as string;
+    REGION = process.env.REACT_APP_PROD_S3_REGION as string;
+    ACCESS_KEY = process.env.REACT_APP_PROD_S3_ACCESS_KEY_ID as string;
+    S3_SECRET_ACCESS_KEY = process.env.REACT_APP_PROD_S3_SECRET_ACCESS_KEY as string;
+}
+
+else {
+    baseURL = process.env.REACT_APP_DEV_S3_BASE_URL as string;
+    S3_BUCKET = process.env.REACT_APP_DEV_S3_BUCKET_NAME as string;
+    REGION = process.env.REACT_APP_DEV_S3_REGION as string;
+    ACCESS_KEY = process.env.REACT_APP_DEV_S3_ACCESS_KEY_ID as string;
+    S3_SECRET_ACCESS_KEY = process.env.REACT_APP_DEV_S3_SECRET_ACCESS_KEY as string;
+}
 
 export default class FileUploadToS3 {
     fileType: 'img'
